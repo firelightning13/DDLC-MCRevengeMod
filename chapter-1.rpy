@@ -6,8 +6,6 @@ init python:
         if event == "end":
             if persistent.ggwp_monika == 0:
                 pass
-            elif persistent.ggwp_monika == 2:
-                renpy.jump("load_ga")
             elif persistent.ggwp_monika == 1:
                 renpy.jump("load_g")
 
@@ -87,8 +85,8 @@ label intro_mod_2_1:
 default persistent.nice_try = 0
 
 label intro_mod_2_2:
-    $ persistent.ggwp_monika = 0
     $ delete_all_saves()
+    $ persistent.ggwp_monika = 0
     #elif persistent.nice_try == 2:
         #$ renpy.call_screen("dialog", "Are you tired, [player]?", ok_action=Return())
         #$ renpy.call_screen("dialog", "I know it's hard to get over it.", ok_action=Return())
@@ -161,7 +159,7 @@ label its_time_boys:
     scene black
     with dissolve_scene_half
     play music ghostmenu
-    $ m.display_args["callback"] = slow_nodismiss
+    $ m.display_args["callback"] = monika_showed_up
     m "{cps=*0.5}Hey, [player]!{/cps}{nw}"
     $ persistent.ggwp_monika = 1
     show screen tear(20, 0.1, 0.1, 0, 40)
@@ -184,7 +182,7 @@ label its_time_boys:
     if persistent.nice_try == 0:
         $ renpy.call_screen("dialog", "Don't play with my heart~", ok_action=Return())
     $ persistent.nice_try = 1
-    play music g1
+    play music g2
     show sayori glitch at t11 zorder 2
     pause 0.5
     show screen tear(8, offtimeMult=1, ontimeMult=10)
@@ -232,11 +230,12 @@ label chapter_mod_1a:
     $ poster_checked = False
     $ closet_checked = False
     "Okay, [player]... What should I do?"
-    call i_do_1
+    $ narrator.display_args["callback"] = None
+    call i_do_1 from _call_i_do_1
     if closet_checked:
         pass
     elif poster_checked:
-        call i_do_1
+        call i_do_1 from _call_i_do_1_1
     return
     
 label i_do_1:
@@ -246,11 +245,11 @@ label i_do_1:
             jump throw_chair
         "Check the closet":
             "I guess I should... {fast}check the classroom closet."
-            call check_closet
+            call check_closet from _call_check_closet
             return
         "Check the poster" if not poster_checked:
             "I guess I should... {fast}check the poster at the wall, which is located at the back of the class."
-            call check_poster
+            call check_poster from _call_check_poster
         "Nevermind...":
             "Ah, never mind..."
             "There's no point for me to to do something here."
@@ -265,7 +264,7 @@ label throw_chair:
     "Well, here goes nothing..."
     mc "May God save me.{nw}"
     $ style.say_dialogue = style.edited
-    "LOAD ME{w=0.5}{nw}"
+    "LOAD ME{w=0.2}{nw}"
     $ style.say_dialogue = style.normal
     mc "May God save me.{fast}"
     "I grab one of the chair in my classroom."
@@ -273,11 +272,13 @@ label throw_chair:
     #play sound throwchair
     "Then... I throw the chair with my full power{fast} at one of the classroom window{nw}"
     #play sound glassbreak
+    $ quick_menu = False
+    stop music
     scene black
     window hide(None)
     window auto
     pause 1.0
-    $ persistent.ggwp_monika = 2
+    #$ persistent.ggwp_monika = 2
     play music ghostmenu
     show end
     with dissolve_scene_full
@@ -304,10 +305,10 @@ label throw_chair:
     "Is that a switch?"
     "What if try to pull it?"
     $ consolehistory = []
-    call updateconsole("renpy.utter_restart()", "Restarting...")
+    call updateconsole("renpy.utter_restart()", "Restarting...") from _call_updateconsole
     pause 1.0
     "Oh."
-    "Well, I guess that wor"
+    "Well, I guess that wor{nw}"
     stop music
     show screen tear(8, offtimeMult=1, ontimeMult=10)
     pause 1.5
@@ -327,7 +328,7 @@ label check_closet:
     "Construction papers too.."
     "Wasn't Monika trying to find these stuff before?"
     #half chance isnt really half of a chance ~Monika
-    $ half_chance = renpy.random.randomint(0, 2)
+    $ half_chance = renpy.random.randint(0, 2)
     if half_chance == 0:# or config.developer:
         mc "What's this?"
         "There's a lone volume of manga amidst a stack of various books on the side of one of the shelves."
@@ -354,22 +355,25 @@ label check_closet:
     mc "Alright, I'm coming..."
     $ closet_checked = True
     return
+    
+label load_ga:
+    
 
 label check_poster:
     "..."
     #half chance isnt really half of a chance ~Monika
-    $ half_chance = renpy.random.randomint(0, 2)
+    $ half_chance = renpy.random.randint(0, 2)
     if half_chance == 0:# or config.developer:
         "I saw..."
         "A girl..."
         "In the poster."
         mc "Uh..."
         mc "What is this picture?"
-        $ currentpos = getpos()
+        $ currentpos = get_pos()
         stop music
         scene black
         pause 1.0
-        scene s_hang
+        scene bg s_hang
         pause 0.1
         show screen tear(20, 0.1, 0.1, 0, 40)
         window hide(None)
@@ -380,6 +384,7 @@ label check_poster:
         window show(None)
         $ audio.t2 = "<from " + str(currentpos) + " loop 4.499>bgm/2.ogg"
         play music t2
+        scene bg class_day
         mc "What is this picture?{fast}"
         "My head started to feel dizzy again."
         "I wished I didn't saw that."
@@ -408,7 +413,7 @@ label check_poster:
         "I'm screwed..."
         m 5a "Don't do it ever again, ok sweetheart?~"
         "What did she just sa{nw}"
-        $ persistent.ggwp_monika = 2
+        #$ persistent.ggwp_monika = 2
         show screen tear(8, offtimeMult=1, ontimeMult=10)
         pause 1.5
         $renpy.utter_restart()
@@ -444,7 +449,7 @@ label chapter_mod_1:
     show monika g2 at t11 zorder 2
     $ style.say_dialogue = style.edited
     $ gtext = glitchtext(80)
-    mc "{cps=*2.0}WHAT THE FU{fast}[gtext]{/cps}{nw}"
+    mc "{cps=*1.5}WHAT THE FU{fast}[gtext]{/cps}{nw}"
     window hide(None)
     show screen tear(20, 0.1, 0.1, 0, 40)
     play sound "sfx/s_kill_glitch1.ogg"
@@ -461,6 +466,7 @@ label chapter_mod_1:
     $ m_name = "???"
     show monika 1a at t11 zorder 2
     m "...[player]?"
+    $ m_name = "Monika"
     m 1b "Oh my goodness, I totally didn't expect to see you here!"
     m 5 "It's been a while, right?"
     mc "Ah..."
@@ -564,6 +570,21 @@ label chapter_mod_1:
         "God damn it!"
     m 1a "Shall we go, then?"
     m "I'll look for the materials another time - you're more important."
-    if monika_seen:
-        call chapter_mod_1a
+    show monika at thide zorder 1
+    hide monika
+    if persistent.ggwp_monika != 2:
+        if monika_seen:
+            call chapter_mod_1a from _call_chapter_mod_1a
+    else:
+        "Wait, didn't I heard this conversation before?"
+        "What I did just now..."
+        "You... {w}You saved me!"
+        "Hell, this would easier for me to know what's going on with Monika."
+        "I think I can pull this thing one by one."
+        "[player], you are fucking genius!"
+        m "[player], huurry up!"
+        "Ah, I found her weak spot."
+        "She couldn't remember anything!"
+        "Yes!"
+        mc "Yes! I'm coming!"
     return
