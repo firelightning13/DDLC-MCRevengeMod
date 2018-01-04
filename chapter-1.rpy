@@ -241,22 +241,22 @@ label chapter_mod_1a:
     
 label i_do_1:
     menu:
-    "I guess I should..."
-        "Do something violent":
-            jump throw_chair
-        "Check the closet":
-            "I guess I should... {fast}check the classroom closet."
-            call check_closet
-            return
-        "Check the poster" if not poster_checked:
-            "I guess I should... {fast}check the poster at the wall, which is located at the back of the class."
-            call check_poster
-        "Nevermind...":
-            "Ah, never mind..."
-            "There's no point for me to to do something here."
-            "After all, she is waiting for me."
-            "I guess getting along is fine, as of now."
-            "I can do something about this later on."
+        "I guess I should..."
+            "Do something violent":
+                jump throw_chair
+            "Check the closet":
+                "I guess I should... {fast}check the classroom closet."
+                call check_closet
+                return
+            "Check the poster" if not poster_checked:
+                "I guess I should... {fast}check the poster at the wall, which is located at the back of the class."
+                call check_poster
+            "Nevermind...":
+                "Ah, never mind..."
+                "There's no point for me to to do something here."
+                "After all, she is waiting for me."
+                "I guess getting along is fine, as of now."
+                "I can do something about this later on."
     return
 
 label throw_chair:
