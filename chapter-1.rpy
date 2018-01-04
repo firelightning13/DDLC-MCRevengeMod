@@ -278,7 +278,7 @@ label throw_chair:
     window hide(None)
     window auto
     pause 1.0
-    #$ persistent.ggwp_monika = 2
+    $ persistent.ggwp_monika = 2
     play music ghostmenu
     show end
     with dissolve_scene_full
@@ -413,7 +413,7 @@ label check_poster:
         "I'm screwed..."
         m 5a "Don't do it ever again, ok sweetheart?~"
         "What did she just sa{nw}"
-        #$ persistent.ggwp_monika = 2
+        $ persistent.ggwp_monika = 2
         show screen tear(8, offtimeMult=1, ontimeMult=10)
         pause 1.5
         $renpy.utter_restart()
