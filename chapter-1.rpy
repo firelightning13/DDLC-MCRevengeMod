@@ -115,7 +115,7 @@ label intro_mod_2_2:
     "Well...."
     $ s_name = glitchtext(12)
     menu:
-    "What should I do at this point?"
+        "What should I do at this point?"
         "Visit [s_name]'s house.":
             pass
         "Go to school.":
@@ -242,21 +242,21 @@ label chapter_mod_1a:
 label i_do_1:
     menu:
         "I guess I should..."
-            "Do something violent":
-                jump throw_chair
-            "Check the closet":
-                "I guess I should... {fast}check the classroom closet."
-                call check_closet
-                return
-            "Check the poster" if not poster_checked:
-                "I guess I should... {fast}check the poster at the wall, which is located at the back of the class."
-                call check_poster
-            "Nevermind...":
-                "Ah, never mind..."
-                "There's no point for me to to do something here."
-                "After all, she is waiting for me."
-                "I guess getting along is fine, as of now."
-                "I can do something about this later on."
+        "Do something violent":
+            jump throw_chair
+        "Check the closet":
+            "I guess I should... {fast}check the classroom closet."
+            call check_closet
+            return
+        "Check the poster" if not poster_checked:
+            "I guess I should... {fast}check the poster at the wall, which is located at the back of the class."
+            call check_poster
+        "Nevermind...":
+            "Ah, never mind..."
+            "There's no point for me to to do something here."
+            "After all, she is waiting for me."
+            "I guess getting along is fine, as of now."
+            "I can do something about this later on."
     return
 
 label throw_chair:
@@ -502,7 +502,7 @@ label chapter_mod_1:
     window show(None)
     m "A literature club!{fast}"
     window auto
-    $ if monika_seen:
+    if monika_seen:
         "That scare the shit out of me."
     mc "Literature...?"
     if not monika_seen:
@@ -539,7 +539,7 @@ label chapter_mod_1:
     m "If you could at the very least visit my club, it would make me really happy."
     m "Please?"
     mc "Um..."
-    $ if monika_seen:
+    if monika_seen:
         $ narrator.display_args["callback"] = mod_check_saves
         "Well, I guess I have no reason to refu-{nw}"
         "Wait, why did I say that?!"
@@ -559,11 +559,11 @@ label chapter_mod_1:
     m 1k "Aah, awesome!"
     m 1b "You're really sweet, [player], you know that?"
     mc "I-It's nothing, really..."
-    $ if monika_seen:
+    if monika_seen:
         "I let my guard down."
         "God damn it!"
     m 1a "Shall we go, then?"
     m "I'll look for the materials another time - you're more important."
-    $ if monika_seen:
+    if monika_seen:
         call chapter_mod_1a
     return
