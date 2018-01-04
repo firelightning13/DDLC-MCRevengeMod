@@ -1,27 +1,12 @@
-# DDLC-Mod-Experiment
-Experimenting my own DDLC mod
+# DDLC - MC Revenge Mod
+What if the main character of Doki-Doki Literature Club became sentient and self-aware, similar to Monika? He was awaken by the power of my coding and begin to realise that this is all just a game? What will he do? You will find out soon enough if you install this mod! (Which is not release yet, sorry!)
 
-Originally, I want to make a mod where MC became sentient and self-aware all of the stuff that Monika messed up.
-Take a look if you want.
+## Releases
+It's to early to release. Coming soon for chapter one (Act 2)
 
-## Files
-### script.rpy
-Main core of the mod. All things starts here
+## About this project
+This mod is still under my development. And my avenge to Sayori. Sayori is the best girl.
+This mod is similar to Act 2, Chapter 1 of the original DDLC story, but this takes a new direction.
 
-### intro.rpy
-Prologue of the story
-
-### chapter-1.rpy
-This is where the story takes place in Act 2 Chapter 1
-
-### main_menu.rpy
-Basically main menu from original DDLC
-
-### definition.rpy
-You can define custom bg/cg/musics/sounds
-
-### option.rpy
-Here you can name your mods here, also you can define your mod version aswell.
-
-### splash.rpy
-You can modify splash warning here.
+## Want to help me?
+You can modify if you want to help me. Just use pull request, and I will approve.
