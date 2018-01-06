@@ -1,4 +1,4 @@
-﻿## This file contains options that can be changed to customize your game.
+## This file contains options that can be changed to customize your game.
 ##
 ## Lines beginning with two '#' marks are comments, and you shouldn't uncomment
 ## them. Lines beginning with a single '#' mark are commented-out code, and you
@@ -12,7 +12,7 @@
 ##
 ## The _() surrounding the string marks it as eligible for translation.
 
-define config.name = "DDLCMyMod"
+define config.name = "DDLC: MC's Revenge"
 
 
 ## Determines if the title given above is shown on the main menu screen. Set
@@ -36,7 +36,7 @@ define gui.about = _("")
 ## distribution. This must be ASCII-only, and must not contain spaces, colons,
 ## or semicolons.
 
-define build.name = "DDLCMyMod"
+define build.name = "DDLC_MR"
 
 ## Sounds and music ############################################################
 
@@ -137,7 +137,7 @@ default preferences.sfx_volume = 0.75
 ## Generally the same as your build name
 ## Should always be a literal string and not an expression
 
-define config.save_directory = "DDLC_Mod_Template"
+define config.save_directory = "DDLC_MR"
 
 
 ## Icon
