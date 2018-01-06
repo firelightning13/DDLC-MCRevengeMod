@@ -15,12 +15,21 @@ init -100 python:
 ##
 init python:
     menu_trans_time = 1
-    #The default splash message, originally shown in Act 1 and Act 4
+    #The default splash message.
     splash_message_default = "This game is an unofficial fan work,\nunaffiliated with Team Salvato."
-    #Optional splash messages, originally chosen at random in Act 2 and Act 3
+    #Ah, nice message. I wonder who did these...
     splash_messages = [
     "Please support Doki Doki Literature Club."
     "Monika is watching you code."
+    "Please support fireligtning13.\nHe's a great guy."
+    "I spend everyday working with my mod."
+    "Monika is the best girl"
+    "Sayori is the best girl"
+    "I tried my best.."
+    "Don't forget to save your game!~"
+    "I love Dan Salvato."
+    "Can you change the world?"
+    "Her Third Eye is getting closer."
     ]
 
 image splash_warning = ParameterizedText(style="splash_text", xalign=0.5, yalign=0.5)
@@ -269,9 +278,13 @@ label splashscreen:
     pause 2.5
     hide intro with Dissolve(0.5, alpha=True)
     #You can use random splash messages, as well. By default, they are only shown during certain acts.
-    if persistent.playthrough == 2 and renpy.random.randint(0, 3) == 0:
-        $ splash_message = renpy.random.choice(splash_messages)
-    show splash_warning "[splash_message]" with Dissolve(0.5, alpha=True)
+    if persistent.warning_seen:
+        show splash_warning "Please choose the right path, ok thanks.\n-firelightning13" with Dissolve(0.5, alpha=True)
+        $ persistent.warning_seen = False
+    else:
+        if persistent.playthrough == 2 and renpy.random.randint(0, 3) == 0:
+            $ splash_message = renpy.random.choice(splash_messages)
+        show splash_warning "[splash_message]" with Dissolve(0.5, alpha=True)
     pause 2.0
     hide splash_warning with Dissolve(0.5, alpha=True)
     $ config.allow_skipping = True
