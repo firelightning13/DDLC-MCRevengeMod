@@ -236,6 +236,9 @@ label chapter_mod_1a:
     show monika at thide zorder 1
     hide monika
     
+    if persistent.ggwp_monika == 2:
+        jump end_ch_mod
+    
     $ poster_checked = False
     $ closet_checked = False
     "Okay, [player]... What should I do?"
@@ -251,15 +254,23 @@ label i_do_1:
     menu:
         "I guess I should..."
         "Do something violent":
+            if persistent.ggwp_monika == 2:
+                jump end_ch_mod
             jump throw_chair
         "Check the closet":
+            if persistent.ggwp_monika == 2:
+                jump end_ch_mod
             "I guess I should... {fast}check the classroom closet."
             call check_closet from _call_check_closet
             return
         "Check the poster" if not poster_checked:
+            if persistent.ggwp_monika == 2:
+                jump end_ch_mod
             "I guess I should... {fast}check the poster at the wall, which is located at the back of the class."
             call check_poster from _call_check_poster
         "Nevermind...":
+            if persistent.ggwp_monika == 2:
+                jump end_ch_mod
             "Ah, never mind..."
             "There's no point for me to to do something here."
             "After all, she is waiting for me."
@@ -608,6 +619,10 @@ label chapter_mod_1:
     m "I'll look for the materials another time - you're more important."
     show monika at thide zorder 1
     hide monika
+    
+    jump choice_choice
+
+label en_ch_mod:
     if persistent.ggwp_monika != 2:
         if monika_seen:
             call chapter_mod_1a from _call_chapter_mod_1a
