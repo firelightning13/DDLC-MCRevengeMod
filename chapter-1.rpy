@@ -87,6 +87,10 @@ default persistent.nice_try = 0
 label intro_mod_2_2:
     $ delete_all_saves()
     $ persistent.ggwp_monika = 0
+    $ persistent.parfait_girls = False
+    $ persistent.poster_seen = False
+    $ persistent.mc_violent = False
+    $ persistent.tea_set = False
     #elif persistent.nice_try == 2:
         #$ renpy.call_screen("dialog", "Are you tired, [player]?", ok_action=Return())
         #$ renpy.call_screen("dialog", "I know it's hard to get over it.", ok_action=Return())
@@ -103,6 +107,7 @@ label intro_mod_2_2:
     #"[nani]   [nani2]"
     "Mornings are usually the worst, being surrounded by couples and friend groups walking to school together."
     "Meanwhile, I've always walked to school alone."
+
     $ currentpos = get_pos()
     stop music
     "..."
@@ -117,7 +122,11 @@ label intro_mod_2_2:
         "Visit [s_name]'s house.":
             pass
         "Go to school.":
-            jump intro_mod_2_3
+            if not persistent.force_play:
+                jump intro_mod_2_3
+            else:
+                $ renpy.call_screen("dialog", "Ah, c'mon!", ok_action=Return())
+                $ renpy.call_screen("dialog", "Really, [player]? Please don't do this again..", ok_action=Return())
     "Maybe I should check out my \"neighbor\" next door, since I'm very curious about what happened."
     "Wait, is it \"neighbor\" or \"neighbour\"?"
     "Whatever..."
@@ -154,7 +163,7 @@ label its_time_boys:
     "Then, I proceed myself to knock the door."
     mc "Hello? Is anyone there?"
     "The house looks empty to me, {w}the door is strangely unlocked... {w}I wonder why..."
-    mc "I'm coming over... {w}{i}(in Japanese language){/i}{w}{i}(as i mutter quietly){/i}"
+    mc "I'm coming over..."
     
     scene black
     with dissolve_scene_half
@@ -230,7 +239,7 @@ label chapter_mod_1a:
     $ poster_checked = False
     $ closet_checked = False
     "Okay, [player]... What should I do?"
-    $ narrator.display_args["callback"] = None
+    #$ narrator.display_args["callback"] = None
     call i_do_1 from _call_i_do_1
     if closet_checked:
         pass
@@ -272,6 +281,7 @@ label throw_chair:
     #play sound throwchair
     "Then... I throw the chair with my full power{fast} at one of the classroom window{nw}"
     #play sound glassbreak
+    $ persistent.mc_violent = True
     $ quick_menu = False
     stop music
     scene black
@@ -345,6 +355,14 @@ label check_closet:
         "I guess I could give them to Monika after all."
         $ persistent.parfait_girls = True
     else:
+        $ another_chance = renpy.random.randint(0, 2) # Make it fair
+        if another_chance == 0:
+            "Huh? There is a tea set as well."
+            "Who put in this closet anyway?"
+            "I don't know, I'm getting chills from my spine for some reason."
+            "I try not to think about it."
+            "I just grab the markers and construction papers instead."
+            $ persistent.tea_set = True
         "Well, I guess I could give them to Monika after all."
         $ persistent.parfait_girls = False
     play sound closet_close
@@ -414,10 +432,12 @@ label check_poster:
         m 5a "Don't do it ever again, ok sweetheart?~"
         "What did she just sa{nw}"
         $ persistent.ggwp_monika = 2
+        $ persistent.poster_seen = True
         show screen tear(8, offtimeMult=1, ontimeMult=10)
         pause 1.5
         $renpy.utter_restart()
     else:
+        $ persistent.poster_seen = False
         "Just a wall calendar."
         "Nothing interesting around here."
         "Maybe I should do something else?"
@@ -437,35 +457,51 @@ label chapter_mod_1:
     mc "Clubs..."
     "There really aren't any that interest me."
     "Besides, most of them would probably be way too demanding for me to want to deal with."
-    "Except for one club that I recognise before..."
-    $ currentpos = get_pos()
-    stop music
-    mc "What the hell is that?!{w=1.0}{nw}"
-    "{cps=*1.5}The \"thing\" started to approach me.{/cps}{w=1.0}{nw}"
-    "{cps=*1.5}I didn't recognise that distorted mess of entity.{/cps}{w=1.0}{nw}"
-    "{cps=*1.5}It's getting closer and closer now...{/cps}{w=1.0}{nw}"
-    "{cps=*1.5}Ah, what is happening to this world?!!?!{/cps}{w=0.5}{nw}"
-    mc "{cps=*1.5}WHAT THE FU{/cps}{nw}"
-    show monika g2 at t11 zorder 2
-    $ style.say_dialogue = style.edited
-    $ gtext = glitchtext(80)
-    mc "{cps=*1.5}WHAT THE FU{fast}[gtext]{/cps}{nw}"
-    window hide(None)
-    show screen tear(20, 0.1, 0.1, 0, 40)
-    play sound "sfx/s_kill_glitch1.ogg"
-    pause 0.25
-    stop sound
-    hide screen tear
-    hide monika
-    window show(None)
-    $ style.say_dialogue = style.normal
+    if monika_seen:
+        "Except for one club that I recognise before..."
+        $ currentpos = get_pos()
+        stop music
+        mc "What the hell is that?!{w=1.0}{nw}"
+        "{cps=*1.5}The \"thing\" started to approach me.{/cps}{w=1.0}{nw}"
+        "{cps=*1.5}I didn't recognise that distorted mess of entity.{/cps}{w=1.0}{nw}"
+        "{cps=*1.5}It's getting closer and closer now...{/cps}{w=1.0}{nw}"
+        "{cps=*1.5}Ah, what is happening to this world?!!?!{/cps}{w=0.5}{nw}"
+        mc "{cps=*1.5}WHAT THE FU{/cps}{nw}"
+        show monika g2 at t11 zorder 2
+        $ style.say_dialogue = style.edited
+        $ gtext = glitchtext(80)
+        mc "{cps=*1.5}WHAT THE FU{fast}[gtext]{/cps}{nw}"
+        window hide(None)
+        show screen tear(20, 0.1, 0.1, 0, 40)
+        play sound "sfx/s_kill_glitch1.ogg"
+        pause 0.25
+        stop sound
+        hide screen tear
+        hide monika
+        window show(None)
+        $ style.say_dialogue = style.normal
     
-    $ m.display_args["callback"] = None
-    $ audio.t2 = "<from " + str(currentpos) + " loop 4.499>bgm/2.ogg"
-    play music t2
-    $ m_name = "???"
-    show monika 1a at t11 zorder 2
-    m "...[player]?"
+        $ m.display_args["callback"] = None
+        $ audio.t2 = "<from " + str(currentpos) + " loop 4.499>bgm/2.ogg"
+        play music t2
+        $ m_name = "???"
+        show monika 1a at t11 zorder 2
+        m "...[player]?"
+    else:
+        "I guess I have no choice but to start with the anime club..."
+        $ m_name = "???"
+        m "...[player]?"
+        window hide(None)
+        show monika g2 at t11 zorder 2
+        pause 0.75
+        show screen tear(20, 0.1, 0.1, 0, 40)
+        play sound "sfx/s_kill_glitch1.ogg"
+        pause 0.25
+        stop sound
+        hide screen tear
+        window show(None)
+        show monika 1 at t11 zorder 2
+    mc "...Monika?"
     $ m_name = "Monika"
     m 1b "Oh my goodness, I totally didn't expect to see you here!"
     m 5 "It's been a while, right?"
@@ -552,7 +588,7 @@ label chapter_mod_1:
         "I cant' just head over heels for her just yet."
         "I need a plan to take out on her."
         "I need to do something rather than playing along."
-        "This game... there must be some kind of weak spot, an exploitation."
+        "This game... there must be some kind of weak spot, or a plot hole."
         "Ah, I might to save this game later..."
         "You know that something might happened in the future..."
         "If I could--{nw}"
@@ -585,6 +621,6 @@ label chapter_mod_1:
         m "[player], huurry up!"
         "Ah, I found her weak spot."
         "She couldn't remember anything!"
-        "Yes!"
-        mc "Yes! I'm coming!"
+        "This might be one of my chance to beat her!"
+        mc "Yes! I'm coming...!"
     return
