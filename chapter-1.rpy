@@ -331,6 +331,7 @@ label throw_chair:
     "Oh."
     "Well, I guess that wor{nw}"
     stop music
+    window hide(None)
     show screen tear(8, offtimeMult=1, ontimeMult=10)
     pause 1.5
     $ renpy.utter_restart()
