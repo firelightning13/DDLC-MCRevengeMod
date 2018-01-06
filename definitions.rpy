@@ -134,6 +134,8 @@ image bg bedroom = "bg/bedroom.png"
 image bg sayori_bedroom = "bg/sayori_bedroom.png"
 image bg house = "bg/house.png"
 image bg kitchen = "bg/kitchen.png"
+
+#Intro needs this
 image bg s_hang = "mod_assets/cg/s_hang.png"
 image bg s_hang_glitch = "mod_assets/cg/s_hang_glitch.png"
 
@@ -1329,6 +1331,14 @@ default persistent.special_poems = None
 default persistent.clearall = None
 default persistent.menu_bg_m = None
 default persistent.first_load = None
+
+# My custom persistent variables
+default persistent.warning_seen = False
+default persistent.force_play = False
+default persistent.mc_violent = False
+
+# My custom global variables
+default monika_seen = False
 
 ###### Other global variables ######
 # It's good practice to define global variables here, just so you know what you can call later
