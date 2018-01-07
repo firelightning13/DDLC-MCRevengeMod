@@ -36,7 +36,7 @@ define gui.about = _("")
 ## distribution. This must be ASCII-only, and must not contain spaces, colons,
 ## or semicolons.
 
-define build.name = "DDLC_MR"
+define build.name = "DDLC_MCR"
 
 ## Sounds and music ############################################################
 
@@ -137,7 +137,7 @@ default preferences.sfx_volume = 0.75
 ## Generally the same as your build name
 ## Should always be a literal string and not an expression
 
-define config.save_directory = "DDLC_MR"
+define config.save_directory = "DDLC_MCR"
 
 
 ## Icon
