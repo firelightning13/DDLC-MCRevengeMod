@@ -661,15 +661,22 @@ label chapter_mod_2:
         "What should I do?"
         # This actually reminds me of Hello Neighbor
         "Say hello to my neighbor":
-            pass
-            #call hello_neighbor
+            call hello_neighbor from _call_hello_neighbor
         "Go home and read PG" if persistent.parfait_girls:
-            pass
+            "Hmm. I guess I have to read Parfait Girls."
+            "It looks kind of interesting.."
+            "I'll guess I can share this to Natsuki."
+            "I wonder if this suits her..."
+            if persistent.mc_violent:
+                "Ugh, I thought I wanted to be hero once in a while."
+            "In the meantime, I should write my poem tonight."
+            "I already used to it, so I think I can handle this."
+            "Okay, let's do this!"
         "Go home" if not persistent.parfait_girls:
-            pass
-    "Ugh, I thought I wanted to be hero once in a while."
-    "I guess I'll go home and do nothing."
-    "I mean technically I could write poems tonight."
-    "I already used to it, so I think I can handle this."
-    "Okay, let's do this!"
+            if persistent.mc_violent:
+                "Ugh, I thought I wanted to be hero once in a while."
+            "I guess I'll go home and do nothing."
+            "I mean technically I could write my poem tonight."
+            "I already used to it, so I think I can handle this."
+            "Okay, let's do this!"
     return
