@@ -14,6 +14,8 @@ screen navigation():
 
             if persistent.playthrough == 1:
                 textbutton _("ŔŗñĮ¼»ŧþŀÂŻŕěōì«") action If(persistent.playername, true=Start(), false=Show(screen="name_input", message="Please enter your name", ok_action=Function(FinishEnterName)))
+            elif persistent.demu_demu:
+                textbutton _("Just Monika") action If(persistent.playername, true=Start(), false=Show(screen="name_input", message="Just Monika", ok_action=Function(FinishEnterName)))
             else:
                 textbutton _("New Game") action If(persistent.playername, true=Start(), false=Show(screen="name_input", message="Please enter your name", ok_action=Function(FinishEnterName)))
 
@@ -23,7 +25,10 @@ screen navigation():
 
             textbutton _("Save Game") action [ShowMenu("save"), SensitiveIf(renpy.get_screen("save") == None)]
 
-        textbutton _("Load Game") action [ShowMenu("load"), SensitiveIf(renpy.get_screen("load") == None)]
+        if persistent.demu_demu:
+            textbutton _("Just Monika") action [ShowMenu("load"), SensitiveIf(renpy.get_screen("load") == None)]
+        else:
+            textbutton _("Load Game") action [ShowMenu("load"), SensitiveIf(renpy.get_screen("load") == None)]
 
         if _in_replay:
 
@@ -35,17 +40,26 @@ screen navigation():
             #else:
                 #textbutton _("Main Menu") action NullAction()
 
-        textbutton _("Settings") action [ShowMenu("preferences"), SensitiveIf(renpy.get_screen("preferences") == None)]
+        if persistent.demu_demu:
+            textbutton _("Just Monika") action [ShowMenu("preferences"), SensitiveIf(renpy.get_screen("preferences") == None)]
+        else:
+            textbutton _("Settings") action [ShowMenu("preferences"), SensitiveIf(renpy.get_screen("preferences") == None)]
 
             #textbutton _("About") action ShowMenu("about")
 
         if renpy.variant("pc"):
 
                 ## Help isn't necessary or relevant to mobile devices.
-            textbutton _("Help") action Help("README.html")
+            if persistent.demu_demu:
+                textbutton _("Just Monika") action Help("README.html")
+            else:
+                textbutton _("Help") action Help("README.html")
 
                 ## The quit button is banned on iOS and unnecessary on Android.
-            textbutton _("Quit") action Quit(confirm=not main_menu)
+            if persistent.demu_demu:
+                textbutton _("Just Monika") action Quit(confirm=not main_menu)
+            else:
+                textbutton _("Quit") action Quit(confirm=not main_menu)
         #else:
             #timer 1.75 action Start("autoload_yurikill")
 
@@ -55,10 +69,14 @@ screen main_menu():
     tag menu
 
     style_prefix "main_menu"
-    
-    add "menu_bg"
-    add "menu_art_y"
-    add "menu_art_n"
+
+
+    if not persistent.demu_demu:
+        add "menu_bg"
+        add "menu_art_y"
+        add "menu_art_n"
+    else:
+        add "hi_monika"
     frame:
         pass
 
@@ -83,11 +101,18 @@ screen main_menu():
     if gui.show_name:
 
         vbox:
-            text "[config.name!t]":
-                style "main_menu_title"
+            if not persistent.demu_demu:
+                text "[config.name!t]":
+                    style "main_menu_title"
 
-            text "v. [config.version]":
-                style "main_menu_version"
+                text "v. [config.version] demo":
+                    style "main_menu_version"
+            else:
+                text "Just Monika":
+                    style "main_menu_title"
+
+                text "Just Monika":
+                    style "main_menu_version"
 
 
     key "K_ESCAPE" action Quit(confirm=False)
