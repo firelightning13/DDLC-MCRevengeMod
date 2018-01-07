@@ -12,7 +12,7 @@ label mod_accepts:
     "She stares into my eyes for a good 3 seconds long{w=3.0}{nw}"
     $ config.keymap['dismiss'] = dismiss_keys
     $ renpy.display.behavior.clear_keymap_cache()
-    mc "Ah, you mean..."
+    mc "Eh, you mean..."
     mc "You know...."
     m "You do?"
     m 1b "Oh my goodness!"
@@ -43,11 +43,20 @@ label mod_accepts:
     return
 
 label mod_rejects:
+    if persistent.ggwp_monika == 3:
+        "Oh wait, what?"
+        "What's that supposed to be?"
     mc "Hold on...there's still one problem."
     show monika at f33 zorder 3
     m 1d "Eh? What's that?"
-    "Guess I'll try to be natural then, if the game wants me to do this."
-    "{i}I hope I didn't raise her suspicion level on me.{/i}"
+    if persistent.ggwp_monika == 3:
+        "I've been forced to reject their invitation."
+        "I thought I can just..."
+        "Maybe because of the mishap just now?"
+        "Was Monika did this on purpose?"
+    else:
+        "Guess I'll try to be natural then, if the game wants me to do this."
+        "{i}I hope I didn't raise her suspicion level on me.{/i}"
     show monika at t33 zorder 2
     mc "I never said I would join this club!"
     mc "Monika may have convinced me to stop by, but I never made any decision."
@@ -57,8 +66,9 @@ label mod_rejects:
     show yuri 2e
     #"I lose my train of thought."
     #"All three girls stare back at me with dejected eyes."
-    "I don't know why, but I felt kind of guilty after seeing their dejected eyes."
-    "I feel bad for them. {w}(except Monika)"
+    if persistent.ggwp_monika != 3:
+        "I don't know why, but I felt kind of guilty after seeing their dejected eyes."
+        "I feel bad for them. {w}(except Monika)"
     show monika at s33
     m 1p "B-But..."
     show yuri at s32
@@ -66,7 +76,10 @@ label mod_rejects:
     show natsuki at s31
     n 5s "Hmph."
     mc "Eh...?"
-    "The girls exchange glances before Monika turns back to me."
+    if persistent.ggwp_monika == 3:
+        "Guess I'll stuck here..." # guess ill die memes
+    else:
+        "The girls exchange glances before Monika turns back to me."
     show monika at f33 zorder 3
     m 1m "I...guess I need to tell you the truth, [player]."
     m "The thing is..."
@@ -78,7 +91,10 @@ label mod_rejects:
     mc "..."
     mc "I, uh..."
     mc "*Sigh*"
-    "I feel like I'm defenseless against these girls, because of my nature personality."
+    if persistent.ggwp_monika == 3:
+        "I feel like I'm defenseless against these girls, because I was forced to reject their invitation."
+    else:
+        "I feel like I'm defenseless against these girls, because of my nature personality."
     "Why am I being like an asshole in the whole time?"
     "Not to mention about my best friend..."
     #"I...I'm defenseless against these girls."
@@ -104,11 +120,11 @@ label mod_rejects:
     if persistent.poster_seen:
         "Umm, yeah, Yuri."
         "The poster that I saw in my class is even scarier than me."
-        if renpy.seen("bg/club-skill.png"):
+        if renpy.seen_image("bg/club-skill.png"):
             "Not to mention at the back of the classroom."
-        "Aren't they even noticed?"
-    elif renpy.seen("bg/club-skill.png"):
-        "Yeah, the back of the classroom is even scarier."
+            "Aren't they even noticed?"
+    elif renpy.seen_image("bg/club-skill.png"):
+        "Yeah, the back of the classroom is even scarier than me."
         "Aren't they even noticed?"
     show yuri at t32 zorder 2
     show natsuki at f31 zorder 3
@@ -119,29 +135,123 @@ label mod_rejects:
     m "[player], I'm so happy..."
     m 1k "We can become an official club now!"
     m 1e "Thank you so much for this. You're really amazing."
+    return    
+
+label hello_neighbor:
+    stop music fadeout 2.0
+    scene bg house
+    with wipeleft_scene
+    "I'm kind of curious what is going on with my neighbor next door."
+    "Since I was cockblocked{nw}"
+    $ _history_list.pop()
+    "Since{fast} Monika blocked me from entering that house."
+    "Sorry, I didn't want to say something weird in this cute game."
+    "I'm sure Monika wasn't supposed to be around here."
+    "I know that this world is not like a sandbox, where you can go around anywhere..."
+    #remember yandere simulator?
+    "But that doesn't mean I can't do whatever I want in this game, {w}right?"
+    "I take a closer look at the door."
+    ####### There will be a locked version of the same door. I wanted to implement
+    ####### a suspicion level system to Monika. If she is too suspicious to you, she
+    ####### will lock the door. Same thing will happened like this in the future. :)
+    ####### Or I could use persistent.ggwp_monika instead.
+    ####### I don't know if this is too much, but let see how my mood coding goes.
+    "The door is unlocked. Just like what I expected."
+    mc "Ah, screw it!"
+    mc "I'm going in!"
+    
+    scene black
+    with wipeleft_scene
+    play music mend
+    
+    "I look around in the first floor. The vibe that I get is something familiar..."
+    "Back in the day where I lived with my best friend, Sayori."
+    "I proceed to go upstair, where Sayori's bedroom was located."
+    pause 1.0
+    "I stand in front of Sayori's bedroom door."
+    "This actually reminds me of the last moment when she ha{nw}"
+    $ _history_list.pop()
+    mc "No, I don't want to remember it anymore."
+    "My anxiety is welling up inside my head even more."
+    "I don't know if I can do this..."
+    "I roughly remember what I told her."
+    menu:
+        mc "Sayori..."
+        "\"I love you.\"":
+            "I loved her."
+            "I love her so much."
+            "I told her everything will be okay.."
+        "\"You'll always be my dearest friend.\"":
+            "I turned down her confession."
+            "I thought that's what Sayori wants out of our relationship."
+    "But no matter what I do, it always ended up in the same way..."
+    "What kind of cruel game is this?"
+    "It ruined my life..."
+    "I don't know what to say anymore."
+    stop music fadeout 2.0
+    "Holding my tears, I grab the door knob."
+    mc "Here goes nothing..."
+    "I slowly open the door."
+    pause 2.0
+    mc "{cps=30}...Sayo-{/cps}{nw}"
+    $ _history_list.pop()
+    window hide(None)
+    window auto
+    show screen tear(8, offtimeMult=1, ontimeMult=10)
+    play music g2
+    pause 2.0
+    hide screen tear
+
+    scene bg bedroom
+    show screen tear(8, offtimeMult=1, ontimeMult=10)
+    pause 1.0
+    hide screen tear
+    stop music
+    # scene bg bedroom_dawn
+    # coming soon
+
+    mc "Huh?"
+    "Wait, what?"
+    "This isn't her room..."
+    "This is my room!"
+    "Where am I?"
+    "Why am I here?"
+    "..."
+    pause 2.0
+    "I proceed to look outside through my bedroom window."
+    mc "Did I just teleported?"
+    "Confused, I glance around."
+    "My head is spinning like crazy."
+    "Is this some kind of trap?"
+    "I don't know..."
+    mc "I need to clear my head first. I'm so tired right now."
+    mc "I need some rest..."
+    "Maybe I'll do something tomorrow.."
+    $ persistent.ggwp_monika = 4
+    # 4 means he forgot to write poems, coming soon for chapter 3 i guess
     return
 
-##### Start ######
+##### Start chapter here ######
 label chapter_mod_2:
     if not monika_seen:
+        # I give you a big warning. I'm just tired.
+        stop music fadeout 2.0
         scene black
         with dissolve_scene_full
-        stop music fadeout 2.0
-        $ fl = FL13
+        $ fl = "FL13"
         fl "Damn, [player]..."
         fl "Why are you even playing this mod?"
         fl "Please play this game more carefully."
         fl "You wanted to know what happened if you visit Sayori's house, right? {w}Or not?"
         fl "You chose to go to school instead. {w}That was a wise choice."
         fl "Then that would be a normal gameplay."
-        fl "Sorry, I don't take plot with original DDLC. It wasn't fun at all, since you are already know what's gonna happen."
-        fl "I don't even want to copy paste original DDLC script into my mod."
+        fl "Sorry, I don't take plots from original DDLC. It wasn't fun at all, since you are already know what's gonna happen."
+        fl "I don't even want to copy paste original DDLC script one by one into my mod."
         fl "It would be pain in the ass.."
         fl "Then, next time, I'll force you to go to Sayori's house."
         #fl "No butts. But {w}T {w}H {w}I {w}C {w}C{nw}"
-        $ persistent.playthrough = 0
+        #$ persistent.playthrough = 2
         $ delete_all_saves()
-        $ persistent.deleted_saves = False
         $ persistent.nice_try = 0
         $ persistent.ggwp_monika = 0
         $ monika_seen = False
@@ -151,11 +261,11 @@ label chapter_mod_2:
         $ persistent.mc_violent = False
         $ persistent.force_play = True
         $ persistent.warning_seen = True
-        $ renpy.utter_restart()
+        $ renpy.quit(relaunch=False, status=0)
 
     # Anti-cheat, why parfait girls and tea set at the same time?
     # Easy, they save and load many times to get two items at the same time.
-    # Logically, saving the game makes the MC's memory stays intact.
+    # Technically, saving the game makes the MC's memory stays intact.
     # However, they don't save items.
     if persistent.tea_set and persistent.parfait_girls:
         $ persistent.parfait_girls = False
@@ -193,12 +303,12 @@ label chapter_mod_2:
         "Monika, please don't let it show your true nature..."
         if poster_seen:
             "I already saw that horrible poster from my class..."
-            if renpy.seen("bg/club-skill.png"):
+            if renpy.seen_image("bg/club-skill.png"):
                 "And I saw it, again..."
                 "Please help me..."
-        elif renpy.seen("bg/club-skill.png"):
+        elif renpy.seen_image("bg/club-skill.png"):
             "And, what the heck is that picture at the back of the classroom?"
-    elif renpy.seen("bg/club-skill.png"):
+    elif renpy.seen_image("bg/club-skill.png"):
         "What the heck is that picture at the back of the classroom?"
     show yuri 2t at t33 zorder 2
     if not config.skipping:
@@ -244,7 +354,7 @@ label chapter_mod_2:
     pause 2.0
     hide screen tear
     window show(None)
-    $ style.say_dialogue = style.edited
+    $ style.say_dialogue = style.normal
     "Okay, I already know that."
     "Also fun fact, she's not a first-year.{nw}"
     
@@ -322,12 +432,12 @@ label chapter_mod_2:
         mc "I thought you'll need these for the festival, right?"
         $ currentpos = get_pos()
         stop music
-        show monika at t11 zorder 2
+        show monika 1n at t11 zorder 2
         "Monika looks sweaty."
         if persistent.ggwp_monika == 2:
             "The way I look her face, I knew she did something horrible since I was there in the classroom."
             "Did she aware that I changed?"
-        m 1n "A-ah, yeah..."
+        m "A-ah, yeah..."
         m 1m "I-I see..."
         "The way she act is really obvious..."
         "I hand in them to Monika"
@@ -354,10 +464,11 @@ label chapter_mod_2:
         hide screen tear
         stop music
         window show(None)
-        $ audio.t3 = "<from " + str(currentpos) + " loop 4.499>bgm/2.ogg"
+        $ audio.t3 = "<from " + str(currentpos) + " loop 4.499>bgm/3.ogg"
         play music t3
         show monika 2k at i22 zorder 2
         show natsuki 4q at i21 zorder 2
+        $ del _history_list[-24:]
     else:
         if persistent.ggwp_monika == 3:
             "I recognise these conversation before."
@@ -371,11 +482,12 @@ label chapter_mod_2:
         n "...I guess."
         "Natsuki reluctantly agrees."
         #"Such different girls, all interested in the same goal..."
-        "Well, I guess literature isn't really that hard."
-        "Despite that it was kind of dull, it was worth making a poem, sharing with your friends and find inspiration from other people."
-        "The basic fundamentals of the literature is to expressing yourself."
-        "Wow, I sound just like Monika..."
-        "I don't know, I felt like I've done this before."
+        if persistent.ggwp_monika != 3:
+            "Well, I guess literature isn't really that hard."
+            "Despite that it was kind of dull, it was worth making a poem, sharing with your friends and find inspiration from other people."
+            "The basic fundamentals of the literature is to expressing yourself."
+            "Wow, I sound just like Monika..."
+            "I don't know, I felt like I've done this before."
         #"Monika must have worked really hard just to find these two."
     "Yuri returns to the table, carrying a tea set."
     if persistent.tea_set:
@@ -579,8 +691,24 @@ label chapter_mod_2:
     menu:
         "So, what are you going to do, [player]?"
         "Accept their invitation":
-            $ persistent.accepts_invite = True
-            call mod_accepts
+            if persistent.ggwp_monika != 3:
+                $ persistent.accepts_invite = True
+                call mod_accepts
+            else:
+                # u fked up boi
+                $ currentpos = get_pos()
+                stop music
+                window hide(None)
+                show screen tear(8, offtimeMult=1, ontimeMult=10)
+                play music g2
+                pause 3.0
+                hide screen tear
+                stop music
+                window hide(None)
+                $ audio.t3 = "<from " + str(currentpos) + " loop 4.618>bgm/3.ogg"
+                play music t3
+                $ persistent.accepts_invite = False
+                call mod_rejects
         "Reject their invitation":
             $ persistent.accepts_invite = False
             call mod_rejects
@@ -611,14 +739,27 @@ label chapter_mod_2:
     if persistent.accepts_invite:
         mc "Yeah, sure. Looking forward to it."
     else:
+        if persistent.ggwp_monika == 3:
+        "I just keep my mouth shut."
+        "I think I messed up \"that\" part."
+        if persistent.mc_violent:
+            "I would think that Monika knew that I broke the game."
         mc "Y-Yeah..."
     show monika at thide zorder 1
     hide monika
     #"Can I really impress the class star Monika with my mediocre writing skills?"
     #"I already feel the anxiety welling up inside me."
     "Wow, how far am I going to tag along with her?"
-    "I need a plan... {w}Maybe I'll do something {i}epic{/i} after school."
+    if persistent.mc_violent:
+        "I need a plan... {w}Maybe I can do something {i}epic{/i} after school."
+        "Throwing a chair is not enough I guess."
+    else:
+        "I need a plan... {w}I'll do some thinking after school."
+    if persistent.poster_seen:
+        "I just don't want to see that poster again..."
     "In that case, I'll use your 'save n load game' power to achieve this!"
+    if persistent.ggwp_monika == 3:
+        "Also, I try not to make things more obvious when I mess things up."
     "Meanwhile, the girls continue to chit-chat as Yuri cleans up the tea set."
     if persistent.accepts_invite:
         mc "Alright, Monika."
@@ -632,6 +773,8 @@ label chapter_mod_2:
     else:
         m "I'll see you tomorrow, then."
     m "I can't wait!"
+    if persistent.ggwp_monika == 3:
+        "..."
 
     scene bg residential_day
     with wipeleft_scene
@@ -649,6 +792,7 @@ label chapter_mod_2:
     hide yuri
     hide monika
     with wipeleft
+    stop music
     "Probably not, but I said it anyway."
     #"I'll just need to make the most of my circumstances, and I'm sure good fortune will find me."
     #"And I guess that starts with writing a poem tonight..."
@@ -660,15 +804,22 @@ label chapter_mod_2:
         "What should I do?"
         # This actually reminds me of Hello Neighbor
         "Say hello to my neighbor":
-            pass
-            #call hello_neighbor
+            call hello_neighbor
         "Go home and read PG" if persistent.parfait_girls:
-            pass
+            "Hmm. I guess I have to read Parfait Girls."
+            "It looks kind of interesting.."
+            "I'll guess I can share this to Natsuki."
+            "I wonder if this suits her..."
+            if persistent.mc_violent:
+                "Ugh, I thought I wanted to be hero once in a while."
+            "In the meantime, I should write my poem tonight."
+            "I already used to it, so I think I can handle this."
+            "Okay, let's do this!"
         "Go home" if not persistent.parfait_girls:
-            pass
-    "Ugh, I thought I wanted to be hero once in a while."
-    "I guess I'll go home and do nothing."
-    "I mean technically I could write poems tonight."
-    "I already used to it, so I think I can handle this."
-    "Okay, let's do this!"
+            if persistent.mc_violent:
+                "Ugh, I thought I wanted to be hero once in a while."
+            "I guess I'll go home and do nothing."
+            "I mean technically I could write my poem tonight."
+            "I already used to it, so I think I can handle this."
+            "Okay, let's do this!"
     return
