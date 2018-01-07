@@ -2,7 +2,7 @@
 What if the main character of Doki-Doki Literature Club becomes sentient and self-aware, similar to Monika? He was awaken by the power of my coding and begin to realise that this is all just a game? What will he do? You will find out soon enough if play this mod!
 
 ## Releases
-[First Demo Release](https://github.com/firelightning13/DDLC-MCRevengeMod/releases)
+[First Demo Release v0.1](https://github.com/firelightning13/DDLC-MCRevengeMod/releases/tag/0.1)
 
 ## About this project
 This mod is still under my development. And my avenge to Sayori. Sayori is the best girl.
