@@ -829,7 +829,7 @@ label chapter_mod_2:
         "What should I do?"
         # This actually reminds me of Hello Neighbor
         "Say hello to my neighbor":
-            call hello_neighbor
+            call hello_neighbor from _call_hello_neighbor
         "Go home and read PG" if persistent.parfait_girls:
             "Hmm. I guess I have to read Parfait Girls."
             "It looks kind of interesting.."
