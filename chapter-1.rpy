@@ -1,14 +1,4 @@
 init python:
-    #check game saves, we are the warrior after all
-    def mod_check_saves(event, interact=True, **kwargs):
-        if not interact:
-            return
-        if event == "end":
-            if persistent.ggwp_monika == 0:
-                pass
-            elif persistent.ggwp_monika == 1:
-                renpy.jump("load_g")
-
     #ya boy cant skip when monika dialogue shows up
     #seems more realistic actually
     #just monika
@@ -87,41 +77,30 @@ default persistent.nice_try = 0
 label intro_mod_2_2:
     $ delete_all_saves()
     $ persistent.ggwp_monika = 0
+    $ monika_seen = False
     $ persistent.parfait_girls = False
     $ persistent.poster_seen = False
     $ persistent.mc_violent = False
     $ persistent.tea_set = False
-    #elif persistent.nice_try == 2:
-        #$ renpy.call_screen("dialog", "Are you tired, [player]?", ok_action=Return())
-        #$ renpy.call_screen("dialog", "I know it's hard to get over it.", ok_action=Return())
-        #$ renpy.call_screen("dialog", "Look, I have an idea.", ok_action=Return())
-        #$ renpy.call_screen("dialog", "After you see this messages, you\nshould save your game, then...", ok_action=Return())
-        #$ renpy.call_screen("dialog", "When Monika shows up, load up\nyour save immediately!", ok_action=Return())
-        #$ renpy.call_screen("dialog", "Then, you should good to go.", ok_action=Return())
-        #$ renpy.call_screen("dialog", "Good luck beating this game!  ~Modder", ok_action=Return())
-        #$ persistent.nice_try = 0
+    $ persistent.demu_demu = False
+    $ _history_list = []
     "It's an ordinary school day, like any other."
-    #just testing my stuff here
-    #$ nani = m.display_args["callback"]
-    #$ nani2 = narrator.display_args["callback"]
-    #"[nani]   [nani2]"
     "Mornings are usually the worst, being surrounded by couples and friend groups walking to school together."
     "Meanwhile, I've always walked to school alone."
 
     $ currentpos = get_pos()
     stop music
     "..."
-    $ narrator.display_args["callback"] = mod_check_saves
     "Alone...{w} I'm alone, huh?"
-    "I feel like some kind of deja vu..."
     "I feel like I'm not supposed to be alone, right?"
+    "I felt, some kind of déjà vu."
     "Well...."
     $ s_name = glitchtext(12)
     menu:
-        "What should I do at this point?"
+        "What am I supposed to do?"
         "Visit [s_name]'s house.":
             pass
-        "Go to school.":
+        "Just go to school.":
             if not persistent.force_play:
                 jump intro_mod_2_3
             else:
@@ -133,6 +112,8 @@ label intro_mod_2_2:
     "Hope that I'll find something interesting."
     "Oh, I might want to save my game before continue."
     "If there's something wrong, I can load the game again, trying to play safe."
+    if persistent.ggwp_monika == 1:
+        jump load_g
     jump its_time_boys
     
 label intro_mod_2_3:
@@ -149,21 +130,22 @@ label its_time_boys:
     scene bg house
     with wipeleft_scene
     "This house..."
+    if persistent.ggwp_monika == 1:
+        jump load_g
     "...looks familiar to me..."
     "I wonder why, though..."
-    "I saw a name tag in front of the house."
-    "Usually in Japan, the name or family name tag is present at the front gate to show the owner's name of his/her house."
-    "But this one..."
-    "It's gibberish to me."
-    "I wonder why..."
-    "If I could read it..."
-    $ s_name = glitchtext(12)
-    mc "[s_name]"
-    "I couldn't read it..."
+    "My memory is a little bit hazy lately."
+    if persistent.ggwp_monika == 1:
+        jump load_g
     "Then, I proceed myself to knock the door."
+    if persistent.ggwp_monika == 1:
+        jump load_g
     mc "Hello? Is anyone there?"
-    "The house looks empty to me, {w}the door is strangely unlocked... {w}I wonder why..."
+    "The house looks empty to me, {w}the door is strangely unlocked... {w}Weird..."
     mc "I'm coming over..."
+    if persistent.ggwp_monika == 1:
+        jump load_g
+    "I open the front door...{nw}"
     
     scene black
     with dissolve_scene_half
@@ -199,20 +181,20 @@ label its_time_boys:
     $ renpy.utter_restart()
 
 label load_g:
-    $ narrator.display_args["callback"] = None
     "Ah, what happened....?"
     "Just now..."
     "I saw..."
     "I saw her true form."
     "She was there all along."
     "She set up some kind of trap just to trick me?!"
-    "I just couldn't stand this thing."
+    "I just couldn't stand this shit."
     "If that what she wants from me..."
     "Then I should get along? {w}Act normally like the game would be?"
     "I guess I have no choice but to move on..."
     "But you will pay for it!"
     "Just you wait, Moni-{nw}"
     $ monika_seen = True
+    $ _history_list = []
     stop music
     scene black with trueblack
     pause 1.0
@@ -227,10 +209,10 @@ label chapter_mod_1a:
     mc "I need to pack up my things."
     mc "Also, I'm on duty today to clean out my classroom."
     "I am supposed to be on duty today by the way."
-    mc "Can you wait outside a litte bit?"
+    mc "Can you wait outside a little bit?"
     m 1c "???"
     "Monika looks at me."
-    "I swallowed, not trying to spill my beans."
+    "I swallowed, not trying to spill the beans."
     m 5a "Okay, [player]. You just need to hurry up okay~?"
     mc "A-Ah, thanks."
     show monika at thide zorder 1
@@ -238,16 +220,14 @@ label chapter_mod_1a:
     
     if persistent.ggwp_monika == 2:
         jump end_ch_mod
-    
-    $ poster_checked = False
-    $ closet_checked = False
+
     "Okay, [player]... What should I do?"
-    #$ narrator.display_args["callback"] = None
     call i_do_1 from _call_i_do_1
     if closet_checked:
-        pass
+        return
     elif poster_checked:
         call i_do_1 from _call_i_do_1_1
+        return
     return
     
 label i_do_1:
@@ -260,14 +240,17 @@ label i_do_1:
         "Check the closet":
             if persistent.ggwp_monika == 2:
                 jump end_ch_mod
+            $ _history_list.pop()
             "I guess I should... {fast}check the classroom closet."
             call check_closet from _call_check_closet
             return
         "Check the poster" if not poster_checked:
             if persistent.ggwp_monika == 2:
                 jump end_ch_mod
+            $ _history_list.pop()
             "I guess I should... {fast}check the poster at the wall, which is located at the back of the class."
             call check_poster from _call_check_poster
+            return
         "Nevermind...":
             if persistent.ggwp_monika == 2:
                 jump end_ch_mod
@@ -276,6 +259,7 @@ label i_do_1:
             "After all, she is waiting for me."
             "I guess getting along is fine, as of now."
             "I can do something about this later on."
+            return
     return
 
 label throw_chair:
@@ -283,15 +267,17 @@ label throw_chair:
     "I thought of doing something crazy..."
     "Well, here goes nothing..."
     mc "May God save me.{nw}"
+    $ _history_list.pop()
     $ style.say_dialogue = style.edited
-    "LOAD ME{w=0.2}{nw}"
+    "{cps=*2}LOAD ME{/cps}{nw}"
+    $ _history_list.pop()
     $ style.say_dialogue = style.normal
     mc "May God save me.{fast}"
     "I grab one of the chair in my classroom."
     "Then... I throw the chair with my full power{nw}"
-    #play sound throwchair
+    play sound throw
     "Then... I throw the chair with my full power{fast} at one of the classroom window{nw}"
-    #play sound glassbreak
+    play sound gb_mod
     $ persistent.mc_violent = True
     $ quick_menu = False
     stop music
@@ -343,7 +329,7 @@ label check_closet:
     scene bg closet
     with wipeleft_scene
     "Well, here goes nothing."
-    "I proceed myself to open it."
+    "I open the closet."
     play sound closet_open
     mc "..."
     mc "I found markers."
@@ -362,7 +348,7 @@ label check_closet:
         "Was it there in the entire time?"
         mc "I guess I could keep it though..."
         "I put it inside my bag, just in case."
-        "I kinda want to read it though in my spare time."
+        "I kind of wanted to read it though, in my spare time."
         "Well, about the markers and construction paper..."
         "I guess I could give them to Monika after all."
         $ persistent.parfait_girls = True
@@ -371,23 +357,21 @@ label check_closet:
         if another_chance == 0:
             "Huh? There is a tea set as well."
             "Who put in this closet anyway?"
-            "I don't know, I'm getting chills from my spine for some reason."
-            "I try not to think about it."
+            "Maybe one of my teachers needs it?"
+            "Well, whatever."
             "I just grab the markers and construction papers instead."
             $ persistent.tea_set = True
+            $ persistent.parfait_girls = True
+            # Oops, you just slipped that book.
         "Well, I guess I could give them to Monika after all."
-        $ persistent.parfait_girls = False
     play sound closet_close
     "I proceed to close the closet."
-    m "[player], are you done already?"
+    m "[player], have you done already?"
     "I saw Monika, eagerly waiting for me outside."
     "I guess I have no choice."
     mc "Alright, I'm coming..."
     $ closet_checked = True
     return
-    
-label load_ga:
-    
 
 label check_poster:
     "..."
@@ -416,6 +400,7 @@ label check_poster:
         play music t2
         scene bg class_day
         mc "What is this picture?{fast}"
+        $ _history_list.pop()
         "My head started to feel dizzy again."
         "I wished I didn't saw that."
         stop music
@@ -424,13 +409,13 @@ label check_poster:
         scene bg corridor
         with wipeleft_scene
         show monika 1d at t11 zorder 2
-        m "[player], what happened back there?"
+        m "[player], what just happened?"
         mc "Ugh.."
         mc "Uh..."
-        mc "I..."
-        show monika at lhide
+        mc "I..." 
+        show monika at thide
         hide monika
-        "I feel like I can't speak anymore."
+        "I feel like I couldn't speak anymore."
         "I sit down at the corridor, against the wall."
         m "[player]..."
         show monika 1d at t11 zorder 2
@@ -438,7 +423,7 @@ label check_poster:
         mc "I..."
         "I couldn't explained it to her, or else she might know my self-awareness."
         m 1h "[player]... {w}You saw it didn't you?"
-        m "Ahaha~ Sorry you had to witness that thing."
+        m 1k "Ahaha~ Sorry you had to witness that \"thing\"."
         "What?"
         "I'm screwed..."
         m 5a "Don't do it ever again, ok sweetheart?~"
@@ -457,7 +442,7 @@ label check_poster:
         $ poster_checked = True
         return
 
-#main chapter flag
+#### Main chapter flag ####
 label chapter_mod_1:
     #haha you cant save this game forever ~Monika
     $ delete_all_saves()
@@ -492,7 +477,7 @@ label chapter_mod_1:
         hide monika
         window show(None)
         $ style.say_dialogue = style.normal
-    
+        $ del _history_list [-8:]
         $ m.display_args["callback"] = None
         $ audio.t2 = "<from " + str(currentpos) + " loop 4.499>bgm/2.ogg"
         play music t2
@@ -547,6 +532,7 @@ label chapter_mod_1:
     mc "In that case, what club did you decide to join?"
     m 1b "Actually, I'm starting a new one!"
     m "A literature club!{nw}"
+    $ _history_list.pop()
     show screen tear(20, 0.1, 0.1, 0, 40)
     window hide(None)
     play sound "sfx/s_kill_glitch1.ogg"
@@ -558,6 +544,7 @@ label chapter_mod_1:
     window auto
     if monika_seen:
         "That scare the shit out of me."
+        $ _history_list.pop()
     mc "Literature...?"
     if not monika_seen:
         "That sounds kind of...dull?"
@@ -594,16 +581,17 @@ label chapter_mod_1:
     m "Please?"
     mc "Um..."
     if monika_seen:
-        $ narrator.display_args["callback"] = mod_check_saves
         "Well, I guess I have no reason to refu-{nw}"
+        $ _history_list.pop()
         "Wait, why did I say that?!"
         "I cant' just head over heels for her just yet."
         "I need a plan to take out on her."
         "I need to do something rather than playing along."
         "This game... there must be some kind of weak spot, or a plot hole."
-        "Ah, I might to save this game later..."
+        "Ah, you might want to save this game later..."
         "You know that something might happened in the future..."
         "If I could--{nw}"
+        $ _history_list.pop()
         m 1g "[player]?"
         mc "Oh! Uh..."
     else:
@@ -618,15 +606,18 @@ label chapter_mod_1:
         "God damn it!"
     m 1a "Shall we go, then?"
     m "I'll look for the materials another time - you're more important."
-    show monika at thide zorder 1
-    hide monika
-    
-    jump choice_choice
+
+    jump en_ch_mod
 
 label en_ch_mod:
     if persistent.ggwp_monika != 2:
         if monika_seen:
             call chapter_mod_1a from _call_chapter_mod_1a
+            return
+        else:
+            show monika at thide zorder 1
+            hide monika
+            return
     else:
         "Wait, didn't I heard this conversation before?"
         "What I did just now..."

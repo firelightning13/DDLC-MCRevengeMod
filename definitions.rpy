@@ -103,6 +103,10 @@ define audio.closet_close = "sfx/closet-close.ogg"
 define audio.page_turn = "sfx/pageflip.ogg"
 define audio.fall = "sfx/fall.ogg"
 
+# Custom audio
+define audio.gb_mod = "mod_assets/sfx/glass_break.ogg"
+define audio.throw = "mod_assets/sfx/whoosh.ogg" # I know this isn't realistic ffs
+
 # Backgrounds
 image black = "#000000"
 image dark = "#000000e4"
@@ -116,6 +120,7 @@ image bg residential_day = "bg/residential.png"
 image bg class_day = "bg/class.png"
 image bg corridor = "bg/corridor.png"
 image bg club_day = "bg/club.png"
+image bg spoopy = "bg/club-skill.png"
 image bg club_day2:
     choice:
         "bg club_day"
@@ -1336,9 +1341,13 @@ default persistent.first_load = None
 default persistent.warning_seen = False
 default persistent.force_play = False
 default persistent.mc_violent = False
+default persistent.demu_demu = False
+default persistent.cheat_mod = False
 
 # My custom global variables
 default monika_seen = False
+default poster_checked = False
+default closet_checked = False
 
 ###### Other global variables ######
 # It's good practice to define global variables here, just so you know what you can call later
