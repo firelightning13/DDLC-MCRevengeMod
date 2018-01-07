@@ -36,7 +36,7 @@ image splash_warning = ParameterizedText(style="splash_text", xalign=0.5, yalign
 
 ##Here's where you can change the logo file to whatever you want
 image menu_logo:
-    "/mod_assets/DDLCModTemplateLogo.png"
+    "/mod_assets/DDLCMCR.png"
     subpixel True
     xcenter 240
     ycenter 120
