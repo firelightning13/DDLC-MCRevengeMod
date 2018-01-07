@@ -13,10 +13,10 @@ This mod is similar to Act 2, Chapter 1 of the original DDLC story, but this tak
 - Prologue = Post-Sayori hanging event and before Act 2. Also MC will realise that Monika is the culprit of that major event.
 - Day one = MC's being self-aware to glitches and bugs in the game.
 - Day two = MC will likely to negotiate Yuri and Natsuki with their argument.
-- Day three = MC will acquire sentient power, just like Monika (early plan)
-- Day four = MC will have a big revealation or (epiphany) from Third Eye (early plan)
-- Weekend = Another major event from Yuri. There are little chance that you will save her for killing herself. (early plan)
-- Ending = Likely will have two ending. Either you will side with Monika, or kill her. (by deleting her .chr file) (early plan)
+- Day three = MC will acquire sentient power, just like Monika **(temporary idea)**
+- Day four = MC will have a big revealation or (epiphany) from Third Eye **(temporary idea)**
+- Weekend = Another major event from Yuri. There are little chance that you will save her for killing herself. **(temporary idea)**
+- Ending = Likely will have two ending. Either you will side with Monika, or kill her. (by deleting her .chr file) **(temporary idea)**
 
 ## Want to help me?
 You can modify if you want to help me. Just use pull request, and I will approve.
