@@ -3,9 +3,9 @@ label mod_accepts:
     mc "Yeah.."
     mc "I mean it could be fun, right?"
     mc "Sharing our poems to each other..."
-    show monika at f33 zorder 3
+    show monika 1d at f33 zorder 3
     "Monika looks at me quizzically"
-    m 1d "Wait, [player]?"
+    m "Wait, [player]?"
     mc "Yes?"
     $ config.keymap['dismiss'] = []
     $ renpy.display.behavior.clear_keymap_cache()
@@ -77,7 +77,11 @@ label mod_rejects:
     n 5s "Hmph."
     mc "Eh...?"
     if persistent.ggwp_monika == 3:
-        "Guess I'll stuck here..." # guess ill die memes
+        "Guess I'll stuck here...{nw}" # guess ill die memes
+        $ _history_list.pop()
+        "{cps=*2}guess ill die{/cps}{nw}"
+        $ _history_list.pop()
+        "Guess I'll stuck here..."
     else:
         "The girls exchange glances before Monika turns back to me."
     show monika at f33 zorder 3
@@ -120,10 +124,10 @@ label mod_rejects:
     if persistent.poster_seen:
         "Umm, yeah, Yuri."
         "The poster that I saw in my class is even scarier than me."
-        if renpy.seen_image("bg/club-skill.png"):
+        if renpy.showing("bg spoopy", layer='master'):
             "Not to mention at the back of the classroom."
             "Aren't they even noticed?"
-    elif renpy.seen_image("bg/club-skill.png"):
+    elif renpy.showing("bg spoopy", layer='master'):
         "Yeah, the back of the classroom is even scarier than me."
         "Aren't they even noticed?"
     show yuri at t32 zorder 2
@@ -263,13 +267,6 @@ label chapter_mod_2:
         $ persistent.warning_seen = True
         $ renpy.quit(relaunch=False, status=0)
 
-    # Anti-cheat, why parfait girls and tea set at the same time?
-    # Easy, they save and load many times to get two items at the same time.
-    # Technically, saving the game makes the MC's memory stays intact.
-    # However, they don't save items.
-    if persistent.tea_set and persistent.parfait_girls:
-        $ persistent.parfait_girls = False
-
     #haha i did it again~
     $ delete_all_saves()
     stop music fadeout 2.0
@@ -281,11 +278,16 @@ label chapter_mod_2:
     "Not really, I just saying it for the sake of the game scripts."
     if persistent.force_play:
         "Also, FL13 is really mad right now I think?"
+        $ _history_list.pop()
         "Oh well..."
+        $ _history_list.pop()
     "I timidly follow Monika across the school and upstairs - a section of the school I rarely visit, being generally used for third-year classes and activities."
     "Monika, full of energy, swings open the classroom door."
 
-    scene bg club_day2
+    if renpy.random.randint(0, 5) == 0:
+        scene bg spoopy
+    else:
+        scene bg club_day
     with wipeleft
     play music t3
 
@@ -301,21 +303,22 @@ label chapter_mod_2:
     #Show time
     if monika_glitch:
         "Monika, please don't let it show your true nature..."
-        if poster_seen:
+        if persistent.poster_seen:
             "I already saw that horrible poster from my class..."
-            if renpy.seen_image("bg/club-skill.png"):
-                "And I saw it, again..."
-                "Please help me..."
-        elif renpy.seen_image("bg/club-skill.png"):
-            "And, what the heck is that picture at the back of the classroom?"
-    elif renpy.seen_image("bg/club-skill.png"):
-        "What the heck is that picture at the back of the classroom?"
+            if renpy.showing("bg spoopy", layer='master'):
+                "Not to mention at the back of the classroom."
+                "Aren't they even noticed?"
+    elif renpy.showing("bg spoopy", layer='master'):
+        "Yeah, the back of the classroom is even scarier than me."
+        "Aren't they even noticed?"
     show yuri 2t at t33 zorder 2
     if not config.skipping:
         show screen invert(0.15, 0.3)
     $ y_name = "Girl 1"
     y "Eh?"
     y "A...a guest?"
+    "What's this? A jumpscare?{nw}"
+    $ _history_list.pop()
     show natsuki 4c at t32 zorder 2
     $ n_name = "Girl 2"
     n "Seriously? You brought a boy?"
@@ -332,6 +335,7 @@ label chapter_mod_2:
     "{i}...is full of incredibly cute girls!!{/i}"
 
     "Again, {w}for the sake of the game scr{nw}"
+    $ _history_list.pop()
     show natsuki at f32 zorder 3
     n 5c "So, let me guess..."
     if n_name == "Girl 2": # Just incase if user quits and run again because of script.rpy
@@ -463,9 +467,17 @@ label chapter_mod_2:
         pause 2.0
         hide screen tear
         stop music
-        window show(None)
+        scene white
+        play music t1
+        show intro with Dissolve(0.5, alpha=True)
+        pause 2.5
+        hide intro with Dissolve(0.5, alpha=True)
+        show splash_warning "What are you doing?" with Dissolve(0.5, alpha=True)
+        pause 1.0
+        scene bg club_day
         $ audio.t3 = "<from " + str(currentpos) + " loop 4.499>bgm/3.ogg"
         play music t3
+        window show(None)
         show monika 2k at i22 zorder 2
         show natsuki 4q at i21 zorder 2
         $ del _history_list[-24:]
@@ -474,6 +486,7 @@ label chapter_mod_2:
             "I recognise these conversation before."
             "It would be better if I didn't hand in the \"stuff\" to Monika."
             "At least not to raise her suspicion level on me."
+            $ persistent.ggwp_monika = 2
         m 2k "I'm confident that we can all really grow this club before we graduate!"
         m "Right, Natsuki?"
         show monika at t22 zorder 2
@@ -628,20 +641,29 @@ label chapter_mod_2:
     "Natsuki averts her eyes."
     n "You wouldn't...like them..."
     show natsuki at t31 zorder 2
-    mc "Ah...not a very confident writer yet?"
+    mc "Ah.. You shouldn't worry about that."
+    mc "I guess you need more confidence to share with someone.."
+    #mc "Ah...not a very confident writer yet?"
     show yuri at f32 zorder 3
     y 2f "I understand how Natsuki feels."
     y "Sharing that level of writing takes more than just confidence."
     y 2k "The truest form of writing is writing to oneself."
+    "Damn Yuri, you're so poetic."
     y "You must be willing to open up to your readers, exposing your vulnerabilities and showing even the deepest reaches of your heart."
+    mc "So, you're basically saying that language itself is very important for making poems?"
+    y 1b "Yes. It's like an artist paints beautiful pictures for everyone to see."
+    y "People value artistic more than just a picture."
+    "Huh? I didn't know Yuri like pictures."
+    "I thought I've heard that before from Sayori.."
+    mc "I see.."
     show yuri at t32 zorder 2
     show monika 2a at f33 zorder 3
     m "Do you have writing experience too, Yuri?"
     m "Maybe if you share some of your work, you can set an example and help Natsuki feel comfortable enough to share hers."
     show yuri at s32
     y 3o "..."
-    mc "I guess it's the same for Yuri..."
-    "Even though I knew that from the start."
+    mc "Well, I guess it's the same for Yuri..."
+    "I knew that from the start."
     "We all sit in silence for a moment."
     "What should I do at this point?"
     show monika at f33 zorder 3
@@ -666,6 +688,7 @@ label chapter_mod_2:
     show yuri 3v at f32 zorder 3
     y "..."
     show yuri at t32 zorder 2
+    "I guess Yuri and Natsuki are having problems with accepting her idea."
     show monika 2m at f33 zorder 3
     m "Ah..."
     m "I mean, I thought it was a good idea..."
@@ -673,6 +696,7 @@ label chapter_mod_2:
     show yuri at f32 zorder 3
     y 2l "Well..."
     y "...I think you're right, Monika."
+    "Nevermind. I take back what I said before."
     y 2f "We should probably start finding activities for all of us to participate in together."
     y 2h "I did decide to take on the responsibility of Vice President, after all..."
     y "I need to do my best to nurture the club as well as its members."
@@ -691,10 +715,7 @@ label chapter_mod_2:
     menu:
         "So, what are you going to do, [player]?"
         "Accept their invitation":
-            if persistent.ggwp_monika != 3:
-                $ persistent.accepts_invite = True
-                call mod_accepts
-            else:
+            if persistent.ggwp_monika == 3:
                 # u fked up boi
                 $ currentpos = get_pos()
                 stop music
@@ -709,6 +730,9 @@ label chapter_mod_2:
                 play music t3
                 $ persistent.accepts_invite = False
                 call mod_rejects
+            else:
+                $ persistent.accepts_invite = True
+                call mod_accepts
         "Reject their invitation":
             $ persistent.accepts_invite = False
             call mod_rejects
@@ -735,13 +759,13 @@ label chapter_mod_2:
     m 1a "[player], I look forward to seeing how you express yourself."
     show monika 5 at hop
     m "Ehehe~"
-    "Did she just jumped herself?"
+    "Did she just jumped?"
     if persistent.accepts_invite:
         mc "Yeah, sure. Looking forward to it."
     else:
         if persistent.ggwp_monika == 3:
-        "I just keep my mouth shut."
-        "I think I messed up \"that\" part."
+            "I just keep my mouth shut."
+            "I think I messed up \"that\" part."
         if persistent.mc_violent:
             "I would think that Monika knew that I broke the game."
         mc "Y-Yeah..."
