@@ -92,15 +92,15 @@ label intro_mod_2_2:
     stop music
     "..."
     "Alone...{w} I'm alone, huh?"
-    "I feel like some kind of deja vu..."
     "I feel like I'm not supposed to be alone, right?"
+    "I felt, some kind of déjà vu."
     "Well...."
     $ s_name = glitchtext(12)
     menu:
-        "What should I do at this point?"
+        "What am I supposed to do?"
         "Visit [s_name]'s house.":
             pass
-        "Go to school.":
+        "Just go to school.":
             if not persistent.force_play:
                 jump intro_mod_2_3
             else:
@@ -134,7 +134,7 @@ label its_time_boys:
         jump load_g
     "...looks familiar to me..."
     "I wonder why, though..."
-    "My memory is a little bit hazy right now."
+    "My memory is a little bit hazy lately."
     if persistent.ggwp_monika == 1:
         jump load_g
     "Then, I proceed myself to knock the door."
@@ -142,10 +142,10 @@ label its_time_boys:
         jump load_g
     mc "Hello? Is anyone there?"
     "The house looks empty to me, {w}the door is strangely unlocked... {w}Weird..."
-    "Was this house left unsecured all the time?"
     mc "I'm coming over..."
     if persistent.ggwp_monika == 1:
         jump load_g
+    "I open the front door...{nw}"
     
     scene black
     with dissolve_scene_half
@@ -181,7 +181,6 @@ label its_time_boys:
     $ renpy.utter_restart()
 
 label load_g:
-    $ narrator.display_args["callback"] = None
     "Ah, what happened....?"
     "Just now..."
     "I saw..."
@@ -221,15 +220,14 @@ label chapter_mod_1a:
     
     if persistent.ggwp_monika == 2:
         jump end_ch_mod
-    
-    $ poster_checked = False
-    $ closet_checked = False
+
     "Okay, [player]... What should I do?"
     call i_do_1 from _call_i_do_1
     if closet_checked:
-        pass
+        return
     elif poster_checked:
         call i_do_1 from _call_i_do_1_1
+        return
     return
     
 label i_do_1:
@@ -252,6 +250,7 @@ label i_do_1:
             $ _history_list.pop()
             "I guess I should... {fast}check the poster at the wall, which is located at the back of the class."
             call check_poster from _call_check_poster
+            return
         "Nevermind...":
             if persistent.ggwp_monika == 2:
                 jump end_ch_mod
@@ -260,6 +259,7 @@ label i_do_1:
             "After all, she is waiting for me."
             "I guess getting along is fine, as of now."
             "I can do something about this later on."
+            return
     return
 
 label throw_chair:
@@ -275,9 +275,9 @@ label throw_chair:
     mc "May God save me.{fast}"
     "I grab one of the chair in my classroom."
     "Then... I throw the chair with my full power{nw}"
-    #play sound throwchair
+    play sound throw
     "Then... I throw the chair with my full power{fast} at one of the classroom window{nw}"
-    #play sound glassbreak
+    play sound gb_mod
     $ persistent.mc_violent = True
     $ quick_menu = False
     stop music
@@ -329,7 +329,7 @@ label check_closet:
     scene bg closet
     with wipeleft_scene
     "Well, here goes nothing."
-    "I proceed myself to open it."
+    "I open the closet."
     play sound closet_open
     mc "..."
     mc "I found markers."
@@ -357,23 +357,21 @@ label check_closet:
         if another_chance == 0:
             "Huh? There is a tea set as well."
             "Who put in this closet anyway?"
-            "I don't know, I'm getting chills from my spine for some reason."
-            "I try not to think about it."
+            "Maybe one of my teachers needs it?"
+            "Well, whatever."
             "I just grab the markers and construction papers instead."
             $ persistent.tea_set = True
+            $ persistent.parfait_girls = True
+            # Oops, you just slipped that book.
         "Well, I guess I could give them to Monika after all."
-        $ persistent.parfait_girls = False
     play sound closet_close
     "I proceed to close the closet."
-    m "[player], are you done already?"
+    m "[player], have you done already?"
     "I saw Monika, eagerly waiting for me outside."
     "I guess I have no choice."
     mc "Alright, I'm coming..."
     $ closet_checked = True
     return
-    
-label load_ga:
-    
 
 label check_poster:
     "..."
@@ -411,13 +409,13 @@ label check_poster:
         scene bg corridor
         with wipeleft_scene
         show monika 1d at t11 zorder 2
-        m "[player], what happened back there?"
+        m "[player], what just happened?"
         mc "Ugh.."
         mc "Uh..."
-        mc "I..."
-        show monika at lhide
+        mc "I..." 
+        show monika at thide
         hide monika
-        "I feel like I can't speak anymore."
+        "I feel like I couldn't speak anymore."
         "I sit down at the corridor, against the wall."
         m "[player]..."
         show monika 1d at t11 zorder 2
@@ -425,7 +423,7 @@ label check_poster:
         mc "I..."
         "I couldn't explained it to her, or else she might know my self-awareness."
         m 1h "[player]... {w}You saw it didn't you?"
-        m "Ahaha~ Sorry you had to witness that thing."
+        m 1k "Ahaha~ Sorry you had to witness that \"thing\"."
         "What?"
         "I'm screwed..."
         m 5a "Don't do it ever again, ok sweetheart?~"
@@ -534,6 +532,7 @@ label chapter_mod_1:
     mc "In that case, what club did you decide to join?"
     m 1b "Actually, I'm starting a new one!"
     m "A literature club!{nw}"
+    $ _history_list.pop()
     show screen tear(20, 0.1, 0.1, 0, 40)
     window hide(None)
     play sound "sfx/s_kill_glitch1.ogg"
@@ -631,5 +630,4 @@ label en_ch_mod:
         "She couldn't remember anything!"
         "This might be one of my chance to beat her!"
         mc "Yes! I'm coming...!"
-        return
     return
