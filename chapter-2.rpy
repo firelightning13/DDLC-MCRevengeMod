@@ -9,7 +9,7 @@ label mod_accepts:
     mc "Yes?"
     $ config.keymap['dismiss'] = []
     $ renpy.display.behavior.clear_keymap_cache()
-    "She stares into my eyes for a good 3 seconds long{w=3.0}{nw}"
+    "She stares into my eyes for a good 3 seconds long{w=2.0}{nw}"
     $ config.keymap['dismiss'] = dismiss_keys
     $ renpy.display.behavior.clear_keymap_cache()
     mc "Eh, you mean..."
@@ -37,6 +37,7 @@ label mod_accepts:
     y 3m "I am so happy that you joined our club before the festival..."
     show yuri at t32 zorder 2
     mc "Ah, thank you."
+    mc "It was my own choice after all"
     "I hope she's okay with me here."
     "Though I'm kind of worried that she might be her next target."
     #which is true, by the way
