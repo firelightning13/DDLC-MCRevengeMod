@@ -31,7 +31,7 @@ label mod_end_demo:
     $ renpy.display.behavior.clear_keymap_cache()
     fl "Goodbye, [player]!{w=1.0}{nw}"
     fl "Oh wait what?{w=2.0}{nw}"
-    fl "OH SHET MONIKA!?!?!{w=1.0}{nw}"
+    fl "OH SHET MONIKA!?!?!{w=1.3}{nw}"
     python:
         currentpos = get_pos()
         startpos = currentpos - 0.3
