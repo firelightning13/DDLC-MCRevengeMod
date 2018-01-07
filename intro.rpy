@@ -1,12 +1,4 @@
 #image bg s_hang = "mod_assets/cg/s_hang.png"
-#image bg s_hang_glitch = "mod_assets/cg/s_hang_glitch.png"
-
-#screen disableclick(time):
-    #timer time action Hide("disableclick")
-    #key "mouseup_1" action NullAction()
-    #key "K_SPACE" action NullAction()
-    #key "K_RETURN" action NullAction()
-
 label intro_mod:
     $ delete_character("sayori")
     stop music fadeout 2.0
@@ -36,6 +28,7 @@ label intro_mod:
     $ gtext = glitchtext(50)
     "What the hell is happe{fast} [gtext] {nw}"
     $ style.say_dialogue = style.normal
+    $ _history_list.pop()
     play sound "sfx/s_kill_glitch1.ogg"
     scene bg sayori_bedroom
     window hide(None)
@@ -99,7 +92,8 @@ label intro_mod:
     window show(None)
     "I think I got it."
     "If I am a sentient, maybe I can mod...{nw}"
-    "{cps=*3}If I am a sentient, maybe I can mod{fast} [gtext] {/cps} {nw}"
+    "{cps=*3}If I am a sentient, maybe I can mod{fast}[gtext]{/cps}{nw}"
+    window hide(None)
     show screen tear(8, offtimeMult=1, ontimeMult=10)
     pause 1.5
     $ persistent.playthrough = 1
