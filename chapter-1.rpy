@@ -348,7 +348,7 @@ label check_closet:
         "Was it there in the entire time?"
         mc "I guess I could keep it though..."
         "I put it inside my bag, just in case."
-        "I kinda want to read it though in my spare time."
+        "I kind of wanted to read it though, in my spare time."
         "Well, about the markers and construction paper..."
         "I guess I could give them to Monika after all."
         $ persistent.parfait_girls = True
