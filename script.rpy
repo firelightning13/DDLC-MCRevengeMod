@@ -33,6 +33,7 @@ label start:
         call intro_mod_2_1 from _call_intro_mod_2_1
         #next chapter
         call chapter_mod_2
+        jump mod_end_demo
 
 label endgame(pause_length=4.0):
     $ quick_menu = False
