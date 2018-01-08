@@ -27,13 +27,13 @@ label mod_accepts:
     m 1k "We can become an official club now!"
     m 1e "Thank you so much for this. You're really amazing."
     show monika at t33 zorder 2
-    show natsuki at f31 zorder 3
-    n 5w "Hmph. I really thought you don't want to join our club anyway."
-    n 5b "Then you would be a complete jerk if you do that."
+    show natsuki 5w at f31 zorder 3
+    n "Hmph. I really thought you don't want to join our club anyway."
+    n 5e "Then you would be a complete jerk if you do that."
     mc "Yeah, yeah."
-    show natsuki at t31 zorder 2
-    show yuri at f32 zorder 3
-    y 1a "That would be a wise decision."
+    show natsuki 5a at t31 zorder 2
+    show yuri 1a at f32 zorder 3
+    y "That would be a wise decision."
     y 3m "I am so happy that you joined our club before the festival..."
     show yuri at t32 zorder 2
     mc "Ah, thank you."
@@ -124,7 +124,7 @@ label mod_rejects:
     y 1m "You really did scare me for a moment..."
     if persistent.poster_seen:
         "Umm, yeah, Yuri."
-        "The poster that I saw in my class is even scarier than me."
+        "The poster that I saw in my classroom is even scarier than me."
         if renpy.showing("bg spoopy", layer='master'):
             "Not to mention at the back of the classroom."
             "Aren't they even noticed?"
@@ -305,13 +305,12 @@ label chapter_mod_2:
     if monika_glitch:
         "Monika, please don't let it show your true nature..."
         if persistent.poster_seen:
-            "I already saw that horrible poster from my class..."
+            "I already saw that horrible poster from my classroom..."
             if renpy.showing("bg spoopy", layer='master'):
-                "Not to mention at the back of the classroom."
-                "Aren't they even noticed?"
+                "And I saw it again..."
+                "Please help me."
     elif renpy.showing("bg spoopy", layer='master'):
-        "Yeah, the back of the classroom is even scarier than me."
-        "Aren't they even noticed?"
+        "What's that poster on the back of the classroom?"
     show yuri 2t at t33 zorder 2
     if not config.skipping:
         show screen invert(0.15, 0.3)
@@ -461,6 +460,7 @@ label chapter_mod_2:
         m 1r "I just feeling a little bit dizzy lately, that's all..."
         "Her expression changed drastically."
         "I wonder how long that she can hold us from hiding her true natu{nw}"
+        $ persistent.temp_ggwp = persistent.ggwp_monika
         $ persistent.ggwp_monika = 3
         window hide(None)
         show screen tear(8, offtimeMult=1, ontimeMult=10)
@@ -487,7 +487,7 @@ label chapter_mod_2:
             "I recognise these conversation before."
             "It would be better if I didn't hand in the \"stuff\" to Monika."
             "At least not to raise her suspicion level on me."
-            $ persistent.ggwp_monika = 2
+            $ persistent.ggwp_monika = persistent.temp_ggwp
         m 2k "I'm confident that we can all really grow this club before we graduate!"
         m "Right, Natsuki?"
         show monika at t22 zorder 2
@@ -730,13 +730,13 @@ label chapter_mod_2:
                 $ audio.t3 = "<from " + str(currentpos) + " loop 4.618>bgm/3.ogg"
                 play music t3
                 $ persistent.accepts_invite = False
-                call mod_rejects
+                call mod_rejects from _call_mod_rejects
             else:
                 $ persistent.accepts_invite = True
-                call mod_accepts
+                call mod_accepts from _call_mod_accepts
         "Reject their invitation":
             $ persistent.accepts_invite = False
-            call mod_rejects
+            call mod_rejects from _call_mod_rejects_1
 
     ####End of Choice
     show monika at f33 zorder 3
@@ -829,7 +829,7 @@ label chapter_mod_2:
         "What should I do?"
         # This actually reminds me of Hello Neighbor
         "Say hello to my neighbor":
-            call hello_neighbor from _call_hello_neighbor
+            jump hello_neighbor
         "Go home and read PG" if persistent.parfait_girls:
             "Hmm. I guess I have to read Parfait Girls."
             "It looks kind of interesting.."
