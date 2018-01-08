@@ -603,7 +603,7 @@ label check_poster:
         $ persistent.poster_seen = True
         show screen tear(8, offtimeMult=1, ontimeMult=10)
         pause 1.5
-        $renpy.utter_restart()
+        $ renpy.utter_restart()
     else:
         $ persistent.poster_seen = False
         "Just a wall calendar."
