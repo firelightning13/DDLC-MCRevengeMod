@@ -110,7 +110,7 @@ label intro_mod_2_2:
     "Wait, is it \"neighbor\" or \"neighbour\"?"
     "Whatever..."
     "Hope that I'll find something interesting."
-    "Oh, I might want to save my game before continue."
+    "Oh, I might want to save my game before I continue."
     "If there's something wrong, I can load the game again, trying to play safe."
     if persistent.ggwp_monika == 1:
         jump load_g
@@ -135,10 +135,10 @@ label its_time_boys:
         jump load_g
     "...looks familiar to me..."
     "I wonder why, though..."
-    "My memory is a little bit hazy lately."
+    "My memory's been a little bit hazy lately."
     if persistent.ggwp_monika == 1:
         jump load_g
-    "Then, I proceed myself to knock the door."
+    "I proceed myself to knock the door."
     if persistent.ggwp_monika == 1:
         jump load_g
     mc "Hello? Is anyone there?"
@@ -188,11 +188,11 @@ label load_g:
     "I saw her true form."
     "She was there all along."
     "She set up some kind of trap just to trick me?!"
-    "I just couldn't stand this shit."
-    "If that what she wants from me..."
-    "Then I should get along? {w}Act normally like the game would be?"
+    "I just couldn't stand this."
+    "If thats what she wants from me..."
+    "Then should I get along? {w}Act normally like the game would be?"
     "I guess I have no choice but to move on..."
-    "But you will pay for it!"
+    "But she will pay for it!"
     "Just you wait, Moni-{nw}"
     $ monika_seen = True
     $ _history_list = []
@@ -211,24 +211,27 @@ label chapter_mod_1:
     scene bg class_day
     with wipeleft_scene
     "The school day is as ordinary as ever, and it's over before I know it."
-    "After I pack up my things, I stare blankly at the wall, looking for an ounce of motivation."
+    if monika_seen:
+        "I stare blankly at the wall, looking for an ounce of motivation."
+    else:
+        "After I pack up my things, I stare blankly at the wall, looking for an ounce of motivation."
     mc "Clubs..."
     "There really aren't any that interest me."
     "Besides, most of them would probably be way too demanding for me to want to deal with."
     if monika_seen:
-        "Except for one club that I recognise before..."
+        "Except for one club that I recognise from before..."
         $ currentpos = get_pos()
         stop music
         mc "What the hell is that?!{w=1.0}{nw}"
         "{cps=*1.5}The \"thing\" started to approach me.{/cps}{w=1.0}{nw}"
-        "{cps=*1.5}I didn't recognise that distorted mess of entity.{/cps}{w=1.0}{nw}"
+        "{cps=*1.5}I didn't recognise that distorted mess of an entity.{/cps}{w=1.0}{nw}"
         "{cps=*1.5}It's getting closer and closer now...{/cps}{w=1.0}{nw}"
         "{cps=*1.5}Ah, what is happening to this world?!!?!{/cps}{w=0.5}{nw}"
-        mc "{cps=*1.5}WHAT THE FU{/cps}{nw}"
+        mc "{cps=*1.5}WHAT THE F{/cps}{nw}"
         show monika g2 at t11 zorder 2
         $ style.say_dialogue = style.edited
         $ gtext = glitchtext(80)
-        mc "{cps=*1.5}WHAT THE FU{fast}[gtext]{/cps}{nw}"
+        mc "{cps=*1.5}WHAT THE F{fast}[gtext]{/cps}{nw}"
         window hide(None)
         show screen tear(20, 0.1, 0.1, 0, 40)
         play sound "sfx/s_kill_glitch1.ogg"
@@ -280,7 +283,7 @@ label chapter_mod_1:
     m 1d "Do you know if there's any construction paper in here?"
     m "Or markers?"
     if monika_seen:
-        "I bet she didn't want look for them in the first place. Ugh, I hate this lady..."
+        "I bet she didn't come to look for them in the first place."
     mc "I guess you could check the closet."
     mc "...You're in the debate club, right?"
     m 5 "Ahaha, about that..."
@@ -304,7 +307,7 @@ label chapter_mod_1:
     m "A literature club!{fast}"
     window auto
     if monika_seen:
-        "That scare the shit out of me."
+        "That scared the shit out of me."
         $ _history_list.pop()
     mc "Literature...?"
     if not monika_seen:
@@ -316,11 +319,11 @@ label chapter_mod_1:
     m "It's really hard to find new members for something that sounds so boring..."
     mc "Well, I can see that..."
     if monika_seen:
-        "The fact that you had another member as well..."
+        "...that fact that you had another member as well..."
     m 3d "But it's really not boring at all, you know!"
     m "Literature can be anything. Reading, writing, poetry..."
     m 3e "I mean, one of my members even keeps her manga collection in the clubroom..."
-    "Have I heard this before? My head fuzzy a little bit lately..."
+    "Have I heard this before?"
     mc "Wait...really?"
     m 2k "Yeah, it's funny, right?"
     m 2e "She always insists that manga is literature, too."
@@ -345,11 +348,11 @@ label chapter_mod_1:
         "Well, I guess I have no reason to refu-{nw}"
         $ _history_list.pop()
         "Wait, why did I say that?!"
-        "I cant' just head over heels for her just yet."
+        "I cant' just go head over heels for her just yet."
         "I need a plan to take out on her."
         "I need to do something rather than playing along."
-        "This game... there must be some kind of weak spot, or a plot hole."
-        "Ah, you might want to save this game later..."
+        "This game... there must be some kind of a weak spot, or a plot hole."
+        "Ah, you might want to save the game later..."
         "You know that something might happened in the future..."
         "If I could--{nw}"
         $ _history_list.pop()
@@ -376,16 +379,16 @@ label chapter_mod_1:
     jump chapter_mod_2
 
 label end_ch_mod:
-    "Wait, didn't I heard about this conversation before?"
+    "Wait, didn't I hear about this conversation before?"
     "What I did just now..."
-    "You... {w}You saved me!"
-    "Well, this would easier for me to know what's going on with Monika."
+    "You... {w}You {i}saved{/i} me!"
+    "Well, this will make it easier for me to know what's going on with Monika."
     "I think I can pull this thing one by one."
-    "[player], you are fucking genius!"
+    "[player], you are a fucking genius!"
     m "[player], huurry up!"
     "Ah, I found her weak spot."
-    "She couldn't remember anything!"
-    "This might be one of my chance to beat her!"
+    "She doesn't remember anything!"
+    "This might be my chance to beat her!"
     mc "Yes! I'm coming...!"
     jump chapter_mod_2
 
@@ -393,15 +396,15 @@ label end_ch_mod:
 label chapter_mod_1a:
     "I knew it..."
     mc "Ah, before that..."
-    mc "I need to pack up my things."
-    mc "Also, I'm on duty today to clean out my classroom."
-    "I am supposed to be on duty today by the way."
+    mc "I need to pack my things up."
+    mc "Also, I'm on duty today to clean my classroom."
+    "I am actually supposed to be on duty today by the way."
     mc "Can you wait outside a little bit?"
-    m 1c "???"
+    m 1c "Hm???"
     "Monika looks at me."
-    "I swallowed, not trying to spill the beans."
-    m 5a "Okay, [player]. You just need to hurry up okay~?"
-    mc "A-Ah, thanks."
+    "I swallow, trying not to spill the beans."
+    m 5a "Okay, [player]. Just hurry up okay~?"
+    mc "A-Ah, I sure will."
     show monika at thide zorder 1
     hide monika
 
@@ -419,21 +422,21 @@ label i_do_1:
             jump check_closet
         "Check the poster" if (not poster_checked) and (persistent.ggwp_monika == 1):
             $ _history_list.pop()
-            "I guess I should... {fast}check the poster at the wall, which is located at the back of the class."
+            "I guess I should... {fast}check the poster on the wall, at the back of the classroom."
             jump check_poster
         "What did I just..." if persistent.ggwp_monika == 2:
             jump end_ch_mod
         "Nevermind..." if persistent.ggwp_monika != 2:
             "Ah, never mind..."
-            "There's no point for me to to do something here."
+            "There's no point for me to do anything here."
             "After all, she is waiting for me."
-            "I guess getting along is fine, as of now."
+            "I guess getting along is fine, for now."
             "I can do something about this later on."
             jump chapter_mod_2
 
 label throw_chair:
     "Hmm..."
-    "I thought of doing something crazy..."
+    "I think of doing something crazy..."
     "Well, here goes nothing..."
     mc "May God save me.{nw}"
     $ _history_list.pop()
@@ -442,7 +445,7 @@ label throw_chair:
     $ _history_list.pop()
     $ style.say_dialogue = style.normal
     mc "May God save me.{fast}"
-    "I grab one of the chair in my classroom."
+    "I grab a chair."
     "Then... I throw the chair with my full power{nw}"
     play sound throw
     "Then... I throw the chair with my full power{fast} at one of the classroom window{nw}"
@@ -461,25 +464,25 @@ label throw_chair:
     pause 1.0
     "What?"
     "What am I seeing right now?"
-    "Did I broke the game?"
+    "Did I break the game?"
     "What?!"
     pause 2.0
     "Huh..."
     pause 2.0
     "Well..."
     pause 2.0
-    "What am I doing right now..."
+    "What do I do right now..."
     "I can't even go to main menu."
     "There must be another way!"
     pause 10.0
-    "What happens if I quit this game?"
-    "Will my memories stays intact after this?"
+    "What happens if I quit the game?"
+    "Will my memories stay intact after this?"
     "I'll guess we're about to find out."
     pause 30.0
     "I found something strange..."
     "What is this?"
     "Is that a switch?"
-    "What if try to pull it?"
+    "What if I try to pull it?"
     $ consolehistory = []
     call updateconsole("renpy.utter_restart()", "Restarting...") from _call_updateconsole
     pause 1.0
@@ -493,7 +496,7 @@ label throw_chair:
 
 label check_closet:
     "Just curious to see what's inside that closet."
-    "I expect the content of that closet with classroom stuffs like books, files or markers."
+    "I expect the contents of that closet to be classroom stuffs like books, files or markers."
     "But you'll never know what is actually inside it."
     scene bg closet
     with wipeleft_scene
@@ -509,15 +512,15 @@ label check_closet:
     if half_chance == 0:# or config.developer:
         mc "What's this?"
         "There's a lone volume of manga amidst a stack of various books on the side of one of the shelves."
-        "Curious, I pull it out a volume of that box of manga."
+        "Curious, I pull the book out."
         mc "Parfait Girls...? {w}Part one?"
-        "Have I heard this manga before?"
+        "Have I heard of this manga before?"
         "My memory is a little bit hazy, so I don't know if I read it before."
         "I wonder why it was there in my classroom."
-        "Was it there in the entire time?"
+        "Was it there for the entire time?"
         mc "I guess I could keep it though..."
-        "I put it inside my bag, just in case."
-        "I kind of wanted to read it though, in my spare time."
+        "I put it inside my bag, just incase."
+        "I kind of want to read it though, in my spare time."
         "Well, about the markers and construction paper..."
         "I guess I could give them to Monika after all."
         $ persistent.parfait_girls = True
@@ -535,7 +538,7 @@ label check_closet:
         "Well, I guess I could give them to Monika after all."
     play sound closet_close
     "I proceed to close the closet."
-    m "[player], have you done already?"
+    m "[player], are you done already?"
     "I saw Monika, eagerly waiting for me outside."
     "I guess I have no choice."
     mc "Alright, I'm coming..."
@@ -547,7 +550,7 @@ label check_poster:
     #half chance isnt really half of a chance ~Monika
     $ half_chance = renpy.random.randint(0, 2)
     if half_chance == 0:# or config.developer:
-        "I saw..."
+        "I see..."
         "A girl..."
         "In the poster."
         mc "Uh..."
@@ -571,14 +574,14 @@ label check_poster:
         mc "What is this picture?{fast}"
         $ _history_list.pop()
         "My head started to feel dizzy again."
-        "I wished I didn't saw that."
+        "I wish I didn't see that."
         stop music
-        "I think... {w}I just wanted to go outside."
+        "I think... {w}I just want to go outside."
         "I need some air."
         scene bg corridor
         with wipeleft_scene
         show monika 1d at t11 zorder 2
-        m "[player], what just happened?"
+        m "[player], what happened?"
         mc "Ugh.."
         mc "Uh..."
         mc "I..." 
@@ -590,8 +593,8 @@ label check_poster:
         show monika 1d at t11 zorder 2
         m "What just happened..."
         mc "I..."
-        "I couldn't explained it to her, or else she might know my self-awareness."
-        m 1h "[player]... {w}You saw it didn't you?"
+        "I can't explain it to her, or else she might know about my self-awareness."
+        m 1h "[player]... {w}You've seen it have you not?"
         m 1k "Ahaha~ Sorry you had to witness that \"thing\"."
         "What?"
         "I'm screwed..."
@@ -605,7 +608,7 @@ label check_poster:
         $ renpy.utter_restart()
     else:
         $ persistent.poster_seen = False
-        "Just a wall calendar."
+        "Just a calendar."
         "Nothing interesting around here."
         "Maybe I should do something else?"
         "Well..."
