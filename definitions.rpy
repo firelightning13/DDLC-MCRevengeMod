@@ -1342,7 +1342,6 @@ default persistent.warning_seen = False
 default persistent.force_play = False
 default persistent.mc_violent = False
 default persistent.demu_demu = False
-default persistent.cheat_mod = False
 
 # My custom global variables
 default monika_seen = False
