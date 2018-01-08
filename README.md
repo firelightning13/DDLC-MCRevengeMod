@@ -12,9 +12,7 @@ This version contains:
 - Just Monika
 
 ## About this project
-This mod is still under my development. And my avenge to Sayori. Sayori is the best girl.
-
-This mod is similar to Act 2, Chapter 1 of the original DDLC story, but this takes a whole(not really) new direction of the story. And weird twist of conversation. And plot twist maybe idk. You will understand once you play this mod!
+Note: This mod is a fan work, and currently under my development. This mod is clearly inspired from original Doki-Doki Literature Club and I gave it a little bit of twist, giving much more options and flexibilities to player, but still limited to what Ren.py engine offers, and my limited abilities and understandings to mod itself.
 
 ## Plot (might be spoiler)
 - Prologue = Post-Sayori hanging event and before Act 2. Also MC will realise that Monika is the culprit of that major event.
