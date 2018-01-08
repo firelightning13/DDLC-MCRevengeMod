@@ -234,7 +234,7 @@ label hello_neighbor:
     "Maybe I'll do something tomorrow.."
     $ persistent.ggwp_monika = 4
     # 4 means he forgot to write poems, coming soon for chapter 3 i guess
-    return
+    jump mod_end_demo
 
 ##### Start chapter here ######
 label chapter_mod_2:
@@ -840,6 +840,7 @@ label chapter_mod_2:
             "In the meantime, I should write my poem tonight."
             "I already used to it, so I think I can handle this."
             "Okay, let's do this!"
+            jump mod_end_demo
         "Go home" if not persistent.parfait_girls:
             if persistent.mc_violent:
                 "Ugh, I thought I wanted to be hero once in a while."
@@ -847,4 +848,4 @@ label chapter_mod_2:
             "I mean technically I could write my poem tonight."
             "I already used to it, so I think I can handle this."
             "Okay, let's do this!"
-    return
+            jump mod_end_demo
