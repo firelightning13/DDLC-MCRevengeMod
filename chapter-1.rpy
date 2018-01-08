@@ -114,7 +114,8 @@ label intro_mod_2_2:
     "If there's something wrong, I can load the game again, trying to play safe."
     if persistent.ggwp_monika == 1:
         jump load_g
-    jump its_time_boys
+    else:
+        jump its_time_boys
     
 label intro_mod_2_3:
     $ audio.t2 = "<from " + str(currentpos) + " loop 4.499>bgm/2.ogg"
@@ -403,9 +404,6 @@ label chapter_mod_1a:
     mc "A-Ah, thanks."
     show monika at thide zorder 1
     hide monika
-    
-    if persistent.ggwp_monika == 2:
-        jump end_ch_mod
 
     "Okay, [player]... What should I do?"
     jump i_do_1
