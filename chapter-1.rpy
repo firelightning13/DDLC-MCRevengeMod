@@ -26,7 +26,7 @@ label intro_mod_2:
     play music t2g
     queue music t2g2
 
-    $ s_name = glitchtext(8)
+    $ s_name = glitchtext(12)
     $ gtext = glitchtext(80)
     s "[gtext]"
     "I see an annoying girl running toward me from the distance, waving her arms in the air like she's totally oblivious to any attention she might draw to herself."
@@ -95,7 +95,7 @@ label intro_mod_2_2:
     "I feel like I'm not supposed to be alone, right?"
     "I felt, some kind of déjà vu."
     "Well...."
-    $ s_name = glitchtext(8)
+    $ s_name = glitchtext(12)
     menu:
         "What should I to do right now?"
         "Visit [s_name]'s house.":
@@ -508,14 +508,8 @@ label check_closet:
     "Construction papers too.."
     "Wasn't Monika trying to find these stuff before?"
     #half chance isnt really half of a chance ~Monika
-    menu:
-        "Look at the side of the shelf":
-            $ chance_sel = 0
-        "Look at the center of the shelf":
-            $ chance_sel = 1
-        "Grab construction paper and markers":
-            $ chance_sel = 2
-    if chance_sel == 0:# or config.developer:
+    $ half_chance = renpy.random.randint(0, 2)
+    if half_chance == 0:# or config.developer:
         mc "What's this?"
         "There's a lone volume of manga amidst a stack of various books on the side of one of the shelves."
         "Curious, I pull the book out."
@@ -530,15 +524,17 @@ label check_closet:
         "Well, about the markers and construction paper..."
         "I guess I could give them to Monika after all."
         $ persistent.parfait_girls = True
-    elif chance_sel == 1:
-        "Huh? There is a tea set as well."
-        "Who put in this closet anyway?"
-        "Maybe one of my teachers needs it?"
-        "Well, whatever."
-        "I just grab the markers and construction papers instead."
-        $ persistent.tea_set = True
-        $ persistent.parfait_girls = True
-        # Oops, you just slipped that book.
+    else:
+        $ another_chance = renpy.random.randint(0, 2) # Make it fair
+        if another_chance == 0:
+            "Huh? There is a tea set as well."
+            "Who put in this closet anyway?"
+            "Maybe one of my teachers needs it?"
+            "Well, whatever."
+            "I just grab the markers and construction papers instead."
+            $ persistent.tea_set = True
+            $ persistent.parfait_girls = True
+            # Oops, you just slipped that book.
         "Well, I guess I could give them to Monika after all."
     play sound closet_close
     "I proceed to close the closet."

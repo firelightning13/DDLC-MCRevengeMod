@@ -69,7 +69,7 @@ label mod_rejects:
     #"All three girls stare back at me with dejected eyes."
     if persistent.ggwp_monika != 3:
         "I don't know why, but I felt kind of guilty after seeing their dejected eyes."
-        "I feel bad for them."
+        "I feel bad for them. {w}(except Monika)"
     show monika at s33
     m 1p "B-But..."
     show yuri at s32
@@ -77,7 +77,14 @@ label mod_rejects:
     show natsuki at s31
     n 5s "Hmph."
     mc "Eh...?"
-    "The girls exchange glances before Monika turns back to me."
+    if persistent.ggwp_monika == 3:
+        "Guess I'll stuck here...{nw}" # guess ill die memes
+        $ _history_list.pop()
+        "{cps=*2}guess ill die{/cps}{nw}"
+        $ _history_list.pop()
+        "Guess I'll stuck here..."
+    else:
+        "The girls exchange glances before Monika turns back to me."
     show monika at f33 zorder 3
     m 1m "I...guess I need to tell you the truth, [player]."
     m "The thing is..."
@@ -353,6 +360,7 @@ label chapter_mod_2:
     window show(None)
     $ style.say_dialogue = style.normal
     "Okay, I already know that."
+    "Also fun fact, she's not a first-year.{nw}"
     
     show yuri at t33 zorder 2
     show monika at f31 zorder 3
