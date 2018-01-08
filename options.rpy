@@ -12,7 +12,7 @@
 ##
 ## The _() surrounding the string marks it as eligible for translation.
 
-define config.name = "DDLC: MC's Revenge"
+define config.name = "DDLC: MC's Revenge Mod"
 
 
 ## Determines if the title given above is shown on the main menu screen. Set
