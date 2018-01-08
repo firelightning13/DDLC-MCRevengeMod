@@ -26,4 +26,4 @@ Note: This mod is a fan work, and currently under my development. This mod is cl
 ## Want to help me?
 You can modify if you want to help me. Just use pull request, and I will approve.
 
-### DDLC Mod Reddit Post
+### [DDLC Mod Reddit Post](https://www.reddit.com/r/DDLCMods/comments/7owdto/demo_releaseddlc_mcs_revenge_mod/)
