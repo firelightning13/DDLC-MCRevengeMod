@@ -21,19 +21,19 @@ label mod_accepts:
     "Ugh, I guess I need to endure it anyway."
     show monika at t33 zorder 2
     mc "Yeah, I decided to join your club anyway."
-    mc "I guess literature isn't really that bad for me, atleast."
+    mc "I guess literature isn't really that bad for me."
     show monika at f33 zorder 3
     m "[player], I'm so happy..."
     m 1k "We can become an official club now!"
     m 1e "Thank you so much for this. You're really amazing."
     show monika at t33 zorder 2
     show natsuki 5w at f31 zorder 3
-    n "Hmph. I really thought you don't want to join our club anyway."
-    n 5e "Then you would be a complete jerk if you do that."
+    n "Hmph. I really thought you didn't want to join our club."
+    n 5e "Then you would be a complete jerk if you did that."
     mc "Yeah, yeah."
     show natsuki 5a at t31 zorder 2
     show yuri 1a at f32 zorder 3
-    y "That would be a wise decision."
+    y "That is a wise decision."
     y 3m "I am so happy that you joined our club before the festival..."
     show yuri at t32 zorder 2
     mc "Ah, thank you."
@@ -53,8 +53,8 @@ label mod_rejects:
     if persistent.ggwp_monika == 3:
         "I've been forced to reject their invitation."
         "I thought I can just..."
-        "Maybe because of the mishap just now?"
-        "Was Monika did this on purpose?"
+        "Maybe because of the mashup just now?"
+        "Did Monika do this on purpose?"
     else:
         "Guess I'll try to be natural then, if the game wants me to do this."
         "{i}I hope I didn't raise her suspicion level on me.{/i}"
@@ -99,9 +99,9 @@ label mod_rejects:
     if persistent.ggwp_monika == 3:
         "I feel like I'm defenseless against these girls, because I was forced to reject their invitation."
     else:
-        "I feel like I'm defenseless against these girls, because of my nature personality."
-    "Why am I being like an asshole in the whole time?"
-    "Not to mention about my best friend..."
+        "I feel like I'm defenseless against these girls."
+    "Why am I being an asshole this whole time?"
+    "Not to mention my best friend..."
     #"I...I'm defenseless against these girls."
     #"How am I supposed to make a clear-headed decision when it's like this?"
     #"I would feel terrible for letting everyone down in this situation..."
@@ -126,11 +126,11 @@ label mod_rejects:
         "Umm, yeah, Yuri."
         "The poster that I saw in my classroom is even scarier than me."
         if renpy.showing("bg spoopy", layer='master'):
-            "Not to mention at the back of the classroom."
-            "Aren't they even noticed?"
+            "Not to mention the one in the back of this classroom."
+            "Haven't they even noticed?"
     elif renpy.showing("bg spoopy", layer='master'):
         "Yeah, the back of the classroom is even scarier than me."
-        "Aren't they even noticed?"
+        "Haven't they even noticed?"
     show yuri at t32 zorder 2
     show natsuki at f31 zorder 3
     n 5q "I mean, if you really just left after all this, I would be super pissed."
@@ -169,9 +169,9 @@ label hello_neighbor:
     with wipeleft_scene
     play music mend
     
-    "I look around in the first floor. The vibe that I get is something familiar..."
-    "Back in the day where I lived with my best friend, Sayori."
-    "I proceed to go upstair, where Sayori's bedroom was located."
+    "I look around on the first floor. The vibe that I get is something familiar..."
+    "Back in the day when I lived with my best friend, Sayori."
+    "I proceed to go upstairs, where Sayori's bedroom was."
     pause 1.0
     "I stand in front of Sayori's bedroom door."
     "This actually reminds me of the last moment when she ha{nw}"
@@ -184,12 +184,12 @@ label hello_neighbor:
         mc "Sayori..."
         "\"I love you.\"":
             "I loved her."
-            "I love her so much."
+            "I loved her so much."
             "I told her everything will be okay.."
         "\"You'll always be my dearest friend.\"":
             "I turned down her confession."
             "I thought that's what Sayori wants out of our relationship."
-    "But no matter what I do, it always ended up in the same way..."
+    "But no matter what I did, it always ended up in the same way..."
     "What kind of cruel game is this?"
     "It ruined my life..."
     "I don't know what to say anymore."
@@ -224,10 +224,10 @@ label hello_neighbor:
     "..."
     pause 2.0
     "I proceed to look outside through my bedroom window."
-    mc "Did I just teleported?"
+    mc "Did I just get teleported?"
     "Confused, I glance around."
     "My head is spinning like crazy."
-    "Is this some kind of trap?"
+    "Is this some kind of a trap?"
     "I don't know..."
     mc "I need to clear my head first. I'm so tired right now."
     mc "I need some rest..."
@@ -246,11 +246,11 @@ label chapter_mod_2:
         $ fl = "FL13"
         fl "Damn, [player]..."
         fl "Why are you even playing this mod?"
-        fl "Please play this game more carefully."
+        fl "Please play the game more carefully."
         fl "You wanted to know what happened if you visit Sayori's house, right? {w}Or not?"
         fl "You chose to go to school instead. {w}That was a wise choice."
         fl "Then that would be a normal gameplay."
-        fl "Sorry, I don't take plots from original DDLC. It wasn't fun at all, since you are already know what's gonna happen."
+        fl "Sorry, I don't take plots from original DDLC. It wasn't fun at all, since you already know what's gonna happen."
         fl "I don't even want to copy paste original DDLC script one by one into my mod."
         fl "It would be pain in the ass.."
         fl "Then, next time, I'll force you to go to Sayori's house."
@@ -276,9 +276,9 @@ label chapter_mod_2:
     with wipeleft_scene
 
     "And thus, today marks the day I sold my soul to Monika and her irresistible smile."
-    "Not really, I just saying it for the sake of the game scripts."
+    "Not really, I'm just saying it for the sake of the game script."
     if persistent.force_play:
-        "Also, FL13 is really mad right now I think?"
+        "Also, FL13 is really mad right now... I think"
         $ _history_list.pop()
         "Oh well..."
         $ _history_list.pop()
@@ -303,14 +303,14 @@ label chapter_mod_2:
     m "And I brought a guest with me!"
     #Show time
     if monika_glitch:
-        "Monika, please don't let it show your true nature..."
+        "Monika, please don't let your true nature show..."
         if persistent.poster_seen:
-            "I already saw that horrible poster from my classroom..."
+            "I've already seen that horrible poster in my classroom..."
             if renpy.showing("bg spoopy", layer='master'):
-                "And I saw it again..."
+                "And I see it again..."
                 "Please help me."
     elif renpy.showing("bg spoopy", layer='master'):
-        "What's that poster on the back of the classroom?"
+        "What's that poster on the back wall of the classroom?"
     show yuri 2t at t33 zorder 2
     if not config.skipping:
         show screen invert(0.15, 0.3)
@@ -323,7 +323,7 @@ label chapter_mod_2:
     $ n_name = "Girl 2"
     n "Seriously? You brought a boy?"
     n "Way to kill the atmosphere."
-    "Umm, yeah Natsuki... About that, she was already killed the atmosphere in my classroom just now."
+    "Umm, yeah Natsuki... About that, she already killed the atmosphere in my classroom just now."
     "Wait, how do I know her name?{nw}"
     show monika 3m at f31 zorder 3
     m "Don't be mean, Natsuki..."
@@ -340,7 +340,7 @@ label chapter_mod_2:
     n 5c "So, let me guess..."
     if n_name == "Girl 2": # Just incase if user quits and run again because of script.rpy
         "Didn't Monika mention her name just now?"
-        "Why her name is still Girl 2?!"
+        "Why is her name still \"Girl 2\"?!"
     n "You're Monika's boyfriend, right?"
     show natsuki at t32 zorder 2
     mc "Wha--"
@@ -379,15 +379,15 @@ label chapter_mod_2:
     m "Isn't that great?"
     "What's so great about me?"
     if persistent.poster_seen:
-        "You just ruin my life back there."
+        "You just ruined my life back there."
     if persistent.mc_violent:
         "I just did something crazy back there."
     show monika at t31 zorder 2
     show natsuki at f32 zorder 3
     n 4e "Wait! Monika!"
-    n "Didn't I tell you to let me know in advance before you brought anyone new?"
+    n "Didn't I tell you to let me know in advance before bringing anyone new?"
     n 4q "I was going to...well, you know..."
-    "Making cupcakes?"
+    "Make cupcakes?{nw}"
     show natsuki at t32 zorder 2
     show monika at f31 zorder 3
     m 1e "Sorry, sorry!"
@@ -433,18 +433,18 @@ label chapter_mod_2:
         mc "Here."
         "I take out markers and construction papers from my bag."
         "I took them from my classroom's closet just now."
-        mc "I thought you'll need these for the festival, right?"
+        mc "I thought you need these for the festival, right?"
         $ currentpos = get_pos()
         stop music
         show monika 1n at t11 zorder 2
         "Monika looks sweaty."
         if persistent.ggwp_monika == 2:
-            "The way I look her face, I knew she did something horrible since I was there in the classroom."
-            "Did she aware that I changed?"
+            "The way her face looks... I know she did something horrible since I was there in the classroom."
+            "Is she aware that I've changed?"
         m "A-ah, yeah..."
         m 1m "I-I see..."
-        "The way she act is really obvious..."
-        "I hand in them to Monika"
+        "The way she acts is really obvious..."
+        "I hand the things in to Monika"
         m "Thanks..."
         show monika at t22 zorder 2
         show natsuki 5m at f21 zorder 3
@@ -453,13 +453,13 @@ label chapter_mod_2:
         m 1l "I-It's nothing.."
         m "Ahaha.."
         "What's going on here?"
-        "For some reason, this situation is getting intense."
+        "For some reason, the situation is getting intense."
         mc "Monika?"
         show monika 1o
         "It looks like she's in panic."
-        m 1r "I just feeling a little bit dizzy lately, that's all..."
+        m 1r "I'm just feeling a little bit dizzy lately, that's all..."
         "Her expression changed drastically."
-        "I wonder how long that she can hold us from hiding her true natu{nw}"
+        "I wonder for how long she can hold from hiding her true natu{nw}"
         $ persistent.temp_ggwp = persistent.ggwp_monika
         $ persistent.ggwp_monika = 3
         window hide(None)
@@ -484,7 +484,7 @@ label chapter_mod_2:
         $ del _history_list[-24:]
     else:
         if persistent.ggwp_monika == 3:
-            "I recognise these conversation before."
+            "I recognise these conversations from before."
             "It would be better if I didn't hand in the \"stuff\" to Monika."
             "At least not to raise her suspicion level on me."
             $ persistent.ggwp_monika = persistent.temp_ggwp
@@ -498,14 +498,14 @@ label chapter_mod_2:
         #"Such different girls, all interested in the same goal..."
         if persistent.ggwp_monika != 3:
             "Well, I guess literature isn't really that hard."
-            "Despite that it was kind of dull, it was worth making a poem, sharing with your friends and find inspiration from other people."
-            "The basic fundamentals of the literature is to expressing yourself."
+            "Despite it being kind of dull, it was worth making a poem, sharing with your friends and finding inspiration from other people."
+            "The basic fundamental of literature is to express yourself."
             "Wow, I sound just like Monika..."
-            "I don't know, I felt like I've done this before."
+            "I don't know, I feel like I've done this before."
         #"Monika must have worked really hard just to find these two."
     "Yuri returns to the table, carrying a tea set."
     if persistent.tea_set:
-        "Though I recognise this tea set before."
+        "Hm... I've seen this tea set before."
         "Weird..."
     "She carefully places a teacup in front of each of us before setting down the teapot in the middle."
     show natsuki at thide zorder 1
@@ -540,8 +540,8 @@ label chapter_mod_2:
     show yuri 1a at t32 zorder 2
     y "So, [player], what kinds of things do you like to read?"
     mc "Well... Ah..."
-    "I thought I read a book before."
-    "My memory is geting hazy, so I thought giving a rough answer is better than nothing."
+    "I think I read a book before."
+    "My memory is getting hazy, so I thought giving a rough answer is better than nothing."
     #"Considering how little I've read these past few years, I don't really have a good way of answering that."
     mc "...Manga..."
     #"I mutter quietly to myself, half-joking."
@@ -558,7 +558,7 @@ label chapter_mod_2:
     hide natsuki
     y 3u "N-Not much of a reader, I guess..."
     mc "Ah..."
-    mc "Don't say that, you made it sounds like a big deal or something"
+    mc "Don't say that, you made it sound like a big deal or something"
     "I said that because of Yuri's sad smile."
     "It's up to me to save this situation."
     mc "I do like reading sometimes."
@@ -573,7 +573,7 @@ label chapter_mod_2:
     y 1f "And telling a good story in such a foreign world is equally impressive."
     "I already knew that she is clearly passionate about her reading."
     "Even though she has an exquisite appearance, I could tell that she finds her comfort in the world of books, not people."
-    "I would think she is not really into social-interaction, or maybe not."
+    "I would think she is not really into social-interaction, or maybe she is."
     #"Yuri goes on, clearly passionate about her reading."
     #"She seemed so reserved and timid since the moment I walked in, but it's obvious by the way her eyes light up that she finds her comfort in the world of books, not people."
     y 2m "But you know, I like a lot of things."
@@ -601,7 +601,7 @@ label chapter_mod_2:
     show natsuki at t31 zorder 2
     show yuri at f32 zorder 3
     y 1f "Oh? Why's that?"
-    "She like cute things, maybe?"
+    "She likes cute things, maybe?"
     show yuri at t32 zorder 2
     show natsuki at f31 zorder 3
     n 5c "Well, I just..."
@@ -629,8 +629,8 @@ label chapter_mod_2:
     show monika 1a at t33 zorder 2
     mc "Natsuki, you write your own poems?"
     "I think everyone does writing their own poems at least once or twice."
-    "Maybe I do wrote poems before."
-    "I wonder what her last poem anyway?"
+    "I may have also written poems before."
+    "I wonder whats her last poem anyway?"
     show natsuki at f31 zorder 3
     n 1c "Eh? Well, I guess sometimes."
     n "Why do you care?"
@@ -652,9 +652,9 @@ label chapter_mod_2:
     "Damn Yuri, you're so poetic."
     y "You must be willing to open up to your readers, exposing your vulnerabilities and showing even the deepest reaches of your heart."
     mc "So, you're basically saying that language itself is very important for making poems?"
-    y 1b "Yes. It's like an artist paints beautiful pictures for everyone to see."
-    y "People value artistic more than just a picture."
-    "Huh? I didn't know Yuri like pictures."
+    y 1b "Yes. It's like an artist painting beautiful pictures for everyone to see."
+    y "People value the artist more than just a picture."
+    "Huh? I didn't know Yuri likes pictures."
     "I thought I've heard that before from Sayori.."
     mc "I see.."
     show yuri at t32 zorder 2
@@ -681,7 +681,7 @@ label chapter_mod_2:
     m 2b "Let's all go home and write a poem of our own!"
     m "Then, next time we meet, we'll all share them with each other."
     m "That way, everyone is even!"
-    "Didn't I heard about this idea before?"
+    "Didn't I hear this idea before?"
     show monika 2a at t33 zorder 2
     show natsuki at f31 zorder 3
     n 5q "U-Um..."
@@ -712,7 +712,7 @@ label chapter_mod_2:
     "I don't know why, but accepting this club is not really a problem too."
     "Even if I say no, it won't change anything."
     "But, it's up to you."
-    "Your have your own will. At least we can avenge our best friend."
+    "You have your own will. Atleast we can avenge our best friend."
     menu:
         "So, what are you going to do, [player]?"
         "Accept their invitation":
@@ -742,7 +742,8 @@ label chapter_mod_2:
     show monika at f33 zorder 3
     m "I'll do everything I can to give you a great time, okay?"
     mc "Ah. Alright then..."
-    "Of course, I feel something's off that something bad might going to happened tomorrow."
+    "Of course, I feel something's off"
+    "Something bad is going to happen tomorrow."
     show yuri at thide zorder 1
     show natsuki at thide zorder 1
     show monika at t11 zorder 2
@@ -754,13 +755,13 @@ label chapter_mod_2:
     m "Write a poem to bring to the next meeting, so we can all share!"
     "Monika looks over at me once more."
     if persistent.accepts_invite:
-        "She looks even more happier than before."
+        "She looks even happier than before."
         "The fact that I joined her club without any hesitation."
-        "I guess I smile her back?"
+        "I guess I'll smile back?"
     m 1a "[player], I look forward to seeing how you express yourself."
     show monika 5 at hop
     m "Ehehe~"
-    "Did she just jumped?"
+    "Did she just jump?"
     if persistent.accepts_invite:
         mc "Yeah, sure. Looking forward to it."
     else:
@@ -768,7 +769,7 @@ label chapter_mod_2:
             "I just keep my mouth shut."
             "I think I messed up \"that\" part."
         if persistent.mc_violent:
-            "I would think that Monika knew that I broke the game."
+            "I thought Monika would know that I broke the game."
         mc "Y-Yeah..."
     show monika at thide zorder 1
     hide monika
@@ -784,7 +785,7 @@ label chapter_mod_2:
         "I just don't want to see that poster again..."
     "In that case, I'll use your 'save n load game' power to achieve this!"
     if persistent.ggwp_monika == 3:
-        "Also, I try not to make things more obvious when I mess things up."
+        "Also, I should try not to make things even more obvious when I mess things up."
     "Meanwhile, the girls continue to chit-chat as Yuri cleans up the tea set."
     if persistent.accepts_invite:
         mc "Alright, Monika."
@@ -821,7 +822,7 @@ label chapter_mod_2:
     "Probably not, but I said it anyway."
     #"I'll just need to make the most of my circumstances, and I'm sure good fortune will find me."
     #"And I guess that starts with writing a poem tonight..."
-    "I had enough pretending to be an asshole."
+    "Thats enough. Its time to stop pretending to be an asshole."
     "Now it's time to act."
     
     ### Another choice won't hurt ###
@@ -831,21 +832,21 @@ label chapter_mod_2:
         "Say hello to my neighbor":
             jump hello_neighbor
         "Go home and read PG" if persistent.parfait_girls:
-            "Hmm. I guess I have to read Parfait Girls."
+            "Hmm. I guess I can read Parfait Girls."
             "It looks kind of interesting.."
-            "I'll guess I can share this to Natsuki."
+            "I guess I could share this to Natsuki later."
             "I wonder if this suits her..."
             if persistent.mc_violent:
                 "Ugh, I thought I wanted to be hero once in a while."
             "In the meantime, I should write my poem tonight."
-            "I already used to it, so I think I can handle this."
+            "I'm already used to it, so I think I can handle this."
             "Okay, let's do this!"
             jump mod_end_demo
         "Go home" if not persistent.parfait_girls:
             if persistent.mc_violent:
                 "Ugh, I thought I wanted to be hero once in a while."
             "I guess I'll go home and do nothing."
-            "I mean technically I could write my poem tonight."
-            "I already used to it, so I think I can handle this."
+            "I mean technically I should write my poem tonight."
+            "I'm already used to it, so I think I can handle this."
             "Okay, let's do this!"
             jump mod_end_demo
