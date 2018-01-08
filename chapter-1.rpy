@@ -202,6 +202,192 @@ label load_g:
     play music t2
     jump chapter_mod_1
 
+
+#### Main chapter flag ####
+label chapter_mod_1:
+    #haha you cant save this game forever ~Monika
+    $ delete_all_saves()
+    scene bg class_day
+    with wipeleft_scene
+    "The school day is as ordinary as ever, and it's over before I know it."
+    "After I pack up my things, I stare blankly at the wall, looking for an ounce of motivation."
+    mc "Clubs..."
+    "There really aren't any that interest me."
+    "Besides, most of them would probably be way too demanding for me to want to deal with."
+    if monika_seen:
+        "Except for one club that I recognise before..."
+        $ currentpos = get_pos()
+        stop music
+        mc "What the hell is that?!{w=1.0}{nw}"
+        "{cps=*1.5}The \"thing\" started to approach me.{/cps}{w=1.0}{nw}"
+        "{cps=*1.5}I didn't recognise that distorted mess of entity.{/cps}{w=1.0}{nw}"
+        "{cps=*1.5}It's getting closer and closer now...{/cps}{w=1.0}{nw}"
+        "{cps=*1.5}Ah, what is happening to this world?!!?!{/cps}{w=0.5}{nw}"
+        mc "{cps=*1.5}WHAT THE FU{/cps}{nw}"
+        show monika g2 at t11 zorder 2
+        $ style.say_dialogue = style.edited
+        $ gtext = glitchtext(80)
+        mc "{cps=*1.5}WHAT THE FU{fast}[gtext]{/cps}{nw}"
+        window hide(None)
+        show screen tear(20, 0.1, 0.1, 0, 40)
+        play sound "sfx/s_kill_glitch1.ogg"
+        pause 0.25
+        stop sound
+        hide screen tear
+        hide monika
+        window show(None)
+        $ style.say_dialogue = style.normal
+        $ del _history_list [-8:]
+        $ m.display_args["callback"] = None
+        $ audio.t2 = "<from " + str(currentpos) + " loop 4.499>bgm/2.ogg"
+        play music t2
+        $ m_name = "???"
+        show monika 1a at t11 zorder 2
+        m "...[player]?"
+    else:
+        "I guess I have no choice but to start with the anime club..."
+        $ m_name = "???"
+        m "...[player]?"
+        window hide(None)
+        show monika g2 at t11 zorder 2
+        pause 0.75
+        show screen tear(20, 0.1, 0.1, 0, 40)
+        play sound "sfx/s_kill_glitch1.ogg"
+        pause 0.25
+        stop sound
+        hide screen tear
+        window show(None)
+        show monika 1 at t11 zorder 2
+    mc "...Monika?"
+    $ m_name = "Monika"
+    m 1b "Oh my goodness, I totally didn't expect to see you here!"
+    m 5 "It's been a while, right?"
+    mc "Ah..."
+    mc "Yeah, it has."
+    if monika_seen:
+        "Oh, yeah? After what I saw {i}just now???{/i}"
+        "I literally want to die just by looking at her."
+        "Having her smile at me so genuinely feels a little... {w}suspicious..."
+    else:
+        "Monika smiles sweetly."
+        "We do know each other - well, we rarely talked, but we were in the same class last year."
+        "Monika was probably the most popular girl in class - smart, beautiful, athletic."
+        "Basically, completely out of my league."
+        "So, having her smile at me so genuinely feels a little..."
+    mc "What did you come in here for, anyway?"
+    m 1a "Oh, I've just been looking for some supplies to use for my club."
+    m 1d "Do you know if there's any construction paper in here?"
+    m "Or markers?"
+    if monika_seen:
+        "I bet she didn't want look for them in the first place. Ugh, I hate this lady..."
+    mc "I guess you could check the closet."
+    mc "...You're in the debate club, right?"
+    m 5 "Ahaha, about that..."
+    m "I actually quit the debate club."
+    mc "Really? You quit?"
+    m "Yeah..."
+    m 2e "To be honest, I can't stand all of the politics around the major clubs."
+    m "It feels like nothing but arguing about the budget and publicity and how to prepare for events..."
+    m "I'd much rather take something I personally enjoy and make something special out of it."
+    mc "In that case, what club did you decide to join?"
+    m 1b "Actually, I'm starting a new one!"
+    m "A literature club!{nw}"
+    $ _history_list.pop()
+    show screen tear(20, 0.1, 0.1, 0, 40)
+    window hide(None)
+    play sound "sfx/s_kill_glitch1.ogg"
+    pause 0.25
+    stop sound
+    hide screen tear
+    window show(None)
+    m "A literature club!{fast}"
+    window auto
+    if monika_seen:
+        "That scare the shit out of me."
+        $ _history_list.pop()
+    mc "Literature...?"
+    if not monika_seen:
+        "That sounds kind of...dull?"
+    mc "How many members do you have so far?"
+    m 5 "Um..."
+    m "Ahaha..."
+    m "It's kind of embarrassing, but there are only three of us so far."
+    m "It's really hard to find new members for something that sounds so boring..."
+    mc "Well, I can see that..."
+    if monika_seen:
+        "The fact that you had another member as well..."
+    m 3d "But it's really not boring at all, you know!"
+    m "Literature can be anything. Reading, writing, poetry..."
+    m 3e "I mean, one of my members even keeps her manga collection in the clubroom..."
+    "Have I heard this before? My head fuzzy a little bit lately..."
+    mc "Wait...really?"
+    m 2k "Yeah, it's funny, right?"
+    m 2e "She always insists that manga is literature, too."
+    m "I mean, she's not wrong, I guess..."
+    m "And besides, a member's a member, right?"
+    if not monika_seen:
+        "...Did Monika say \"she\"?"
+        "Hmm..."
+    else:
+        pause 1.0
+    m 1a "Hey, [player]..."
+    m "By any chance...are you still looking for a club to join?"
+    mc "Ah--"
+    mc "I mean, I guess so, but..."
+    m "In that case..."
+    m 5 "Is there any chance you could do me a big favor?"
+    m "I won't ask you to join, but..."
+    m "If you could at the very least visit my club, it would make me really happy."
+    m "Please?"
+    mc "Um..."
+    if monika_seen:
+        "Well, I guess I have no reason to refu-{nw}"
+        $ _history_list.pop()
+        "Wait, why did I say that?!"
+        "I cant' just head over heels for her just yet."
+        "I need a plan to take out on her."
+        "I need to do something rather than playing along."
+        "This game... there must be some kind of weak spot, or a plot hole."
+        "Ah, you might want to save this game later..."
+        "You know that something might happened in the future..."
+        "If I could--{nw}"
+        $ _history_list.pop()
+        m 1g "[player]?"
+        mc "Oh! Uh..."
+    else:
+        "Well, I guess I have no reason to refuse..."
+        "Besides, how could I ever refuse someone like Monika?"
+    mc "Sure, I guess I could check it out."
+    m 1k "Aah, awesome!"
+    m 1b "You're really sweet, [player], you know that?"
+    mc "I-It's nothing, really..."
+    if monika_seen:
+        "I let my guard down."
+        "God damn it!"
+    m 1a "Shall we go, then?"
+    m "I'll look for the materials another time - you're more important."
+
+    if monika_seen:
+        jump chapter_mod_1a
+    else:
+        show monika at thide zorder 1
+        hide monika
+    return
+
+label end_ch_mod:
+    "Wait, didn't I heard about this conversation before?"
+    "What I did just now..."
+    "You... {w}You saved me!"
+    "Well, this would easier for me to know what's going on with Monika."
+    "I think I can pull this thing one by one."
+    "[player], you are fucking genius!"
+    m "[player], huurry up!"
+    "Ah, I found her weak spot."
+    "She couldn't remember anything!"
+    "This might be one of my chance to beat her!"
+    mc "Yes! I'm coming...!"
+    return
+
 #choice flag
 label chapter_mod_1a:
     "I knew it..."
@@ -222,44 +408,29 @@ label chapter_mod_1a:
         jump end_ch_mod
 
     "Okay, [player]... What should I do?"
-    call i_do_1 from _call_i_do_1
-    if closet_checked:
-        return
-    elif poster_checked:
-        call i_do_1 from _call_i_do_1_1
-        return
-    return
+    jump i_do_1
     
 label i_do_1:
     menu:
         "I guess I should..."
-        "Do something violent":
-            if persistent.ggwp_monika == 2:
-                jump end_ch_mod
+        "Do something violent" if persistent.ggwp_monika != 2:
             jump throw_chair
-        "Check the closet":
-            if persistent.ggwp_monika == 2:
-                jump end_ch_mod
+        "Check the closet" if persistent.ggwp_monika != 2:
             $ _history_list.pop()
             "I guess I should... {fast}check the classroom closet."
-            call check_closet from _call_check_closet
-            return
-        "Check the poster" if not poster_checked:
-            if persistent.ggwp_monika == 2:
-                jump end_ch_mod
+            jump check_closet
+        "Check the poster" if (not poster_checked) and (persistent.ggwp_monika == 1):
             $ _history_list.pop()
             "I guess I should... {fast}check the poster at the wall, which is located at the back of the class."
-            call check_poster from _call_check_poster
-            return
-        "Nevermind...":
-            if persistent.ggwp_monika == 2:
-                jump end_ch_mod
+            jump check_poster
+        "What did I just..." if persistent.ggwp_monika == 2:
+            jump end_ch_mod
+        "Nevermind..." if persistent.ggwp_monika != 2:
             "Ah, never mind..."
             "There's no point for me to to do something here."
             "After all, she is waiting for me."
             "I guess getting along is fine, as of now."
             "I can do something about this later on."
-            return
     return
 
 label throw_chair:
@@ -440,194 +611,4 @@ label check_poster:
         "Maybe I should do something else?"
         "Well..."
         $ poster_checked = True
-        return
-
-#### Main chapter flag ####
-label chapter_mod_1:
-    #haha you cant save this game forever ~Monika
-    $ delete_all_saves()
-    $ persistent.ggwp_monika = 0
-    scene bg class_day
-    with wipeleft_scene
-    "The school day is as ordinary as ever, and it's over before I know it."
-    "After I pack up my things, I stare blankly at the wall, looking for an ounce of motivation."
-    mc "Clubs..."
-    "There really aren't any that interest me."
-    "Besides, most of them would probably be way too demanding for me to want to deal with."
-    if monika_seen:
-        "Except for one club that I recognise before..."
-        $ currentpos = get_pos()
-        stop music
-        mc "What the hell is that?!{w=1.0}{nw}"
-        "{cps=*1.5}The \"thing\" started to approach me.{/cps}{w=1.0}{nw}"
-        "{cps=*1.5}I didn't recognise that distorted mess of entity.{/cps}{w=1.0}{nw}"
-        "{cps=*1.5}It's getting closer and closer now...{/cps}{w=1.0}{nw}"
-        "{cps=*1.5}Ah, what is happening to this world?!!?!{/cps}{w=0.5}{nw}"
-        mc "{cps=*1.5}WHAT THE FU{/cps}{nw}"
-        show monika g2 at t11 zorder 2
-        $ style.say_dialogue = style.edited
-        $ gtext = glitchtext(80)
-        mc "{cps=*1.5}WHAT THE FU{fast}[gtext]{/cps}{nw}"
-        window hide(None)
-        show screen tear(20, 0.1, 0.1, 0, 40)
-        play sound "sfx/s_kill_glitch1.ogg"
-        pause 0.25
-        stop sound
-        hide screen tear
-        hide monika
-        window show(None)
-        $ style.say_dialogue = style.normal
-        $ del _history_list [-8:]
-        $ m.display_args["callback"] = None
-        $ audio.t2 = "<from " + str(currentpos) + " loop 4.499>bgm/2.ogg"
-        play music t2
-        $ m_name = "???"
-        show monika 1a at t11 zorder 2
-        m "...[player]?"
-    else:
-        "I guess I have no choice but to start with the anime club..."
-        $ m_name = "???"
-        m "...[player]?"
-        window hide(None)
-        show monika g2 at t11 zorder 2
-        pause 0.75
-        show screen tear(20, 0.1, 0.1, 0, 40)
-        play sound "sfx/s_kill_glitch1.ogg"
-        pause 0.25
-        stop sound
-        hide screen tear
-        window show(None)
-        show monika 1 at t11 zorder 2
-    mc "...Monika?"
-    $ m_name = "Monika"
-    m 1b "Oh my goodness, I totally didn't expect to see you here!"
-    m 5 "It's been a while, right?"
-    mc "Ah..."
-    mc "Yeah, it has."
-    if monika_seen:
-        "Oh, yeah? After what I saw {i}just now???{/i}"
-        "I literally want to die just by looking at her."
-        "Having her smile at me so genuinely feels a little... {w}suspicious..."
-    else:
-        "Monika smiles sweetly."
-        "We do know each other - well, we rarely talked, but we were in the same class last year."
-        "Monika was probably the most popular girl in class - smart, beautiful, athletic."
-        "Basically, completely out of my league."
-        "So, having her smile at me so genuinely feels a little..."
-    mc "What did you come in here for, anyway?"
-    m 1a "Oh, I've just been looking for some supplies to use for my club."
-    m 1d "Do you know if there's any construction paper in here?"
-    m "Or markers?"
-    if monika_seen:
-        "I bet she didn't want look for them in the first place. Ugh, I hate this lady..."
-    mc "I guess you could check the closet."
-    mc "...You're in the debate club, right?"
-    m 5 "Ahaha, about that..."
-    m "I actually quit the debate club."
-    mc "Really? You quit?"
-    m "Yeah..."
-    m 2e "To be honest, I can't stand all of the politics around the major clubs."
-    m "It feels like nothing but arguing about the budget and publicity and how to prepare for events..."
-    m "I'd much rather take something I personally enjoy and make something special out of it."
-    mc "In that case, what club did you decide to join?"
-    m 1b "Actually, I'm starting a new one!"
-    m "A literature club!{nw}"
-    $ _history_list.pop()
-    show screen tear(20, 0.1, 0.1, 0, 40)
-    window hide(None)
-    play sound "sfx/s_kill_glitch1.ogg"
-    pause 0.25
-    stop sound
-    hide screen tear
-    window show(None)
-    m "A literature club!{fast}"
-    window auto
-    if monika_seen:
-        "That scare the shit out of me."
-        $ _history_list.pop()
-    mc "Literature...?"
-    if not monika_seen:
-        "That sounds kind of...dull?"
-    mc "How many members do you have so far?"
-    m 5 "Um..."
-    m "Ahaha..."
-    m "It's kind of embarrassing, but there are only three of us so far."
-    m "It's really hard to find new members for something that sounds so boring..."
-    mc "Well, I can see that..."
-    if monika_seen:
-        "The fact that you had another member as well..."
-    m 3d "But it's really not boring at all, you know!"
-    m "Literature can be anything. Reading, writing, poetry..."
-    m 3e "I mean, one of my members even keeps her manga collection in the clubroom..."
-    "Have I heard this before? My head fuzzy a little bit lately..."
-    mc "Wait...really?"
-    m 2k "Yeah, it's funny, right?"
-    m 2e "She always insists that manga is literature, too."
-    m "I mean, she's not wrong, I guess..."
-    m "And besides, a member's a member, right?"
-    if not monika_seen:
-        "...Did Monika say \"she\"?"
-        "Hmm..."
-    else:
-        pause 1.0
-    m 1a "Hey, [player]..."
-    m "By any chance...are you still looking for a club to join?"
-    mc "Ah--"
-    mc "I mean, I guess so, but..."
-    m "In that case..."
-    m 5 "Is there any chance you could do me a big favor?"
-    m "I won't ask you to join, but..."
-    m "If you could at the very least visit my club, it would make me really happy."
-    m "Please?"
-    mc "Um..."
-    if monika_seen:
-        "Well, I guess I have no reason to refu-{nw}"
-        $ _history_list.pop()
-        "Wait, why did I say that?!"
-        "I cant' just head over heels for her just yet."
-        "I need a plan to take out on her."
-        "I need to do something rather than playing along."
-        "This game... there must be some kind of weak spot, or a plot hole."
-        "Ah, you might want to save this game later..."
-        "You know that something might happened in the future..."
-        "If I could--{nw}"
-        $ _history_list.pop()
-        m 1g "[player]?"
-        mc "Oh! Uh..."
-    else:
-        "Well, I guess I have no reason to refuse..."
-        "Besides, how could I ever refuse someone like Monika?"
-    mc "Sure, I guess I could check it out."
-    m 1k "Aah, awesome!"
-    m 1b "You're really sweet, [player], you know that?"
-    mc "I-It's nothing, really..."
-    if monika_seen:
-        "I let my guard down."
-        "God damn it!"
-    m 1a "Shall we go, then?"
-    m "I'll look for the materials another time - you're more important."
-
-    jump en_ch_mod
-
-label en_ch_mod:
-    if persistent.ggwp_monika != 2:
-        if monika_seen:
-            call chapter_mod_1a from _call_chapter_mod_1a
-            return
-        else:
-            show monika at thide zorder 1
-            hide monika
-            return
-    else:
-        "Wait, didn't I heard this conversation before?"
-        "What I did just now..."
-        "You... {w}You saved me!"
-        "Hell, this would easier for me to know what's going on with Monika."
-        "I think I can pull this thing one by one."
-        "[player], you are fucking genius!"
-        m "[player], huurry up!"
-        "Ah, I found her weak spot."
-        "She couldn't remember anything!"
-        "This might be one of my chance to beat her!"
-        mc "Yes! I'm coming...!"
-    return
+        jump i_do_1
