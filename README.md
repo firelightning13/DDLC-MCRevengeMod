@@ -1,3 +1,4 @@
+![DDLCMCR](https://raw.githubusercontent.com/firelightning13/DDLC-MCRevengeMod/master/mod_assets/DDLCMCR.png)
 # DDLC - MC Revenge Mod
 What if the main character of Doki-Doki Literature Club becomes sentient and self-aware, similar to Monika? He was awaken by the power of my coding and begin to realise that this is all just a game? What will he do? You will find out soon enough if play this mod!
 
