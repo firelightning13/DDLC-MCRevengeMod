@@ -69,7 +69,7 @@ label mod_rejects:
     #"All three girls stare back at me with dejected eyes."
     if persistent.ggwp_monika != 3:
         "I don't know why, but I felt kind of guilty after seeing their dejected eyes."
-        "I feel bad for them. {w}(except Monika)"
+        "I feel bad for them."
     show monika at s33
     m 1p "B-But..."
     show yuri at s32
@@ -77,12 +77,8 @@ label mod_rejects:
     show natsuki at s31
     n 5s "Hmph."
     mc "Eh...?"
-    if persistent.ggwp_monika == 3:
-        "Guess I'll stuck here...{nw}" # guess ill die memes
-        $ _history_list.pop()
-        "{cps=*2}guess ill die{/cps}{nw}"
-        $ _history_list.pop()
-        "Guess I'll stuck here..."
+    if persistent.ggwp_monika = 3:
+        "Guess I'll stuck here"
     else:
         "The girls exchange glances before Monika turns back to me."
     show monika at f33 zorder 3
@@ -360,7 +356,6 @@ label chapter_mod_2:
     window show(None)
     $ style.say_dialogue = style.normal
     "Okay, I already know that."
-    "Also fun fact, she's not a first-year.{nw}"
     
     show yuri at t33 zorder 2
     show monika at f31 zorder 3
@@ -468,6 +463,11 @@ label chapter_mod_2:
         pause 2.0
         hide screen tear
         stop music
+        # temporary fix
+        if renpy.showing("bg spoopy", layer='master'):
+            $ spoopy_scene = True
+        else:
+            $ spoopy_scene = False
         scene white
         play music t1
         show intro with Dissolve(0.5, alpha=True)
@@ -475,7 +475,10 @@ label chapter_mod_2:
         hide intro with Dissolve(0.5, alpha=True)
         show splash_warning "What are you doing?" with Dissolve(0.5, alpha=True)
         pause 1.0
-        scene bg club_day
+        if spoopy_scene:
+            scene bg spoopy
+        else:
+            scene bg club_day
         $ audio.t3 = "<from " + str(currentpos) + " loop 4.499>bgm/3.ogg"
         play music t3
         window show(None)
