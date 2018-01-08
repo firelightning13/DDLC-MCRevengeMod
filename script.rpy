@@ -1,5 +1,6 @@
 # This is used for top-level game strucutre.
 # Should not include any actual events or scripting; only logic and calling other labels.
+#define config.developer = True
 
 label start:
 
@@ -30,9 +31,10 @@ label start:
         call intro_mod_2 from _call_intro_mod_2
     
     if persistent.playthrough == 2:
-        call intro_mod_2_1 from _call_intro_mod_2_1
+        if persistent.ggwp_monika != 2:
+            call intro_mod_2_1 from _call_intro_mod_2_1
         #next chapter
-        call chapter_mod_2
+        call chapter_mod_2 from _call_chapter_mod_2
         jump mod_end_demo
 
 label endgame(pause_length=4.0):
