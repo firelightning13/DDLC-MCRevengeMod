@@ -12,7 +12,7 @@ This version contains:
 - Just Monika
 
 ## About this project
-Note: This mod is a fan work, and currently under my development. This mod is clearly inspired from original Doki-Doki Literature Club and I gave it a little bit of twist, giving much more options and flexibilities to player, but still limited to what Ren.py engine offers, and my limited abilities and understandings to mod itself.
+Note: This mod is a fan work, and currently under my development. This mod is clearly inspired from original Doki-Doki Literature Club and I gave it a little bit of twist, giving much more options and flexibilities to player, but still limited to what Ren.py engine offers, and my limited abilities and understandings to mod itself. Also, you still can consider this an "alternate universe of DDLC".
 
 ## Plot (might be spoiler)
 - Prologue = Post-Sayori hanging event and before Act 2. Also MC will realise that Monika is the culprit of that major event.
