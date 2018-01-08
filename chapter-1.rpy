@@ -97,7 +97,7 @@ label intro_mod_2_2:
     "Well...."
     $ s_name = glitchtext(12)
     menu:
-        "What am I supposed to do?"
+        "What should I to do right now?"
         "Visit [s_name]'s house.":
             pass
         "Just go to school.":
@@ -106,7 +106,7 @@ label intro_mod_2_2:
             else:
                 $ renpy.call_screen("dialog", "Ah, c'mon!", ok_action=Return())
                 $ renpy.call_screen("dialog", "Really, [player]? Please don't do this again..", ok_action=Return())
-    "Maybe I should check out my \"neighbor\" next door, since I'm very curious about what happened."
+    "Maybe I should check out my \"neighbor\" next door, since I'm very curious about it."
     "Wait, is it \"neighbor\" or \"neighbour\"?"
     "Whatever..."
     "Hope that I'll find something interesting."
