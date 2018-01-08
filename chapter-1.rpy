@@ -373,7 +373,7 @@ label chapter_mod_1:
     else:
         show monika at thide zorder 1
         hide monika
-    return
+    jump chapter_mod_2
 
 label end_ch_mod:
     "Wait, didn't I heard about this conversation before?"
@@ -387,7 +387,7 @@ label end_ch_mod:
     "She couldn't remember anything!"
     "This might be one of my chance to beat her!"
     mc "Yes! I'm coming...!"
-    return
+    jump chapter_mod_2
 
 #choice flag
 label chapter_mod_1a:
@@ -429,7 +429,7 @@ label i_do_1:
             "After all, she is waiting for me."
             "I guess getting along is fine, as of now."
             "I can do something about this later on."
-    return
+            jump chapter_mod_2
 
 label throw_chair:
     "Hmm..."
@@ -540,7 +540,7 @@ label check_closet:
     "I guess I have no choice."
     mc "Alright, I'm coming..."
     $ closet_checked = True
-    return
+    jump chapter_mod_2
 
 label check_poster:
     "..."
@@ -601,6 +601,7 @@ label check_poster:
         $ persistent.poster_seen = True
         show screen tear(8, offtimeMult=1, ontimeMult=10)
         pause 1.5
+        $ persistent.new_game = True
         $ renpy.utter_restart()
     else:
         $ persistent.poster_seen = False
