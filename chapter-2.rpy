@@ -77,7 +77,7 @@ label mod_rejects:
     show natsuki at s31
     n 5s "Hmph."
     mc "Eh...?"
-    if persistent.ggwp_monika = 3:
+    if persistent.ggwp_monika == 3:
         "Guess I'll stuck here"
     else:
         "The girls exchange glances before Monika turns back to me."
