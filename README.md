@@ -3,7 +3,7 @@
 What if the main character of Doki-Doki Literature Club becomes sentient and self-aware, similar to Monika? He was awaken by the power of my coding and begin to realise that this is all just a game? What will he do? You will find out soon enough if play this mod!
 
 ## Releases
-[First Demo Release v0.1.1](https://github.com/firelightning13/DDLC-MCRevengeMod/releases/tag/v0.1-demo)
+[First Demo Release v0.1.1](https://github.com/firelightning13/DDLC-MCRevengeMod/releases/tag/v0.1.1-demo)
 
 This version contains:
 - Story taken from Act 2
