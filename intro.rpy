@@ -23,10 +23,21 @@
 # Avi
 # Various kinds of MPEG stream.
 
+image rgb_flash: 
+
 label intro_mod:
     $ delete_character("sayori")
-    stop music fadeout 2.0
-    scene black
-    with dissolve_scene_full
+    $ quick_menu = False
+    $ config.allow_skipping = False
+    stop music
+    play music g2
+    window hide(None)
+    show screen tear(8, offtimeMult=1, ontimeMult=10)
+    pause 3.0
+    hide screen tear
+    stop music
+    window auto
+    scene black with trueblack
+    
     
     return
