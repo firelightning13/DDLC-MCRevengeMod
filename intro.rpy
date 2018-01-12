@@ -72,12 +72,13 @@ label intro_mod:
     "Initiating \"DDLC: MC's Revenge\" mod.{fast}.{w=0.5}{nw}"
     "Initiating \"DDLC: MC's Revenge\" mod..{fast}.{w=0.5}{nw}"
     "Initiating \"DDLC: MC's Revenge\" mod{fast}{w=0.5}{nw}"
+    "Initiating \"DDLC: MC's Revenge\" mod{fast}.{w=0.5}{nw}"
     "Initiating \"DDLC: MC's Revenge\" mod.{fast}.{w=0.5}{nw}"
-    "Initiating \"DDLC: MC's Revenge\" mod..{fast}.{w=0.5}{nw}"
     call hideconsole
     $ config.keymap['dismiss'] = dismiss_keys
     $ renpy.display.behavior.clear_keymap_cache()
 
+    $ currentpos = get_pos()
     stop music
     window hide(None)
     hide intro_rendered
@@ -86,22 +87,25 @@ label intro_mod:
     pause 3.0
     hide screen tear
     stop music
-    play music ghostmenu
+    $ audio.spoopy = "<from " + str(currentpos) + " loop 105.51>mod_assets/sfx/spoopy_glitch.ogg"
+    play music spoopy
 
     mc "Argh...."
     mc "What's this?"
     "I glanced around."
     mc "It's really dark here..."
     mc "Where am I?"
-    "What just happened?"
-    "Ah.."
+    "What are these noises coming from?!"
+    "Ah-"
     mc "What is happening to me...?"
+    show intro_rendered
     $ gtext = glitchtext(renpy.random.randint(12, 80))
     mc "{cps=*0.5}Hell{/cps}{nw}"
     $ style.say_dialogue = style.edited
     mc "{cps=*2}Hell{fast}l111o000o who[gtext]{/cps}{nw}"
 
     play sound "sfx/s_kill_glitch1.ogg"
+    hide intro_rendered
     scene bg sayori_bedroom
     window hide(None)
     pause 0.25
@@ -140,6 +144,8 @@ label intro_mod:
     "The day when..."
     "That girl, was.."
     mc "Ugh... I barely could remember what had happened before..."
+    stop music fadeout 2.0
+    $ renpy.music.play(audio.ghostmenu, channel="trans", fadein=2.0, tight=True)
     show noise at noisefade(2) zorder 3
     "This room..."
     "It's getting closer.."
@@ -149,7 +155,7 @@ label intro_mod:
     "Help me [player]..."
     $ renpy.call_screen("dialog", "Please help me.", ok_action=Return())
 
-    stop music
+    $ renpy.music.stop(channel='trans', fadeout=None)
     play music g2
     window hide(None)
     show screen tear(8, offtimeMult=1, ontimeMult=10)
