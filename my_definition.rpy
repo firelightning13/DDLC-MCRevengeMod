@@ -29,11 +29,15 @@ image intro_rendered:
     repeat
 image bg s_hang = "mod_assets/cg/s_hang.png"
 image bg s_hang_glitch = "mod_assets/cg/s_hang_glitch.png"
+image bg spoopy = "bg/club-skill.png"
+image bg res_gl = "mod_assets/bg/residential_glitch.png"
 ######################################################################
 
 ####################### Custom audio #################################
 define audio.t1g = "mod_assets/sfx/1g.ogg"
 define audio.spoopy = "<loop 105.51>mod_assets/sfx/spoopy_glitch.ogg"
+define audio.aglitch1 = "mod_assets/sfx/glitch1.ogg"
+define audio.t3l = "<loop 4.618>mod_assets/sfx/3l.ogg"
 ######################################################################
 
 ###################### Custom Functions ############################
