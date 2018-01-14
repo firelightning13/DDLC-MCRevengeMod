@@ -1,4 +1,4 @@
-label intro_mod:
+label ch_mod_intro:
     $ persistent.playthrough = 1
     $ delete_character("sayori")
     $ quick_menu = False
@@ -28,13 +28,13 @@ label intro_mod:
     show splash_n
     pause 0.25
     hide splash_n with Dissolve(0.5, alpha=True)
-    show splash_warning "You left her hanging this morning you know!~" with Dissolve(0.5, alpha=True)
+    show splash_warning "WARNING: Flashing colours in 3 seconds ahead!\n-firelightning13" with Dissolve(0.5, alpha=True)
     pause 1.0
+    hide splash_warning
     show screen tear(20, 0.1, 0.1, 0, 40)
     play sound "sfx/s_kill_glitch1.ogg"
     pause 0.25
     stop sound
-    hide splash_warning
     hide screen tear
     stop music
     scene black with trueblack
@@ -95,7 +95,7 @@ label intro_mod:
     "I glanced around."
     mc "It's really dark here..."
     mc "Where am I?"
-    "What are these noises coming from?!"
+    "Where are these noises coming from?!"
     "Ah-"
     mc "What is happening to me...?"
     show intro_rendered
@@ -130,7 +130,7 @@ label intro_mod:
 
     mc "What... {w}the heck?!"
     mc "What is this?!"
-    "I suddenly remember what happened before."
+    "I suddenly remember what had happened before."
     "My head is spinning like crazy."
     mc "Arghh....!{nw}"
     mc "Why are you showing me that?!{nw}"
@@ -193,6 +193,8 @@ label mod_intro_reject:
 label mod_crash:
     if renpy.loadable("inject.rpyc"):
         $ persistent.ggwp_monika = 0
+    else:
+        $ persistent.ggwp_monika = -1
     $ quick_menu = False
     window hide(None)
     stop music fadeout 2.0
