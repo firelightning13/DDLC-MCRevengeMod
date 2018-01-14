@@ -282,10 +282,10 @@ label splashscreen:
     pause 2.5
     hide intro with Dissolve(0.5, alpha=True)
     #You can use random splash messages, as well. By default, they are only shown during certain acts.
-    if persistent.warning_seen:
-        $ splash_message = "Please choose the right path, ok thanks.\n-firelightning13"
-        $ persistent.warning_seen = False
-    elif persistent.demu_demu:
+    #if persistent.warning_seen:
+        #$ splash_message = "Please choose the right path, ok thanks.\n-firelightning13"
+        #$ persistent.warning_seen = False
+    if persistent.demu_demu:
         $ splash_message = "Just Monika."
     elif persistent.playthrough == 2 and renpy.random.randint(0, 3) == 0:
         $ splash_message = renpy.random.choice(splash_messages)
