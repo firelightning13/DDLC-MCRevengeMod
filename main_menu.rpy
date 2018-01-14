@@ -12,7 +12,7 @@ screen navigation():
 
         if main_menu:
 
-            if persistent.playthrough == 1:
+            if persistent.playthrough == 1 or persistent.ggwp_monika == -1:
                 textbutton _("ŔŗñĮ¼»ŧþŀÂŻŕěōì«") action If(persistent.playername, true=Start(), false=Show(screen="name_input", message="Please enter your name", ok_action=Function(FinishEnterName)))
             elif persistent.demu_demu:
                 textbutton _("Just Monika") action If(persistent.playername, true=Start(), false=Show(screen="name_input", message="Just Monika", ok_action=Function(FinishEnterName)))
@@ -71,12 +71,14 @@ screen main_menu():
     style_prefix "main_menu"
 
 
-    if not persistent.demu_demu:
+    if persistent.demu_demu:
+        add "hi_monika"
+    elif persistent.ggwp_monika == -1:
+        add "menu_bg"
+    elif persistent.ggwp_monika >= 0:
         add "menu_bg"
         add "menu_art_y"
         add "menu_art_n"
-    else:
-        add "hi_monika"
     frame:
         pass
 
@@ -88,12 +90,14 @@ screen main_menu():
     add "menu_particles"
     add "menu_particles"
     add "menu_logo"
-    if persistent.playthrough == 1:
-        add "menu_art_s_glitch"
-    elif persistent.playthrough == 2:
+    if persistent.ggwp_monika == -1:
         pass
-    else:
+    elif persistent.playthrough == 1:
+        add "menu_art_s_glitch"
+    elif persistent.playthrough == 0:
         add "menu_art_s"
+    else:
+        pass
     add "menu_particles"
     add "menu_art_m"
     add "menu_fade"
@@ -101,18 +105,20 @@ screen main_menu():
     if gui.show_name:
 
         vbox:
-            if not persistent.demu_demu:
+            if persistent.demu_demu:
+                text "Just Monika":
+                    style "main_menu_title"
+
+                text "Just Monika":
+                    style "main_menu_version"
+            elif persistent.playthrough > 0:
                 text "[config.name!t]":
                     style "main_menu_title"
 
-                text "v. [config.version] demo":
+                text "v. [config.version] demo, by firelightning13":
                     style "main_menu_version"
             else:
-                text "Just Monika":
-                    style "main_menu_title"
-
-                text "Just Monika":
-                    style "main_menu_version"
+                pass
 
 
     key "K_ESCAPE" action Quit(confirm=False)
