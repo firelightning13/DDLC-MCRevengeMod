@@ -79,7 +79,7 @@ label ch_mod_1:
     "I felt, weird... just now."
     "What's going on?"
     mc "I feel... {w}uncomfortable.."
-    mc "I feel like my body, just wake up for some reason..."
+    mc "I feel like my body just woke up for some reason..."
     mc "Huh..."
     $ del _history_list[-9:]
     "Probably nothing, I guess.."
@@ -133,7 +133,7 @@ label ch_mod_1:
     m 5 "It's been a while, right?"
     $ m_name= "Monika"
     mc "Ah..."
-    "What did I just witnessed?"
+    "What did I just witness?"
     $ _history_list.pop()
     mc "Yeah, it has."
     "Monika smiles sweetly."
@@ -142,7 +142,7 @@ label ch_mod_1:
     #"Basically, completely out of my league."
     #"So, having her smile at me so genuinely feels a little..."
     "Wait, what?"
-    "I feel like I met her not a long ago..."
+    "I feel like I met her here not long ago..."
     "What is happening to my head right now?"
     mc "What did you come in here for, anyway?"
     m 1a "Oh, I've just been looking for some supplies to use for my club."
@@ -163,7 +163,7 @@ label ch_mod_1:
     window show(None)
     $ style.say_dialogue = style.normal
     mc "...You're in the debate club, right?{fast}"
-    "Ah, what did I just said?"
+    "Ah, what did I just say?"
     m 5 "Ahaha, about that..."
     m "I actually quit the debate club."
     mc "Really? You quit...?"
@@ -181,9 +181,9 @@ label ch_mod_1:
     m "It's kind of embarrassing, but there are only three of us so far."
     m "It's really hard to find new members for something that sounds so boring..."
     mc "Well, I can see that..."
-    "\"Well, I can see that... {fast}the fact that you had another member as well...\""
+    "\"Well, I can see that... {fast}that you had another member as well...\""
     $ _history_list.pop()
-    "Why did I feel like my wrath is growing since Monika showed up?"
+    "Why do I feel like my wrath is growing since Monika showed up?"
     $ _history_list.pop()
     m 3d "But it's really not boring at all, you know!"
     m "Literature can be anything. Reading, writing, poetry.."
@@ -229,7 +229,7 @@ label ch_mod_1:
     "Why do I feel like I'm being betrayed instead?"
     "For some reason, it actually infuriates me."
     "I can't even understand my own feelings right now..."
-    "I wonder if this is how Sayori actually feels right now."
+    "I wonder if this is how Sayori felt..."
     "Wait, who is Sayo{nw}"
     $ del _history_list [-6:]
     stop music
@@ -261,13 +261,13 @@ label ch_mod_1:
     m "I'm back~!"
     m "And I brought a guest with me!"
     if monika_glitch:
-        "What the heck did I just saw?"
+        "What the heck did I just see?"
         if renpy.showing("bg spoopy", layer='master'):
-            "And what's with the poster on the back wall of the clubroom?"
-            "Why I'm feeling that something terrible is going to happen?"
+            "And what's with the poster on the back wall of the clubroom!?"
+            "Why do I feel like something terrible is going to happen...?"
     elif renpy.showing("bg spoopy", layer='master'):
-        "What's that poster on the back wall of the clubroom?"
-        "Why I'm feeling that something terrible is going to happen?"
+        "What's that poster on the back wall of the clubroom!?"
+        "Why do I feel like something terrible is going to happen...?"
     show yuri 2t at t33 zorder 2
     if not config.skipping:
         show screen invert(0.15, 0.3)
@@ -347,9 +347,9 @@ label ch_mod_1:
             $ isit = True
     window show(None)
     "Meanwhile, Monika and Natsuki sit across {fast}from each other."
-    "Then, I take a seat next to Monika."
+    "I take a seat next to Monika."
     if isit:
-        "I don't know why, but I feel like I should sit next to Natsuki"
+        "I don't know why, but I feel like I should sit next to Natsuki instead..."
     show monika 1a at t11 zorder 2
     m "So, I know you didn't really plan on coming here..."
     m "But we'll make sure you feel right at home, okay?"
@@ -361,9 +361,9 @@ label ch_mod_1:
     m "Especially when it's something that doesn't grab your attention, like literature."
     m "You have to work hard to convince people that you're both fun and worthwhile."
     m "But it makes school events, like the festival, that much more important."
-    "Festival? I don't know much about what a literature club supposed to do in the festival."
-    "As I don't see how well it goes, yet..?"
-    m 2k "I'm confident that we can all really grow this club before we graduate!"
+    "The festival? I don't really know much about what a literature club is supposed to do in the festival."
+    "And I don't see how well it could go, either..."
+    m 2k "We'll figure that out soon enough, I'm confident that we can all really grow this club before we graduate!"
     m "Right, Natsuki?"
     show monika at t22 zorder 2
     show natsuki 4q at t21 zorder 2
@@ -372,8 +372,8 @@ label ch_mod_1:
     "Natsuki reluctantly agrees."
     #"Such different girls, all interested in the same goal..."
     "Well, I guess literature isn't really that hard."
-    "Despite it being kind of dull, it was worth making a poem, sharing with your friends and finding inspiration from other people."
-    "The basic fundamental of literature is to express yourself."
+    "Despite it being kind of dull, it's worth it to make a poem, share it with your friends and to find inspiration from other people."
+    "The basic fundamentals of literature is to express yourself."
     "I don't know, I feel like I've done this before."
     "Yuri returns to the table, carrying a tea set."
     "She carefully places a teacup in front of each of us before setting down the teapot in the middle."
@@ -415,8 +415,8 @@ label ch_mod_1:
             window show(None)
             $ ihorror = True
             y 1e "Oh?"
-            "Yuri looks at my face with a suprised expression."
-            y 1a "What did you say just now?"
+            "Yuri looks at my me with a suprised expression."
+            y 1a "What did you say?"
             mc "Uh..."
             window hide(None)
     $ currentpos = get_pos()
@@ -436,13 +436,13 @@ label ch_mod_1:
     y 3u "N-Not much of a reader, I guess..."
     "What was that about?"
     mc "Ah..."
-    mc "Don't say that, you made it sound like a big deal or something."
-    "I said that because of Yuri's sad smile."
+    mc "Don't say that, you're making it sound like a big deal or something."
+    "I say that because of Yuri's sad smile."
     "It's up to me to save this situation."
     mc "I do like reading sometimes."
-    mc "If there's any book that promotes interesting story, then I might enjoy reading it."
+    mc "If there's any book that promotes a interesting stories, then I usually enjoy reading it."
     y 3v "I see..."
-    "Somehow I made her relieved a little bit."
+    "Somehow I relieved her a little bit."
     mc "Anyway, what about you, Yuri?"
     "I'm confused when I say \"you\" and \"Yuri\" at the same time."
     "What kind of language am I speaking right now?"
@@ -452,10 +452,10 @@ label ch_mod_1:
     y "The level of creativity and craftsmanship behind them is amazing to me."
     y 1f "And telling a good story in such a foreign world is equally impressive."
     "I already knew that she is clearly passionate about her reading."
-    "Even though she has an exquisite appearance, I could tell that she finds her comfort in the world of books, not people."
-    "I would think she is not really into social-interaction, or maybe she is."
+    "Even though she has an exquisite appearance, I can already tell that she's most comfortable in the fantasy worlds that books bring, not with regular people."
+    "I would think she is not really into social-interaction, but maybe she is?"
     #"Yuri goes on, clearly passionate about her reading."
-    #"She seemed so reserved and timid since the moment I walked in, but it's obvious by the way her eyes light up that she finds her comfort in the world of books, not people."
+    #"She seemed so reserved and timid since the moment I walked in, but it's obvious by the way her eyes light up that she finds her comfort in the world of books as I imagined, not people."
     y 2m "But you know, I like a lot of things."
     y "Stories with deep psychological elements usually immerse me as well."
     y 2a "Isn't it amazing how a writer can so deliberately take advantage of your own lack of imagination to completely throw you for a loop?"
@@ -463,17 +463,17 @@ label ch_mod_1:
     y "Anyway, I've been reading a lot of horror lately..."
     mc "Really? I read a horror book once."
     if ihorror:
-        "I thought I did said before that I like horror.."
+        "I thought I said before that I like horror...?"
         "What is happening right now?!"
     else:
-        "Or twice."
-        "At this point, Yuri might as well be having a conversation with a rock."
+        "Or twice..."
+        "Either way, horror can be interesting..."
     #"I desperately grasp something I can relate to at the minimal level."
     #"At this rate, Yuri might as well be having a conversation with a rock."
     show monika 1j at f33 zorder 3
     m "Ahaha. I'd expect that from you, Yuri."
     m 1a "It suits your personality."
-    "Something's fishy about this conversation."
+    "Something seems fishy about this conversation."
     show monika at t33 zorder 2
     show yuri at f32 zorder 3
     y 1a "Oh, is that so?"
@@ -511,9 +511,9 @@ label ch_mod_1:
     m 1j "Fine, fine~"
     show monika 1a at t33 zorder 2
     mc "Natsuki, you write your own poems?"
-    "I think everyone does writing their own poems at least once or twice."
+    "I think everyone writes their own poems at least once or twice."
     "I may have also written poems before."
-    "I wonder whats her last poem anyway?"
+    "I wonder what her latest poem is..."
     show natsuki at f31 zorder 3
     n 1c "Eh? Well, I guess sometimes."
     n "Why do you care?"
@@ -526,16 +526,16 @@ label ch_mod_1:
     n "You wouldn't...like them..."
     show natsuki at t31 zorder 2
     mc "Ah.. You shouldn't worry about that."
-    mc "I guess you need more confidence to share with someone.."
+    mc "I guess you just need more confidence to share with someone.."
     #mc "Ah...not a very confident writer yet?"
     show yuri at f32 zorder 3
     y 2f "I understand how Natsuki feels."
     y "Sharing that level of writing takes more than just confidence."
     y 2k "The truest form of writing is writing to oneself."
     y "You must be willing to open up to your readers, exposing your vulnerabilities and showing even the deepest reaches of your heart."
-    mc "Ah, so you're basically saying that language itself is very important for making poems?"
+    mc "So you're basically saying that language itself is very important for making poems?"
     y 1b "Yes. It's like an artist painting beautiful pictures for everyone to see."
-    y "People value the artist more than just a picture."
+    y "People value the artist because of more than just a picture that they paint."
     "Huh? I didn't know Yuri likes pictures."
     "I thought I've heard that before from Sayo-{nw}"
     $ _history_list.pop()
@@ -555,8 +555,8 @@ label ch_mod_1:
     y 3o "..."
     mc "Well, I guess it's the same for Yuri..."
     "We all sit in silence for a moment."
-    "I stare at the desk, trying to understand my painful thoughts inside my head."
-    "I feel like I should admit it to everyone, but my anxious feeling and fear never let me speak my mind about it."
+    "I stare at the desk, trying to understand the painful thoughts inside my head."
+    "I feel like I should admit it to everyone, but my anxious feelings and fear stop me from speaking my mind about it."
     show monika at f33 zorder 3
     m 5a "Hey, I just got an idea!"
     m "How about this?"
@@ -565,7 +565,7 @@ label ch_mod_1:
     show yuri 3e at f32 zorder 3
     ny "...?"
     "Natsuki and Yuri look quizzically at Monika."
-    "I guess I look at Monika too."
+    "I guess I should look at Monika, too."
     show natsuki at t31 zorder 2
     show yuri at t32 zorder 2
     show monika at f33 zorder 3
@@ -611,7 +611,7 @@ label ch_mod_1:
     show monika at f33 zorder 3
     m "I'll do everything I can to give you a great time, okay?"
     mc "Ah. Alright then..."
-    "Of course, I feel something's off"
+    "I feel like something's off."
     "Something bad is going to happen tomorrow."
     show yuri at thide zorder 1
     show natsuki at thide zorder 1
@@ -653,10 +653,10 @@ label ch_mod_1:
     show monika 5a at t11 zorder 2
     m "Okay!"
     if accepts_invite:
-        m "I'll see you tomorrow too, then."
+        m "I'll see you tomorrow too, then~!"
     else:
-        m "I'll see you tomorrow, then."
-    m "I can't wait!"
+        m "I'll see you tomorrow."
+    m "I can't wait~!"
     
     scene bg residential_day
     with wipeleft_scene
@@ -703,7 +703,7 @@ label ch_mod_1:
 label mod_ch1_accepts:
     mc "Yeah.."
     mc "I mean it could be fun, right?"
-    mc "Sharing our poems to each other..."
+    mc "Sharing our poems with each other..."
     show monika 1d at f33 zorder 3
     "Monika looks at me quizzically"
     m "Wait, [player]?"
@@ -713,13 +713,13 @@ label mod_ch1_accepts:
     "She stares into my eyes for a good 3 seconds long{w=2.0}{nw}"
     $ config.keymap['dismiss'] = dismiss_keys
     $ renpy.display.behavior.clear_keymap_cache()
-    mc "Eh, you mean..."
+    mc "Eh, I mean..."
     mc "You know...."
     m "You do?"
     m 1b "Oh my goodness!"
     m 5a "You really mean it, don't you?"
     "Monika smiles sweetly."
-    "Ugh, I guess I need to endure it anyway."
+    "Ugh, I guess I need to endure this."
     show monika at t33 zorder 2
     mc "Yeah, I decided to join your club anyway."
     mc "I guess literature isn't really that bad for me."
@@ -730,7 +730,7 @@ label mod_ch1_accepts:
     show monika at t33 zorder 2
     show natsuki 5w at f31 zorder 3
     n "Hmph. I really thought you didn't want to join our club."
-    n 5e "Then you would be a complete jerk if you did that."
+    n 5e "You would be a complete jerk if you did that. Not join, that is."
     mc "Yeah, yeah."
     show natsuki 5a at t31 zorder 2
     show yuri 1a at f32 zorder 3
@@ -740,7 +740,7 @@ label mod_ch1_accepts:
     mc "Ah, thank you."
     mc "It was my own choice after all"
     "I hope she's okay with me here."
-    "Though I'm kind of worried that she might be her next target."
+    "Though I'm kind of worried that she might be \her\ next target."
     "Wait, what am I talking about?"
     return
 
@@ -757,7 +757,7 @@ label mod_ch1_rejects:
     show yuri 2e
     #"I lose my train of thought."
     #"All three girls stare back at me with dejected eyes."
-    "I don't know why, but I felt kind of guilty after seeing their dejected eyes."
+    "I don't know why, but I feel kind of guilty after seeing their dejected eyes."
     "I feel bad for them."
     show monika at s33
     m 1p "B-But..."
@@ -806,7 +806,7 @@ label mod_ch1_rejects:
     y 1m "You really did scare me for a moment..."
     if renpy.showing("bg spoopy", layer='master'):
         "Yeah, the back of the classroom is even scarier than me."
-        "Haven't they even noticed?"
+        "Haven't they even noticed? \How\?"
     show yuri at t32 zorder 2
     show natsuki at f31 zorder 3
     n 5q "I mean, if you really just left after all this, I would be super pissed."
