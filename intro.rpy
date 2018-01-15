@@ -92,7 +92,7 @@ label ch_mod_intro:
 
     mc "Argh...."
     mc "What's this?"
-    "I glanced around."
+    "I glance around."
     mc "It's really dark here..."
     mc "Where am I?"
     "Where are these noises coming from?!"
@@ -152,7 +152,7 @@ label ch_mod_intro:
     "I can't move."
     "I can't go anywhere.."
     "Please help me..."
-    "Help me [player]..."
+    "Help me, [player]..."
     $ renpy.call_screen("dialog", "Please help me.", ok_action=Return())
 
     $ renpy.music.stop(channel='trans', fadeout=None)
@@ -180,7 +180,7 @@ label mod_intro_reject:
     $ persistent.ggwp_monika = -1
     pause 1.0
     m 5b "{cps=*0.5}Don't ever do that again, [player]!{/cps}"
-    m 5a "{cps=*0.5}Okay, sweetheart?~{/cps}"
+    m 5a "{cps=*0.5}Okay, sweetheart~?{/cps}"
     window hide(None)
     hide intro_rendered
     show screen tear(8, offtimeMult=1, ontimeMult=10)
