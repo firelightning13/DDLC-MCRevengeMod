@@ -415,7 +415,7 @@ label ch_mod_1:
             window show(None)
             $ ihorror = True
             y 1e "Oh?"
-            "Yuri looks at my me with a suprised expression."
+            "Yuri looks at me with a suprised expression."
             y 1a "What did you say?"
             mc "Uh..."
             window hide(None)
@@ -440,7 +440,7 @@ label ch_mod_1:
     "I say that because of Yuri's sad smile."
     "It's up to me to save this situation."
     mc "I do like reading sometimes."
-    mc "If there's any book that promotes a interesting stories, then I usually enjoy reading it."
+    mc "If there's any book that promotes an interesting stories, then I usually enjoy reading it."
     y 3v "I see..."
     "Somehow I relieved her a little bit."
     mc "Anyway, what about you, Yuri?"
@@ -719,7 +719,6 @@ label mod_ch1_accepts:
     m 1b "Oh my goodness!"
     m 5a "You really mean it, don't you?"
     "Monika smiles sweetly."
-    "Ugh, I guess I need to endure this."
     show monika at t33 zorder 2
     mc "Yeah, I decided to join your club anyway."
     mc "I guess literature isn't really that bad for me."
@@ -740,7 +739,7 @@ label mod_ch1_accepts:
     mc "Ah, thank you."
     mc "It was my own choice after all"
     "I hope she's okay with me here."
-    "Though I'm kind of worried that she might be \her\ next target."
+    "Though I'm kind of worried that she might be {i}her{/i} next target."
     "Wait, what am I talking about?"
     return
 
@@ -806,7 +805,7 @@ label mod_ch1_rejects:
     y 1m "You really did scare me for a moment..."
     if renpy.showing("bg spoopy", layer='master'):
         "Yeah, the back of the classroom is even scarier than me."
-        "Haven't they even noticed? \How\?"
+        "Haven't they even noticed? {i}How{/i}?"
     show yuri at t32 zorder 2
     show natsuki at f31 zorder 3
     n 5q "I mean, if you really just left after all this, I would be super pissed."
