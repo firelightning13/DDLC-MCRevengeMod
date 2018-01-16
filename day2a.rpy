@@ -532,7 +532,10 @@ label check_poster:
         
         mc "What is this picture?{fast}"
         $ _history_list.pop()
+        "I quickly look away."
         "My head started to feel dizzy again."
+        if seen_day == 1:
+            "That's.... what I saw yesterday..." # if you see sayori poster yesterday
         mc "I wish I didn't see that..."
         stop music
         "I suppress the urge to vomit."
