@@ -24,7 +24,6 @@ label start:
     $ allow_skipping = True
     $ config.allow_skipping = True
 
-    
     if persistent.ggwp_monika == -1:
         jump mod_crash
 
@@ -33,9 +32,13 @@ label start:
     
     elif persistent.playthrough == 1:
         call ch_mod_1a
+        jump mod_continue
 
     elif persistent.playthrough == 2:
         call ch_mod_1b
+        label mod_continue:
+            call ch_mod_p1
+            call ch_mod_2
 
 label endgame(pause_length=4.0):
     $ quick_menu = False
