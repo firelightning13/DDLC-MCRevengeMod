@@ -43,7 +43,7 @@ label ch_mod_1a:
     scene black with trueblack
     $ delete_all_saves()
     $ persistent.playthrough = 2
-    $ persistent.anticheat = renpy.random.randint(100000, 999999)
+    $ persistent.anticheat = renpy.random.randint(100000, 999999) # why not
     $ anticheat = persistent.anticheat
 
     scene bg residential_day
@@ -101,31 +101,42 @@ label ch_mod_1:
     "There really aren't any that interest me."
     "Besides, most of them would probably be way too demanding for me to want to deal with."
     "I guess I have no choice but to start with the anime club..."
-    $ currentpos = get_pos()
-    stop music
-    mc "What the hell is that?!{w=1.0}{nw}"
-    "{cps=*1.5}The \"thing\" started to approach me.{/cps}{w=1.0}{nw}"
-    "{cps=*1.5}I didn't recognise that distorted mess of an entity.{/cps}{w=1.0}{nw}"
-    "{cps=*1.5}It's getting closer and closer now...{/cps}{w=1.0}{nw}"
-    "{cps=*1.5}Ah, what is happening to this world?!!?!{/cps}{w=0.5}{nw}"
-    mc "{cps=*1.5}WHAT THE F{/cps}{nw}"
-    show monika g2 at t11 zorder 2
-    $ style.say_dialogue = style.edited
-    $ gtext = glitchtext(80)
-    mc "{cps=*1.5}WHAT THE F{fast}[gtext]{/cps}{nw}"
-    window hide(None)
-    show screen tear(20, 0.1, 0.1, 0, 40)
-    play sound "sfx/s_kill_glitch1.ogg"
-    pause 0.25
-    stop sound
-    hide screen tear
-    hide monika
-    window show(None)
-    $ style.say_dialogue = style.normal
-    $ del _history_list [-7:]
-    $ m.display_args["callback"] = None
-    $ audio.t2 = "<from " + str(currentpos) + " loop 4.499>bgm/2.ogg"
-    play music t2
+    if not config.skipping: # oops... skipping this dialogue is the safest way to heaven
+        $ currentpos = get_pos()
+        stop music
+        $ config.keymap['dismiss'] = []
+        $ renpy.display.behavior.clear_keymap_cache()
+        #$ config.allow_skipping = False
+        mc "What the hell is that?!{w=1.0}{nw}"
+        "{cps=*1.5}The \"thing\" started to approach me.{/cps}{w=0.5}{nw}"
+        "{cps=*1.5}I didn't recognise that distorted mess of an entity.{/cps}{w=0.5}{nw}"
+        "{cps=*1.5}It's getting closer and closer now...{/cps}{w=0.5}{nw}"
+        "{cps=*1.5}Ah, what is happening to this world?!!?!{/cps}{w=0.2}{nw}"
+        mc "{cps=*1.5}WHAT THE F{/cps}{nw}"
+        show monika g2 at t11 zorder 2
+        $ style.say_dialogue = style.edited
+        $ gtext = glitchtext(80)
+        mc "{cps=*1.5}WHAT THE F{fast}[gtext]{/cps}{nw}"
+        window hide(None)
+        show screen tear(20, 0.1, 0.1, 0, 40)
+        play sound "sfx/s_kill_glitch1.ogg"
+        pause 0.25
+        stop sound
+        hide screen tear
+        hide monika
+        window show(None)
+        $ config.keymap['dismiss'] = dismiss_keys
+        $ renpy.display.behavior.clear_keymap_cache()
+        $ style.say_dialogue = style.normal
+        $ del _history_list [-7:]
+        $ audio.t2 = "<from " + str(currentpos) + " loop 4.499>bgm/2.ogg"
+        play music t2
+        $ gg_skip = False
+    if config.skipping:
+        $ config.skipping = False
+        $ allow_skipping = False
+        $ config.allow_skipping = False
+        $ gg_skip = True
     $ m_name = "???"
     show monika 1a at t11 zorder 2
     m "...[player]?"
@@ -133,7 +144,16 @@ label ch_mod_1:
     m 5 "It's been a while, right?"
     $ m_name= "Monika"
     mc "Ah..."
-    "What did I just witness?"
+    if not gg_skip:
+        "What did I just witness?"
+    else:
+        # suprise motherfcker
+        "Can I skip over these stuff at this point?"
+        "It infuriates me."
+        $ del _history_list [-2:]
+        "Wait, what am I talking about?"
+        $ config.allow_skipping = True
+        $ allow_skipping = True
     $ _history_list.pop()
     mc "Yeah, it has."
     "Monika smiles sweetly."
@@ -698,6 +718,24 @@ label ch_mod_1:
     $ config.skipping = False
     $ config.allow_skipping = False
     $ allow_skipping = False
+
+    # its a joke, pls dont kill me
+    $ gtext = glitchtext(31)
+    call screen confirm("This mod has profanity filter mode.\nDo you want to enable it?", Return(True), Return(False))
+    if _return:
+        $ persistent.protecc = True
+        $ renpy.call_screen("dialog", "Profanity filter is enabled.", ok_action=Return())
+        $ fgword = "******"
+        $ bword = "****"
+        $ aword = "******"
+        $ sword = "***"
+    else:
+        $ persistent.protecc = False
+        $ renpy.call_screen("dialog", "[gtext]", ok_action=Return())
+        $ fgword = "ucking"
+        $ bword = "itch"
+        $ aword = "sshole"
+        $ sword = "hit"
     return
 
 label mod_ch1_accepts:
@@ -710,7 +748,7 @@ label mod_ch1_accepts:
     mc "Yes?"
     $ config.keymap['dismiss'] = []
     $ renpy.display.behavior.clear_keymap_cache()
-    "She stares into my eyes for a good 3 seconds long{w=2.0}{nw}"
+    "She stares into my eyes for a good 3 seconds long{w=1.5}{nw}"
     $ config.keymap['dismiss'] = dismiss_keys
     $ renpy.display.behavior.clear_keymap_cache()
     mc "Eh, I mean..."
