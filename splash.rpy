@@ -254,7 +254,7 @@ label splashscreen:
         pause 1.0
 
         #Optional, load a copy of DDLC save data
-        #call import_ddlc_persistent
+        call import_ddlc_persistent
 
         scene white
         with Dissolve(1.5)
@@ -282,9 +282,6 @@ label splashscreen:
     pause 2.5
     hide intro with Dissolve(0.5, alpha=True)
     #You can use random splash messages, as well. By default, they are only shown during certain acts.
-    #if persistent.warning_seen:
-        #$ splash_message = "Please choose the right path, ok thanks.\n-firelightning13"
-        #$ persistent.warning_seen = False
     if persistent.demu_demu:
         $ splash_message = "Just Monika."
     elif persistent.playthrough == 2 and renpy.random.randint(0, 3) == 0:
@@ -312,6 +309,7 @@ label after_load:
         "The save file could not be loaded."
         "Are you trying to cheat?"
         #Handle however you want, default is to force reset all save data
+        $ delete_all_saves()
         $ renpy.utter_restart()
     return
 
