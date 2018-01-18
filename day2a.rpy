@@ -103,12 +103,12 @@ label ch_mod_2:
         $ poster_checked = False
         $ closet_checked = False
     "Argh.."
-    "I had a bad dream.."
-    "Someone screamed my name."
-    "I wonder who was {i}she{/i}?"
+    "I had a bad dream..."
+    "...Someone screaming my name."
+    "I wonder who {i}she{/i} was?"
     "She said something like \"save me\"..."
     "Or something like \"Don't forget to save your game\"...?"
-    "That was weird."
+    "That was weird..."
     if poetappeal != "abs" or persistent.ggwp_monika == 1:
         # if player chooses other than abstract
         "Anyway, it's pretty late right now."
@@ -137,11 +137,11 @@ label ch_mod_2:
         $ _history_list.pop()
         "It looks like there are only a few people running around.. they must be late, just like me."
         #"Meanwhile, I've always walked to school alone."
-        "Meanwhile, I've always walked{nw}"
+        "Normally, I've always walked{nw}"
         $ _history_list.pop()
-        "Meanwhile, I am trying to run as fast as I can so I can catch up with them."
+        "This time, however, I am trying to run as fast as possible so that I can catch up with them."
         window auto
-        "My class is getting started in any minute now!"
+        "My class could start any minute now!"
         if persistent.ggwp_monika > 0:
             label mc_realise:
                 # going back in time when you load at the start of the game
@@ -162,7 +162,7 @@ label ch_mod_2:
                 mc "Ah, what just happened?!"
                 mc "Did I just..."
                 mc "What's going on right now?"
-                "Confused, I glanced around once again."
+                "Confused, I glance around."
                 "Did I just go back in time?"
                 if persistent.ggwp_monika == 1:# post going to sayori's house
                     mc "That screaming girl back there.."
@@ -173,7 +173,7 @@ label ch_mod_2:
                 "What am I saying?!"
                 "I'm really late right now!"
                 window auto
-                "Screw it, I'm going to school!"
+                "Forget this, I'm going to school!"
                 if persistent.ggwp_monika == 2:
                     jump skip_2_2a
     else:
@@ -198,7 +198,7 @@ label ch_mod_2:
         mc "Eh?"
         "What was that?"
         window auto
-        "I heard someone screaming in the distance..."
+        "I hear someone screaming in the distance..."
         "The same voice that I heard in my dream."
         "It's coming from my neighbor's house."
         $ style.say_window = style.window
@@ -212,10 +212,10 @@ label ch_mod_2:
         "This house..."
         "...looks familiar to me..."
         "My memory's been a little bit hazy lately."
-        "I proceed myself to knock the door."
+        "I proceed to knock the door."
         mc "H-Hello? Is anyone there?"
         "The house looks empty to me, {w}the door is strangely unlocked..."
-        "Is there something happened in this house?"
+        "Has something happened in this house?"
         #mc "I'm coming over..." basically how to deal with robbery situation
         "{cps=30}I silently open the front door...{/cps}{nw}"
         if persistent.ggwp_monika == 0:
@@ -239,13 +239,13 @@ label ch_mod_2:
             mc "Ah, what just happened?!"
             mc "Did I just..."
             mc "What's going on right now?"
-            "Confused, I glanced around once again."
-            "Did I go back in time?"
+            "Confused, I glance around once again."
+            "Did I just go back in time?"
             "My gut says that I shouldn't be here."
             "I don't want to get in trouble again."
             "What am I saying?!"
             window auto
-            "Screw it, I'm going to school!"
+            "Screw this, I'm going to school!"
 
     if poetappeal != "abs" and not persistent.ggwp_monika == 1:
         scene bg cr_gl # glitched bg when choosing other than abstract
@@ -254,15 +254,15 @@ label ch_mod_2:
     with wipeleft_scene
 
     "The school day is as ordinary as ever, and it's over before I know it."
-    "After I pack up my things, I stare blankly at the wall{nw}"
+    "After I pack up my things, I stare blankly at the wall.{nw}"
     $ _history_list.pop()
-    "After I pack up my things, I should get going."
+    "I should get going."
     if persistent.ggwp_monika != 1:# or config.developer:
         # this stuff happens when player not choose abstract poem
-        "Literature club{nw}"
+        "Literature club...{nw}"
         $ _history_list.pop()
         $ style.say_dialogue = style.edited
-        "Literature club{fast}, here I go...{nw}"
+        "Well, {fast}, here I go...{nw}"
         window hide(None)
         show screen tear(20, 0.1, 0.1, 0, 40)
         play sound aglitch2
@@ -273,7 +273,7 @@ label ch_mod_2:
         $ style.say_dialogue = style.normal
         "Argh!{nw}"
         "What?! {w}Oh...."
-        "I just notice..."
+        "I just noticed..."
         "This classroom seems a little bit off..."
         "I feel like something is not right..."
         window hide(None)
@@ -302,13 +302,13 @@ label ch_mod_2:
                 mc "Ah, what just happened?!"
                 mc "Did I just..."
                 mc "What's going on right now?"
-                "Confused, I glanced around once again."
-                "Did I go back in time?"
+                "I'm so confused."
+                "What was all that about?"
                 mc "Did I do something weird just now?"
                 mc "Argh!"
                 "What am I saying?!"
-                "I'm really late right now!"
-                "Screw it, I'm going to litera{nw}"
+                "I'm really late now!"
+                "Screw it, I'm going to the litera{nw}"
                 jump skip_2_2a
         elif persistent.parfait_girls or persistent.tea_set or persistent.ggwp_monika == 1:
             $ gtext = glitchtext(50) # prevent anti-cheat
@@ -356,16 +356,16 @@ label check_closet:
     window auto
     $ style.say_window = style.window
     "Just curious to see what's inside that closet."
-    "I expect the contents of that closet to be classroom stuffs like books, files or markers."
-    "But you'll never know what is actually inside it."
+    "I'm expecting the contents of that closet to simply be classroom stuff like books, files or markers."
+    "But you'll never know what is actually inside it until you look."
     "Well, here goes nothing."
     play sound closet_open
     "I open the closet."
     show noise at noisefade(5) zorder 3
     mc "..."
     mc "I found markers."
-    "Construction papers too.."
-    "Wasn't Monika trying to find these stuff yesterday?"
+    "Construction paper, too.."
+    "Wasn't Monika trying to find this stuff yesterday?"
     $ half_chance = renpy.random.randint(0, 2)
     if half_chance == 0:# or config.developer:
         $ another_chance = renpy.random.randint(0, 3) # Make it fair
@@ -380,10 +380,10 @@ label check_closet:
             mc "Parfait Girls...? {w}Part one?"
             "Have I heard of this manga before?"
             "My memory is a little bit hazy, so I don't know if I read it before."
-            "I wonder why it was there in my classroom."
-            "Was it there for the entire time?"
-            mc "I guess I could keep it though..."
-            "I put it inside my bag, just incase."
+            "I wonder why it's here in the classroom?"
+            "Has it been here the entire time?"
+            mc "I guess I could keep it, though..."
+            "I put it inside my bag, just in case."
             "I kind of want to read it though, in my spare time."
             "Well, about the markers and construction paper..."
             "I guess I could give them to Monika after all."
@@ -395,9 +395,9 @@ label check_closet:
         "Huh? There is a tea set as well."
         "Who put in this closet anyway?"
         "Maybe one of my teachers needs it?"
-        "Well, whatever."
-        "I just grab the markers and construction papers instead."
-        "Well, I guess I could give them to Monika after all."
+        "Oh well, whatever."
+        "I just grab the markers and construction paper instead."
+        "Well, I guess I could give this stuff to Monika after all."
         if persistent.parfait_girls:
             $ persistent.parfait_girls = False
             $ persistent.cheat_mod += 1
@@ -405,7 +405,7 @@ label check_closet:
         $ persistent.tea_set = True
     play sound closet_close
     "I proceed to close the closet."
-    "Hmm... what else should I do..."
+    "Hmm... what else should I do...?"
     $ closet_checked = True
     if persistent.tea_set or persistent.parfait_girls:
         # oops, you ran out of time
@@ -424,9 +424,9 @@ label check_closet:
 label throw_chair:
     show noise at noisefade(5) zorder 3
     "Hmm..."
-    "I think of doing something crazy..."
+    "I feel like doing something crazy..."
     "Well, here goes nothing..."
-    mc "May God save me.{nw}"
+    mc "May God have mercy on me...{nw}"
     $ _history_list.pop()
     play sound aglitch1
     $ style.say_dialogue = style.edited
@@ -434,17 +434,17 @@ label throw_chair:
     $ _history_list.pop()
     $ style.say_dialogue = style.normal
     stop sound
-    mc "May God save me.{fast}"
-    "I grab a chair."
+    mc "May God have mercy on me.{fast}"
+    "I grab the nearest chair."
     if persistent.mc_violent:
         play sound gb_gl
         pause 1.5
         stop sound
         $ persistent.cheat_mod += 1
         jump skip_2_2a # anti-cheat
-    "Then... I throw the chair with my full power{nw}"
+    "...I throw the chair as hard as I can{nw}"
     play sound throw
-    "Then... I throw the chair with my full power{fast} at one of the classroom window{nw}"
+    "...I throw the chair as hard as I can{fast} at one of the classroom windows{nw}"
     $ persistent.mc_violent = True
     $ persistent.ggwp_monika = 2
     python:
@@ -473,7 +473,7 @@ label check_poster:
     window show(None)
     scene bg class_day
 
-    "I guess I should look around..."
+    "I guess I could just look around..."
     pause 1.0
     $ counter = 5 # i dont want to play longer
     ### initiating terrible "look-around" engine, can bypassed by skipping
@@ -495,7 +495,7 @@ label check_poster:
             elif direction == 4:
                 "I look left."
             $ counter -= 1
-        "I look behind..."
+        "I look behind me..."
 
     $ half_chance = renpy.random.randint(0, 2)
     if half_chance == 0:# or config.developer:
@@ -512,7 +512,7 @@ label check_poster:
         "A girl..."
         "In the poster."
         mc "Uh..."
-        mc "What is this picture?"
+        mc "What is this picture?!"
         $ currentpos = get_pos()
         stop music
         scene black
@@ -530,10 +530,10 @@ label check_poster:
         play music t2l
         scene bg class_day
         
-        mc "What is this picture?{fast}"
+        mc "What is this picture?!{fast}"
         $ _history_list.pop()
         "I quickly look away."
-        "My head started to feel dizzy again."
+        "My head starta to feel dizzy again."
         if seen_day == 1:
             "That's.... what I saw yesterday..." # if you see sayori poster yesterday
         mc "I wish I didn't see that..."
@@ -544,8 +544,8 @@ label check_poster:
         scene bg corridor
         with wipeleft_scene
         show noise at noisefade(5) zorder 3
-        "{i}What the hell was that???{/i}"
-        "What did I just saw??"
+        "{i}What the hell was that?!?!{/i}"
+        "What did I just see??"
         "God! Please, I don't want to do this anymore!"
         "Don't do this to me!"
         "I'm not a program! I'm a f[fgword] human!"
