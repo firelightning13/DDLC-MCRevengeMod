@@ -137,9 +137,9 @@ label ch_mod_2:
         $ _history_list.pop()
         "It looks like there are only a few people running around.. they must be late, just like me."
         #"Meanwhile, I've always walked to school alone."
-        "Normally, I've always walked{nw}"
+        "Meanwhile, I've always walked{nw}"
         $ _history_list.pop()
-        "This time, however, I am trying to run as fast as possible so that I can catch up with them."
+        "Meanwhile, I am trying to run as fast as possible so that I can catch up with them."
         window auto
         "My class could start any minute now!"
         if persistent.ggwp_monika > 0:
@@ -254,15 +254,15 @@ label ch_mod_2:
     with wipeleft_scene
 
     "The school day is as ordinary as ever, and it's over before I know it."
-    "After I pack up my things, I stare blankly at the wall.{nw}"
+    "After I pack up my things, I stare blankly at the wall{nw}"
     $ _history_list.pop()
-    "I should get going."
+    "After I pack up my things, I should get going."
     if persistent.ggwp_monika != 1:# or config.developer:
         # this stuff happens when player not choose abstract poem
-        "Literature club...{nw}"
+        "Literature club{nw}"
         $ _history_list.pop()
         $ style.say_dialogue = style.edited
-        "Well, {fast}, here I go...{nw}"
+        "Literature club{fast}, here I go...{nw}"
         window hide(None)
         show screen tear(20, 0.1, 0.1, 0, 40)
         play sound aglitch2
@@ -434,7 +434,7 @@ label throw_chair:
     $ _history_list.pop()
     $ style.say_dialogue = style.normal
     stop sound
-    mc "May God have mercy on me.{fast}"
+    mc "May God have mercy on me...{{fast}"
     "I grab the nearest chair."
     if persistent.mc_violent:
         play sound gb_gl
@@ -442,9 +442,9 @@ label throw_chair:
         stop sound
         $ persistent.cheat_mod += 1
         jump skip_2_2a # anti-cheat
-    "...I throw the chair as hard as I can{nw}"
+    "Then... I throw the chair as hard as I can{nw}"
     play sound throw
-    "...I throw the chair as hard as I can{fast} at one of the classroom windows{nw}"
+    "Then... I throw the chair as hard as I can{fast} at one of the classroom windows{nw}"
     $ persistent.mc_violent = True
     $ persistent.ggwp_monika = 2
     python:
@@ -533,8 +533,8 @@ label check_poster:
         mc "What is this picture?!{fast}"
         $ _history_list.pop()
         "I quickly look away."
-        "My head starta to feel dizzy again."
-        if seen_day == 1:
+        "My head start to feel dizzy again."
+        if seen_day == 1: # 11.11% chance
             "That's.... what I saw yesterday..." # if you see sayori poster yesterday
         mc "I wish I didn't see that..."
         stop music
