@@ -33,7 +33,10 @@ label mod_exclusive_mp_1:
     play music t6 fadeout 1.0
     show yuri 4a at t11 zorder 2
     y "Ah..."
-    "Crap--"
+    if persistent.mc_violent:
+        "S[sword]--"
+    else:
+        "Crap--"
     "I think she noticed me looking at her..."
     "She sneaks another glance at me, and our eyes meet for a split second."
     y 4b "..."
@@ -69,7 +72,7 @@ label mod_exclusive_mp_1:
     y "Well, when I stopped at the bookstore yesterday--"
     y 3o "Ah, that's not what I meant..."
     y "I mean--"
-    y 1w "I...just happened to buy two of them."
+    y 1w "I... just happened to buy two of them."
     if persistent.ggwp_monika == 3 and poetappeal == "abs": # mc talks to yuri about stuff
         #jump mod_exclusive_abs_1 # temporary idea
         call mod_exclusive_abs_1
@@ -86,6 +89,7 @@ label mod_exclusive_mp_1:
                 $ skip_counter += 1
                 jump stuck_loop
             if skip_counter > 20:
+                $ config.skipping = False
                 $ currentpos = get_pos()
                 stop music
                 window hide(None)
@@ -143,7 +147,8 @@ label mod_exclusive_mp_1:
     y "Mmm..."
     "I look at the cover of the book."
     "The book is titled \"Portrait of Markov\", with an ominous-looking eye symbol on the front cover."
-    "This book seems familiar to me, for some reason..."
+    if persistent.ggwp_monika != 2:
+        "This book seems familiar to me, for some reason..."
     y 1a "Basically, it's about this religious camp that was turned into a human experiment prison..."
     y "And the people trapped there have this trait that turns them into killing machines that lust for blood."
     y 1m "But the facility gets even worse, and they start selectively breeding people by cutting off their limbs and affixing them to--"
@@ -158,8 +163,8 @@ label mod_exclusive_mp_1:
         y 2o "Uh... well..."
         y 2p "N-No...!"
         y 3q "I-I mean-{nw}"
-        mc "No, it's not that..."
-        mc "I mean, I can definitely enjoy those kinds of stories, so don't worry."
+        mc "No, what I mean is..."
+        mc "...I can definitely enjoy those kinds of stories, so don't worry."
         y 2s "I-I see..."
         y 1l "Phew..."
     else:
@@ -185,9 +190,7 @@ label mod_exclusive_mp_1:
     #y "Then, suddenlyyyyyyyyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyyyyyy{nw}"
     $ style.say_dialogue = style.normal
     $ gtext = glitchtext(40)
-    "Huh? Why's that? {nw}"
-    $ _history_list.pop()
-    "Huh? Why's that? {fast}[gtext]{nw}"
+    "Huh? Why's that? [gtext]{nw}"
     $ _history_list.pop()
     $ style.say_dialogue = style.edited
     y "Then, suddenlyyyyyyyy{nw}"
@@ -249,7 +252,7 @@ label mod_exclusive_mp_1:
     y 2s "A-Alright then..."
     y "If you say so..."
     y 1s "Thank you, for reassuring me."
-    mc "Alright, let me know if you feel uncomfortable or something."
+    mc "Let me know if you feel uncomfortable or something."
     y "A-Alright..."
     #mc "Are you sure?"
     #mc "You seem a little apprehensive..."
@@ -322,7 +325,7 @@ label mod_exclusive_mp_1:
             y "{alpha=*0.5}Hey, [player]...{/alpha}"
             y "{alpha=*0.5}Don't mess with my power...{/alpha}"
             y "{alpha=*0.5}Can you hear me, [player]?{/alpha}"
-            y "{alpha=*0.5}There's a devil inside all of us{/alpha}"
+            y "{alpha=*0.5}There's a devil inside all of us.{/alpha}"
             $ config.skipping = False
             $ style.say_dialogue = style.normal
             $ persistent.ggwp_monika = 4
@@ -330,19 +333,22 @@ label mod_exclusive_mp_1:
         $ y_name = "Yuri"
         $ audio.t6 = "<from " + str(currentpos) + " loop 10.893>bgm/6.ogg"
         play music t6
-        python: ### same text as "CAN YOU HEAR ME?.txt" but different name
+        python: ### same text as "CAN YOU HEAR ME?.txt" but different name file
             try: renpy.file(config.basedir + "/EY3 CAN S33 Y0U.txt")
             except: open(config.basedir + "/EY3 CAN S33 Y0U.txt", "wb").write(renpy.file("CAN YOU HEAR ME.txt").read())
     else: # normal playthrough when choosing abs
-        "I soon understand what Yuri means about reading in company."
+        #"I soon understand what Yuri means about reading in company."
+        "I kind of understand how hard for Yuri to be confortable when reading with someone."
         "It's as if I can feel her presence over my shoulder as I read."
-        "It's not a particularly bad thing."
-        "Maybe a little distracting, but the feeling is somewhat comforting."
+        #"It's not a particularly bad thing."
+        "I mean it's not a particularly bad thing."
+        #"Maybe a little distracting, but the feeling is somewhat comforting."
+        "Well, to be honest, I haven't socialize to anyone for a long time now..."
+        "Or have I?"
         "Yuri is in the corner of my eye."
         "I realize that she's not actually looking at her own book."
         "I glance over."
         "It looks like she's reading from my book instead--"
-        
     show yuri 3n at t11 zorder 2
     y "S-Sorry!"
     if poetappeal == "mp": # glitch happens when choosing mp poem
@@ -360,7 +366,7 @@ label mod_exclusive_mp_1:
         pause 0.2
         hide mod_one_eye
         stop sound
-        window show(None)
+        window auto
         pause 1.0
         "It looks like my book is still open, where it's just only first few pages."
         y 3n "I-I'm sorry...!"
@@ -372,7 +378,10 @@ label mod_exclusive_mp_1:
         y "I was just{fast} bathing in the feeling of your body heat tttttttttttttheat eattttttt{nw}"
         $ style.say_dialogue = style.normal
         $ del _history_list[-3:]
-        "Wait, what?"
+        python:
+            try: sys.modules['renpy.error'].report_exception("List index out of rangeeYeeYe eYeeYeeYe... there's a deVil inSIde aLL oF US.", False)
+            except: pass
+        "%What's that all about?%£££ {alpha=*0.5}Error: List index out of range{/alpha}"
 
     mc "Yuri, you really apologize a lot, don't you?"
     y "I...I do?"
@@ -391,43 +400,106 @@ label mod_exclusive_mp_1:
     mc "Ah, I guess that makes it kind of difficult to turn the page..."
     y "Here..."
     scene y_cg1_base with dissolve_cg
-    if not config.skipping and not preferences.skip_unseen:
-        $ renpy.call_screen("dialog", "Hint: You can use the \"Skip\" button to\nfast-forward through text you've already read.", ok_action=Return())
-        $ preferences.skip_unseen = True
-    ###############################################################################################################
     "Yuri takes her left arm and holds the left side of the book between her thumb and forefinger."
-    mc "Ah..."
+    #mc "Ah..."
+    mc "Eh... okay then."
     "I do the same with my right arm, on the right side of the book."
     "That way, I turn a page, and Yuri slides it under her thumb after it flips to her side."
-    "But in holding it like this..."
-    "We're huddled even closer together than before."
-    "It's actually kind of distracting me...!"
-    "It's as if I can feel the warmth of Yuri's face, and she's in the corner of my vision..."
+    if ihorror or poetappeal = "mp":
+        pause 1.0
+        "Hmm..."
+        "This story feels a little bit dark though, and immersive as well..."
+        "I guess Yuri is really good at finding this kind of story."
+        "I wonder why..."
+    else:
+        "But in holding it like this..."
+        "We're huddled even closer together than before."
+        #"It's actually kind of distracting me...!"
+        "It's kind of distracting me a little bit..."
+        "It's as if I can feel the warmth of Yuri's face, and she's in the corner of my vision..."
     show y_cg1_exp1 at cgfade
     y "...Are you ready?"
-    mc "Eh?"
+    #mc "Eh?"
+    mc "Ready? For what?"
     y "To turn the page..."
-    mc "Ah...sorry!"
-    mc "I think I got a bit distracted for a second..."
+    #mc "Ah...sorry!" - dumb
+    #mc "I think I got a bit distracted for a second..."
+    mc "Ah--Uh..."
     "I glance over at Yuri's face again, and our eyes meet."
-    "I don't know how I'll be able to keep up with her..."
-    y "Ah..."
+    if ihorror or poetappeal = "mp":
+        mc "Well, it took me quite a while to read the whole page. So..."
+    else:
+        "I don't know how I'll be able to keep up with her..."
+        mc "Sorry... I think I got a bit distracted for a second..."
     show y_cg1_exp2 at cgfade
+    y "Ah..."
     y "That's okay."
     y "You're not as used to reading, right?"
     y "I don't mind being patient if it takes you a bit longer..."
     y "It's probably the least I can do..."
     y "Since you've been so patient with me..."
-    mc "Y-Yeah..."
-    mc "Thanks."
+    #mc "Y-Yeah..."
+    mc "Ah--Thanks."
     hide y_cg1_exp1
     hide y_cg1_exp2
     "We continue reading."
     "Yuri no longer asks me if I'm ready to turn the page."
     "Instead, I just assume that she finishes the page before me, so I turn it by my own volition."
     "We continue the first chapter in silence."
-    "Even so, turning each page almost feels like an intimate exchange..."
-    "My thumb gently letting go of the page, letting it flutter over to her side as she catches it under her own thumb."
+    pause 2.0
+    #"Even so, turning each page almost feels like an intimate exchange..."
+    #"My thumb gently letting go of the page, letting it flutter over to her side as she catches it under her own thumb."
+    if poetappeal = "mp":
+        window show(None)
+        menu:
+            "Let's talks about the main character of this story": # ironic af
+                call normal_mp_1
+            "Shut up and just read it" if not persistent.mc_violent and not persistent.poster_seen:
+                call special_mp_1
+            "Just shut the f[fword] up and just f[fgword] read it" if persistent.mc_violent or persistent.poster_seen:
+                call special_mp_1
+    else:
+        call normal_mp_1
+    return
+
+label special_mp_1:
+    "I was about to ask her about the main character of this story."
+    "But for some reason, I feel like my mind doesn't allow me to talk about it..."
+    "Well, I think it's better this way. I don't want to hurt her even further."
+    "I mean, she could have mental problems or something that I might not know. Maybe I should've convince her to talk to a therapist."
+    $ _history_list.pop()
+    "Wait, what am I talking about?"
+    "Oh, well..."
+    pause 2.0
+    stop music
+    window hide(None)
+    scene bg club_day
+    window show(None)
+    window auto
+    show monika 2b at l21 zorder 2
+    m "Alright, everyone! It's time to share poems!"
+    m 2d "Would you kindly get the poem now? You two seems to get closer to each other, and..."
+    show monika 2d at t21 zorder 2
+    show yuri 3n at t22 zorder 2
+    y "...!"
+    mc "..."
+    mc "Alright, if you say so..."
+    show monika 5a at f21 zorder 3
+    m "Okay, [player]. You just need to hurry up. I can't wait to share my poems!"
+    show yuri at t11 zorder 2
+    show monika at lhide zorder 1
+    hide monika
+    mc "Right..."
+    "Yuri releases her hand from the book, causing it to close on top of my thumb."
+    mc "I guess we'll continue our reading tomorrow.."
+    y 2s "A-Ah... that would be nice. I'm looking forward to it."
+    show yuri at thide zorder 1
+    hide yuri
+    "I stand up."
+    "I make a mental note of where I left off in the book, then slip it back into my bag."
+    return
+
+label normal_mp_1:
     mc "Hey, Yuri..."
     mc "This might be a silly thought, but..."
     mc "The main character kind of reminds me of you a little bit."
@@ -435,6 +507,7 @@ label mod_exclusive_mp_1:
     y "E-Eh??"
     y "N-No, I don't relate to this character at all!"
     y "Definitely not!"
+    "There's something obvious that Yuri didn't tell me..."
     mc "Really...?"
     mc "I was just thinking the way she second-guesses things she says, and all that..."
     show y_cg1_exp1 at cgfade
@@ -474,6 +547,8 @@ label mod_exclusive_mp_1:
     show monika 1d at t11 zorder 2
     m "[player]?"
     m "Did something happen just now?"
+    "I don't think I can say whatever I want..."
+    "Or else she would be too suspicious of me."
     mc "Eh?"
     mc "I have no idea..."
     mc "Yuri was acting a little strange, I guess..."
@@ -483,7 +558,7 @@ label mod_exclusive_mp_1:
     m 1a "Oh...no, not really."
     m "I was just making sure that you didn't do anything to her."
     mc "N-No, nothing!"
-    m 5 "Ahaha, don't worry...I believe you, silly."
+    m 5a "Ahaha, don't worry...I believe you, silly."
     m "Yuri just does this sometimes, so it's nothing alarming."
     mc "Alright...if you say so."
     m 2b "Anyway, why don't we start with sharing our poems with each other?"
@@ -491,12 +566,13 @@ label mod_exclusive_mp_1:
     mc "Shouldn't we wait for Yuri?"
     m 2a "Well, she might be a while, so I just figured we'd get started without her."
     m "Is that okay?"
-    mc "Yeah, I was just asking..."
+    #mc "Yeah, I was just asking..."
+    mc "Yeah, sure. Why not?"
+    show monika at thide zorder 1
+    hide monika
     "I stand up."
     "I make a mental note of where I left off in the book, then slip it back into my bag."
-    if config.skipping and preferences.skip_unseen:
-        $ config.skipping = False
-    $ preferences.skip_unseen = False
+    "I hope that Yuri comes back safely..."
     $ y_ranaway = True
     return
 
