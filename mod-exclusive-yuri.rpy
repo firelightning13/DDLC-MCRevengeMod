@@ -274,9 +274,9 @@ label mod_exclusive_mp_1:
         "I as look at the back of the book, I curiously read the synopsis of this book...."
         pause 1.0
         "The synopsis is pretty much different than what Yuri told me earlier..."
-        "I mean... {w}that kind of make sense, as she'd already finished reading-{nw}"
+        "I mean... {w}it's kind of make sense, as she'd already finished reading-{nw}"
         "Wait, that doesn't make sense either... {w}she bought this book yesterday-{nw}"
-        "No! That doesn't make sense either... {w}she probably have the old copy though-{nw}"
+        "No! This doesn't make sense either... {w}she probably have the old copy though-{nw}"
         "Ugh... {w}why am I overthinking this!{nw}" # over autocorrect mc's fake script (monika's plan)
         mc "What's this?"
         "I look at the small text printed at the bottom right corner of the back of the book."
