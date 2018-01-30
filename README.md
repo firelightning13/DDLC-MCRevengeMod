@@ -15,7 +15,8 @@ This version contains:
 - Just Monika
 
 **Upcoming updates:**
-- **v0.2-demo:** The whole story will be overhauled _(and extended to day two)_. **It will be completely different than v0.1**
+- **v0.3-demo (sub v0.2-demo):** The whole story will be overhauled _(and extended to day two)_. **It will be completely different than v0.1**
+- **v0.2-demo will be skipped** as there's too much major _"silent"_ update. However, there will be an experimental version that only selected people will play it for playtesting.
 - v0.1-demo will be referred as _"early-concept"_ - it features some of the overall story
 - Reduce number of files for easy installation - **only 3 files!**
 - Profanity filter implementation _(for family-friendly entertainment)_
@@ -26,10 +27,10 @@ This version contains:
 ## About this project
 Note: This mod is a fan work, and currently under my development. This mod is clearly inspired from original Doki-Doki Literature Club and I gave it a little bit of twist, giving much more options and flexibilities to player, but still limited to what Ren.py engine offers, and my limited abilities and understandings to game itself. Also, you can consider this an "alternate universe of DDLC". This mod holds a concept where some features aren't appealing as much in original game, _eg: Save/Load and Skip Mode_. These mechanics are perfect advantage for my mod to basically using them in the playthrough, make it more important as the story progresses. _(much like Life is Strange, but you can go back in time by saving/loading again and again!)_
 
-This mod is pretty much similar to "A Brand New Day" by Phantom or "DDLC!!! 1.1.0(mo)" by NNDanny or any other similar mods that modify original scripts, but I have different approach what this mod has to offer when its fully release. **WARNING for v0.2 demo: Too much bizarre stuff in my mod. Be prepared before you start your game.**
+This mod is pretty much similar to "A Brand New Day" by Phantom or "DDLC!!! 1.1.0(mo)" by NNDanny or any other similar mods that modify original scripts, but I have different approach what this mod has to offer when its fully release. **WARNING for v0.3 demo: Too much bizarre stuff in my mod. Be prepared before you start your game.**
 
 ## Installation
-**v0.2(coming soon) :** Extract all the files from my zip mod inside your DDLC "game" folder. Easy...
+**v0.3(coming soon) :** Extract all the files from my zip mod inside your DDLC "game" folder. Easy...
 
 **v0.1.1 :** Inside my zip folder, copy and paste "game" folder inside your DDLC directory (where DDLC.exe was located).
 
