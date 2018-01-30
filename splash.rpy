@@ -21,7 +21,7 @@ init python:
     splash_messages = [
     "Please support Doki Doki Literature Club.",
     "Monika is watching you code.",
-    "Please support fireligtning13.\nHe's a great guy.",
+    "Please support firelightning13.\nHe's a great guy.",
     "I spend everyday working with my mod.",
     "Monika is the best girl",
     "Sayori is the best girl",
@@ -35,8 +35,16 @@ init python:
 image splash_warning = ParameterizedText(style="splash_text", xalign=0.5, yalign=0.5)
 
 ##Here's where you can change the logo file to whatever you want
-image menu_logo:
+image menu_logo_mod:
     "/mod_assets/DDLCMCR.png"
+    subpixel True
+    xcenter 240
+    ycenter 120
+    zoom 0.60
+    menu_logo_move
+
+image menu_logo:
+    "gui/logo.png"
     subpixel True
     xcenter 240
     ycenter 120
@@ -214,8 +222,9 @@ image warning:
     "white" with Dissolve(0.5, alpha=True)
     0.5
 
-image tos = "bg/warning.png"
-image tos2 = "bg/warning2.png"
+#image tos = "bg/warning.png"
+image tos = "mod_assets/bg/warning.png"
+image tos2 = "mod_assets/bg/warning2.png"
 
 # Make sure character files are in place
 init python:
@@ -232,9 +241,39 @@ init python:
         except: open(config.basedir + "/characters/sayori.chr", "wb").write(renpy.file("sayori.chr").read())
 
 label splashscreen:
+    default persistent.first_run = False
+    # Logic for detecting if the game has been reinstalled
+    python:
+        mod_firstrun = ""
+        try:
+            mod_firstrun = renpy.file("mod_firstrun").read(1)
+        except:
+            with open(config.basedir + "/game/mod_firstrun", "wb") as f:
+                pass
+    if not mod_firstrun: #renpy.loadable("10"):
+        if persistent.first_run: #and not persistent.do_not_delete:
+            $ quick_menu = False
+            scene black
+            menu:
+                "A previous save file for this mod has been found. Would you like to delete your save data and start over?"
+                "Yes, delete my existing data.":
+                    "Deleting save data...{nw}"
+                    python:
+                        delete_all_saves()
+                        renpy.loadsave.location.unlink_persistent()
+                        renpy.persistent.should_save_persistent = False
+                        renpy.utter_restart()
+                "No, continue where I left off.":
+                    pass
+
+        python:
+            if not mod_firstrun:
+                with open(config.basedir + "/game/mod_firstrun", "w") as f:
+                    f.write("1")
+            #filepath = renpy.file("firstrun").name
+            #open(filepath, "a").close()
 
     #If this is the first time the game has been run, show a disclaimer
-    default persistent.first_run = False
     if not persistent.first_run:
         $ quick_menu = False
         scene white
@@ -244,9 +283,10 @@ label splashscreen:
         pause 1.0
         "[config.name] is a Doki Doki Literature Club fan mod that is not affiliated with Team Salvato."
         "It is designed to be played only after the official game has been completed, and contains spoilers for the official game."
+        "This story is mostly based from theories that was made by fans of DDLC, and in no way cannon to the original story of DDLC or any other future games by Team Salvato."
         "Game files for Doki Doki Literature Club are required to play this mod and can be downloaded for free at: http://ddlc.moe"
         menu:
-            "By playing [config.name] you agree that you have completed Doki Doki Literature Club and accept any spoilers contained within."
+            "By playing [config.name] you agree that you have completed DDLC and accept any spoilers contained within, and you consent to your exposure of highly disturbing content."
             "I agree.":
                 pass
         scene tos2
