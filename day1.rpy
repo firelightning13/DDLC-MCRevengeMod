@@ -46,13 +46,13 @@ label ch_mod_1a:
     $ persistent.anticheat = renpy.random.randint(100000, 999999) # why not
     $ anticheat = persistent.anticheat
 
+    $ del _history_list[0:]
     scene bg residential_day
     with dissolve_scene_half
     play music t2
     jump ch_mod_1
 
 label ch_mod_1b:
-    $ _history_list = []
     stop music fadeout 2.0
     scene bg residential_day
     with dissolve_scene_full
@@ -91,6 +91,7 @@ label ch_mod_1:
     "I always tell myself it's about time I meet some girls or something like that..."
     "But I have no motivation to join any clubs."
     "After all, I'm perfectly content just getting by on the average while spending my free time on games and anime."
+    window auto
 
     scene bg class_day
     with wipeleft_scene
@@ -104,10 +105,12 @@ label ch_mod_1:
     if not config.skipping: # oops... skipping this dialogue is the safest way to heaven
         $ currentpos = get_pos()
         stop music
+        $ quick_menu = False
         $ config.keymap['dismiss'] = []
         $ renpy.display.behavior.clear_keymap_cache()
         #$ config.allow_skipping = False
-        mc "What the hell is that?!{w=1.0}{nw}"
+        $ mcrp = player # temp fix
+        mcrp "\"What the hell is that?!\"{w=1.0}{nw}"
         "{cps=*1.5}The \"thing\" started to approach me.{/cps}{w=0.5}{nw}"
         "{cps=*1.5}I didn't recognise that distorted mess of an entity.{/cps}{w=0.5}{nw}"
         "{cps=*1.5}It's getting closer and closer now...{/cps}{w=0.5}{nw}"
@@ -127,6 +130,7 @@ label ch_mod_1:
         window show(None)
         $ config.keymap['dismiss'] = dismiss_keys
         $ renpy.display.behavior.clear_keymap_cache()
+        $ quick_menu = True
         $ style.say_dialogue = style.normal
         $ del _history_list [-7:]
         $ audio.t2 = "<from " + str(currentpos) + " loop 4.499>bgm/2.ogg"
@@ -140,9 +144,9 @@ label ch_mod_1:
     $ m_name = "???"
     show monika 1a at t11 zorder 2
     m "...[player]?"
+    $ m_name= "Monika"
     m 1b "Oh my goodness, I totally didn't expect to see you here!"
     m 5 "It's been a while, right?"
-    $ m_name= "Monika"
     mc "Ah..."
     if not gg_skip:
         "What did I just witness?"
@@ -201,8 +205,6 @@ label ch_mod_1:
     m "It's kind of embarrassing, but there are only three of us so far."
     m "It's really hard to find new members for something that sounds so boring..."
     mc "Well, I can see that..."
-    "\"Well, I can see that... {fast}that you had another member as well...\""
-    $ _history_list.pop()
     "Why do I feel like my wrath is growing since Monika showed up?"
     $ _history_list.pop()
     m 3d "But it's really not boring at all, you know!"
@@ -254,24 +256,26 @@ label ch_mod_1:
     $ del _history_list [-6:]
     stop music
     window hide(None)
+    window auto
     scene black with trueblack
     pause 1.0
 
     scene bg corridor
     with wipeleft_scene
 
-    "And thus, today marks the day I sold my soul to Monika and her irresistible smile."
+    "And thus, today marks the day I {i}sold my soul{/i} to Monika and her irresistible smile."
     "I timidly follow Monika across the school and upstairs - a section of the school I rarely visit, being generally used for third-year classes and activities."
     "Monika, full of energy, swings open the classroom door."
 
-    if renpy.random.randint(0, 5) == 0:
+    if renpy.random.randint(0, 5) == 0: ### 16.66% chance 
         scene bg spoopy
+        $ seen_day += 1
     else:
         scene bg club_day
     with wipeleft
     play music t3
 
-    if renpy.random.randint(0, 2) == 0:
+    if renpy.random.randint(0, 2) == 0: ### 33.33% chance
         show monika g1 at l31
         $ monika_glitch = True
     else:
@@ -324,7 +328,9 @@ label ch_mod_1:
     "The girl with the sour attitude, whose name is apparently Natsuki, is one I don't recognize."
     "Her small figure makes me think she's probably a first-year."
     "Wait, I should've introduced you when Monika said \"Don't be mean, Natsuki...\""
+    $ _history_list.pop()
     "What am I talking about?"
+    $ _history_list.pop()
     show monika at f31 zorder 3
     m 2l "A-Anyway, this is Natsuki, energetic as usual..."
     m 2b "And this is Yuri, the Vice President!"
@@ -346,8 +352,8 @@ label ch_mod_1:
     show yuri at f33 zorder 3
     y 1a "In that case, I should at least make some tea, right?"
     show yuri at t33 zorder 2
-    show monika at f31 zorder 3
     mc "Ah, thanks?"
+    show monika at f31 zorder 3
     m 1b "Yeah, that would be great!"
     m "Why don't you come sit down, [player]?"
     mc "Sure..."
@@ -359,6 +365,7 @@ label ch_mod_1:
     "The girls have a few desks arranged to form a table."
     "Yuri walks to the corner of the room and opens the closet."
     "Meanwhile, Monika and Natsuki sit across {nw}"
+    $ _history_list.pop()
     window hide(None)
     menu:
         "Sit next to Monika":
@@ -439,6 +446,7 @@ label ch_mod_1:
             y 1a "What did you say?"
             mc "Uh..."
             window hide(None)
+            $ del _history_list[-4:]
     $ currentpos = get_pos()
     stop music
     play sound aglitch1
@@ -465,13 +473,15 @@ label ch_mod_1:
     "Somehow I relieved her a little bit."
     mc "Anyway, what about you, Yuri?"
     "I'm confused when I say \"you\" and \"Yuri\" at the same time."
+    $ _history_list.pop()
     "What kind of language am I speaking right now?"
+    $ _history_list.pop()
     y 1l "Well, let's see..."
     #"Yuri traces the rim of her teacup with her finger."
     y 1a "My favorites are usually novels that build deep and complex fantasy worlds."
     y "The level of creativity and craftsmanship behind them is amazing to me."
     y 1f "And telling a good story in such a foreign world is equally impressive."
-    "I already knew that she is clearly passionate about her reading."
+    "She is clearly passionate about her reading."
     "Even though she has an exquisite appearance, I can already tell that she's most comfortable in the fantasy worlds that books bring, not with regular people."
     "I would think she is not really into social-interaction, but maybe she is?"
     #"Yuri goes on, clearly passionate about her reading."
@@ -479,7 +489,8 @@ label ch_mod_1:
     y 2m "But you know, I like a lot of things."
     y "Stories with deep psychological elements usually immerse me as well."
     y 2a "Isn't it amazing how a writer can so deliberately take advantage of your own lack of imagination to completely throw you for a loop?"
-    "Ah... I would think the same way in this current situation."
+    if monika_glitch or renpy.showing("bg spoopy", layer='master'):
+        "Ah... I would think the same way in this current situation."
     y "Anyway, I've been reading a lot of horror lately..."
     mc "Really? I read a horror book once."
     if ihorror:
@@ -614,14 +625,14 @@ label ch_mod_1:
     y "It seems like a good step for us to take."
     y "Do you agree as well, [player]?"
     show yuri at t32 zorder 2
-    if ihorror or isit or monika_glitch or renpy.showing("bg spoopy", layer='master'):
-        "What am I actually doing right now?"
-        "I feel like I wasn't supposed to be here. My head is getting crazier and crazier right now!"
+    if monika_glitch or renpy.showing("bg spoopy", layer='master'):
+        "What the heck is going on!? My head is getting crazy!"
         "Things are getting weirder and weirder."
+    $ mcrp = player # temp fix
     mc "Well, uh...?"
     $ _history_list.pop()
     menu:
-        mc "Well, uh...?{fast}"
+        mcrp "\"Well, uh...?\"{fast}"
         "Accept their invitation":
             $ accepts_invite = True
             call mod_ch1_accepts
@@ -630,9 +641,13 @@ label ch_mod_1:
             call mod_ch1_rejects
     show monika at f33 zorder 3
     m "I'll do everything I can to give you a great time, okay?"
-    mc "Ah. Alright then..."
-    "I feel like something's off."
-    "Something bad is going to happen tomorrow."
+    if accepts_invite:
+        mc "Ah. Alright then..."
+    else:
+        mc "Ah...thanks, I guess...?"
+    if monika_glitch or renpy.showing("bg spoopy", layer='master'):
+        "I feel like something's off."
+        "Something bad is going to happen tomorrow."
     show yuri at thide zorder 1
     show natsuki at thide zorder 1
     show monika at t11 zorder 2
@@ -643,7 +658,7 @@ label ch_mod_1:
     m "Everyone remember tonight's assignment:"
     m "Write a poem to bring to the next meeting, so we can all share!"
     "Monika looks over at me once more."
-    if persistent.accepts_invite:
+    if accepts_invite:
         "She looks even happier than before."
         "The fact that I joined her club without any hesitation."
         "I guess I'll smile back?"
@@ -652,10 +667,11 @@ label ch_mod_1:
     m "Ehehe~"
     "Did she just jump?"
     "Her ecstatic seems to be overflowing inside her head."
-    "But I begin to understand that it is hard to get a new member. So..."
-    if persistent.accepts_invite:
+    if accepts_invite:
+        "But I begin to understand that it is hard to get a new member. So..."
         mc "Yeah, sure. Looking forward to it."
     else:
+        "I don't know what makes her do that..."
         mc "Y-Yeah..."
     show monika at thide zorder 1
     hide monika
@@ -684,6 +700,7 @@ label ch_mod_1:
 
     "With that, I depart the clubroom and make my way home."
     "The whole way, my mind wanders{nw}"
+    window show(None)
     $ currentpos = get_pos()
     stop music
     $ audio.t3 = "<from " + str(currentpos) + " loop 4.618>bgm/3.ogg"
@@ -691,6 +708,7 @@ label ch_mod_1:
     play music t3l
     scene bg res_gl
     "The whole way, my mind wanders{fast} back and forth between the three girls:"
+    window auto
     show natsuki 4a at t31 zorder 2
     "Natsuki,"
     show yuri 1a at t32 zorder 2
@@ -725,17 +743,9 @@ label ch_mod_1:
     if _return:
         $ persistent.protecc = True
         $ renpy.call_screen("dialog", "Profanity filter is enabled.", ok_action=Return())
-        $ fgword = "******"
-        $ bword = "****"
-        $ aword = "******"
-        $ sword = "***"
     else:
         $ persistent.protecc = False
         $ renpy.call_screen("dialog", "[gtext]", ok_action=Return())
-        $ fgword = "ucking"
-        $ bword = "itch"
-        $ aword = "sshole"
-        $ sword = "hit"
     return
 
 label mod_ch1_accepts:
@@ -746,11 +756,13 @@ label mod_ch1_accepts:
     "Monika looks at me quizzically"
     m "Wait, [player]?"
     mc "Yes?"
+    $ quick_menu = False
     $ config.keymap['dismiss'] = []
     $ renpy.display.behavior.clear_keymap_cache()
     "She stares into my eyes for a good 3 seconds long{w=1.5}{nw}"
     $ config.keymap['dismiss'] = dismiss_keys
     $ renpy.display.behavior.clear_keymap_cache()
+    $ quick_menu = True
     mc "Eh, I mean..."
     mc "You know...."
     m "You do?"
@@ -779,6 +791,7 @@ label mod_ch1_accepts:
     "I hope she's okay with me here."
     "Though I'm kind of worried that she might be {i}her{/i} next target."
     "Wait, what am I talking about?"
+    $ del _history_list[-2:]
     return
 
 label mod_ch1_rejects:
