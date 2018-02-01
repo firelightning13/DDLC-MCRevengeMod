@@ -1,7 +1,3 @@
-transform m_pos:
-    xpos 320
-    ypos 500
-
 label ch_mod_p1:
     scene black 
     pause 1.0
@@ -79,15 +75,31 @@ label ch_mod_p1:
     scene black
     $ config.allow_skipping = True
     $ allow_skipping = True
-    return
 
-style window_lq is window:
-    background Image("mod_assets/textbox_lq.png", xalign=0.5, yalign=1.0)
+    python:
+        try: renpy.file(config.basedir + "/SSBhbSBhbG9uZSBpbiBteSB3b3JsZA==.txt")
+        except: open(config.basedir + "/SSBhbSBhbG9uZSBpbiBteSB3b3JsZA==.txt", "wb").write(renpy.file("mod_assets/SSBhbSBhbG9uZSBpbiBteSB3b3JsZA==.txt").read())
+
+    return
 
 ###### There's a lot of anti-cheat system that i implemented, trying to prevent abusive save/load mechanics by players
 ###### (you are probably confused if you see some weird things below, sry you had to see my horrendous codes)
 
+
+label dftsy_game:
+    if not renpy.can_load("1-1", test=False)and not persistent.warning_seen and not (persistent.ggwp_monika > 0):
+        $ renpy.save("1-6", extra_info='') # incase if player forgot to save
+    return
+
+label dftsy_game2:
+    if not persistent.warning_seen and persistent.ggwp_monika > 0:
+        $ renpy.call_screen("dialog", "I just saved your life.", ok_action=Return())
+        $ renpy.call_screen("dialog", "If you want to be safe, please always save your game.\n-firelightning13", ok_action=Return())
+        $ persistent.warning_seen = True
+    return
+
 label ch_mod_2:
+    $ narrator.display_args["callback"] = player_pls_skip ### use this if player tends to load again after showing up in the clubroom
     $ _history_list = []
     pause 1.0
     scene bg bedroom
@@ -95,19 +107,34 @@ label ch_mod_2:
 
     if config.developer: # for testing purposes
         $ persistent.ggwp_monika = 0
-        $ persistent.parfait_girls = False
+        $ parfait_girls = False
         $ persistent.tea_set = False
         $ persistent.mc_violent = False
         $ persistent.poster_seen = False
         $ persistent.cheat_mod = 0
         $ poster_checked = False
         $ closet_checked = False
+    if persistent.protecc: # refresh curse words list
+        $ fword = "***"
+        $ fgword = "******"
+        $ bword = "****"
+        $ aword = "******"
+        $ sword = "***"
+    else:
+        $ fword = "uck"
+        $ fgword = "ucking"
+        $ bword = "itch"
+        $ aword = "sshole"
+        $ sword = "hit"
     "Argh.."
     "I had a bad dream..."
     "...Someone screaming my name."
     "I wonder who {i}she{/i} was?"
     "She said something like \"save me\"..."
+    default persistent.warning_seen = False
+    call dftsy_game
     "Or something like \"Don't forget to save your game\"...?"
+    call dftsy_game2
     "That was weird..."
     if poetappeal != "abs" or persistent.ggwp_monika == 1:
         # if player chooses other than abstract
@@ -186,11 +213,12 @@ label ch_mod_2:
         $ stext = glitchtext(80)
         $ s_name = "[gtext]"
         s "{cps=*2}[stext]{/cps}{nw}" # spooky
+        $ _history_list.pop()
         $ currentpos = get_pos()
         stop music
         window hide(None)
         show screen tear(20, 0.1, 0.1, 0, 40)
-        play music aglitch2
+        play music s_gl
         pause 0.25
         stop music
         hide screen tear
@@ -218,6 +246,12 @@ label ch_mod_2:
         "Has something happened in this house?"
         #mc "I'm coming over..." basically how to deal with robbery situation
         "{cps=30}I silently open the front door...{/cps}{nw}"
+        python:
+            currentpos = get_pos()
+            startpos = currentpos - 0.3
+            if startpos < 0: startpos = 0
+            track = "<from " + str(startpos) + " to " + str(currentpos) + ">bgm/2.ogg"
+            renpy.music.play(track, loop=True)
         if persistent.ggwp_monika == 0:
             $ persistent.ggwp_monika = 1
             show screen tear(8, offtimeMult=1, ontimeMult=10)
@@ -279,7 +313,7 @@ label ch_mod_2:
         window hide(None)
         window auto
         show screen tear(20, 0.1, 0.1, 0, 40)
-        play sound aglitch2
+        play sound s_gl
         pause 0.25
         stop sound
         hide screen tear
@@ -310,13 +344,12 @@ label ch_mod_2:
                 "I'm really late now!"
                 "Screw it, I'm going to the litera{nw}"
                 jump skip_2_2a
-        elif persistent.parfait_girls or persistent.tea_set or persistent.ggwp_monika == 1:
+        elif parfait_girls or persistent.tea_set or persistent.ggwp_monika == 1:
             $ gtext = glitchtext(50) # prevent anti-cheat
             mc "[gtext]{nw}"
             play sound aglitch1
             pause 1.0
             stop sound
-            $ persistent.cheat_mod += 1 
             jump skip_2_2a
         if not config.skipping:#or config.developer:
             label mc_choice:
@@ -333,13 +366,17 @@ label ch_mod_2:
                         if persistent.protecc:
                             # praise to god
                             $ renpy.call_screen("dialog", "WARNING: Profanity filter is enabled.", ok_action=Return())
-                            $ renpy.call_screen("dialog", "Something terrible is going to happen.\nAre you sure you want to proceed?", ok_action=Return())
+                            $ renpy.call_screen("dialog", "Something terrible is going to happen.\nProceed with caution.", ok_action=Return())
                         jump throw_chair
                     "[gtext]" if not poster_checked: # check poster
                         if persistent.ggwp_monika == 2:
                             jump mc_realise_2
+                        if persistent.protecc:
+                            $ renpy.call_screen("dialog", "WARNING: Profanity filter is enabled.", ok_action=Return())
+                            $ renpy.call_screen("dialog", "Something terrible is going to happen.\nProceed with caution.", ok_action=Return())
                         jump check_poster
         else:
+            $ config.skipping = False
             jump skip_2_2a
     else:
         # skip over those stuff if player choose abstract poem
@@ -366,18 +403,20 @@ label check_closet:
     mc "I found markers."
     "Construction paper, too.."
     "Wasn't Monika trying to find this stuff yesterday?"
-    $ half_chance = renpy.random.randint(0, 2)
+    $ half_chance = renpy.random.randint(0, 1)
     if half_chance == 0:# or config.developer:
         $ another_chance = renpy.random.randint(0, 3) # Make it fair
         if another_chance == 0:# or config.developer:
-            ### 8.33% chance
+            ### 12.5% chance
             "Well, I guess I could give them to Monika after all."
         else:
-            ### 24.11% chance
+            ### 37.5% chance
             mc "What's this?"
             "There's a lone volume of manga amidst a stack of various books on the side of one of the shelves."
             "Curious, I pull the book out."
             mc "Parfait Girls...? {w}Part one?"
+            "I stare at the cover."
+            "It features four girls in colorful attire striking animated feminine poses."
             "Have I heard of this manga before?"
             "My memory is a little bit hazy, so I don't know if I read it before."
             "I wonder why it's here in the classroom?"
@@ -387,27 +426,23 @@ label check_closet:
             "I kind of want to read it though, in my spare time."
             "Well, about the markers and construction paper..."
             "I guess I could give them to Monika after all."
-            $ persistent.parfait_girls = True
+            $ parfait_girls = True
             $ closet_checked = True
             #it's possible to get both parfait girls and tea set, for smart gamers; so i just gonna leave it here
     else:
-        ### 66.66% chance, i think yuri like this idea
+        ### 50% chance, i think yuri like this idea
         "Huh? There is a tea set as well."
         "Who put in this closet anyway?"
         "Maybe one of my teachers needs it?"
-        "Oh well, whatever."
+        "Eh, whatever."
         "I just grab the markers and construction paper instead."
         "Well, I guess I could give this stuff to Monika after all."
-        if persistent.parfait_girls:
-            $ persistent.parfait_girls = False
-            $ persistent.cheat_mod += 1
-            # Oops, you just slipped that book. Cheater! - yuri
         $ persistent.tea_set = True
     play sound closet_close
     "I proceed to close the closet."
     "Hmm... what else should I do...?"
     $ closet_checked = True
-    if persistent.tea_set or persistent.parfait_girls:
+    if persistent.tea_set or parfait_girls:
         # oops, you ran out of time
         window hide(None)
         window auto
@@ -434,29 +469,25 @@ label throw_chair:
     $ _history_list.pop()
     $ style.say_dialogue = style.normal
     stop sound
-    mc "May God have mercy on me...{{fast}"
+    mc "May God have mercy on me...{fast}"
     "I grab the nearest chair."
     if persistent.mc_violent:
         play sound gb_gl
         pause 1.5
         stop sound
-        $ persistent.cheat_mod += 1
         jump skip_2_2a # anti-cheat
     "Then... I throw the chair as hard as I can{nw}"
     play sound throw
     "Then... I throw the chair as hard as I can{fast} at one of the classroom windows{nw}"
     $ persistent.mc_violent = True
     $ persistent.ggwp_monika = 2
-    python:
-        # im terrible at art sry
-        try: sys.modules['renpy.error'].report_exception("cg_glass_break.png not found", False)
-        except: pass
     hide noise
     window hide(None)
     stop music
     show screen tear(8, offtimeMult=1, ontimeMult=10)
     play sound gb_gl
     pause 1.5
+    $ renpy.error("cg_glass_break.png not found. Oops... I'm too lazy to add custom arts in my mod. Click \"Ignore\" to restart the game.")
     stop sound
     $ renpy.utter_restart()
 
@@ -534,14 +565,14 @@ label check_poster:
         $ _history_list.pop()
         "I quickly look away."
         "My head start to feel dizzy again."
-        if seen_day == 1: # 11.11% chance
+        if seen_day == 1: ### 11.11% chance
             "That's.... what I saw yesterday..." # if you see sayori poster yesterday
         mc "I wish I didn't see that..."
         stop music
         "I suppress the urge to vomit."
         "I think... {w}I just want to go outside."
         "I need some air."
-        scene bg corridor
+        scene bg cord_gl
         with wipeleft_scene
         show noise at noisefade(5) zorder 3
         "{i}What the hell was that?!?!{/i}"
@@ -559,9 +590,11 @@ label check_poster:
         pause 1.5
         $ persistent.ggwp_monika = 2
         $ persistent.poster_seen = True
+        $ renpy.error("Ren'py is unable to suppress player's unstable emotion... Click \"Ignore\" to restart the game.")
         $ renpy.utter_restart()
 
 label skip_2_2a:
+    $ narrator.display_args["callback"] = None
     stop music
     window hide(None)
     window auto
@@ -570,4 +603,3 @@ label skip_2_2a:
     scene bg corridor
     with wipeleft_scene
     jump ch_mod_2a
-    
