@@ -38,6 +38,7 @@ label start:
         call ch_mod_1b
         label mod_continue:
             call ch_mod_p1
+            $ mod_chapter = 1
             call ch_mod_2
 
 label endgame(pause_length=4.0):
