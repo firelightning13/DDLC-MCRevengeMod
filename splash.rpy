@@ -274,7 +274,12 @@ label splashscreen:
             #open(filepath, "a").close()
 
     #If this is the first time the game has been run, show a disclaimer
+    #if not persistent.first_run:
     if not persistent.first_run:
+        default persistent.finished_ddlc = None
+        #Optional, load a copy of DDLC save data
+        call import_ddlc_persistent
+
         $ quick_menu = False
         scene white
         pause 0.5
@@ -283,18 +288,21 @@ label splashscreen:
         pause 1.0
         "[config.name] is a Doki Doki Literature Club fan mod that is not affiliated with Team Salvato."
         "It is designed to be played only after the official game has been completed, and contains spoilers for the official game."
-        "This story is mostly based from theories that was made by fans of DDLC, and in no way cannon to the original story of DDLC or any other future games by Team Salvato."
+        "This story is mostly based on theories that were made by fans of DDLC, and in no way canon to the original story of DDLC or any other future games by Team Salvato."
         "Game files for Doki Doki Literature Club are required to play this mod and can be downloaded for free at: http://ddlc.moe"
-        menu:
-            "By playing [config.name] you agree that you have completed DDLC and accept any spoilers contained within, and you consent to your exposure of highly disturbing content."
-            "I agree.":
-                pass
+        if persistent.finished_ddlc == "postcredits_loop":
+            menu:
+                "This mod detects that you already have completed the game. By playing [config.name], you consent to your exposure of highly disturbing content."
+                "I agree.":
+                    pass
+        else:
+            menu:
+                "By playing [config.name] you agree that you have completed DDLC and accept any spoilers contained within, and you consent to your exposure of highly disturbing content."
+                "I agree.":
+                    pass
         scene tos2
         with Dissolve(1.5)
         pause 1.0
-
-        #Optional, load a copy of DDLC save data
-        call import_ddlc_persistent
 
         scene white
         with Dissolve(1.5)
