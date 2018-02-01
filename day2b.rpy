@@ -5,7 +5,6 @@ label ch_mod_2a:
     $ renpy.display.behavior.clear_keymap_cache()
 
     if persistent.ggwp_monika >= 3: ### anti-cheat system
-        $ persistent.cheat_mod += 1
         label mc_realise_3:
             if renpy.showing("bg spoopy", layer='master'):
                 $ temp_scene = 1
@@ -49,7 +48,9 @@ label ch_mod_2a:
             return
     play music t2o
     "Well..."
+    call dftsy_game
     "I managed to get here in time."
+    call dftsy_game2
     "Even though I'm a little bit late. I hope they don't mind..."
     "I timidly open the front door."
 
@@ -239,6 +240,7 @@ label ch_mod_2a:
         call mc_realise_3
         $ audio.t2g3 = "<from " + str(currentpos) + " loop 4.492>bgm/2g2.ogg"
         play music t2g3
+        $ style.say_dialogue = style.normal
         y 1t "[player]?"
         mc "A-Ah..."
         mc "Yuri, thank you! I'll definitely read this!"
@@ -285,13 +287,13 @@ label ch_mod_2a:
             "How is this girl accidentally being so {fast}cute?"
             "She even picked out a book she thinks I'll like, despite me not reading much..."
             $ gtext = glitchtext(80)
-            mc "Yuri, {w}{color=#000}[gtext]{/color}"
+            mc "Yuri, {w}{color=#000}[gtext]{/color}{nw}"
             $ style.say_dialogue = style.normal
             y 3n "Eh?"
             y 3p "What was that, [player]!?"
             $ style.say_dialogue = style.edited
             $ gtext = glitchtext(80)
-            mc "{color=#000}[gtext]{/color}"
+            mc "{color=#000}[gtext]{/color}{nw}"
 
             window hide(None)
             $ currentpos = get_pos()
@@ -301,15 +303,14 @@ label ch_mod_2a:
             pause 2.0
             stop music
             hide screen tear
-            show yuri 3p at t11 zorder 2
+            hide yuri
+            #show yuri 3p at t11 zorder 2
             $ style.say_dialogue = style.normal
-            pause 0.01
+            #pause 0.01
             window auto
             $ audio.t2g3 = "<from " + str(currentpos) + " loop 4.492>bgm/2g2.ogg"
             play music t2g3
             $ del _history_list[-6:]
-            show yuri at thide zorder 1
-            hide yuri
             show layer master
             pause 2.0
             "Now that everyone's settled in{nw}"
@@ -319,10 +320,12 @@ label ch_mod_2a:
             $ _history_list.pop()
             stop music
             window hide(None)
-            play sound sgl
+            play sound ggg
             scene white
             pause 1.5
+            stop sound
             scene bg club_day2
+            $ style.say_dialogue = style.normal
 
             "Wait, what?"
             "What happened?"
@@ -340,6 +343,7 @@ label ch_mod_2a:
             $ config.allow_skipping = False
             show yuri at thide zorder 1
             hide yuri
+            $ style.say_dialogue = style.normal
             "Wait, what?"
             "What happened?"
             "Did I said something to Yuri?"
@@ -396,7 +400,7 @@ label ch_mod_2a:
     default poet_scene = "mp"
     if poetappeal == "abs":
         $ poet_scene = "mp"
-    elif poetappeal = "bs":
+    elif poetappeal == "bs":
         $ poet_scene = "cute"
     else:
         $ poet_scene = poetappeal
@@ -413,4 +417,6 @@ label ch_mod_2a:
     $ mod_ex_scene = "mod_exclusive_" + poet_scene + "_" + str(mod_chapter)
     ### temporary "mod_chapter" variable, cg logic doesnt apply yet, maybe in the next v0.3
     call expression mod_ex_scene
+
+    #call mod_poem_response
     return
