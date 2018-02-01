@@ -41,12 +41,12 @@ label mod_exclusive_cute_1:
     scene bg closet
     show natsuki 4r at t11 zorder 2
     with wipeleft_scene
+    window auto
     #mc "You looking for something in there?"
     mc "Natsuki, are you looking for something in there?"
     $ style.say_dialogue = style.edited
-    window auto
     if persistent.natsuki_glitch < 1 and not config.skipping: # glitch doesn't happen when skipping
-        if poetappeal = "cute" and persistent.protecc: # if players chooses "cute" poem and enables profanity filter
+        if poetappeal == "cute" and persistent.protecc: # if players chooses "cute" poem and enables profanity filter
             n 4x "f[fgword] monikammmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm{nw}"
             pause 1.0
             n "f[fgword] monikammmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm{nw}"
@@ -149,6 +149,7 @@ label mod_exclusive_cute_1:
     n "But I'll tell you one thing, [player]."
     if persistent.natsuki_glitch < 2 and not config.skipping:
         n 4l "Consider this a lesson straight from the Literature Club:{nw}"
+        $ _history_list.pop()
         #$ _history_list[-1].what = "Consider this a lesson straight from the Literature Club: Don't judge a book by its cover!"
         #n "don't judge a bookkkkkkkkkkkkkkkkk kkkkk kk{space=20}k{space=40}k{space=120}k{space=160}k{space=200}k"
         #$ _history_list.pop()
@@ -208,6 +209,7 @@ label mod_exclusive_cute_1:
         n "Well, I wanted to have that chance when you join--"
         n 5o "...!"
         mc "...this club?"
+        n 5u "..."
         mc "Yeah, I you're right, I haven't socialize to anyone in my entire life..."
         "That's not entirely true, I feel like I had a friend before."
         mc "After all--"
@@ -217,7 +219,7 @@ label mod_exclusive_cute_1:
         mc "I only have volume one, so I thought I'd like to share this with you sometimes."
         mc "But it seems that we already had the same book, and--"
         n "..."
-        n "D-Did you already read that whole thing?"
+        n 5n "D-Did you already read that whole thing?"
         mc "Ah--No."
         mc "I just--"
         $ _history_list.pop()
@@ -442,11 +444,8 @@ label mod_exclusive_cute_1:
 label special_cute_1:
     "Suddenly, Natsuki starts laughing."
     if persistent.natsuki_glitch < 6:
-        pass
-    else:
         $ preferences.skip_unseen = False
-        if config.skipping:
-            $ config.skipping = False
+        $ config.skipping = False
         $ config.allow_skipping = False
         $ allow_skipping = False
         window hide(None)
@@ -476,6 +475,7 @@ label special_cute_1:
             "What the f[fword] was that?"
         else:
             "What the heck was that?"
+    show black with dissolve_cg
     hide n_cg1_exp3
     show n_cg1_exp4 at cgfade behind black
     if persistent.natsuki_glitch < 6:
@@ -615,7 +615,7 @@ label special_cute_1:
         else:
             hide monika
             scene black with trueblack
-    elif persistent.ggwp_monika != 4:
+    elif persistent.ggwp_monika == 4:
         stop music
         scene black with trueblack
     else: # if players skip in the first playthrough (where mc didn't know about "protein bar" that monika had)
@@ -675,7 +675,7 @@ label normal_cute_1:
     $ _history_list[-1].what = "Suddenly, Natsuki was tooo tired for {i}anythingg{/i}"
     $ currentpos = get_pos()
     stop music
-    scene black
+    show black
     "..."
     "..."
     "....."
@@ -694,7 +694,7 @@ label normal_cute_1:
     play sound fall
     mc "H-Hey... what the--"
 
-    if persistent.natsuki_glitch == 5:
+    if persistent.natsuki_glitch == 5 or persistent.natsuki_glitch == 4:
         show n_cg1_exp5
         hide n_cg1_exp5
 
@@ -719,8 +719,8 @@ label normal_cute_1:
         stop music
     else:
         stop music
-        show mod_oneeye_gl
-        play sound aglitch2
+        show mod_one_eye
+        play sound ggg
         pause 0.5
         stop sound
     window hide(None)
