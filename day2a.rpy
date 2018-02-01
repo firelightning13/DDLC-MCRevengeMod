@@ -76,12 +76,6 @@ label ch_mod_p1:
     $ config.allow_skipping = True
     $ allow_skipping = True
 
-    python:
-        try: renpy.file(config.basedir + "/SSBhbSBhbG9uZSBpbiBteSB3b3JsZA==.txt")
-        except: open(config.basedir + "/SSBhbSBhbG9uZSBpbiBteSB3b3JsZA==.txt", "wb").write(renpy.file("mod_assets/SSBhbSBhbG9uZSBpbiBteSB3b3JsZA==.txt").read())
-
-    return
-
 ###### There's a lot of anti-cheat system that i implemented, trying to prevent abusive save/load mechanics by players
 ###### (you are probably confused if you see some weird things below, sry you had to see my horrendous codes)
 
