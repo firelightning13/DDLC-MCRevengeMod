@@ -76,9 +76,10 @@ label ch_mod_p1:
     $ config.allow_skipping = True
     $ allow_skipping = True
 
+    return
+
 ###### There's a lot of anti-cheat system that i implemented, trying to prevent abusive save/load mechanics by players
 ###### (you are probably confused if you see some weird things below, sry you had to see my horrendous codes)
-
 
 label dftsy_game:
     if not renpy.can_load("1-1", test=False)and not persistent.warning_seen and not (persistent.ggwp_monika > 0):
@@ -86,7 +87,7 @@ label dftsy_game:
     return
 
 label dftsy_game2:
-    if not persistent.warning_seen and persistent.ggwp_monika > 0:
+    if not renpy.can_load("1-1", test=False) and not persistent.warning_seen and persistent.ggwp_monika > 0:
         $ renpy.call_screen("dialog", "I just saved your life.", ok_action=Return())
         $ renpy.call_screen("dialog", "If you want to be safe, please always save your game.\n-firelightning13", ok_action=Return())
         $ persistent.warning_seen = True
@@ -94,7 +95,7 @@ label dftsy_game2:
 
 label ch_mod_2:
     $ narrator.display_args["callback"] = player_pls_skip ### use this if player tends to load again after showing up in the clubroom
-    $ _history_list = []
+    $ del _history_list[0:]
     pause 1.0
     scene bg bedroom
     with wipeleft_scene
