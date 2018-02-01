@@ -200,24 +200,24 @@ label import_ddlc_persistent:
         
         #ghost_menu & seen_ghost_menu
         #There's a 1 in 64 chance Easter Egg of a ghost menu showing up in act 2
-        if old_persistent.ghost_menu is not None:
-            persistent.ghost_menu=old_persistent.ghost_menu
-            persistent.seen_ghost_menu = old_persistent.seen_ghost_menu
+        #if old_persistent.ghost_menu is not None:
+            #persistent.ghost_menu=old_persistent.ghost_menu
+            #persistent.seen_ghost_menu = old_persistent.seen_ghost_menu
         
         #monika_kill
         #Has monika died? (Had her character file deleted in act 3)
-        if old_persistent.monika_kill is not None:
-            persistent.monika_kill=old_persistent.monika_kill
+        #if old_persistent.monika_kill is not None:
+            #persistent.monika_kill=old_persistent.monika_kill
         
         #monika_reload
         #How many times have you restarted in chapter 30 (spaceroom scene)
-        if old_persistent.monika_reload is not None:
-            persistent.monika_reload=old_persistent.monika_reload
+        #if old_persistent.monika_reload is not None:
+            #persistent.monika_reload=old_persistent.monika_reload
         
         #monikatopics
         #A list with numbers for the random topics in Act 3 that Monika can talk about
-        if old_persistent.monikatopics is not None:
-            persistent.monikatopics=old_persistent.monikatopics
+        #if old_persistent.monikatopics is not None:
+            #persistent.monikatopics=old_persistent.monikatopics
         
         #playername
         #What name did the player set for the main character at the start of the game
@@ -227,18 +227,18 @@ label import_ddlc_persistent:
         
         #seen_eyes
         #Marks if the player saw an easter egg in Act 2 poem game with eyes (1 in 6 chance)
-        if old_persistent.seen_eyes is not None:
-            persistent.seen_eyes=old_persistent.seen_eyes
+        #if old_persistent.seen_eyes is not None:
+            #persistent.seen_eyes=old_persistent.seen_eyes
         
         #seen_sticker
         #Marks if the player saw an easter egg in Act 2 poem game where Monika's sticker jumped off screen
-        if old_persistent.seen_sticker is not None:
-            persistent.seen_sticker=old_persistent.seen_sticker
+        #if old_persistent.seen_sticker is not None:
+            #persistent.seen_sticker=old_persistent.seen_sticker
         
         #special_poems
         #Which special poems did the player unlock
-        if old_persistent.special_poems is not None:
-            persistent.special_poems=old_persistent.special_poems
+        #if old_persistent.special_poems is not None:
+            #persistent.special_poems=old_persistent.special_poems
         
         #steam
         #Steam version of the DDLC?
@@ -247,13 +247,18 @@ label import_ddlc_persistent:
         
         #tried_skip
         #Did the player try to skip Monika's dialogue in Act 3?
-        if old_persistent.tried_skip is not None:
-            persistent.tried_skip=old_persistent.tried_skip
+        #if old_persistent.tried_skip is not None:
+            #persistent.tried_skip=old_persistent.tried_skip
         
         #yuri_kill
         #Did yuri stab herself?
-        if old_persistent.yuri_kill is not None:
-            persistent.yuri_kill=old_persistent.yuri_kill        
+        #if old_persistent.yuri_kill is not None:
+            #persistent.yuri_kill=old_persistent.yuri_kill
+        
+        #autoload
+        #To proof that you finished the original game
+        if old_persistent.autoload is not None:
+            persistent.finished_ddlc = old_persistent.autoload
         
         # Optionally print persistent to file for debugging purposes
         #dumpPersistentToFile(persistent,basedir + '/merged_persistent.txt')
