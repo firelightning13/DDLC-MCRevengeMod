@@ -87,31 +87,32 @@ label mod_exclusive_mp_1:
             $ _history_list.pop()
             if config.skipping:
                 $ skip_counter += 1
-                jump stuck_loop
-            if skip_counter > 20:
-                $ config.skipping = False
-                $ currentpos = get_pos()
-                stop music
-                window hide(None)
-                show screen tear(8, offtimeMult=1, ontimeMult=10)
-                play music aglitch2
-                pause 2.0
-                stop music
-                hide screen tear
-                window show(None)
-                scene bg club_day
-                $ style.say_dialogue = style.normal
-                $ audio.t6 = "<from " + str(currentpos) + " loop 10.893>bgm/6.ogg"
-                play music t6
-                mc "Argh..."
-                "{i}What the hell was that?{/i}"
-                "My head... it hurts..."
-                show yuri 2f at t11 zorder 2
-                y "[player]?"
-                mc "Oh, yeah. Where was I?"
-                "I try to endure the pain that I'm having, then I remember what are we suppose to talk about."
-                mc "Ah, I see."
-                "I look at the book that she holds with her right hand."
+                if skip_counter > 20:
+                    $ config.skipping = False
+                    $ currentpos = get_pos()
+                    stop music
+                    window hide(None)
+                    show screen tear(8, offtimeMult=1, ontimeMult=10)
+                    play music aglitch2
+                    pause 2.0
+                    stop music
+                    hide screen tear
+                    window show(None)
+                    scene bg club_day
+                    $ style.say_dialogue = style.normal
+                    $ audio.t6 = "<from " + str(currentpos) + " loop 10.893>bgm/6.ogg"
+                    play music t6
+                    mc "Argh..."
+                    "{i}What the hell was that?{/i}"
+                    "My head... it hurts..."
+                    show yuri 2f at t11 zorder 2
+                    y "[player]?"
+                    mc "Oh, yeah. Where was I?"
+                    "I try to endure the pain that I'm having, then I remember what are we suppose to talk about."
+                    mc "Ah, I see."
+                    "I look at the book that she holds with her right hand."
+                else:
+                    jump stuck_loop
             else:
                 jump stuck_loop
     elif persistent.ggwp_monika == 4 and not persistent.mc_realise: # if player tends to reload again after mc talked to yuri
@@ -303,7 +304,7 @@ label mod_exclusive_mp_1:
         "Then, as I release my right hand from my right eye, I take a look at it..." # pls fix this sentence im bad at it
         window hide(None)
         show mod_one_eye # oof
-        play sound aglitch2
+        play sound s_gl
         pause 0.5
         hide mod_one_eye
         stop sound
@@ -312,27 +313,27 @@ label mod_exclusive_mp_1:
         "{cps=*0.5}What's happening right now...?{/cps}{nw}"
         $ currentpos = get_pos()
         stop music
-        play sound aglitch2
+        window hide(None)
+        show screen tear(20, 0.1, 0.1, 0, 40)
+        play sound s_gl
         pause 0.5
         stop sound
+        hide screen tear
+        window show(None)
         $ del _history_list[-25:]
         $ gtext = glitchtext(8)
-        $ y_name = "[gtext]"
 
         if not config.skipping and persistent.ggwp_monika != 4:
-            $ style.say_dialogue = style.edited
-            $ config.skipping = True
-            y "{alpha=*0.5}Hey, [player]...{/alpha}"
-            y "{alpha=*0.5}Don't mess with my power...{/alpha}"
-            y "{alpha=*0.5}Can you hear me, [player]?{/alpha}"
-            y "{alpha=*0.5}There's a devil inside all of us.{/alpha}"
-            $ config.skipping = False
-            $ style.say_dialogue = style.normal
+            #y "{alpha=*0.5}Hey, [player]...{/alpha}"
+            #y "{alpha=*0.5}Don't mess with my power...{/alpha}"
+            #y "{alpha=*0.5}Can you hear me, [player]?{/alpha}"
+            #y "{alpha=*0.5}There's a devil inside all of us.{/alpha}"
+            $ m.add_history(None, "", """Hey, [player]...\nDon't mess with my power...\nCan you hear me, [player]?\nThere's a devil inside all of us.""")
             $ persistent.ggwp_monika = 4
 
-        $ y_name = "Yuri"
         $ audio.t6 = "<from " + str(currentpos) + " loop 10.893>bgm/6.ogg"
         play music t6
+        scene bg club_day
         python: ### same text as "CAN YOU HEAR ME?.txt" but different name file
             try: renpy.file(config.basedir + "/EY3 CAN S33 Y0U.txt")
             except: open(config.basedir + "/EY3 CAN S33 Y0U.txt", "wb").write(renpy.file("CAN YOU HEAR ME.txt").read())
@@ -353,7 +354,7 @@ label mod_exclusive_mp_1:
     y "S-Sorry!"
     if poetappeal == "mp": # glitch happens when choosing mp poem
         #y "I was just--!"
-        y "I was just bathing in the feeling of your body--!"
+        y "I was just bathing in the feeling of your body--!{nw}"
         y 4c "Uuu... what am I saying that?!"
         mc "Wait, what?"
         "My eYe"
@@ -361,12 +362,14 @@ label mod_exclusive_mp_1:
         "My eye{fast}s, my boOokkkkKKkkkkKKKkkkkKKK{nw}"
         $ _history_list.pop()
         window hide(None)
+        hide yuri
         show mod_one_eye # oof
         play sound aglitch2
         pause 0.2
         hide mod_one_eye
         stop sound
-        window auto
+        show yuri 4c at i11 zorder 2
+        window show(None)
         pause 1.0
         "It looks like my book is still open, where it's just only first few pages."
         y 3n "I-I'm sorry...!"
@@ -381,7 +384,7 @@ label mod_exclusive_mp_1:
         python:
             try: sys.modules['renpy.error'].report_exception("List index out of rangeeYeeYe eYeeYeeYe... there's a deVil inSIde aLL oF US.", False)
             except: pass
-        "%What's that all about?%£££ {alpha=*0.5}Error: List index out of range{/alpha}"
+        "What's that all about? {alpha=*0.5}Error: List index out of range{/alpha}"
 
     mc "Yuri, you really apologize a lot, don't you?"
     y "I...I do?"
@@ -405,7 +408,7 @@ label mod_exclusive_mp_1:
     mc "Eh... okay then."
     "I do the same with my right arm, on the right side of the book."
     "That way, I turn a page, and Yuri slides it under her thumb after it flips to her side."
-    if ihorror or poetappeal = "mp":
+    if ihorror or poetappeal == "mp":
         pause 1.0
         "Hmm..."
         "This story feels a little bit dark though, and immersive as well..."
@@ -426,7 +429,7 @@ label mod_exclusive_mp_1:
     #mc "I think I got a bit distracted for a second..."
     mc "Ah--Uh..."
     "I glance over at Yuri's face again, and our eyes meet."
-    if ihorror or poetappeal = "mp":
+    if ihorror or poetappeal == "mp":
         mc "Well, it took me quite a while to read the whole page. So..."
     else:
         "I don't know how I'll be able to keep up with her..."
@@ -449,7 +452,7 @@ label mod_exclusive_mp_1:
     pause 2.0
     #"Even so, turning each page almost feels like an intimate exchange..."
     #"My thumb gently letting go of the page, letting it flutter over to her side as she catches it under her own thumb."
-    if poetappeal = "mp":
+    if poetappeal == "mp":
         window show(None)
         menu:
             "Let's talks about the main character of this story": # ironic af
@@ -479,7 +482,6 @@ label special_mp_1:
     show monika 2b at l21 zorder 2
     m "Alright, everyone! It's time to share poems!"
     m 2d "Would you kindly get the poem now? You two seems to get closer to each other, and..."
-    show monika 2d at t21 zorder 2
     show yuri 3n at t22 zorder 2
     y "...!"
     mc "..."
@@ -487,7 +489,7 @@ label special_mp_1:
     show monika 5a at f21 zorder 3
     m "Okay, [player]. You just need to hurry up. I can't wait to share my poems!"
     show yuri at t11 zorder 2
-    show monika at lhide zorder 1
+    show monika at lhide zorder 2
     hide monika
     mc "Right..."
     "Yuri releases her hand from the book, causing it to close on top of my thumb."
@@ -588,6 +590,7 @@ label mod_exclusive_abs_1:
     window show(None)
     scene black
     # mc's doki-doki power charged up to 9000 bps
+    show yuri 1w at i11 zorder 2
     mc "Umm... Yuri?"
     mc "Can I ask you one question?"
     y 3p "E-Eh?"
@@ -636,8 +639,9 @@ label mod_exclusive_abs_1:
     stop music
     window hide(None)
     show s_hacker zorder 10
-    #play sound 
-    pause 0.25
+    play sound sgl
+    pause 0.5
+    stop sound
     hide s_hacker
     window show(None)
     show yuri 3p at i11 zorder 2
