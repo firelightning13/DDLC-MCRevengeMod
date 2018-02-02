@@ -51,7 +51,7 @@ label mod_exclusive_cute_1:
             pause 1.0
             n "f[fgword] monikammmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm{nw}"
             pause 1.0
-            n "f[fgword] monikammmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm{nw}"
+            n "f[fgword] monik{nw}"
             $ del _history_list[-3:]
             window hide(None)
             show screen tear(20, 0.1, 0.1, 0, 40)
@@ -154,13 +154,10 @@ label mod_exclusive_cute_1:
         #n "don't judge a bookkkkkkkkkkkkkkkkk kkkkk kk{space=20}k{space=40}k{space=120}k{space=160}k{space=200}k"
         #$ _history_list.pop()
         $ style.say_dialogue = style.edited
-        n "don't judge a bookkkkkkkkkkkkkkkkk kkkkk kk{nw}"
+        n "{cps=*1.5}don't judge a bookkkkkkkkkkkkkkkkk kkkkk kk{/cps}{nw}"
         $ _history_list.pop()
         pause 1.0
-        n "don't judge a bookkkkkkkkkkkkkkkkk kkkkk kk{nw}"
-        $ _history_list.pop()
-        pause 1.0
-        n "don't judge a bookkkkkkkkkkkkkkkkk kkkkk kk{nw}"
+        n "{cps=*1.5}don't judge a boo{/cps}{nw}"
         $ _history_list.pop()
         window hide(None)
         show screen tear(20, 0.1, 0.1, 0, 40)
@@ -172,7 +169,6 @@ label mod_exclusive_cute_1:
         $ style.say_dialogue = style.normal
         $ persistent.natsuki_glitch = 2
         n "Consider this a lesson straight from the Literature Club: Don't judge a book by its cover!{fast}"
-        "Did I do something weird just now?"
     else:
         n 4l "Consider this a lesson straight from the Literature Club: Don't judge a book by its cover!"
     n "In fact--"
@@ -359,7 +355,7 @@ label mod_exclusive_cute_1:
         n "{color=#000}I don't have free will.{/color}"
         n "{color=#000}I don't have self-confidence.{/color}"
         $ gtext = glitchtext(96)
-        n "{color=#000}[gtext]{/color}{nw}"
+        n "{cps=*1.5}{color=#000}[gtext]{/color}{/cps}{nw}"
         $ _history_list[-1].what = "{color=#000}Loathing. Judgement. Elytysmmm. Self-doubt.{/color}"
         window hide(None)
         show screen tear(20, 0.1, 0.1, 0, 40)
@@ -705,7 +701,7 @@ label normal_cute_1:
         play music t6g
         if poetappeal == "cute":
             stop sound
-            $ renpy.music.play(audio.fall_gl, channel="trans", fadein=None, tight=True)
+            $ renpy.music.play(audio.fall_gl, channel="trans", tight=True)
 
         $ ntext = glitchtext(96)
         $ style.say_dialogue = style.edited
