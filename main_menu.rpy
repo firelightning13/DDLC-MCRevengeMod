@@ -120,7 +120,7 @@ screen main_menu():
                 text "[config.name!t]":
                     style "main_menu_title"
 
-                text "v. [config.version] demo, by firelightning13":
+                text "v. [config.version] demo-experimental, by firelightning13":
                     style "main_menu_version"
             else:
                 pass
