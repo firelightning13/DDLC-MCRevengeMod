@@ -120,9 +120,6 @@ init python:
             renpy.hide_screen("confirm")
             renpy.jump_out_of_context("start")
 
-    def ModWarningSaveNot():
-            renpy.hide_screen("confirm")
-
     def player_pls_skip(event, interact=True, **kwargs):
         if event == "end":
             if persistent.ggwp_monika >= 3:
