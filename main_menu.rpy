@@ -16,8 +16,10 @@ screen navigation():
                 textbutton _("ŔŗñĮ¼»ŧþŀÂŻŕěōì«") action If(persistent.playername, true=Start(), false=Show(screen="name_input", message="Please enter your name", ok_action=Function(FinishEnterName)))
             elif persistent.demu_demu:
                 textbutton _("Just Monika") action If(persistent.playername, true=Start(), false=Show(screen="name_input", message="Just Monika", ok_action=Function(FinishEnterName)))
+            elif persistent.ggwp_monika > 0:
+                textbutton _("New Game") action Show(screen="confirm", message="You can load your previous saved game instead of starting over.\nAre you sure you want to start a new game?", yes_action=Function(ModWarningSave), no_action=Hide("confirm"))
             else:
-                textbutton _("New Game") action If(persistent.playername, true=Start(), false=Show(screen="name_input", message="Please enter your name", ok_action=Function(FinishEnterName)))
+                textbutton _("New Game") action If(persistent.playername, true=Show(screen="confirm", message="Your old name is [player].\nDo you want to change your name?", yes_action=Show(screen="name_input", message="Please enter your name", ok_action=Function(FinishEnterName)), no_action=Start()), false=Show(screen="name_input", message="Please enter your name", ok_action=Function(FinishEnterName)))
 
         else:
 
@@ -89,7 +91,10 @@ screen main_menu():
     add "menu_particles"
     add "menu_particles"
     add "menu_particles"
-    add "menu_logo"
+    if persistent.playthrough > 0:
+        add "menu_logo_mod"
+    else:
+        add "menu_logo"
     if persistent.ggwp_monika == -1:
         pass
     elif persistent.playthrough == 1:
@@ -154,3 +159,75 @@ style main_menu_text:
 
 style main_menu_title:
     size gui.title_text_size
+
+############################### Confirmation Box #################################
+
+#image confirm_glitch:
+#    "gui/overlay/confirm_glitch.png"
+#    pause 0.02
+#    "gui/overlay/confirm_glitch2.png"
+#    pause 0.02
+#    repeat
+
+screen confirm(message, yes_action, no_action):
+
+    ## Ensure other screens do not get input while this screen is displayed.
+    modal True
+
+    zorder 200
+
+    style_prefix "confirm"
+
+    add "gui/overlay/confirm.png"
+
+    frame:
+
+        vbox:
+            xalign .5
+            yalign .5
+            spacing 30
+
+            #if in_sayori_kill and message == layout.QUIT:
+                #add "confirm_glitch" xalign 0.5
+
+            #else:
+            label _(message):
+                style "confirm_prompt"
+                xalign 0.5
+
+            hbox:
+                xalign 0.5
+                spacing 100
+
+                textbutton _("Yes") action yes_action
+                textbutton _("No") action no_action
+
+    ## Right-click and escape answer "no".
+    #key "game_menu" action no_action
+
+
+style confirm_frame is gui_frame
+style confirm_prompt is gui_prompt
+style confirm_prompt_text is gui_prompt_text
+style confirm_button is gui_medium_button
+style confirm_button_text is gui_medium_button_text
+
+style confirm_frame:
+    background Frame([ "gui/confirm_frame.png", "gui/frame.png"], gui.confirm_frame_borders, tile=gui.frame_tile)
+    padding gui.confirm_frame_borders.padding
+    xalign .5
+    yalign .5
+
+style confirm_prompt_text:
+    color "#000"
+    outlines []
+    text_align 0.5
+    layout "subtitle"
+
+style confirm_button:
+    properties gui.button_properties("confirm_button")
+    hover_sound gui.hover_sound
+    activate_sound gui.activate_sound
+
+style confirm_button_text is navigation_button_text:
+    properties gui.button_text_properties("confirm_button")
