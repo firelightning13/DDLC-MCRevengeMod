@@ -18,7 +18,7 @@ This version contains:
 - **v0.3-demo (sub v0.2-demo):** The whole story will be overhauled _(and extended to day two)_. **It will be completely different than v0.1**
 - **v0.2-demo will be skipped** as there's too much major _"silent"_ update. However, there will be an experimental version that only selected people will play it for playtesting.
 - v0.1-demo will be referred as _"early-concept"_ - it features some of the overall story
-- Reduce number of files for easy installation - **only 3 files!**
+- Reduce number of files for easy installation
 - Profanity filter implementation _(for family-friendly entertainment)_
 - Enable import old saves data (from original DDLC) - _for future references_
 - Alternative poem game (_to prevent copyright material_, jk pls dont kill me)
