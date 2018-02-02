@@ -255,7 +255,7 @@ label splashscreen:
             $ quick_menu = False
             scene black
             menu:
-                "A previous save file for this mod has been found. Would you like to delete your save data and start over?"
+                "A previous save file/updates for this mod has been found. Would you like to delete your save data and start over? If you have previous update from this mod, you should do so, or else it will break my mod!"
                 "Yes, delete my existing data.":
                     "Deleting save data...{nw}"
                     python:
