@@ -1,4 +1,4 @@
-define config.developer = True #Change this flag to True to enable dev tools
+define config.developer = False #Change this flag to True to enable dev tools
 
 ###### Custom persistent and variables ######
 default ihorror = False
@@ -123,22 +123,16 @@ init python:
     def player_pls_skip(event, interact=True, **kwargs):
         if event == "end":
             if persistent.ggwp_monika >= 3:
+                config.keymap['dismiss'] = dismiss_keys
+                renpy.display.behavior.clear_keymap_cache()
                 renpy.jump("skip_2_2a")
 
     def monika_showed_up(event, interact=True, **kwargs):
         if event == "begin":
-           config.keymap['dismiss'] = []
-           renpy.display.behavior.clear_keymap_cache()
+            config.keymap['dismiss'] = []
+            renpy.display.behavior.clear_keymap_cache()
         elif event == "slow_done":
-           config.keymap['dismiss'] = dismiss_keys
-           renpy.display.behavior.clear_keymap_cache()
+            config.keymap['dismiss'] = dismiss_keys
+            renpy.display.behavior.clear_keymap_cache()
 
     renpy.music.register_channel("trans", mixer="music", tight=True)
-
-    #def censorship():
-        #if persistent.protecc:
-            #fgword = "******"
-            #bword = "****"
-            #aword = "******"
-            #sword = "***"
-####################################################################
