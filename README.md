@@ -1,3 +1,5 @@
+**Dev Note: I'm on hiatus... I don't know how long it will be. I'll be back soon.**
+
 ![DDLCMCR](https://raw.githubusercontent.com/firelightning13/DDLC-MCRevengeMod/master/mod_assets/DDLCMCR.png)
 ### [DDLC Modification Club Reddit Post](https://www.reddit.com/r/DDLCMods/comments/7owdto/demo_releaseddlc_mcs_revenge_mod/)
 # DDLC - MC Revenge Mod
@@ -40,7 +42,7 @@ https://docs.google.com/document/d/1afg0mO6hsvOESS7Tk8lWkFUgmSeFy8Pv2BTShxhis3M/
 ## Want to help me?
 You can modify scripts file if you want to help me. Just use pull request, and I will approve.
 
-**v0.2 demo in progress:** https://github.com/firelightning13/DDLC-MCRevengeMod/tree/0.2-demo
+**v0.3 demo in progress:** https://github.com/firelightning13/DDLC-MCRevengeMod/pull/7
 
-(**Current proofreader :** @BioHazic)
+(**Current proofreader :** BioHazic)
 
