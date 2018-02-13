@@ -210,7 +210,7 @@ label mod_exclusive_cute_1:
         "That's not entirely true, I feel like I had a friend before."
         mc "After all--"
         "I quickly retrieve the same book that Natsuki admires in my bag, which I found it from my classroom an hour ago."
-        "I grab both of them, which is mine and hers, and show them to Natsuki just so that I can prove to her." # pls fix this im tired of this english bs
+        "I grab both of them, and show them to Natsuki just so that I can prove it to her."  # pls fix this im tired of this english bs
         mc "See? I already have it. You don't need to worry about yours getting bent or smudges on the pages."
         mc "I only have volume one, so I thought I'd like to share this with you sometimes."
         mc "But it seems that we already had the same book, and--"
@@ -224,13 +224,13 @@ label mod_exclusive_cute_1:
         "I don't even know why I'm feeling this way."
         # a fake story by mc, nice one eh
         mc "I just{fast} bought a stack of it a few months ago for my older sister's birthday present."
-        mc "But she forgot this one as she left my house because of her college." # again, pls fix this, this is so wrong :(
-        mc "I didn't want to read it though since I'm not into it, so I thought I just wanted to share it with you."
+        mc "But she forgot this volume when she moved out for college." # again, pls fix this, this is so wrong :(
+        mc "I didn't want to read it though, since I'm not into it, so I thought I just wanted to share it with you."
         mc "I don't want this book going to be wasted and left alone in my house."
         "Wow, this is one hell of a story."
         n 5q "I-I see..."
         n "Well, I can't argue with that, since you already had one."
-        n 5n "I guess I can do is to reread some of it."
+        n 5n  I guess the least I can do, is to reread some of it."
         n 5u "I-Is that okay?"
         mc "Alright, you asked for it."
         "I return her book by slipping it back into the box of manga."
@@ -252,7 +252,7 @@ label mod_exclusive_cute_1:
         #n 5r "D-Don't just say that!"
         n "You'll make me feel weird about it!"
         "Natsuki crosses her arms and scootches an inch away from me."
-        mc "Sorry, I didn't realise..."
+        mc "Sorry, I didn't realize..."
         show natsuki 5g
         #"I didn't exactly expect to be sitting this close to her, either..."
         #"Not that I can say it's a particularly bad thing."
@@ -317,7 +317,7 @@ label mod_exclusive_cute_1:
     #mc "...What do you mean?"
     #mc "Don't you share your manga with your friends?"
     mc "Ah, I see..."
-    "I'm kind of suprise how Natsuki was alone all the time. Not to mention about Yuri though..."
+    "I'm kind of surprised how Natsuki was alone all the time. Not to mention about Yuri though..."
     hide n_cg1_exp2
     show n_cg1_exp3 at cgfade
     n "Could you not rub it in?"
@@ -505,8 +505,8 @@ label special_cute_1:
     mc "Natsuki, are you okay?!"
     queue music t9
     n "..."
-    "I presses my hand againts her forehead."
-    "Natsuki seems having a serious fever..."
+    "I press my hand against her forehead."
+     "Natsuki seems to be having a serious fever..."
     mc "Don't worry, Natsuki."
     if persistent.natsuki_glitch == 5:
         mc "I'll help you the best I can."
@@ -515,7 +515,7 @@ label special_cute_1:
         mc "...?"
         n "...is beating really fast..."
         mc "...!"
-        "Ah, I didn't realise I was too close to her."
+        "Ah, I didn't realize I was too close to her."
         "But I have no choice."
         "I need to help her!"
     else:
@@ -527,7 +527,7 @@ label special_cute_1:
     "Still holding her shoulder, I assist her to slowly get up."
     if persistent.natsuki_glitch == 5 and persistent.ggwp_monika != 4: # if player tends to reload again after normal route
         "I begin to walk with Natsuki through the door, as we are on our way to the infirmary."
-        "I'll probably can find nurse there."
+        "I can probably find a nurse there."."
         stop music
         m "[player]!"
         "Ah, damn it! I can't just stop here..."
@@ -540,7 +540,7 @@ label special_cute_1:
         mc "W-What? No!"
         mc "That's ridiculous!"
         "That makes me feel bad about her, I mean she had no friend in the first place."
-        "I'll probably ended up in the same way as before..."
+        "I'll probably end up in the same way as before..."
         show monika 5a at t11 zorder 2
         show natsuki at thide zorder 1
         hide natsuki
@@ -551,7 +551,7 @@ label special_cute_1:
         mc "Does this happens very often?"
         show monika 1l at s11 zorder 2
         m "Ahaha, well..."
-        "There's something obvious going around here..."
+        "There's something obviously going around here..."
         show monika 1l at t11 zorder 2
         m 1j "It just happens every now and then."
         m 1a "Don't worry about it."
@@ -580,7 +580,7 @@ label special_cute_1:
         mc "Sorry if I assume you doing something weird."
         mc "I think you're right, as club president."
         mc "You can have her now."
-        m 2l "Ah-It's nothing to worry about, I mean you're deserve to accompany her."
+        m 2l "Ah-It's nothing to worry about, I mean you deserve to accompany her."
         m 2n "But there's something that I need to talk to her about this problem."
         m 3a "I won't let this happen in the future, I promise. So-{nw}"
         mc "But there's one thing I need to do with you."
@@ -593,7 +593,7 @@ label special_cute_1:
         m "I mean I would loved to do that if I were you... Ahaha..." # turned on?
         m 1l "Oh my god. What's wrong with me?~"
         mc "I see..."
-        "I apprehensively presses my hand against her forehea{nw}"
+        "I apprehensively press my hand against her forehea{nw}"
         if persistent.ggwp_monika != 4:
             $ audio.t29 = "<from 5.458 loop 5.458>mod_assets/sfx/p1.ogg"
             play music t29
