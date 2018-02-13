@@ -74,7 +74,7 @@ label ch_mod_2a:
     m "Glad to see you didn't run away on us. Hahaha!"
     ####################################### MC's REACTIONS FLAG #############################################
     if persistent.poster_seen:
-        "I wish I was..."
+        "I wish I had..."
         "After what I saw something {i}horrible{/i} earlier!"
         if seen_day == 1: ### 18.52% chance
             "I saw it again..."
@@ -120,7 +120,7 @@ label ch_mod_2a:
             "I'm... {w}back at the Literature Club..."
             "I was the last to come in... {w}so everyone else is already hanging out..."
         elif seen_day == 2: ### 2.777% chance
-            "Is that poster again from yesterday?!"
+            "Is that the poster again from yesterday?!"
             "What is going on in this world..."
         else: ### 69.44% chance
             "Well, I'm back at the Literature Club."
@@ -140,7 +140,7 @@ label ch_mod_2a:
     n "Oh, come on! Like he deserves any slack."
     # mc saw glitching natsuki
     if persistent.mc_violent:
-        "That scare the s[sword] out of me..."
+        "That scared the s[sword] out of me..."
         if not persistent.protecc: # if profanity filter disabled
             "Oops, did I swear?"
             $ del _history_list[-2:]
@@ -204,7 +204,7 @@ label ch_mod_2a:
         mc "I thought about it when I wrote my poem last night."
         mc "I think I should start reading something."
         "I don't know... but I feel like I've done something like this before..."
-        "What is happening with my memory?"
+        "What has happened to my memories?"
         y 1b "Well... I was thinking that..."
         y 2u "...as Vice President, I might help you with that."
         mc "Oh, alright. What should I read, then?"
@@ -329,8 +329,8 @@ label ch_mod_2a:
 
             "Wait, what?"
             "What happened?"
-            "Did I said something to Yuri?"
-            "Confused, still holding a book that Yuri gave me, I glance around."
+            "Did I say something to Yuri?"
+            "Confused, still holding the book that Yuri gave me, I glance around."
             play music t2g3
             "Yuri's face is already buried in a book."
             "Meanwhile, Natsuki is rummaging around in the closet."
@@ -346,7 +346,7 @@ label ch_mod_2a:
             $ style.say_dialogue = style.normal
             "Wait, what?"
             "What happened?"
-            "Did I said something to Yuri?"
+            "Did I say something to Yuri?"
             "I can't see what she said to me. It was {i}too fast{/i}." # 4th wall breaking?
             "..."
             "What am I doing right now?"
@@ -368,7 +368,7 @@ label ch_mod_2a:
             "She's trying to help me, right?"
             "After all, I don't have other things to read, so..."
             if not ihorror: ### choose manga over horror from day one
-                "{i}Even though I had loads of stacks of books in my room...{/i}"
+                "{i}Even though I had stacks of books in my room...{/i}"
                 "I'm not trying to be an a[aword] here..."
                 if persistent.protecc:
                     $ _history_list.pop()
