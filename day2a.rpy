@@ -427,7 +427,7 @@ label check_closet:
     else:
         ### 50% chance, i think yuri like this idea
         "Huh? There is a tea set as well."
-        "Who put in this closet anyway?"
+        "Who put this in the closet anyway?"
         "Maybe one of my teachers needs it?"
         "Eh, whatever."
         "I just grab the markers and construction paper instead."
@@ -559,7 +559,7 @@ label check_poster:
         mc "What is this picture?!{fast}"
         $ _history_list.pop()
         "I quickly look away."
-        "My head start to feel dizzy again."
+        "My head starts to feel dizzy again."
         if seen_day == 1: ### 11.11% chance
             "That's.... what I saw yesterday..." # if you see sayori poster yesterday
         mc "I wish I didn't see that..."
