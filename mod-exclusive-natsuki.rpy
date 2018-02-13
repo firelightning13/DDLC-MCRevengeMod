@@ -230,7 +230,7 @@ label mod_exclusive_cute_1:
         "Wow, this is one hell of a story."
         n 5q "I-I see..."
         n "Well, I can't argue with that, since you already had one."
-        n 5n  I guess the least I can do, is to reread some of it."
+        n 5n  "I guess the least I can do, is to reread some of it."
         n 5u "I-Is that okay?"
         mc "Alright, you asked for it."
         "I return her book by slipping it back into the box of manga."
@@ -527,7 +527,7 @@ label special_cute_1:
     "Still holding her shoulder, I assist her to slowly get up."
     if persistent.natsuki_glitch == 5 and persistent.ggwp_monika != 4: # if player tends to reload again after normal route
         "I begin to walk with Natsuki through the door, as we are on our way to the infirmary."
-        "I can probably find a nurse there."."
+        "I can probably find a nurse there."
         stop music
         m "[player]!"
         "Ah, damn it! I can't just stop here..."
