@@ -112,7 +112,7 @@ label ch_mod_1:
         $ mcrp = player # temp fix
         mcrp "\"What the hell is that?!\"{w=1.0}{nw}"
         "{cps=*1.5}The \"thing\" started to approach me.{/cps}{w=0.5}{nw}"
-        "{cps=*1.5}I didn't recognise that distorted mess of an entity.{/cps}{w=0.5}{nw}"
+        "{cps=*1.5}I didn't recognize that distorted mess of an entity.{/cps}{w=0.5}{nw}"
         "{cps=*1.5}It's getting closer and closer now...{/cps}{w=0.5}{nw}"
         "{cps=*1.5}Ah, what is happening to this world?!!?!{/cps}{w=0.2}{nw}"
         mc "{cps=*1.5}WHAT THE F{/cps}{nw}"
@@ -152,7 +152,7 @@ label ch_mod_1:
         "What did I just witness?"
     else:
         # suprise motherfcker
-        "Can I skip over these stuff at this point?"
+        "Can I skip over this stuff at this point?"
         "It infuriates me."
         $ del _history_list [-2:]
         "Wait, what am I talking about?"
@@ -205,7 +205,7 @@ label ch_mod_1:
     m "It's kind of embarrassing, but there are only three of us so far."
     m "It's really hard to find new members for something that sounds so boring..."
     mc "Well, I can see that..."
-    "Why do I feel like my wrath is growing since Monika showed up?"
+    "Why do I feel like my wrath has been growing since Monika showed up?"
     $ _history_list.pop()
     m 3d "But it's really not boring at all, you know!"
     m "Literature can be anything. Reading, writing, poetry.."
