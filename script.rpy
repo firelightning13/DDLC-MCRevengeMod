@@ -1,6 +1,6 @@
 # This is used for top-level game strucutre.
 # Should not include any actual events or scripting; only logic and calling other labels.
-#define config.developer = True
+# define config.developer = True
 
 label start:
 
@@ -24,23 +24,22 @@ label start:
     $ allow_skipping = True
     $ config.allow_skipping = True
 
-    if persistent.playthrough == 0:
-        call intro_mod from _call_intro_mod
+    if persistent.ggwp_monika == -1:
+        jump mod_crash
 
-    if persistent.playthrough == 1:
-        call intro_mod_2 from _call_intro_mod_2
+    elif persistent.playthrough == 0:
+        call ch_mod_intro
     
-    # There's a bit of problem / bugs that I can't fix
-    # Saving and loading is pretty much broken in this game
-    # I don't know...
-    if persistent.playthrough == 2:
-        # I guess there's no other way
-        jump intro_mod_2_1
-        #call intro_mod_2_1
-        #next chapter
-        #call chapter_mod_2 from _call_chapter_mod_2
-        #jump mod_end_demo
-        # I'll disable this temporarily
+    elif persistent.playthrough == 1:
+        call ch_mod_1a
+        jump mod_continue
+
+    elif persistent.playthrough == 2:
+        call ch_mod_1b
+        label mod_continue:
+            call ch_mod_p1
+            $ mod_chapter = 1
+            call ch_mod_2
 
 label endgame(pause_length=4.0):
     $ quick_menu = False
