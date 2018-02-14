@@ -1,5 +1,3 @@
-**Dev Note: I'm on hiatus... I don't know how long it will be. I'll be back soon.**
-
 ![DDLCMCR](https://github.com/firelightning13/DDLC-MCRevengeMod/blob/0.3-demo/mod_assets/bg/warning.png?raw=true)
 ### [DDLC Modification Club Reddit Post](https://www.reddit.com/r/DDLCMods/comments/7owdto/demo_releaseddlc_mcs_revenge_mod/)
 # DDLC - MC Revenge Mod
