@@ -561,7 +561,7 @@ label m_bs_1:
     "I don't even know what's going on with her..."
     mc "Uh... thanks, I guess?"
     if natsuki_out:
-        jump natsuki_come back
+        jump natsuki_come_back
     return
 
 label monika_special_1_end:
