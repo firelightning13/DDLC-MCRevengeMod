@@ -108,7 +108,7 @@ label mod_exclusive_mp_1:
                     show yuri 2f at t11 zorder 2
                     y "[player]?"
                     mc "Oh, yeah. Where was I?"
-                    "I try to endure the pain that I'm having, then I remember what are we suppose to talk about."
+                    "I try to endure the pain that I'm experiencing, then I remember what we are suppose to talk about."
                     mc "Ah, I see."
                     "I look at the book that she holds with her right hand."
                 else:
@@ -126,16 +126,16 @@ label mod_exclusive_mp_1:
         #"There's something fairly obvious here that Yuri isn't telling me, but I decide to let it go."
         #mc "I'll definitely start reading it soon!"
         "The way she act is really obvious, but I decide to let it go anyway."
-        "Also, is the bookstore even exist? {w}What am I talking about right now?"
+        "Also, does the bookstore even exist? {w}What am I talking about right now?"
         $ _history_list.pop()
     else: # normal playthrough if choosing mp poem
         mc "Ah, I see."
         #"There's something fairly obvious here that Yuri isn't telling me, but I decide to let it go."
         #mc "I'll definitely start reading it soon!"
         "The way she act is really obvious, but I decide to let it go anyway."
-        "Also, is the bookstore even exist? {w}What am I talking about right now?"
+        "Also, does the bookstore even exist? {w}What am I talking about right now?"
         $ _history_list.pop()
-    mc "I'll probably going to start reading it soon."
+    mc "I'll probably start reading it soon."
     if ihorror and persistent.ggwp_monika != 4:
         mc "I hope the story is interesting enough for me."
     y 2u "I'm glad to hear..."
@@ -208,7 +208,7 @@ label mod_exclusive_mp_1:
     y 4b "I'm sorry..."
     mc "Hey, don't apologize...!"
     mc "I haven't lost interest or anything."
-    mc "I mean, I can relate that to my own life, what is like to be a protagonist in my own story." # oh wow self-reflecting?
+    mc "I mean, I can relate that to my own life, what it is like to be a protagonist in my own story." # oh wow self-reflecting?
     mc "Being naive is another thing though..."
     y "Well..."
     y "I guess it's alright, then..."
@@ -249,7 +249,7 @@ label mod_exclusive_mp_1:
     mc "I hope that we can socialize more, even though we're not that good at it."
     mc "Well, of course it takes time. I'm sure we'll get over this sort of barrier soon enough."
     "Wow, I sound just like Monika all of sudden."
-    "But I'll make sure that Yuri is confortable enough to be with me. I don't want Yuri to get in trouble or else..."
+    "But I'll make sure that Yuri is comfortable enough to be with me. I don't want Yuri to get in trouble or else..."
     y 2s "A-Alright then..."
     y "If you say so..."
     y 1s "Thank you, for reassuring me."
@@ -272,12 +272,12 @@ label mod_exclusive_mp_1:
         "..."
         "I don't know why, I'm too tired to read right now."
         "..."
-        "I as look at the back of the book, I curiously read the synopsis of this book...."
+        "As I look at the back of the book, I curiously read the synopsis of this book...."
         pause 1.0
-        "The synopsis is pretty much different than what Yuri told me earlier..."
-        "I mean... {w}it's kind of make sense, as she'd already finished reading-{nw}"
+        "The synopsis is pretty different from what Yuri told me earlier..."
+        "I mean... {w}it does kind of make sense, as she'd already finished reading-{nw}"
         "Wait, that doesn't make sense either... {w}she bought this book yesterday-{nw}"
-        "No! This doesn't make sense either... {w}she probably have the old copy though-{nw}"
+        "No! This doesn't make sense either... {w}she probably has the old copy though-{nw}"
         "Ugh... {w}why am I overthinking this!{nw}" # over autocorrect mc's fake script (monika's plan)
         mc "What's this?"
         "I look at the small text printed at the bottom right corner of the back of the book."
@@ -339,12 +339,12 @@ label mod_exclusive_mp_1:
             except: open(config.basedir + "/EY3 CAN S33 Y0U.txt", "wb").write(renpy.file("CAN YOU HEAR ME.txt").read())
     else: # normal playthrough when choosing abs
         #"I soon understand what Yuri means about reading in company."
-        "I kind of understand how hard for Yuri to be confortable when reading with someone."
+        "I kind of understand how hard it is for Yuri to be comfortable when reading with someone."
         "It's as if I can feel her presence over my shoulder as I read."
-        #"It's not a particularly bad thing."
-        "I mean it's not a particularly bad thing."
+        #"It's not particularly bad thing."
+        "I mean it's not particularly bad thing."
         #"Maybe a little distracting, but the feeling is somewhat comforting."
-        "Well, to be honest, I haven't socialize to anyone for a long time now..."
+        "Well, to be honest, I haven't socialized with anyone for a long time now..."
         "Or have I?"
         "Yuri is in the corner of my eye."
         "I realize that she's not actually looking at her own book."
@@ -412,7 +412,7 @@ label mod_exclusive_mp_1:
         pause 1.0
         "Hmm..."
         "This story feels a little bit dark though, and immersive as well..."
-        "I guess Yuri is really good at finding this kind of story."
+        "I guess Yuri is really good at finding these kinds of stories."
         "I wonder why..."
     else:
         "But in holding it like this..."
@@ -469,7 +469,7 @@ label special_mp_1:
     "I was about to ask her about the main character of this story."
     "But for some reason, I feel like my mind doesn't allow me to talk about it..."
     "Well, I think it's better this way. I don't want to hurt her even further."
-    "I mean, she could have mental problems or something that I might not know. Maybe I should've convince her to talk to a therapist."
+    "I mean, she could have mental problems or something that I might not know about. Maybe I should convince her to talk to a therapist."
     $ _history_list.pop()
     "Wait, what am I talking about?"
     "Oh, well..."
@@ -486,10 +486,10 @@ label special_mp_1:
     y "...!"
     mc "..."
     mc "Alright, if you say so..."
-    show monika 5a at f21 zorder 3
-    m "Okay, [player]. You just need to hurry up. I can't wait to share my poems!"
+    show monika 1a at t21 zorder 3
+    m "Okay, [player]. You just need to hurry up."
     show yuri at t11 zorder 2
-    show monika at lhide zorder 2
+    show monika at lhide
     hide monika
     mc "Right..."
     "Yuri releases her hand from the book, causing it to close on top of my thumb."
@@ -566,7 +566,7 @@ label normal_mp_1:
     m 2b "Anyway, why don't we start with sharing our poems with each other?"
     mc "Eh?"
     mc "Shouldn't we wait for Yuri?"
-    m 2a "Well, she might be a while, so I just figured we'd get started without her."
+    m 2a "Well, she might be out a while, so I just figured we'd get started without her."
     m "Is that okay?"
     #mc "Yeah, I was just asking..."
     mc "Yeah, sure. Why not?"

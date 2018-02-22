@@ -62,32 +62,36 @@ label ch_mod_1b:
 label ch_mod_1:
     "It's an ordinary school day, like any other."
     "Mornings are usually the worst, being surrounded by couples and friend groups walking to school together."
-    "Meanwhile, I've always walked to school alone.{nw}"
-    $ currentpos = get_pos()
-    stop music
-    window hide(None)
-    show screen tear(20, 0.1, 0.1, 0, 40)
-    play sound "sfx/s_kill_glitch1.ogg"
-    pause 0.25
-    stop sound
-    hide screen tear
-    window show(None)
-    mc "Argh...!"
-    mc "What the he-{nw}"
-    mc "Eh?"
-    "What the heck?"
-    "I felt, weird... just now."
-    "What's going on?"
-    mc "I feel... {w}uncomfortable.."
-    mc "I feel like my body just woke up for some reason..."
-    mc "Huh..."
-    $ del _history_list[-9:]
-    "Probably nothing, I guess.."
-    "Well, "
-    $ _history_list.pop()
-    $ audio.t2 = "<from " + str(currentpos) + " loop 4.499>bgm/2.ogg"
-    play music t2
-    "Well, {fast}going to school isn't really bad at all."
+    if persistent.day1_gl < 1:
+        "Meanwhile, I've always walked to school alone.{nw}"
+        $ currentpos = get_pos()
+        stop music
+        window hide(None)
+        show screen tear(20, 0.1, 0.1, 0, 40)
+        play sound "sfx/s_kill_glitch1.ogg"
+        pause 0.25
+        stop sound
+        hide screen tear
+        window show(None)
+        $ persistent.day1_gl = 1
+        mc "Argh...!"
+        mc "What the he-{nw}"
+        mc "Eh?"
+        "What the heck?"
+        "I felt, weird... just now."
+        "What's going on?"
+        mc "I feel... {w}uncomfortable.."
+        mc "I feel like my body just woke up for some reason..."
+        mc "Huh..."
+        $ del _history_list[-9:]
+        "Probably nothing, I guess.."
+        "Well, "
+        $ _history_list.pop()
+        $ audio.t2 = "<from " + str(currentpos) + " loop 4.499>bgm/2.ogg"
+        play music t2
+        "Well, {fast}going to school isn't really bad at all."
+    else:
+        "Meanwhile, I've always walked to school alone."
     "I always tell myself it's about time I meet some girls or something like that..."
     "But I have no motivation to join any clubs."
     "After all, I'm perfectly content just getting by on the average while spending my free time on games and anime."
@@ -102,7 +106,7 @@ label ch_mod_1:
     "There really aren't any that interest me."
     "Besides, most of them would probably be way too demanding for me to want to deal with."
     "I guess I have no choice but to start with the anime club..."
-    if not config.skipping: # oops... skipping this dialogue is the safest way to heaven
+    if not config.skipping and persistent.day1_gl < 2: # oops... skipping this dialogue is the safest way to heaven
         $ currentpos = get_pos()
         stop music
         $ quick_menu = False
@@ -112,7 +116,7 @@ label ch_mod_1:
         $ mcrp = player # temp fix
         mcrp "\"What the hell is that?!\"{w=1.0}{nw}"
         "{cps=*1.5}The \"thing\" started to approach me.{/cps}{w=0.5}{nw}"
-        "{cps=*1.5}I didn't recognise that distorted mess of an entity.{/cps}{w=0.5}{nw}"
+        "{cps=*1.5}I didn't recognize that distorted mess of an entity.{/cps}{w=0.5}{nw}"
         "{cps=*1.5}It's getting closer and closer now...{/cps}{w=0.5}{nw}"
         "{cps=*1.5}Ah, what is happening to this world?!!?!{/cps}{w=0.2}{nw}"
         mc "{cps=*1.5}WHAT THE F{/cps}{nw}"
@@ -148,17 +152,18 @@ label ch_mod_1:
     m 1b "Oh my goodness, I totally didn't expect to see you here!"
     m 5 "It's been a while, right?"
     mc "Ah..."
-    if not gg_skip:
+    if not gg_skip and persistent.day1_gl < 2:
         "What did I just witness?"
-    else:
-        # suprise motherfcker
+        $ persistent.day1_gl = 2
+        $ _history_list.pop()
+    elif gg_skip: # if players, for some reason that they wanted to skip dialogues...
         "Can I skip over these stuff at this point?"
         "It infuriates me."
         $ del _history_list [-2:]
         "Wait, what am I talking about?"
         $ config.allow_skipping = True
         $ allow_skipping = True
-    $ _history_list.pop()
+        $ _history_list.pop()
     mc "Yeah, it has."
     "Monika smiles sweetly."
     "We do know each other - well, we rarely talked, but we were in the same class last year."
@@ -173,21 +178,25 @@ label ch_mod_1:
     m 1d "Do you know if there's any construction paper in here?"
     m "Or markers?"
     mc "I guess you could check the closet."
-    mc "...You're in the literature {nw}"
-    $ _history_list.pop()
-    $ style.say_dialogue = style.edited
-    mc "...You're in the literature {fast}club, right?{nw}"
-    $ _history_list.pop()
-    window hide(None)
-    show screen tear(20, 0.1, 0.1, 0, 40)
-    play sound "sfx/s_kill_glitch1.ogg"
-    pause 0.25
-    stop sound
-    hide screen tear
-    window show(None)
-    $ style.say_dialogue = style.normal
-    mc "...You're in the debate club, right?{fast}"
-    "Ah, what did I just say?"
+    if persistent.day1_gl < 3:
+        mc "...You're in the literature {nw}"
+        $ _history_list.pop()
+        $ style.say_dialogue = style.edited
+        mc "...You're in the literature {fast}club, right?{nw}"
+        $ _history_list.pop()
+        window hide(None)
+        show screen tear(20, 0.1, 0.1, 0, 40)
+        play sound "sfx/s_kill_glitch1.ogg"
+        pause 0.25
+        stop sound
+        hide screen tear
+        window show(None)
+        $ style.say_dialogue = style.normal
+        $ persistent.day1_gl = 3
+        mc "...You're in the debate club, right?{fast}"
+        "Ah, what did I just say?"
+    else:
+        mc "...You're in the debate club, right?"
     m 5 "Ahaha, about that..."
     m "I actually quit the debate club."
     mc "Really? You quit...?"
@@ -197,7 +206,23 @@ label ch_mod_1:
     m "I'd much rather take something I personally enjoy and make something special out of it."
     mc "In that case, what club did you decide to join?"
     m 1b "Actually, I'm starting a new one!"
-    m "A literature club!"
+    if persistent.day1_gl < 4:
+        m "A literature club!"
+        $ persistent.day1_gl = 4
+    else:
+        m "A literature club!{nw}"
+        $ _history_list.pop()
+        window hide(None)
+        show screen tear(20, 0.1, 0.1, 0, 40)
+        play sound "sfx/s_kill_glitch1.ogg"
+        pause 0.25
+        stop sound
+        hide screen tear
+        window show(None)
+        window auto
+        m "A literature club!{fast}"
+        "Did I load the game again?"
+        $ _history_list.pop()
     mc "Literature...?"
     pause 1.0
     mc "How many members do you have so far?"
@@ -229,36 +254,44 @@ label ch_mod_1:
     m "If you could at the very least visit my club, it would make me really happy."
     m "Please?"
     mc "Um..."
-    "Well, I guess I have no reason to ref-{nw}"
-    $ _history_list.pop()
-    window hide(None)
-    menu:
-        "Visit her club":
-            pass
-        "Don't visit her club":
-            pass
-    window show(None)
-    "Well, I guess I have no reason to ref{fast}use."
-    "Eh? What was that?"
+    if persistent.day1_gl < 5:
+        "Well, I guess I have no reason to ref-{nw}"
+        $ _history_list.pop()
+        window hide(None)
+        menu:
+            "Visit her club":
+                pass
+            "Don't visit her club":
+                pass
+        window show(None)
+        $ persistent.day1_gl = 5
+        "Well, I guess I have no reason to ref{fast}use."
+        "Eh? What was that?"
+    else:
+        "Well, I guess I have no reason to refuse."
     mc "Sure, I guess I could check it out."
     m 1k "Aah, awesome!"
     m 1b "You're really sweet, [player], you know that?"
     m 1a "Shall we go, then?"
     m "I'll look for the materials another time - you're more important."
-    show monika at thide zorder 1
-    hide monika
-    "I'm more important?"
-    "Why do I feel like I'm being betrayed instead?"
-    "For some reason, it actually infuriates me."
-    "I can't even understand my own feelings right now..."
-    "I wonder if this is how Sayori felt..."
-    "Wait, who is Sayo{nw}"
-    $ del _history_list [-6:]
-    stop music
-    window hide(None)
-    window auto
-    scene black with trueblack
-    pause 1.0
+    if persistent.day1_gl < 6:
+        show monika at thide zorder 1
+        hide monika
+        "I'm more important?"
+        "Why do I feel like I'm being betrayed instead?"
+        "For some reason, it actually infuriates me."
+        "I can't even understand my own feelings right now..."
+        "I wonder if this is how Sayori felt..."
+        "Wait, who is Sayo{nw}"
+        $ del _history_list [-6:]
+        $ persistent.day1_gl = 6
+        stop music
+        window hide(None)
+        window auto
+        scene black with trueblack
+        pause 1.0
+    else:
+        stop music fadeout 2.0
 
     scene bg corridor
     with wipeleft_scene
@@ -364,19 +397,25 @@ label ch_mod_1:
 
     "The girls have a few desks arranged to form a table."
     "Yuri walks to the corner of the room and opens the closet."
-    "Meanwhile, Monika and Natsuki sit across {nw}"
-    $ _history_list.pop()
-    window hide(None)
-    menu:
-        "Sit next to Monika":
-            $ isit = False
-        "Sit next to Natsuki":
-            $ isit = True
-    window show(None)
-    "Meanwhile, Monika and Natsuki sit across {fast}from each other."
-    "I take a seat next to Monika."
-    if isit:
-        "I don't know why, but I feel like I should sit next to Natsuki instead..."
+    if persistent.day1_gl < 7:
+        "Meanwhile, Monika and Natsuki sit across {nw}"
+        $ _history_list.pop()
+        window hide(None)
+        menu:
+            "Sit next to Monika":
+                $ isit = False
+            "Sit next to Natsuki":
+                $ isit = True
+        window show(None)
+        $ persistent.day1_gl = 7
+        "Meanwhile, Monika and Natsuki sit across {fast}from each other."
+        "I take a seat next to Monika."
+        if isit:
+            "I don't know why, but I feel like I should sit next to Natsuki instead..."
+    else:
+        $ isit = False
+        "Meanwhile, Monika and Natsuki sit across from each other."
+        "I take a seat next to Monika."
     show monika 1a at t11 zorder 2
     m "So, I know you didn't really plan on coming here..."
     m "But we'll make sure you feel right at home, okay?"
@@ -434,35 +473,40 @@ label ch_mod_1:
     y "So, [player], what kinds of things do you like to read?"
     mc "Well... Ah..."
     "Considering how little I've read these past few years, I don't really have a good way of answering that."
-    window hide(None)
-    menu:
-        "Manga":
-            $ ihorror = False
-        "Horror":
-            window show(None)
-            $ ihorror = True
-            y 1e "Oh?"
-            "Yuri looks at me with a suprised expression."
-            y 1a "What did you say?"
-            mc "Uh..."
-            window hide(None)
-            $ del _history_list[-4:]
-    $ currentpos = get_pos()
-    stop music
-    play sound aglitch1
-    pause 0.5
-    stop sound
-    $ audio.t3 = "<from " + str(currentpos) + " loop 4.618>bgm/3.ogg"
-    play music t3
-    #mc "...Manga..."
-    #"I mutter quietly to myself, half-joking."
-    #"Natsuki's head suddenly perks up for some reason."
-    #"It looks like she wants to say something, but she keeps quiet."
-    #show natsuki at thide zorder 1
-    #hide natsuki
-    window show(None)
-    y 3u "N-Not much of a reader, I guess..."
-    "What was that about?"
+    if persistent.day1_gl < 8:
+        window hide(None)
+        menu:
+            "Manga":
+                $ ihorror = False
+            "Horror":
+                window show(None)
+                $ ihorror = True
+                y 1e "Oh?"
+                "Yuri looks at me with a suprised expression."
+                y 1a "What did you say?"
+                mc "Uh..."
+                window hide(None)
+                $ del _history_list[-4:]
+        $ currentpos = get_pos()
+        stop music
+        play sound aglitch1
+        pause 0.5
+        stop sound
+        $ audio.t3 = "<from " + str(currentpos) + " loop 4.618>bgm/3.ogg"
+        play music t3
+        $ persistent.day1_gl = 8
+        window show(None)
+        y 3u "N-Not much of a reader, I guess..."
+        "What was that about?"
+    else:
+        $ ihorror = False
+        mc "...Manga..."
+        "I mutter quietly to myself, half-joking."
+        show natsuki 1c at t41 zorder 2
+        "Natsuki's head suddenly perks up for some reason."
+        "It looks like she wants to say something, but she keeps quiet."
+        show natsuki at thide zorder 1
+        hide natsuki
     mc "Ah..."
     mc "Don't say that, you're making it sound like a big deal or something."
     "I say that because of Yuri's sad smile."
@@ -568,15 +612,17 @@ label ch_mod_1:
     y 1b "Yes. It's like an artist painting beautiful pictures for everyone to see."
     y "People value the artist because of more than just a picture that they paint."
     "Huh? I didn't know Yuri likes pictures."
-    "I thought I've heard that before from Sayo-{nw}"
-    $ _history_list.pop()
-    window hide(None)
-    show screen tear(20, 0.1, 0.1, 0, 40)
-    play sound "sfx/s_kill_glitch1.ogg"
-    pause 0.25
-    stop sound
-    hide screen tear
-    window show(None)
+    if persistent.day1_gl < 9:
+        "I thought I've heard that before from Sayo-{nw}"
+        $ _history_list.pop()
+        window hide(None)
+        show screen tear(20, 0.1, 0.1, 0, 40)
+        play sound "sfx/s_kill_glitch1.ogg"
+        pause 0.25
+        stop sound
+        hide screen tear
+        window show(None)
+        $ persistent.day1_gl = 9
     mc "I see.."
     show yuri at t32 zorder 2
     show monika 2a at f33 zorder 3
@@ -630,15 +676,21 @@ label ch_mod_1:
         "Things are getting weirder and weirder."
     $ mcrp = player # temp fix
     mc "Well, uh...?"
-    $ _history_list.pop()
-    menu:
-        mcrp "\"Well, uh...?\"{fast}"
-        "Accept their invitation":
-            $ accepts_invite = True
-            call mod_ch1_accepts
-        "Reject their invitation":
-            $ accepts_invite = False
-            call mod_ch1_rejects
+    if persistent.day1_gl < 10:
+        $ _history_list.pop()
+        menu:
+            mcrp "\"Well, uh...?\"{fast}"
+            "Accept their invitation":
+                $ persistent.day1_gl = 10
+                $ accepts_invite = True
+                call mod_ch1_accepts
+            "Reject their invitation":
+                $ persistent.day1_gl = 10
+                $ accepts_invite = False
+                call mod_ch1_rejects
+    else:
+        $ accepts_invite = False
+        call mod_ch1_rejects
     show monika at f33 zorder 3
     m "I'll do everything I can to give you a great time, okay?"
     if accepts_invite:
@@ -699,34 +751,53 @@ label ch_mod_1:
     window auto
 
     "With that, I depart the clubroom and make my way home."
-    "The whole way, my mind wanders{nw}"
-    window show(None)
-    $ currentpos = get_pos()
-    stop music
-    $ audio.t3 = "<from " + str(currentpos) + " loop 4.618>bgm/3.ogg"
-    $ audio.t3l = "<from " + str(currentpos) + " loop 4.618>mod_assets/sfx/3l.ogg" 
-    play music t3l
-    scene bg res_gl
-    "The whole way, my mind wanders{fast} back and forth between the three girls:"
-    window auto
-    show natsuki 4a at t31 zorder 2
-    "Natsuki,"
-    show yuri 1a at t32 zorder 2
-    "Yuri,"
-    show monika 1a at t33 zorder 2
-    "and, of course, {w}Monika.{nw}"
-    scene bg residential_day
-    "Will I really be hap{nw}"
-    $ style.say_dialogue = style.edited
-    "Will I really be hap{fast}py spending every day after school in a literature club?"
-    "Perhaps I'll have the chance to grow closer to one of these girls..."
-    hide natsuki
-    hide yuri
-    hide monika
-    with wipeleft
-    $ style.say_dialogue = style.normal
-    stop music
-    play music t3
+    if persistent.day1_gl < 11:
+        "The whole way, my mind wanders{nw}"
+        window show(None)
+        $ currentpos = get_pos()
+        stop music
+        $ audio.t3 = "<from " + str(currentpos) + " loop 4.618>bgm/3.ogg"
+        $ audio.t3l = "<from " + str(currentpos) + " loop 4.618>mod_assets/sfx/3l.ogg" 
+        play music t3l
+        scene bg res_gl
+        "The whole way, my mind wanders{fast} back and forth between the three girls:"
+        window auto
+        show natsuki 4a at t31 zorder 2
+        "Natsuki,"
+        show yuri 1a at t32 zorder 2
+        "Yuri,"
+        show monika 1a at t33 zorder 2
+        "and, of course, {w}Monika.{nw}"
+        scene bg residential_day
+        "Will I really be hap{nw}"
+        $ style.say_dialogue = style.edited
+        "Will I really be hap{fast}py spending every day after school in a literature club?"
+        "Perhaps I'll have the chance to grow closer to one of these girls..."
+        hide natsuki
+        hide yuri
+        hide monika
+        with wipeleft
+        $ style.say_dialogue = style.normal
+        stop music
+        play music t3
+        $ persistent.day1_gl = 11
+    else:
+        "The whole way, my mind wanders{fast} back and forth between the three girls:"
+        show natsuki 4a at t31 zorder 2
+        "Natsuki,"
+        show yuri 1a at t32 zorder 2
+        "Yuri,"
+        show monika 1a at t33 zorder 2
+        "and, of course, Monika."
+        "Will I really be hap{nw}"
+        $ style.say_dialogue = style.edited
+        "Will I really be hap{fast}py spending every day after school in a literature club?"
+        "Perhaps I'll have the chance to grow closer to one of these girls..."
+        hide natsuki
+        hide yuri
+        hide monika
+        with wipeleft
+        $ style.say_dialogue = style.normal
     "Alright!"
     "I'll just need to make the most of my circumstances, and I'm sure good fortune will find me."
     "And I guess that starts with writing a poem tonight..."

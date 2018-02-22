@@ -112,7 +112,7 @@ label mod_exclusive_cute_1:
         window show(None)
     mc "Eh? What's this?"
     "There's a lone volume of manga amidst a stack of various books on the side of one of the shelves."
-    if parfait_girls: # self-explanatory
+    if persistent.parfait_girls: # self-explanatory
         "Wait, isn't that the same book that I found recently?"
     "Curious, I pull it out of the stack."
     n 1b "{i}There{/i} it is!"
@@ -120,12 +120,12 @@ label mod_exclusive_cute_1:
     "She then turns to a box of manga and slips the volume right into the middle of the rest."
     n 4d "Aah, much better!"
     n "Seeing a box set with one book missing is probably the most irritating sight in the world."
-    if parfait_girls:
+    if persistent.parfait_girls:
         mc "I-I see..."
     else:
         mc "I know that feel..."
     "I get a closer look at the box set she's admiring."
-    if parfait_girls:
+    if persistent.parfait_girls:
         "Wait, it is the same book that I had in my classroom!"
         "Is this a coincidence?"
     else:
@@ -176,7 +176,7 @@ label mod_exclusive_cute_1:
     n "I'm gonna show you exactly why!"
     "She shoves the book right into my hands."
     mc "Ah..."
-    if not parfait_girls:
+    if not persistent.parfait_girls:
         "I stare at the cover."
         "It features four girls in colorful attire striking animated feminine poses."
         "I somehow feel like those girls are kind of reminiscent of this whole club members..."
@@ -193,7 +193,7 @@ label mod_exclusive_cute_1:
     show bg club_day
     show natsuki 2a at t11 zorder 2
     with wipeleft
-    if parfait_girls: # extra thicc for mc
+    if persistent.parfait_girls: # extra thicc for mc
         mc "Umm... Natsuki, I think-{nw}"
         n 1e "Just sit down already!"
         mc "Okay, okay!"
@@ -207,34 +207,59 @@ label mod_exclusive_cute_1:
         mc "...this club?"
         n 5u "..."
         mc "Yeah, I you're right, I haven't socialize to anyone in my entire life..."
+        show natsuki 5n at t11 zorder 2 
         "That's not entirely true, I feel like I had a friend before."
         mc "After all--"
-        "I quickly retrieve the same book that Natsuki admires in my bag, which I found it from my classroom an hour ago."
-        "I grab both of them, which is mine and hers, and show them to Natsuki just so that I can prove to her." # pls fix this im tired of this english bs
-        mc "See? I already have it. You don't need to worry about yours getting bent or smudges on the pages."
-        mc "I only have volume one, so I thought I'd like to share this with you sometimes."
-        mc "But it seems that we already had the same book, and--"
-        n "..."
-        n 5n "D-Did you already read that whole thing?"
-        mc "Ah--No."
-        mc "I just--"
-        $ _history_list.pop()
-        "I don't think I should tell her the truth."
-        "I'm already afraid that something terrible is going to happened to her."
-        "I don't even know why I'm feeling this way."
-        # a fake story by mc, nice one eh
-        mc "I just{fast} bought a stack of it a few months ago for my older sister's birthday present."
-        mc "But she forgot this one as she left my house because of her college." # again, pls fix this, this is so wrong :(
-        mc "I didn't want to read it though since I'm not into it, so I thought I just wanted to share it with you."
-        mc "I don't want this book going to be wasted and left alone in my house."
-        "Wow, this is one hell of a story."
-        n 5q "I-I see..."
-        n "Well, I can't argue with that, since you already had one."
-        n 5n "I guess I can do is to reread some of it."
-        n 5u "I-Is that okay?"
-        mc "Alright, you asked for it."
-        "I return her book by slipping it back into the box of manga."
-        "Then, I open the book and start the prologue."
+        if persistent.parfait_girls and parfait_girls:
+            "I quickly retrieve the same book that Natsuki admires in my bag, which I found it from my classroom an hour ago."
+            "I grab both of them, and show them to Natsuki just so that I can prove it to her."
+            mc "See? I already have it. You don't need to worry about yours getting bent or smudges on the pages."
+            mc "I only have volume one, so I thought I'd like to share this with you sometimes."
+            mc "But it seems that we already had the same book, and--"
+            n "..."
+            n 5n "D-Did you already read that whole thing?"
+            mc "Ah--No."
+            mc "I just--"
+            $ _history_list.pop()
+            "I don't think I should tell her the truth."
+            "I'm already afraid that something terrible is going to happened to her."
+            "I don't even know why I'm feeling this way."
+            # a fake story by mc, nice one eh
+            mc "I just{fast} bought a stack of it a few months ago for my older sister's birthday present."
+            mc "But she forgot this volume when she moved out for college.
+            mc "I didn't want to read it though, since I'm not into it, so I thought I just wanted to share it with you."
+            mc "I don't want this book going to be wasted and left alone in my house."
+            "Wow, this is one hell of a story."
+            n 5q "I-I see..."
+            n "Well, I can't argue with that, since you already had one."
+            n 5n "I guess the least I can do, is to reread some of it."
+            n 5u "I-Is that okay?"
+            mc "Alright, you asked for it."
+            "I return her book by slipping it back into the box of manga."
+            "Then, I open the book and start the prologue."
+        else: # In certain occasions, sometimes players are stupid and careless (banter). somehow...
+            # if mc remembers the book, but suddenly he lost it if he reloads the game too much
+            "I quickly retrieve the same book that Natsuki admires in my bag-{nw}"
+            "Wait, where is it?!"
+            "I scrap all the content from my bag."
+            "I think I forgot it when I'm saving and loading to much..."
+            "What am I talking abo-{nw}"
+            $ del _history_list[-2:]
+            n 4g "[player], what are you doing?"
+            n "Are you looking for something?"
+            if persistent.ggwp_monika >= 2:
+                "Ah, s[sword]!"
+            else:
+                "Ah, shoot!"
+            mc "Ah, no..."
+            mc "N-Never mind!"
+            "Natsuki seems to be confused about it."
+            mc "I guess we can get started, right?"
+            n 4s "Right..."
+            "I should've been careful about it, or else she knows everything about me."
+            $ _history_list.pop()
+            "I open the book."
+            "It's only a few seconds before Natsuki once again inches closer, reclaiming the additional space while she hopes I won't notice."
     else:
         #mc "Wouldn't chairs be more comfortable...?"
         #"I take my seat."
@@ -252,7 +277,7 @@ label mod_exclusive_cute_1:
         #n 5r "D-Don't just say that!"
         n "You'll make me feel weird about it!"
         "Natsuki crosses her arms and scootches an inch away from me."
-        mc "Sorry, I didn't realise..."
+        mc "Sorry, I didn't realize..."
         show natsuki 5g
         #"I didn't exactly expect to be sitting this close to her, either..."
         #"Not that I can say it's a particularly bad thing."
@@ -281,9 +306,12 @@ label mod_exclusive_cute_1:
     n 2e "Just keep reading it!"
     mc "Alright, alright..."
     #"I am, but nothing's really happened yet, so I can talk at the same time."
-    if parfait_girls:
-        "I was eager to read it since I found it.."
+    if parfait_girls and persistent.parfait_girls:
+        "I was eager to read it since I found it..."
         "Well..."
+    elif persistent.parfait_girls and not parfait_girls: # if mc remembers that book, but he forgot it cus of reloading too many times
+        "I was eager to read it since I \"found\" it..."
+        "I don't know where it went..."
     else:
         "I guess I have to read it then..."
     "It looks like it's about a bunch of friends in high school."
@@ -293,14 +321,14 @@ label mod_exclusive_cute_1:
     scene n_cg1_bg
     show n_cg1_base
     with dissolve_cg
-    if not parfait_girls:
-        mc "...Are you sure this isn't boring for you?"
-        n "It's not!"
-        mc "Even though you're just watching me read?"
-    else:
+    if parfait_girls and persistent.parfait_girls:
         mc "Is it really okay if we're reading like this?"
         mc "Even if it's not yours?"
         mc "Well, I know you're already finished the first volume."
+    else:
+        mc "...Are you sure this isn't boring for you?"
+        n "It's not!"
+        mc "Even though you're just watching me read?"
     n "Well...!"
     n "I'm...fine with that."
     mc "If you say so..."
@@ -317,7 +345,7 @@ label mod_exclusive_cute_1:
     #mc "...What do you mean?"
     #mc "Don't you share your manga with your friends?"
     mc "Ah, I see..."
-    "I'm kind of suprise how Natsuki was alone all the time. Not to mention about Yuri though..."
+    "I'm kind of surprised how Natsuki was alone all the time. Not to mention about Yuri though..."
     hide n_cg1_exp2
     show n_cg1_exp3 at cgfade
     n "Could you not rub it in?"
@@ -409,13 +437,13 @@ label mod_exclusive_cute_1:
     "Wait, what did Monika do?"
     mc "Well, it paid off in the end, didn't it?"
     mc "Maybe..."
-    if persistent.parfait_girls:
+    if persistent.parfait_girls and parfait_girls:
         mc "Even if it's mine though..."
     mc "But at least you're enjoying yourself, right?"
     hide n_cg1_exp3
     show n_cg1_exp2 at cgfade
     n "--"
-    if persistent.parfait_girls:
+    if persistent.parfait_girls and parfait_girls:
         n "U-Urm..."
         n "Y-Yeah... so?"
     else:
@@ -444,6 +472,7 @@ label special_cute_1:
         $ config.skipping = False
         $ config.allow_skipping = False
         $ allow_skipping = False
+        pause 1.0
         window hide(None)
         show screen tear(20, 0.1, 0.1, 0, 40)
         play sound "sfx/s_kill_glitch1.ogg"
@@ -505,17 +534,17 @@ label special_cute_1:
     mc "Natsuki, are you okay?!"
     queue music t9
     n "..."
-    "I presses my hand againts her forehead."
-    "Natsuki seems having a serious fever..."
+    "I press my hand against her forehead."
+    "Natsuki seems to be having a serious fever..."
     mc "Don't worry, Natsuki."
-    if persistent.natsuki_glitch == 5:
+    if persistent.natsuki_glitch >= 5:
         mc "I'll help you the best I can."
         n "..."
         n "Your heart..."
         mc "...?"
         n "...is beating really fast..."
         mc "...!"
-        "Ah, I didn't realise I was too close to her."
+        "Ah, I didn't realize I was too close to her."
         "But I have no choice."
         "I need to help her!"
     else:
@@ -527,7 +556,7 @@ label special_cute_1:
     "Still holding her shoulder, I assist her to slowly get up."
     if persistent.natsuki_glitch == 5 and persistent.ggwp_monika != 4: # if player tends to reload again after normal route
         "I begin to walk with Natsuki through the door, as we are on our way to the infirmary."
-        "I'll probably can find nurse there."
+        "I can probably find a nurse there."
         stop music
         m "[player]!"
         "Ah, damn it! I can't just stop here..."
@@ -540,7 +569,7 @@ label special_cute_1:
         mc "W-What? No!"
         mc "That's ridiculous!"
         "That makes me feel bad about her, I mean she had no friend in the first place."
-        "I'll probably ended up in the same way as before..."
+        "I'll probably end up in the same way as before..."
         show monika 5a at t11 zorder 2
         show natsuki at thide zorder 1
         hide natsuki
@@ -551,7 +580,7 @@ label special_cute_1:
         mc "Does this happens very often?"
         show monika 1l at s11 zorder 2
         m "Ahaha, well..."
-        "There's something obvious going around here..."
+        "There's something obviously going around here..."
         show monika 1l at t11 zorder 2
         m 1j "It just happens every now and then."
         m 1a "Don't worry about it."
@@ -580,40 +609,44 @@ label special_cute_1:
         mc "Sorry if I assume you doing something weird."
         mc "I think you're right, as club president."
         mc "You can have her now."
-        m 2l "Ah-It's nothing to worry about, I mean you're deserve to accompany her."
+        m 2l "Ah-It's nothing to worry about, I mean you deserve to accompany her."
         m 2n "But there's something that I need to talk to her about this problem."
         m 3a "I won't let this happen in the future, I promise. So-{nw}"
         mc "But there's one thing I need to do with you."
         m 2g "Eh? What do you mean?"
         "I approach her closer to her face."
         $ p_char_1 = player[:0]
-        m 1n "[p_char_1]-[player]! W-What are you doing?"
+        show monika 1n at hop
+        m "[p_char_1]-[player]! W-What are you doing?"
         m 1o "..."
         m 1n "I-I think that's too early--"
         m "I mean I would loved to do that if I were you... Ahaha..." # turned on?
         m 1l "Oh my god. What's wrong with me?~"
         mc "I see..."
-        "I apprehensively presses my hand against her forehea{nw}"
-        if persistent.ggwp_monika != 4:
+        "I apprehensively press my hand against her forehea{nw}"
+        if persistent.ggwp_monika != 4 or persistent.natsuki_glitch != 6:
             $ audio.t29 = "<from 5.458 loop 5.458>mod_assets/sfx/p1.ogg"
             play music t29
             python:
                 try: sys.modules['renpy.error'].report_exception("Panic mode failed to activate. Please send this error log to \"firelightning13\", either via DDMC official reddit page or DDMC official discord", False)
                 except: pass
             scene bg club_gl
+            show monika 1l at i11
             pause 0.01
             show screen tear(8, offtimeMult=1, ontimeMult=10)
             pause 3.0
             hide screen tear
             window hide(None)
             $ persistent.ggwp_monika = 4
+            $ persistent.natsuki_glitch = 6
             $ renpy.quit(relaunch=False, status=0)
         else:
-            hide monika
             scene black with trueblack
+            pause 0.01
     elif persistent.ggwp_monika == 4:
         stop music
         scene black with trueblack
+        pause 0.01
     else: # if players skip in the first playthrough (where mc didn't know about "protein bar" that monika had)
         mc "Monika!"
         "I think she can handle this, since she is the club president."
@@ -649,7 +682,7 @@ label special_cute_1:
         show monika at thide zorder 1
         hide monika
         "Natsuki timidly follows Monika through the door, as they're on their way to the school's infirmary."
-        if parfait_girls:
+        if persistent.parfait_girls and parfait_girls:
             "Then, I slip my book into my bag."
         else:
             mc "Guess I'll return this book back into its place."
@@ -768,6 +801,7 @@ label normal_cute_1:
     m 5a "Anyway...!"
     m "Why don't we all share poems now?"
     scene black with trueblack
+    pause 0.01
     return
 
 label glitcher_n:

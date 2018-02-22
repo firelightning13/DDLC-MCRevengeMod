@@ -1,51 +1,58 @@
+label mc_realise_3:
+    if renpy.showing("bg spoopy", layer='master'):
+        $ temp_scene = 1
+    elif renpy.showing("bg club_day", layer='master'):
+        $ temp_scene = 2
+    elif renpy.showing("bg corridor", layer='master'):
+        $ temp_scene = 3
+    "Ah, what happened?"
+    "Did I do something weird again?"
+    "Maybe there's something wrong with me..."
+    #"Is {w}this {w}actually {w}a {w}game?"
+    scene black
+    play music ap1
+    window hide(None)
+    pause 0.35
+    show m_sticker at m_pos zorder 5
+    show p1b zorder 4
+    pause 0.08
+    stop music
+    hide m_sticker
+    hide p1b
+    if temp_scene == 1:
+        scene bg spoopy
+    elif temp_scene == 2:
+        scene bg club_day
+    elif temp_scene == 3:
+        scene bg corridor
+    if persistent.mc_violent:
+        "I don't even know what the f[fword] is going on..."
+    else:
+        "I don't even know what the heck is going on..."
+    #"..."
+    #"I think I... {w}realized that{nw}"
+    window hide(None)
+    show screen tear(20, 0.1, 0.1, 0, 40)
+    play sound "sfx/s_kill_glitch1.ogg"
+    pause 0.25
+    stop sound
+    hide screen tear
+    pause 1.0
+    window show(None)
+    $ persistent.mc_realise = True
+    $ persistent.ggwp_monika = 2
+    $ del _history_list[-6:]
+    return
+
 label ch_mod_2a:
     $ style.say_window = style.window
-    $ _history_list = []
+    if persistent.screen_glitch < 1:
+        $ _history_list[0:]
     $ config.keymap['dismiss'] = dismiss_keys ### Just incase if bugs appear, where keys and mouse are not responding
     $ renpy.display.behavior.clear_keymap_cache()
 
     if persistent.ggwp_monika >= 3: ### anti-cheat system
-        label mc_realise_3:
-            if renpy.showing("bg spoopy", layer='master'):
-                $ temp_scene = 1
-            elif renpy.showing("bg club_day", layer='master'):
-                $ temp_scene = 2
-            elif renpy.showing("bg corridor", layer='master'):
-                $ temp_scene = 3
-            "Ah, what happened?"
-            "Did I do something weird again?"
-            "Maybe there's something wrong with me..."
-            "Is {w}this {w}actually {w}a {w}game?"
-            scene black
-            play music ap1
-            window hide(None)
-            pause 0.35
-            show m_sticker at m_pos zorder 5
-            show p1b zorder 4
-            pause 0.08
-            stop music
-            hide m_sticker
-            hide p1b
-            if temp_scene == 1:
-                scene bg spoopy
-            elif temp_scene == 2:
-                scene bg club_day
-            elif temp_scene == 3:
-                scene bg corridor
-            "..."
-            "I think I... realized that..."
-            window hide(None)
-            show screen tear(20, 0.1, 0.1, 0, 40)
-            play sound "sfx/s_kill_glitch1.ogg"
-            pause 0.25
-            stop sound
-            hide screen tear
-            pause 1.0
-            window show(None)
-            $ persistent.mc_realise = True
-            $ persistent.ggwp_monika = 2
-            $ del _history_list[-6:]
-            return
+        call mc_realise_3
     play music t2o
     "Well..."
     call dftsy_game
@@ -74,17 +81,18 @@ label ch_mod_2a:
     m "Glad to see you didn't run away on us. Hahaha!"
     ####################################### MC's REACTIONS FLAG #############################################
     if persistent.poster_seen:
-        "I wish I was..."
+        "I wish I had..."
         "After what I saw something {i}horrible{/i} earlier!"
-        if seen_day == 1: ### 18.52% chance
-            "I saw it again..."
-            "What the hell is wrong with this world..."
-        elif seen_day == 2: ### 1.851% chance, wow that's too little actually, i should set up achievement system for this
-            "That's three in a row..."
-            "What..."
-        else: ### 46.29% chance
-            "What's up with that anyway?"
-        mc "Ah... well..."
+        if renpy.showing("bg spoopy", layer='master'):
+            if seen_day == 1: ### 18.52% chance
+                "I saw it again..."
+                "What the hell is wrong with this world..."
+            elif seen_day == 2: ### 1.851% chance, wow that's too little actually, i should set up achievement system for this
+                "That's three in a row..."
+                "What..."
+            else: ### 46.29% chance
+                "What's up with that anyway?"
+            mc "Ah... well..."
     elif persistent.mc_violent: # mc's personality changed a little bit.?
         "Oh wait... I should've done that earlier..."
         "Throwing a chair is not enough I guess."
@@ -114,14 +122,15 @@ label ch_mod_2a:
             "Is this even reality?"
     else:
         # normal playthrough (no game crash, no saving/reloading)
-        if seen_day == 1: ### 13.88% chance
-            "What's that poster on the back wall of the clubroom!?"
-            "Umm--Well..."
-            "I'm... {w}back at the Literature Club..."
-            "I was the last to come in... {w}so everyone else is already hanging out..."
-        elif seen_day == 2: ### 2.777% chance
-            "Is that poster again from yesterday?!"
-            "What is going on in this world..."
+        if renpy.showing("bg spoopy", layer='master'):
+            if seen_day == 1: ### 13.88% chance
+                "What's that poster on the back wall of the clubroom!?"
+                "Umm--Well..."
+                "I'm... {w}back at the Literature Club..."
+                "I was the last to come in... {w}so everyone else is already hanging out..."
+            elif seen_day == 2: ### 2.777% chance
+                "Is that the poster again from yesterday?!"
+                "What is going on in this world..."
         else: ### 69.44% chance
             "Well, I'm back at the Literature Club."
             "I was the last to come in, so everyone else is already hanging out."
@@ -140,7 +149,7 @@ label ch_mod_2a:
     n "Oh, come on! Like he deserves any slack."
     # mc saw glitching natsuki
     if persistent.mc_violent:
-        "That scare the s[sword] out of me..."
+        "That scared the s[sword] out of me..."
         if not persistent.protecc: # if profanity filter disabled
             "Oops, did I swear?"
             $ del _history_list[-2:]
@@ -168,6 +177,7 @@ label ch_mod_2a:
     stop sound
     hide screen tear
     window show(None)
+    show layer master
     show monika 2b at i41 zorder 3
     m "Natsuki, you certainly have a big{fast} mouth for someone who keeps her manga collection in the clubroom."
     n 4o "M-M-M...!!"
@@ -204,7 +214,7 @@ label ch_mod_2a:
         mc "I thought about it when I wrote my poem last night."
         mc "I think I should start reading something."
         "I don't know... but I feel like I've done something like this before..."
-        "What is happening with my memory?"
+        "What has happened to my memories?"
         y 1b "Well... I was thinking that..."
         y 2u "...as Vice President, I might help you with that."
         mc "Oh, alright. What should I read, then?"
@@ -329,8 +339,8 @@ label ch_mod_2a:
 
             "Wait, what?"
             "What happened?"
-            "Did I said something to Yuri?"
-            "Confused, still holding a book that Yuri gave me, I glance around."
+            "Did I say something to Yuri?"
+            "Confused, still holding the book that Yuri gave me, I glance around."
             play music t2g3
             "Yuri's face is already buried in a book."
             "Meanwhile, Natsuki is rummaging around in the closet."
@@ -346,7 +356,7 @@ label ch_mod_2a:
             $ style.say_dialogue = style.normal
             "Wait, what?"
             "What happened?"
-            "Did I said something to Yuri?"
+            "Did I say something to Yuri?"
             "I can't see what she said to me. It was {i}too fast{/i}." # 4th wall breaking?
             "..."
             "What am I doing right now?"
@@ -368,7 +378,7 @@ label ch_mod_2a:
             "She's trying to help me, right?"
             "After all, I don't have other things to read, so..."
             if not ihorror: ### choose manga over horror from day one
-                "{i}Even though I had loads of stacks of books in my room...{/i}"
+                "{i}Even though I had stacks of books in my room...{/i}"
                 "I'm not trying to be an a[aword] here..."
                 if persistent.protecc:
                     $ _history_list.pop()
@@ -396,8 +406,8 @@ label ch_mod_2a:
         "I can't help but notice her intense expression, like she was waiting for this chance."
         "Meanwhile, Natsuki is rummaging around in the closet."
 
-    # Reroute scene to other poet
-    default poet_scene = "mp"
+    # Reroute poetappeal to other poet scene
+    default poet_scene = ""
     if poetappeal == "abs":
         $ poet_scene = "mp"
     elif poetappeal == "bs":
@@ -410,13 +420,7 @@ label ch_mod_2a:
     # bs/cute = Natsuki's scene
 
     # Call exclusive scene based on player's poem.
-    # Also, anti-cheat is not yet implemented in the exclusive scene or any further scene, as im too lazy rn...
-    # So, I'll probably expect bugs or something bad happening to players who want to cheat the system through
-    # saving/loading many times or making different save point.
-    # Might be fixed in the next v0.3
     $ mod_ex_scene = "mod_exclusive_" + poet_scene + "_" + str(mod_chapter)
-    ### temporary "mod_chapter" variable, cg logic doesnt apply yet, maybe in the next v0.3
     call expression mod_ex_scene
 
-    #call mod_poem_response
     return
