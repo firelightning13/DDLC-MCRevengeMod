@@ -135,7 +135,7 @@ label mod_exclusive_mp_1:
         "The way she act is really obvious, but I decide to let it go anyway."
         "Also, does the bookstore even exist? {w}What am I talking about right now?"
         $ _history_list.pop()
-    mc I'll probably start reading it soon.
+    mc "I'll probably start reading it soon."
     if ihorror and persistent.ggwp_monika != 4:
         mc "I hope the story is interesting enough for me."
     y 2u "I'm glad to hear..."
@@ -274,7 +274,7 @@ label mod_exclusive_mp_1:
         "..."
         "As I look at the back of the book, I curiously read the synopsis of this book...."
         pause 1.0
-        "The synopsis is pretty  different from what Yuri told me earlier..."
+        "The synopsis is pretty different from what Yuri told me earlier..."
         "I mean... {w}it does kind of make sense, as she'd already finished reading-{nw}"
         "Wait, that doesn't make sense either... {w}she bought this book yesterday-{nw}"
         "No! This doesn't make sense either... {w}she probably has the old copy though-{nw}"
@@ -412,7 +412,7 @@ label mod_exclusive_mp_1:
         pause 1.0
         "Hmm..."
         "This story feels a little bit dark though, and immersive as well..."
-        " I guess Yuri is really good at finding these kinds of stories."
+        "I guess Yuri is really good at finding these kinds of stories."
         "I wonder why..."
     else:
         "But in holding it like this..."
@@ -486,10 +486,10 @@ label special_mp_1:
     y "...!"
     mc "..."
     mc "Alright, if you say so..."
-    show monika 5a at f21 zorder 3
-    m "Okay, [player]. You just need to hurry up. I can't wait to share my poems!"
+    show monika 1a at t21 zorder 3
+    m "Okay, [player]. You just need to hurry up."
     show yuri at t11 zorder 2
-    show monika at lhide zorder 2
+    show monika at lhide
     hide monika
     mc "Right..."
     "Yuri releases her hand from the book, causing it to close on top of my thumb."

@@ -1,4 +1,33 @@
 label ch_mod_p1:
+    if persistent.screen_glitch < 1:
+        jump ch_mod_p1b
+    else:
+        jump ch_mod_p1a
+
+label ch_mod_p1a: ### prevent cheating
+    scene black
+    pause 1.0
+    if persistent.poetappeal == "abs" or persistent.poetappeal == "bs":
+        play sound ggg
+        pause 1.0
+        if persistent.poetappeal == "abs":
+            $ poetappeal = "abs"
+        elif persistent.poetappeal == "bs":
+            $ poetappeal = "bs"
+        stop sound
+        return # goes back to normal "day two scene"
+    $ chapter = 0
+    call poem(transition=False) ### original poem game from DDLC
+    ### at this point, i'll probably going to add extra possibility for choosing alternative poem when saving/loading
+    if poemwinner[0] == "natsuki":
+        #$ persistent.poetappeal = "cute"
+        $ poetappeal = "cute" # natsuki
+    else:
+        #$ persistent.poetappeal = "mp"
+        $ poetappeal = "mp" # yuri
+    return
+
+label ch_mod_p1b: ### will only see once
     scene black 
     pause 1.0
     show p1 zorder 1
@@ -65,24 +94,27 @@ label ch_mod_p1:
         "ŴHaŧ ĸIñd øF ¶o3m shoųlÐ ¡ mÆke¿"
         "Something cute":
             $ poetappeal = "cute"
+            $ persistent.poetappeal = "cute"
         "Something bittersweet":
             $ poetappeal = "bs" # lol
+            $ persistent.poetappeal = "bs"
         "Something metaphorical":
             $ poetappeal = "mp"
+            $ persistent.poetappeal = "mp"
         "[gtext]":
             $ poetappeal = "abs" # abstract
+            $ persistent.poetappeal = "abs"
     hide noise
     scene black
     $ config.allow_skipping = True
     $ allow_skipping = True
-
     return
 
 ###### There's a lot of anti-cheat system that i implemented, trying to prevent abusive save/load mechanics by players
 ###### (you are probably confused if you see some weird things below, sry you had to see my horrendous codes)
 
 label dftsy_game:
-    if not renpy.can_load("1-1", test=False)and not persistent.warning_seen and not (persistent.ggwp_monika > 0):
+    if not renpy.can_load("1-6", test=False)and not persistent.warning_seen and not (persistent.ggwp_monika > 0):
         $ renpy.save("1-6", extra_info='') # incase if player forgot to save
     return
 
@@ -94,6 +126,11 @@ label dftsy_game2:
     return
 
 label ch_mod_2:
+    $ mod_censorship()
+    if persistent.screen_glitch > 1:
+        jump skip_2_2a
+    else:
+        $ persistent.screen_glitch = 1
     $ narrator.display_args["callback"] = player_pls_skip ### use this if player tends to load again after showing up in the clubroom
     $ del _history_list[0:]
     pause 1.0
@@ -109,18 +146,6 @@ label ch_mod_2:
         $ persistent.cheat_mod = 0
         $ poster_checked = False
         $ closet_checked = False
-    if persistent.protecc: # refresh curse words list
-        $ fword = "***"
-        $ fgword = "******"
-        $ bword = "****"
-        $ aword = "******"
-        $ sword = "***"
-    else:
-        $ fword = "uck"
-        $ fgword = "ucking"
-        $ bword = "itch"
-        $ aword = "sshole"
-        $ sword = "hit"
     "Argh.."
     "I had a bad dream..."
     "...Someone screaming my name."
@@ -241,13 +266,13 @@ label ch_mod_2:
         "Has something happened in this house?"
         #mc "I'm coming over..." basically how to deal with robbery situation
         "{cps=30}I silently open the front door...{/cps}{nw}"
-        python:
-            currentpos = get_pos()
-            startpos = currentpos - 0.3
-            if startpos < 0: startpos = 0
-            track = "<from " + str(startpos) + " to " + str(currentpos) + ">bgm/2.ogg"
-            renpy.music.play(track, loop=True)
         if persistent.ggwp_monika == 0:
+            python:
+                currentpos = get_pos()
+                startpos = currentpos - 0.3
+                if startpos < 0: startpos = 0
+                track = "<from " + str(startpos) + " to " + str(currentpos) + ">bgm/2.ogg"
+                renpy.music.play(track, loop=True)
             $ persistent.ggwp_monika = 1
             show screen tear(8, offtimeMult=1, ontimeMult=10)
             pause 1.0
@@ -417,11 +442,12 @@ label check_closet:
             "I wonder why it's here in the classroom?"
             "Has it been here the entire time?"
             mc "I guess I could keep it, though..."
+            $ persistent.parfait_girls = True
+            $ parfait_girls = True
             "I put it inside my bag, just in case."
             "I kind of want to read it though, in my spare time."
             "Well, about the markers and construction paper..."
             "I guess I could give them to Monika after all."
-            $ parfait_girls = True
             $ closet_checked = True
             #it's possible to get both parfait girls and tea set, for smart gamers; so i just gonna leave it here
     else:
