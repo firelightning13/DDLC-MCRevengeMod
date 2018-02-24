@@ -241,8 +241,8 @@ label mod_exclusive_cute_1:
             # if mc remembers the book, but suddenly he lost it if he reloads the game too much
             "I quickly retrieve the same book that Natsuki admires in my bag-{nw}"
             "Wait, where is it?!"
-            "I scrap all the content from my bag."
-            "I think I forgot it when I'm saving and loading to much..."
+            "I scrap all the contents from my bag."
+            "I think I forgot it when I have been saving and loading to much..."
             "What am I talking abo-{nw}"
             $ del _history_list[-2:]
             n 4g "[player], what are you doing?"
@@ -324,7 +324,7 @@ label mod_exclusive_cute_1:
     if parfait_girls and persistent.parfait_girls:
         mc "Is it really okay if we're reading like this?"
         mc "Even if it's not yours?"
-        mc "Well, I know you're already finished the first volume."
+        mc "Well, I know you have already finished the first volume."
     else:
         mc "...Are you sure this isn't boring for you?"
         n "It's not!"
@@ -529,7 +529,7 @@ label special_cute_1:
     mc "Woah--Hey--"
     "I catch her right before she falls onto the ground."
     "I grab her shoulders with both of my hands."
-    "For some reason, we're like hugging together, in a weird way..."
+    "For some reason, we're like hugging together, in a weird way..." # sounds weird but I have no idea how to fix.
     "My heart starts to go crazy. I don't know I'll be able to keep it up!"
     mc "Natsuki, are you okay?!"
     queue music t9
@@ -553,7 +553,7 @@ label special_cute_1:
     "Natsuki nods in agreement."
     scene bg club_day
     with dissolve_cg
-    "Still holding her shoulder, I assist her to slowly get up."
+    "Still holding her shoulders, I assist her to slowly get up."
     if persistent.natsuki_glitch == 5 and persistent.ggwp_monika != 4: # if player tends to reload again after normal route
         "I begin to walk with Natsuki through the door, as we are on our way to the infirmary."
         "I can probably find a nurse there."
@@ -561,14 +561,14 @@ label special_cute_1:
         m "[player]!"
         "Ah, damn it! I can't just stop here..."
         show monika 2f at t11 zorder 2
-        m "What are you doing, with Natsuki?"
+        m "What are you doing with Natsuki?"
         m 5b "Don't tell me you're going out with her!"
         show monika at t21 zorder 2
         show natsuki 12g at f22 zorder 2
         n "..."
         mc "W-What? No!"
         mc "That's ridiculous!"
-        "That makes me feel bad about her, I mean she had no friend in the first place."
+        "That makes me feel bad about her, I mean she had no friends in the first place."
         "I'll probably end up in the same way as before..."
         show monika 5a at t11 zorder 2
         show natsuki at thide zorder 1
@@ -716,7 +716,7 @@ label normal_cute_1:
     "Natsuki is strangely quiet now."
     "I glance over at her."
     hide black with dissolve_cg
-    "It looks like she's started to fall asleep."
+    "It looks like she started to fall asleep."
     mc "Hey, Natsuki..."
     n "Y-Yeah...?"
     "Suddenly, Natsuki collapses straight into me."
@@ -794,7 +794,7 @@ label normal_cute_1:
     m "She's fine."
     m "It just happens every now and then."
     m 1a "That's why I always keep a snack in my bag for her."
-    mc "Why I can't say anyth-{nw}"
+    mc "Why can't I say anyth-{nw}"
     $ _history_list.pop()
     call glitcher_n
     pause 0.25
