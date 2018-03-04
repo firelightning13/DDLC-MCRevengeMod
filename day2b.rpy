@@ -704,7 +704,7 @@ label ch_mod_2_end:
         hide screen tear
         window show(None)
         window auto
-        $ preferences.skip_unseen = True # players will be able to skip (bad practice, low-end device will experience lag)
+        $ preferences.skip_unseen = True # players will be able to skip
         play music t7g
         $ timeleft = 0
     else:
@@ -714,6 +714,7 @@ label ch_mod_2_end:
     show vignette as flicker at vignetteflicker(timeleft) zorder 4
     show vignette at vignettefade(timeleft) zorder 4
     show layer master at layerflicker(timeleft)
+	$ mc_counter = 0
     y "Taking out your own insecurities on others like that..."
     y "You really act as young as you look, Natsuki."
     show yuri at t21 zorder 2
@@ -933,8 +934,8 @@ label ny_fight_alt:
     n "{i}(This is a very awkward situation...){/i}"
     n "Monika!"
     y "...?"
-    m "A-Ah--"
-    m "W-What is it, Natsuki?"
+    m "Ah..."
+    m "What is it, Natsuki?"
     y "Do you know anything about what happened just now?"
     n "I was about to ask that..."
     m "Uh..."
@@ -955,7 +956,7 @@ label ny_fight_alt:
     stop sound
     hide screen tear
     window show(None)
-    if poetappeal == "abs":
+    if poetappeal == "abs" or poetappeal == "bs":
         mc "I'm right here..."
         mc "Sorry about that."
         n "About what?"
@@ -980,3 +981,59 @@ label ny_fight_alt:
             mc "Well, uh..."
         else:
             mc "I guess tha"
+	else:
+		# if other than abs or bs
+		mc ""
+
+label ny_fight_normal:
+	y "You think you can counterbalance your toxic personality just by dressing and acting cute?"
+    y 1k "The only cute thing about you is how hard you try."
+    show yuri at t21 zorder 2
+    if not config.skipping:
+        call mc_say
+    show natsuki at f22 zorder 3
+    n 2y "Whoa, be careful or you might cut yourself on that edge, Yuri."
+    n "Oh, my bad... You already do, don't you?"
+    show natsuki at t22 zorder 2
+    if not config.skipping:
+        call mc_say
+    show yuri at f21 zorder 3
+    y 3n "D-Did you just accuse me of cutting myself??"
+    y 3r "What the fuck is wrong with your head?!"
+    show yuri at t21 zorder 2
+    if not config.skipping:
+        call mc_say
+    show natsuki at f22 zorder 3
+    n 1e "Yeah, go on!"
+    n "Let [player] hear everything you really think!"
+    n "I'm sure he'll be head over heels for you after this!"
+    show natsuki at t22 zorder 2
+    show yuri at f21 zorder 3
+    y 3n "A-Ah--!"
+    show yuri at t21 zorder 2
+    "Suddenly, Yuri turns toward me, as if she just noticed I was standing here."
+    show yuri at f21 zorder 3
+    y 2n "[player]...!"
+    y "She-- She's just trying to make me look bad...!"
+    show yuri at t21 zorder 2
+    show natsuki at f22 zorder 3
+    n 4w "That's not true!"
+    n "She started it!"
+    show yuri 1t at t21 zorder 2
+    show natsuki 1g at t22 zorder 2
+    $ style.say_dialogue = style.normal
+    mc "..."
+    #$ style.say_dialogue = style.edited
+    #"{cps=*2}How did I get dragged into this in the first place?!{/cps}{nw}"
+    #"{cps=*2}It's not like I know anything about writing...{/cps}{nw}"
+    #"{cps=*2}But whomever I agree with, they'll probably think more highly of me!{/cps}{nw}"
+    #"{cps=*2}So, of course that's going to be...!{/cps}{nw}"
+    #$ style.say_dialogue = style.normal
+
+label mc_say:
+	$ mc_dialogues = ["Argh!!! What the f[fword] is happening?!", "My head really hurts so much right now!!!", "Get out of my f[fgword] head!!!", "Shut the f[fword] up!!!", "asdsfagadgfdsasd", "AAAAAAAAAAAAAAAAAAAAAAAAAAAAaaaaHHHHHHhhH!!!!!!!!"]
+	$ dialogue = mc_dialogues[mc_counter]
+	mc "[dialogue]{nw}"
+	$ _history_list.pop()
+	$ mc_counter += 1
+	return
