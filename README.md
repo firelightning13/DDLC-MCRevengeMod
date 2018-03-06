@@ -35,13 +35,9 @@ This mod is pretty much similar to "A Brand New Day" by Phantom or "DDLC!!! 1.1.
 
 **v0.1.1 :** Inside my zip folder, copy and paste "game" folder inside your DDLC directory (where DDLC.exe was located).
 
-## My plan on making story (warning: huge spoiler!)
-https://docs.google.com/document/d/1afg0mO6hsvOESS7Tk8lWkFUgmSeFy8Pv2BTShxhis3M/edit?usp=sharing
-
 ## Want to help me?
 You can modify scripts file if you want to help me. Just use pull request, and I will approve.
 
 **v0.3 demo in progress:** https://github.com/firelightning13/DDLC-MCRevengeMod/pull/7
 
 (**Current proofreader :** BioHazic)
-
