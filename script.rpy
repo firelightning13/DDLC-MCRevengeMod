@@ -21,25 +21,38 @@ label start:
 
     $ quick_menu = True
     $ style.say_dialogue = style.normal
+    $ config.main_menu_music = audio.t1
     $ allow_skipping = True
     $ config.allow_skipping = True
 
     if persistent.ggwp_monika == -1:
+        # if inject.rpyc is not found inside the "/game" folder. (unless you put them back)
         jump mod_crash
 
     elif persistent.playthrough == 0:
+        #Intro
         call ch_mod_intro
     
     elif persistent.playthrough == 1:
+        # Normal day 1
         call ch_mod_1a
         jump mod_continue
 
     elif persistent.playthrough == 2:
+        # Alternative day 1
         call ch_mod_1b
         label mod_continue:
+            # Poem game
             call ch_mod_p1
+
+            # Day 2
             $ mod_chapter = 1
             call ch_mod_2
+            call mod_poemresponse
+            call ch_mod_2_end
+
+            # End of demo
+            call mod_end_demo
 
 label endgame(pause_length=4.0):
     $ quick_menu = False

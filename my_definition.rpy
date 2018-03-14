@@ -1,4 +1,5 @@
-define config.developer = False #Change this flag to True to enable dev tools
+init 10 python:
+    config.developer = "auto"
 
 ###### Custom persistent and variables ######
 default ihorror = False
@@ -11,6 +12,7 @@ default seen_day = 0
 default parfait_girls = False
 default natsuki_out = False
 #############################################
+default persistent.day1_gl = 0
 default persistent.ggwp_monika = 0
 default persistent.accepts_invite = None
 default persistent.protecc = False
@@ -19,7 +21,15 @@ default persistent.mc_violent = False
 default persistent.poster_seen = False
 default persistent.cheat_mod = 0
 default persistent.mc_realise = False
+default persistent.parfait_girls = False
 default persistent.natsuki_glitch = 0
+default persistent.screen_glitch = 0
+default persistent.poetappeal = ""
+#############################################
+default persistent.monika_secret = [False, False, False, False]
+# 0 = mod-poemresponse.rpy; a serious conversation between monika and mc
+# 1 = mod-poemresponse.rpy; where monika failed to explain at the end of her conversation with mc
+# 2 = day2b.rpy; natsuki and yuri intense conversations battle
 #############################################
 
 #$ preferences.skip_unseen = False ## For future reference
@@ -86,9 +96,29 @@ image mod_one_eye = "mod_assets/cg/one_eye_gl.png"
 style window_lq is window:
     background Image("mod_assets/textbox_lq.png", xalign=0.5, yalign=1.0)
 
+style window_ghost is window:
+    background Image("gui/textbox.png", xalign=0.5, yalign=1.0, alpha=0.5)
+
 transform m_pos:
     xpos 320
     ypos 500
+
+### f21(400) and t22(880) | f32(640) and f33(1040); refer to day2b.rpy
+transform mod_pos_gl(x=540, alt_x=640, z=0.80):
+    yanchor 1.0 ypos 1.03 subpixel True
+    block:
+        xcenter alt_x zoom z*1.05
+        alpha 1.00
+        parallel:
+            easein .3 xcenter x zoom z*1.05
+        parallel:
+            easein .15 yoffset 0
+        repeat
+    time 1.5
+    xcenter x
+
+transform mod_finstant(x=400, z=0.80): # special finstant for yuri; refer to day2b.rpy
+        xcenter x yoffset 0 zoom z*1.05 alpha 1.00 yanchor 1.0 ypos 1.03
 ######################################################################
 
 ####################### Custom audio #################################
@@ -110,6 +140,10 @@ define audio.ggg = "mod_assets/sfx/ggg.ogg"
 define audio.s_gl = "mod_assets/sfx/s_gl.ogg"
 define audio.fall_gl = "mod_assets/sfx/fall_gl.ogg"
 define audio.gl = "mod_assets/sfx/gl.ogg"
+define audio.tgl3 = "<loop 4.444>mod_assets/sfx/glitch3.ogg"
+define audio.tpj = "<loop 0>mod_assets/sfx/pj.ogg"
+define audio.t7fast = "<loop 31.880>bgm/7g.ogg"
+define audio.start_gl = "<loop 0>mod_assets/sfx/start_gl.ogg"
 ######################################################################
 
 ###################### Custom Functions ############################
@@ -135,4 +169,19 @@ init python:
             config.keymap['dismiss'] = dismiss_keys
             renpy.display.behavior.clear_keymap_cache()
 
+    def mod_censorship():
+        if persistent.protecc:
+            fword = "***"
+            fgword = "******"
+            bword = "****"
+            aword = "******"
+            sword = "***"
+        else:
+            fword = "uck"
+            fgword = "ucking"
+            bword = "itch"
+            aword = "sshole"
+            sword = "hit"
+
     renpy.music.register_channel("trans", mixer="music", tight=True)
+    
