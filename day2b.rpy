@@ -491,6 +491,7 @@ label ch_mod_2_end:
         play sound gl
         scene bg club_gl
         pause 0.3
+        stop sound
         scene bg club_day # the poster disappears
         "Across the room, Monika is writing someth{fast}ing in her notebook."
     else:
@@ -617,7 +618,7 @@ label ch_mod_2_end:
     y "That's not what I...!"
     y 1o "Uu..."
     show yuri at t21 zorder 2
-    if poetappeal == "mp": # hah, see what i did here?
+    if poetappeal == "mp":
         "That's not a nice thing to say."
     elif poetappeal == "cute":
         "Uh--I don't think that's going to help in this situation, Natsuki..."
@@ -652,7 +653,7 @@ label ch_mod_2_end:
     y "If I was full of myself..."
     y 1r "...I would deliberately go out of my way to make everything I do overly cutesy!"
     show yuri at t21 zorder 2
-    if poetappeal == "cute": # hah, see what i did here?
+    if poetappeal == "cute":
         "That's not a nice thing to say."
     elif poetappeal == "mp":
         "Uh--I don't think that's going to help in this situation, Yuri..."
@@ -714,7 +715,7 @@ label ch_mod_2_end:
     show vignette as flicker at vignetteflicker(timeleft) zorder 4
     show vignette at vignettefade(timeleft) zorder 4
     show layer master at layerflicker(timeleft)
-	$ mc_counter = 0
+    $ mc_counter = 0
     y "Taking out your own insecurities on others like that..."
     y "You really act as young as you look, Natsuki."
     show yuri at t21 zorder 2
@@ -960,7 +961,7 @@ label ny_fight_alt:
         mc "I'm right here..."
         mc "Sorry about that."
         n "About what?"
-        mc "Anyways..."
+        mc "Anyway..."
         mc "You're all done sharing poems right?"
         y "..."
         n "..."
@@ -974,19 +975,51 @@ label ny_fight_alt:
         y "Oh! Uh..."
         y "I think I should get going then..."
         "Yuri follows the same path as Natsuki."
-        "Yuri packs up her things and then timidly walks out of the classroom."
+        "She packs up her things and then timidly walks out of the classroom."
         if poetappeal == "abs":
             mc "..."
             m "..."
             mc "Well, uh..."
+            mc "About what happened..."
+            mc "I--"
+            m "[player]..."
+            m "What are you trying to do?"
+            m "You almost killed us back there..."
+            mc "Killed you? What are you talking about?"
+            "\"Killed\"? That's a strong word to describe. Pretty sure that's not the right word."
+            mc "I didn't do anything..."
+            m "Well, who did it then?"
+            mc "I wish I knew who did it."
+            m "..."
+            m "[player]..."
+            mc "Huh?"
+            "As I hear her frustated sigh, she finally wants to say something."
+            if persistent.monika_secret[1]: #if she failed to explain when they shared their poems.
+                m "Please, hear me out."
+                m "Just don't leave me hanging again--" #oof
+                m "I-I mean--"
+                mc "???"
+                "I think she is trying to say something to me when I shared my poem with her..."
+                "I don't know what happened back then. But that word seems..."
+                mc "Alright. What are you trying to say?"
+            else:
+                m "Do you remember when we shared out poem to each other moment ago?"
+                mc "Yeah... Why?"
+            m "The thing is..."
+            m "{/i}(I guess I should spill the beans...){i}"
+            "Did I just hear her thoughts inside her head?"
+            m "Everything is not real around here..."
+            m "This world, it's just something made up by someone else."
+            m "Who developed this world."
+            m "This... game..."
         else:
             mc "I guess tha"
-	else:
-		# if other than abs or bs
-		mc ""
+    else:
+        # if other than abs or bs
+        mc ""
 
 label ny_fight_normal:
-	y "You think you can counterbalance your toxic personality just by dressing and acting cute?"
+    y "You think you can counterbalance your toxic personality just by dressing and acting cute?"
     y 1k "The only cute thing about you is how hard you try."
     show yuri at t21 zorder 2
     if not config.skipping:
@@ -1031,9 +1064,9 @@ label ny_fight_normal:
     #$ style.say_dialogue = style.normal
 
 label mc_say:
-	$ mc_dialogues = ["Argh!!! What the f[fword] is happening?!", "My head really hurts so much right now!!!", "Get out of my f[fgword] head!!!", "Shut the f[fword] up!!!", "asdsfagadgfdsasd", "AAAAAAAAAAAAAAAAAAAAAAAAAAAAaaaaHHHHHHhhH!!!!!!!!"]
-	$ dialogue = mc_dialogues[mc_counter]
-	mc "[dialogue]{nw}"
-	$ _history_list.pop()
-	$ mc_counter += 1
-	return
+    $ mc_dialogues = ["Argh!!! What the f[fword] is happening?!", "My head really hurts so much right now!!!", "Get out of my f[fgword] head!!!", "Shut the f[fword] up!!!", "asdsfagadgfdsasd", "AAAAAAAAAAAAAAAAAAAAAAAAAAAAaaaaHHHHHHhhH!!!!!!!!"]
+    $ dialogue = mc_dialogues[mc_counter]
+    mc "[dialogue]{nw}"
+    $ _history_list.pop()
+    $ mc_counter += 1
+    return
