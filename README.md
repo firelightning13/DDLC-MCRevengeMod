@@ -5,11 +5,12 @@
 What if the main character of Doki-Doki Literature Club becomes sentient and self-aware, similar to Monika? He was awaken by the power of my coding and begin to realise that this is all just a game? What will he do? Will he beat Monika and save his best friend?
 
 ## Releases
-[First Demo/Early Concept Release v0.1.1](https://github.com/firelightning13/DDLC-MCRevengeMod/releases/tag/v0.1.1-demo)
+[First Demo/Early Concept Release v0.1.2](https://github.com/firelightning13/DDLC-MCRevengeMod/releases/tag/v0.1.2-demo)
 
 This version contains:
 - Story taken from Act 2
 - **Update v0.1.1-demo:** Fix grammar mistakes _(thanks to @DimasDSF )_
+- **Update v0.1.2-demo:** Some minor fixes, files are more organised and more grammatical fixes by @BioHazic and @timbasaa 
 - Temporary intro scene
 - Day one scene
 - Secrets (idk how many secrets in this mod actually cus I never count them)
@@ -33,11 +34,11 @@ This mod is pretty much similar to "A Brand New Day" by Phantom or "DDLC!!! 1.1.
 ## Installation
 **v0.3(coming soon) :** Extract all the files from my zip mod inside your DDLC "game" folder. Easy...
 
-**v0.1.1 :** Inside my zip folder, copy and paste "game" folder inside your DDLC directory (where DDLC.exe was located).
+**v0.1 :** Inside my zip folder, copy and paste "game" folder inside your DDLC directory (where DDLC.exe was located). Requires DDLC 1.1.0 update only. (DDLC 1.1.1 is untested at the moment)
 
 ## Want to help me?
 You can modify scripts file if you want to help me. Just use pull request, and I will approve.
 
 **v0.3 demo in progress:** https://github.com/firelightning13/DDLC-MCRevengeMod/pull/7
 
-(**Current proofreader :** BioHazic)
+(**Current proofreader :** @BioHazic and @timbasaa )

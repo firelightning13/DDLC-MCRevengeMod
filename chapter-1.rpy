@@ -76,7 +76,8 @@ default persistent.nice_try = 0
 
 label intro_mod_2_2:
     $ delete_all_saves()
-    $ persistent.ggwp_monika = 0
+    if not persistent.force_play:
+        $ persistent.ggwp_monika = 0
     $ monika_seen = False
     $ persistent.parfait_girls = False
     $ persistent.poster_seen = False
@@ -183,6 +184,8 @@ label its_time_boys:
 
 label load_g:
     "Ah, what happened....?"
+    if persistent.force_play:
+        $ renpy.call_screen("dialog", "Saving and loading is very important!/n You might not know what will happen next...", ok_action=Return())
     "Just now..."
     "I saw..."
     "I saw her true form."
@@ -222,7 +225,8 @@ label chapter_mod_1:
         "Except for one club that I recognise from before..."
         $ currentpos = get_pos()
         stop music
-        mc "What the hell is that?!{w=1.0}{nw}"
+        $ mcrp = player # temp fix
+        mcrp "What the hell is that?!{w=1.0}{nw}"
         "{cps=*1.5}The \"thing\" started to approach me.{/cps}{w=1.0}{nw}"
         "{cps=*1.5}I didn't recognise that distorted mess of an entity.{/cps}{w=1.0}{nw}"
         "{cps=*1.5}It's getting closer and closer now...{/cps}{w=1.0}{nw}"
@@ -445,10 +449,10 @@ label throw_chair:
     $ _history_list.pop()
     $ style.say_dialogue = style.normal
     mc "May God save me.{fast}"
-    "I grab a chair."
-    "Then... I throw the chair with my full power{nw}"
+    "I grab the nearest chair."
+    "Then... I throw the chair as hard as I can{nw}"
     play sound throw
-    "Then... I throw the chair with my full power{fast} at one of the classroom window{nw}"
+    "Then... I throw the chair as hard as I can{fast} at one of the classroom windows{nw}"
     play sound gb_mod
     $ persistent.mc_violent = True
     $ quick_menu = False
@@ -496,8 +500,8 @@ label throw_chair:
 
 label check_closet:
     "Just curious to see what's inside that closet."
-    "I expect the contents of that closet to be classroom stuffs like books, files or markers."
-    "But you'll never know what is actually inside it."
+    "I'm expecting the contents of that closet to simply be classroom stuff like books, files or markers."
+    "But you'll never know what is actually inside it until you look."
     scene bg closet
     with wipeleft_scene
     "Well, here goes nothing."
@@ -505,7 +509,7 @@ label check_closet:
     play sound closet_open
     mc "..."
     mc "I found markers."
-    "Construction papers too.."
+    "Construction papers, too.."
     "Wasn't Monika trying to find these stuff before?"
     #half chance isnt really half of a chance ~Monika
     $ half_chance = renpy.random.randint(0, 2)
@@ -514,12 +518,14 @@ label check_closet:
         "There's a lone volume of manga amidst a stack of various books on the side of one of the shelves."
         "Curious, I pull the book out."
         mc "Parfait Girls...? {w}Part one?"
+        "I stare at the cover."
+        "It features four girls in colorful attire striking animated feminine poses."
         "Have I heard of this manga before?"
         "My memory is a little bit hazy, so I don't know if I read it before."
-        "I wonder why it was there in my classroom."
-        "Was it there for the entire time?"
-        mc "I guess I could keep it though..."
-        "I put it inside my bag, just incase."
+        "I wonder why it's here in the classroom?"
+        "Has it been here the entire time?"
+        mc "I guess I could keep it, though..."
+        "I put it inside my bag, just in case."
         "I kind of want to read it though, in my spare time."
         "Well, about the markers and construction paper..."
         "I guess I could give them to Monika after all."
@@ -573,9 +579,11 @@ label check_poster:
         scene bg class_day
         mc "What is this picture?{fast}"
         $ _history_list.pop()
+        "I quickly look away."
         "My head started to feel dizzy again."
-        "I wish I didn't see that."
+        mc "I wish I didn't see that."
         stop music
+        "I suppress the urge to vomit."
         "I think... {w}I just want to go outside."
         "I need some air."
         scene bg corridor

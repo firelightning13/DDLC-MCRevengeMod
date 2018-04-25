@@ -2,16 +2,18 @@
 label mod_accepts:
     mc "Yeah.."
     mc "I mean it could be fun, right?"
-    mc "Sharing our poems to each other..."
+    mc "Sharing our poems with each other..."
     show monika 1d at f33 zorder 3
     "Monika looks at me quizzically"
     m "Wait, [player]?"
     mc "Yes?"
+    $ quick_menu = False
     $ config.keymap['dismiss'] = []
     $ renpy.display.behavior.clear_keymap_cache()
-    "She stares into my eyes for a good 3 seconds long{w=2.0}{nw}"
+    "She stares into my eyes for a good 3 seconds long{w=1.5}{nw}"
     $ config.keymap['dismiss'] = dismiss_keys
     $ renpy.display.behavior.clear_keymap_cache()
+    $ quick_menu = True
     mc "Eh, you mean..."
     mc "You know...."
     m "You do?"
@@ -29,9 +31,10 @@ label mod_accepts:
     show monika at t33 zorder 2
     show natsuki 5w at f31 zorder 3
     n "Hmph. I really thought you didn't want to join our club."
-    n 5e "Then you would be a complete jerk if you did that."
+    n 5e "You would be a complete jerk if you did that. Not join, that is."
     mc "Yeah, yeah."
     show natsuki 5a at t31 zorder 2
+    "I don't know why, but I somehow managed to piss her off."
     show yuri 1a at f32 zorder 3
     y "That is a wise decision."
     y 3m "I am so happy that you joined our club before the festival..."
@@ -39,7 +42,7 @@ label mod_accepts:
     mc "Ah, thank you."
     mc "It was my own choice after all"
     "I hope she's okay with me here."
-    "Though I'm kind of worried that she might be her next target."
+    "Though I'm kind of worried that she might be {i}her{/i} next target."
     #which is true, by the way
     return
 
@@ -122,11 +125,11 @@ label mod_rejects:
         "Umm, yeah, Yuri."
         "The poster that I saw in my classroom is even scarier than me."
         if renpy.showing("bg spoopy", layer='master'):
-            "Not to mention the one in the back of this classroom."
-            "Haven't they even noticed?"
+            "Not to mention the one in the back of this clubroom."
+            "Haven't they even noticed? {i}How{/i}?"
     elif renpy.showing("bg spoopy", layer='master'):
-        "Yeah, the back of the classroom is even scarier than me."
-        "Haven't they even noticed?"
+        "Yeah, the back of the clubroom is even scarier than me."
+        "Haven't they even noticed? {i}How{/i}?"
     show yuri at t32 zorder 2
     show natsuki at f31 zorder 3
     n 5q "I mean, if you really just left after all this, I would be super pissed."
@@ -250,7 +253,6 @@ label chapter_mod_2:
         fl "I don't even want to copy paste original DDLC script one by one into my mod."
         fl "It would be pain in the ass.."
         fl "Then, next time, I'll force you to go to Sayori's house."
-        #fl "No butts. But {w}T {w}H {w}I {w}C {w}C{nw}"
         #$ persistent.playthrough = 2
         $ delete_all_saves()
         $ persistent.nice_try = 0
@@ -271,13 +273,13 @@ label chapter_mod_2:
     scene bg corridor
     with wipeleft_scene
 
-    "And thus, today marks the day I sold my soul to Monika and her irresistible smile."
+    "And thus, today marks the day I {i}sold my soul{/i} to Monika and her irresistible smile."
     "Not really, I'm just saying it for the sake of the game script."
-    if persistent.force_play:
-        "Also, FL13 is really mad right now... I think"
-        $ _history_list.pop()
-        "Oh well..."
-        $ _history_list.pop()
+    #if persistent.force_play:
+        #"Also, FL13 is really mad right now... I think"
+        #$ _history_list.pop()
+        #"Oh well..."
+        #$ _history_list.pop()
     "I timidly follow Monika across the school and upstairs - a section of the school I rarely visit, being generally used for third-year classes and activities."
     "Monika, full of energy, swings open the classroom door."
 
@@ -305,8 +307,10 @@ label chapter_mod_2:
             if renpy.showing("bg spoopy", layer='master'):
                 "And I see it again..."
                 "Please help me."
+        elif renpy.showing("bg spoopy", layer='master'):
+            "And what the heck is that poster on the back wall of the clubroom?"
     elif renpy.showing("bg spoopy", layer='master'):
-        "What's that poster on the back wall of the classroom?"
+        "What's that poster on the back wall of the clubroom?"
     show yuri 2t at t33 zorder 2
     if not config.skipping:
         show screen invert(0.15, 0.3)
@@ -501,8 +505,8 @@ label chapter_mod_2:
         #"Such different girls, all interested in the same goal..."
         if persistent.ggwp_monika != 3:
             "Well, I guess literature isn't really that hard."
-            "Despite it being kind of dull, it was worth making a poem, sharing with your friends and finding inspiration from other people."
-            "The basic fundamental of literature is to express yourself."
+            "Despite it being kind of dull, it's worth it to make a poem, share it with your friends and to find inspiration from other people."
+            "The basic fundamentals of literature is to express yourself."
             "Wow, I sound just like Monika..."
             "I don't know, I feel like I've done this before."
         #"Monika must have worked really hard just to find these two."
@@ -631,9 +635,9 @@ label chapter_mod_2:
     m 1j "Fine, fine~"
     show monika 1a at t33 zorder 2
     mc "Natsuki, you write your own poems?"
-    "I think everyone does writing their own poems at least once or twice."
+    "I think everyone writes their own poems at least once or twice."
     "I may have also written poems before."
-    "I wonder whats her last poem anyway?"
+    "I wonder what her latest poem is..."
     show natsuki at f31 zorder 3
     n 1c "Eh? Well, I guess sometimes."
     n "Why do you care?"
@@ -646,7 +650,7 @@ label chapter_mod_2:
     n "You wouldn't...like them..."
     show natsuki at t31 zorder 2
     mc "Ah.. You shouldn't worry about that."
-    mc "I guess you need more confidence to share with someone.."
+    mc "I guess you just need more confidence to share with someone.."
     #mc "Ah...not a very confident writer yet?"
     show yuri at f32 zorder 3
     y 2f "I understand how Natsuki feels."
@@ -654,9 +658,9 @@ label chapter_mod_2:
     y 2k "The truest form of writing is writing to oneself."
     "Damn Yuri, you're so poetic."
     y "You must be willing to open up to your readers, exposing your vulnerabilities and showing even the deepest reaches of your heart."
-    mc "So, you're basically saying that language itself is very important for making poems?"
+    mc "So you're basically saying that language itself is very important for making poems?"
     y 1b "Yes. It's like an artist painting beautiful pictures for everyone to see."
-    y "People value the artist more than just a picture."
+    y "People value the artist because of more than just a picture that they paint."
     "Huh? I didn't know Yuri likes pictures."
     "I thought I've heard that before from Sayori.."
     mc "I see.."
