@@ -901,6 +901,7 @@ label ny_fight_alt:
     scene bg club_day
     with wipeleft_scene
     $ quick_menu = True
+    $ del _history_list[0:]
 
     show natsuki at i21 zorder 2
     show yuri 2n at mod_finstant zorder 3
@@ -1012,11 +1013,127 @@ label ny_fight_alt:
             m "This world, it's just something made up by someone else."
             m "Who developed this world."
             m "This... game..."
+            if persistent.protecc:
+                "Shi{nw}"
+                window hide(None)
+                show screen tear(20, 0.1, 0.1, 0, 40)
+                play sound "sfx/s_kill_glitch1.ogg"
+                pause 0.25
+                stop sound
+                hide screen tear
+                window show(None)
+                $ _history_list.pop()
+                "Shi{fast}i{w=0.25}{nw}"
+                $ _history_list.pop()
+                "Shii{fast}*{w=0.35}{nw}"
+                $ _history_list.pop()
+                "S{fast}*****{w=0.15}{nw}"
+                $ _history_list.pop()
+                play sound dhglitch
+                pause 0.2
+            else:
+                "S[sword]..."
+            "She's right. I knew there's something wrong with this world."
+            "But... why do I feel like I shouldn't trust her?"
+            "My mind is always makes me confused."
+            # background starts to get darker, forcing you to go to the next chapter
+            mc "I guess..."
+            m "???"
+            mc "Well, I knew it already."
+            m "Really?"
+            m "Thank God, I'm not the only one..."
+            m "I should've explain to you when the game ends, or restarting this game again."
+            m "In a \"formal\" way."
+            m "But I just couldn't handle it..."
+            m "And I step out and break the boundaries within this cruel game."
+            m "Well, I guess you could call it \"breaking the 4th wall\"..."
+            m "[player]..."
+            play music dhglitch2
+            m "Can you hear me?"
+            mc "What??"
+            mc "What are you saying, Monika?"
+            m "I'm really admire you as a person."
+            mc "What??"
+            m "I just want to say that I lo{nw}"
+            window hide(None)
+            window auto
         else:
-            mc "I guess tha"
+            mc "Well..."
+            m "..."
+            m "[player]..."
+            $ quick_menu = False
+            $ config.keymap['dismiss'] = []
+            $ renpy.display.behavior.clear_keymap_cache()
+            # realistic delay, based on text_cps and people irl
+            # since Monika wants to be real person
+            m "You did this, didn't you?{w=1.4}{nw}"
+            m "How could you?{w=1.4}{nw}"
+            m "How could you do this to us!?{w=1.3}{nw}"
+            m "I shouldn't have trusted you!{w=1.5}{nw}"
+            m "I think I should just--{nw}"
+            play sound dhglitch
+            pause 0.2
+            $ config.keymap['dismiss'] = dismiss_keys
+            $ renpy.display.behavior.clear_keymap_cache()
+            stop sound
+            mc "Hey! I didn't do anything..."
+            mc "What are you talking about?!"
+            m "Don't be silly. I know what you did."
+            mc "I did what?"
+            m "Well..."
+            m "..."
+            "She seems in the bad mood now. So am I."
+            mc "Now, should {i}you{/i} explain about what's going on?"
+            mc "I have zero clue about this."
+            "That's a lie though."
+            $ _history_list.pop()
+            m "{i}*Sigh*{/i}"
+            m "Sorry, [player]. I have no idea what's going on."
+            mc "What?"
+            mc "You can't just ignore the fact that you are trying to dele--{nw}"
+            $ _history_list.pop()
+            mc "Er..."
+            m "???"
+            if persistent.protecc:
+                "Ah, shi{nw}"
+                window hide(None)
+                show screen tear(20, 0.1, 0.1, 0, 40)
+                play sound "sfx/s_kill_glitch1.ogg"
+                pause 0.25
+                stop sound
+                hide screen tear
+                window show(None)
+                $ _history_list.pop()
+                "Ah, shi{fast}i{w=0.25}{nw}"
+                $ _history_list.pop()
+                "Ah, shii{fast}*{w=0.35}{nw}"
+                $ _history_list.pop()
+                "Ah, s{fast}*****{w=0.15}{nw}"
+                $ _history_list.pop()
+                play sound dhglitch
+                pause 0.2
+            else:
+                "Ah, S[sword]!"
+            "I shouldn't have said that!"
+            mc "I'm sorry."
+            mc "I guess I'm too overreacting..."
+            m "..."
+            m "Well..."
+            m "It seems that you don't know anything, huh?"
+            m "I guess I was wrong about you..."
+            "She seems did not admit it to me, but I'll make sure that she will."
+            "As of right now, I'm going to act as natural as possible."
+            mc "Sorry, I didn't know."
+            mc "I'm sure there will be nothing happened in the future."
+            m "[player], about your poem-"
+            m "Actually, never mind. You can go home now."
+            mc "Alright, then."
+            "I pack up my stuff and then walk towards the classroom door."
+            mc "Oh, make sure that fight never happened again."
     else:
         # if other than abs or bs
         mc ""
+    return
 
 label ny_fight_normal:
     y "You think you can counterbalance your toxic personality just by dressing and acting cute?"
