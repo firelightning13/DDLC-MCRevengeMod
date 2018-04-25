@@ -29,18 +29,9 @@ label start:
 
     if persistent.playthrough == 1:
         call intro_mod_2 from _call_intro_mod_2
-    
-    # There's a bit of problem / bugs that I can't fix
-    # Saving and loading is pretty much broken in this game
-    # I don't know...
+
     if persistent.playthrough == 2:
-        # I guess there's no other way
         jump intro_mod_2_1
-        #call intro_mod_2_1
-        #next chapter
-        #call chapter_mod_2 from _call_chapter_mod_2
-        #jump mod_end_demo
-        # I'll disable this temporarily
 
 label endgame(pause_length=4.0):
     $ quick_menu = False
