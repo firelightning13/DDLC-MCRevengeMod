@@ -967,9 +967,12 @@ label ny_fight_alt:
         y "..."
         n "..."
         m "Yeah. We're pretty much done here..."
-        m "It's already late now..."
-        m "So you guys can go home now."
-        mc "Er- That's kind of--{nw}"
+        m "It's already late. You guys can go home now."
+        if poetappeal == "abs":
+            mc "Yeah. You're right."
+        else poetappeal == "bs":
+            mc "Erm... That's a little{nw}"
+            $ _history_list.pop()
         n "Yeah. I'm outta here..."
         "Natsuki starts packing up her things and then walks right out of the classroom."
         y "..."
@@ -998,17 +1001,24 @@ label ny_fight_alt:
             if persistent.monika_secret[1]: #if she failed to explain when they shared their poems.
                 m "Please, hear me out."
                 m "Just don't leave me hanging again--" #oof
+                $ _history_list.pop()
                 m "I-I mean--"
                 mc "???"
-                "I think she is trying to say something to me when I shared my poem with her..."
-                "I don't know what happened back then. But that word seems..."
+                "I think she was trying to say something at me when I share my poem with her..."
+                "I don't know what happened back then. But that word seems...{nw}"
+                $ _history_list.pop()
                 mc "Alright. What are you trying to say?"
             else:
                 m "Do you remember when we shared out poem to each other moment ago?"
                 mc "Yeah... Why?"
+                m "Where I said that I need to talk to you about something..."
+                mc "Ah, yeah. That..."
+                "She seems pressured and hurried. What's \"something\" that she wanted to talk about?"
             m "The thing is..."
             m "{/i}(I guess I should spill the beans...){i}"
+            $ _history_list.pop()
             "Did I just hear her thoughts inside her head?"
+            $ _history_list.pop()
             m "Everything is not real around here..."
             m "This world, it's just something made up by someone else."
             m "Who developed this world."
@@ -1039,7 +1049,7 @@ label ny_fight_alt:
             # background starts to get darker, forcing you to go to the next chapter
             mc "I guess..."
             m "???"
-            mc "Well, I knew it already."
+            mc "Well, I think I {i}roughly{/i} knew about it."
             m "Really?"
             m "Thank God, I'm not the only one..."
             m "I should've explain to you when the game ends, or restarting this game again."
@@ -1054,7 +1064,8 @@ label ny_fight_alt:
             mc "What are you saying, Monika?"
             m "I'm really admire you as a person."
             mc "What??"
-            m "I just want to say that I lo{nw}"
+            m "I just want to say that{nw}"
+            $ _history_list.pop()
             window hide(None)
             window auto
         else:
@@ -1085,7 +1096,7 @@ label ny_fight_alt:
             "She seems in the bad mood now. So am I."
             mc "Now, should {i}you{/i} explain about what's going on?"
             mc "I have zero clue about this."
-            "That's a lie though."
+            "That's a lie though. But for reasons..."
             $ _history_list.pop()
             m "{i}*Sigh*{/i}"
             m "Sorry, [player]. I have no idea what's going on."
@@ -1122,17 +1133,48 @@ label ny_fight_alt:
             m "It seems that you don't know anything, huh?"
             m "I guess I was wrong about you..."
             "She seems did not admit it to me, but I'll make sure that she will."
+            $ _history_list.pop()
             "As of right now, I'm going to act as natural as possible."
+            $ _history_list.pop()
             mc "Sorry, I didn't know."
             mc "I'm sure there will be nothing happened in the future."
             m "[player], about your poem-"
             m "Actually, never mind. You can go home now."
             mc "Alright, then."
             "I pack up my stuff and then walk towards the classroom door."
-            mc "Oh, make sure that fight never happened again."
+            mc "Oh, make sure that fight never happens again."
+            m "Yeah, I hope so..."
+            call ny_fight_alt2
     else:
         # if other than abs or bs
         mc ""
+    return
+
+label ny_fight_alt2:
+    scene bg residential_day
+    with wipeleft_scene
+
+    "With that, I depart the clubroom and make my way home."
+    "The whole way, my mind wanders back and forth between the three girls:{nw}"
+    window hide
+    scene bg res_gl
+    play sound dhglitch
+    pause 1.0
+    scene bg residential_day
+    window show
+    window auto
+    "Ah! What am I talking about?"
+    "This is mildly infuriating!!"
+    "Oh my god... can you just fix me or something?"
+    "I'm tired of this bulls[sword] stuff that controls my action!"
+    "This is definitely her fault! I should've attack her with something hard and call it a day!"
+    "Urghh....."
+    pause 3.0
+    mc "..."
+    "I should calm down. Attacking her is not the best option right now."
+    "I need more information about her. I need more time. That's how should it be."
+    "I'll try to persuade her more tomorrow. That might help me solve all of the problems."
+    "I should head home for now. I'm very tired right now."
     return
 
 label ny_fight_normal:
