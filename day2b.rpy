@@ -786,57 +786,57 @@ label ny_fight_alt:
     show noise at noise_alpha zorder 100
     show vignette at vignetteflicker(-2.030) zorder 100
     show layer master at rewind
-    y "{cps=*4}You think you can counterbalance your toxic personality just by dressing and acting cute?{/cps}{nw}"
-    y 1k "{cps=*4}The only cute thing about you is how hard you try.{/cps}{nw}"
+    y "{cps=200}You think you can counterbalance your toxic personality just by dressing and acting cute?{/cps}{nw}"
+    y 1k "{cps=200}The only cute thing about you is how hard you try.{/cps}{nw}"
     show yuri at i21 zorder 2
     show natsuki at f22 zorder 3
-    n 2y "{cps=*4}Whoa, be careful or you might cut yourself on that edge, Yuri.{/cps}{nw}"
-    n "{cps=*4}Oh, my bad... You already do, don't you?{/cps}{nw}"
+    n 2y "{cps=200}Whoa, be careful or you might cut yourself on that edge, Yuri.{/cps}{nw}"
+    n "{cps=200}Oh, my bad... You already do, don't you?{/cps}{nw}"
     show natsuki at i22 zorder 2
     show yuri at f21 zorder 3
-    y 3n "{cps=*4}D-Did you just accuse me of cutting myself??{/cps}{nw}"
-    y 3r "{cps=*4}What the f[fword] is wrong with your head?!{/cps}{nw}"
+    y 3n "{cps=200}D-Did you just accuse me of cutting myself??{/cps}{nw}"
+    y 3r "{cps=200}What the f[fword] is wrong with your head?!{/cps}{nw}"
     show yuri at i21 zorder 2
     show natsuki at f22 zorder 3
-    n 1e "{cps=*4}Yeah, go on!"
-    n "{cps=*4}Let [player] hear everything you really think!{/cps}{nw}"
-    n "{cps=*4}I'm sure he'll be head over heels for you after this!{/cps}{nw}"
+    n 1e "{cps=200}Yeah, go on!"
+    n "{cps=200}Let [player] hear everything you really think!{/cps}{nw}"
+    n "{cps=200}I'm sure he'll be head over heels for you after this!{/cps}{nw}"
     show natsuki at i22 zorder 2
     show yuri at f21 zorder 3
-    y 3n "{cps=*4}A-Ah--!"
+    y 3n "{cps=200}A-Ah--!"
     show yuri at i21 zorder 2
-    "{cps=*4}Suddenly, Yuri turns toward me, as if she just noticed I was standing here.{/cps}{nw}"
+    "{cps=200}Suddenly, Yuri turns toward me, as if she just noticed I was standing here.{/cps}{nw}"
     show yuri at f21 zorder 3
-    y 2n "{cps=*4}[player]...!"
-    y "{cps=*4}She-- She's just trying to make me look bad...!{/cps}{nw}"
+    y 2n "{cps=200}[player]...!"
+    y "{cps=200}She-- She's just trying to make me look bad...!{/cps}{nw}"
     show yuri at i21 zorder 2
     show natsuki at f22 zorder 3
-    n 4w "{cps=*4}That's not true!{/cps}{nw}"
-    n "{cps=*4}She started it!{/cps}{nw}"
+    n 4w "{cps=200}That's not true!{/cps}{nw}"
+    n "{cps=200}She started it!{/cps}{nw}"
     #n 4e "If she could get over herself and learn to appreciate that {i}simple{/i} writing is more effective..."
-    n 4e "{cps=*4}If shee culd geet overr herself anand learnttt to appraseciate thaet {i}simple{/i} writinsg is moore effectivwe...{/cps}{nw}"
+    n 4e "{cps=200}If shee culd geet overr herself anand learnttt to appraseciate thaet {i}simple{/i} writinsg is moore effectivwe...{/cps}{nw}"
     #n "Then this wouldn't have happened in the first place!"
-    n "{cps=*4}then this wouldasdn't have happeneddd in thae fiwst plwacee!{/cps}{nw}"
+    n "{cps=200}then this wouldasdn't have happeneddd in thae fiwst plwacee!{/cps}{nw}"
     #n "What's the point in making your poems all convoluted for no reason?"
-    n "{cps=*4}Whaqt's the ppoint in makinbg yours poememses alaslall convopoluted fosr noe reassson?{/cps}{nw}"
+    n "{cps=200}Whaqt's the ppoint in makinbg yours poememses alaslall convopoluted fosr noe reassson?{/cps}{nw}"
     #n "The meaning should jump out at the reader, not force them to have to figure it out."
-    n "{cps=*4}The meaningshould jumpjmpu ouet at th readr, nononnt forcethem o hvve to fggre itt ouet.{/cps}{nw}"
+    n "{cps=200}The meaningshould jumpjmpu ouet at th readr, nononnt forcethem o hvve to fggre itt ouet.{/cps}{nw}"
     #n 1f "Help me explain that to her, [player]!"
-    n 1f "{cps=*4}hell meee expaalain aathat to her, [player]ยก?!{/cps}{nw}"
+    n 1f "{cps=200}hell meee expaalain aathat to her, [player]ยก?!{/cps}{nw}"
     show natsuki at i22 zorder 2
     show yuri at mod_finstant zorder 3
     #y 3o "W-Wait!"
-    y 3o "{cps=*4}W-Wwwwt!{/cps}{nw}"
+    y 3o "{cps=200}W-Wwwwt!{/cps}{nw}"
     #y "There's a reason we have so many deep and expressive words in our language!"
-    y "{cps=*4}There's a reason we have so many deep and expressive words in wour laanguage!{/cps}{nw}"
+    y "{cps=200}There's a reason we have so many deep and expressive words in wour laanguage!{/cps}{nw}"
     #y 3w "It's the only way to convey complex feelings and meaning the most effectively."
-    y 3w "{cps=*4}It's the only way to convey complex feelinaags! and meaning the mostt effectiveely.{/cps}{nw}"
+    y 3w "{cps=200}It's the only way to convey complex feelinaags! and meaning the mostt effectiveely.{/cps}{nw}"
     #y "Avoiding them is not only unnecessarily limiting yourself...it's also a waste!"
-    y "{cps=*4}Avaocidding thqem isw not only unnenecessessarilyyy limi/d/atiegng youlf.-!?.it's ayolk avb wawet3e!{/cps}{nw}"
+    y "{cps=200}Avaocidding thqem isw not only unnenecessessarilyyy limi/d/atiegng youlf.-!?.it's ayolk avb wawet3e!{/cps}{nw}"
     #y 1t "You understand that, right, [player]?"
-    y 1t "{cps=*4}Yoasadu!!/! undd.,asdwrs\%tanda tqwa?t, ?ยก?r?ig?hawwat?,ยก [player]?{/cps}{nw}"
+    y 1t "{cps=200}Yoasadu!!/! undd.,asdwrs\%tanda tqwa?t, ?ยก?r?ig?hawwat?,ยก [player]?{/cps}{nw}"
     # garbage text, theres no internal meaning of it
-    y "{cps=*4}[gtext]{/cps}{space=5000}{w=2.0}{nw}"
+    y "{cps=200}[gtext]{/cps}{space=5000}{w=2.0}{nw}"
     python:
         currentpos = get_pos()
         startpos = currentpos - 0.3
@@ -846,17 +846,17 @@ label ny_fight_alt:
     show white onlayer front:
         alpha 0.0
         linear 0.25 alpha 0.5
-    y "{cps=*4}[gtext]{/cps}{space=5000}{fast}{w=0.1}{nw}"
+    y "{cps=200}[gtext]{/cps}{space=5000}{fast}{w=0.1}{nw}"
     $ quick_menu = False
-    y "{cps=*4}[gtext]{/cps}{space=5000}{fast}{w=0.2}{nw}"
+    y "{cps=200}[gtext]{/cps}{space=5000}{fast}{w=0.2}{nw}"
     $ quick_menu = True
-    y "{cps=*4}[gtext]{/cps}{space=5000}{fast}{w=0.3}{nw}"
+    y "{cps=200}[gtext]{/cps}{space=5000}{fast}{w=0.3}{nw}"
     $ quick_menu = False
-    y "{cps=*4}[gtext]{/cps}{space=5000}{fast}{w=0.2}{nw}"
+    y "{cps=200}[gtext]{/cps}{space=5000}{fast}{w=0.2}{nw}"
     $ quick_menu = True
-    y "{cps=*4}[gtext]{/cps}{space=5000}{fast}{w=0.2}{nw}"
+    y "{cps=200}[gtext]{/cps}{space=5000}{fast}{w=0.2}{nw}"
     $ quick_menu = False
-    y "{cps=*4}[gtext]{/cps}{space=5000}{fast}{w=2.0}{nw}"
+    y "{cps=200}[gtext]{/cps}{space=5000}{fast}{w=2.0}{nw}"
     hide white onlayer front
     window hide(None)
     scene white
@@ -1147,7 +1147,93 @@ label ny_fight_alt:
             call ny_fight_alt2
     else:
         # if other than abs or bs
-        mc ""
+        mc "Argh..."
+        $ gtext = glitchtext(80)
+        "[gtext]" # What the heck just happened? My mind is glitching out for some reason.
+        $ gtext = glitchtext(80)
+        "[gtext]" # Argh... I couldn't read my mind like this...
+        $ ad = 12
+        $ ac = 12
+        show monika 1 at mod_malpha(ac/ad)
+        y "[player]... Are you okay?"
+        $ ac -= 1
+        show monika 1 at mod_malpha(ac/ad)
+        y "Did- Did I hurt you in some way...?"
+        $ ac -= 1
+        show monika 1 at mod_malpha(ac/ad)
+        mc "Uh- no... I--"
+        $ ac -= 1
+        show monika 1 at mod_malpha(ac/ad)
+        n "Oh come on, Yuri. It's not your fault for doing that."
+        $ ac -= 1
+        show monika 1 at mod_malpha(ac/ad)
+        y "Uuuu."
+        $ ac -= 1
+        show monika 1 at mod_malpha(ac/ad)
+        n "What we did was--"
+        $ ac -= 1
+        show monika 1 at mod_malpha(ac/ad)
+        n "-was..."
+        $ ac -= 1
+        show monika 1 at mod_malpha(ac/ad)
+        mc "???"
+        $ ac -= 1
+        show monika 1 at mod_malpha(ac/ad)
+        n "Ah, I don't f[fgword] know! Don't just stare at me!"
+        $ ac -= 1
+        show monika 1 at mod_malpha(ac/ad)
+        mc "Language, Natsuki..."
+        $ ac -= 1
+        show monika 1 at mod_malpha(ac/ad)
+        n "Hmph."
+        $ ac -= 1
+        show monika 1 at mod_malpha(ac/ad)
+        mc "I think what happened was{nw}"
+        window hide(None)
+
+        scene black with trueblack
+        pause 0.01
+        window auto
+        scene bg club_day
+        with wipeleft_scene
+        play music t8
+
+        show monika 4b at t11 zorder 2
+        m "Okay, everyone!"
+        m "It's just about time for us to leave."
+        m "How did you all feel about sharing poems?"
+        show yuri 1i at t31 zorder 2
+        hide sayori
+        y "Well, I'd say it was worth it."
+        show yuri at thide behind natsuki
+        show natsuki 4q at t31 zorder 2
+        hide yuri
+        n "It was alright. Well, mostly."
+        show natsuki at thide zorder 1
+        hide natsuki
+        m 1a "[player], how about you?"
+        mc "...Yeah, I'd say the same."
+        mc "It was a neat thing to talk about with everyone."
+        m 1j "Awesome!"
+        m 1a "In that case, we'll do the same thing tomorrow."
+        m "And maybe you learned something from your friends, too."
+        m 3b "So your poems will turn out even better!"
+        mc "..."
+        #show monika at thide zorder 1
+        #hide monika
+        "I think to myself."
+        "I did learn a little more about the kinds of poems everyone likes."
+        $ currentpos = get_pos()
+        stop music
+        $ audio.t8g = "<from " + str(currentpos) + " loop 9.938>mod_assets/sfx/8g.ogg"
+        play music t8g
+        pause 0.6
+        stop music
+
+        mc "Wait a minute..."
+        mc "This feels like a déjà vu."
+        mc "What am I talking about?!"
+
     return
 
 label ny_fight_alt2:
