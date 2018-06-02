@@ -30,6 +30,7 @@ default persistent.monika_secret = [False, False, False, False]
 # 0 = mod-poemresponse.rpy; a serious conversation between monika and mc
 # 1 = mod-poemresponse.rpy; where monika failed to explain at the end of her conversation with mc
 # 2 = day2b.rpy; natsuki and yuri intense conversations battle
+# 3 = day2b.rpy; ny_fight_alt, under if poeappeal == "mp" or "cute"
 #############################################
 
 #$ preferences.skip_unseen = False ## For future reference
@@ -89,7 +90,9 @@ image bg cr_gl = "mod_assets/bg/class_glitch.png"
 image bg cord_gl = "mod_assets/bg/corridor_glitch.png"
 image s_hacker = "mod_assets/cg/s_hacker.png"
 image bg club_gl = "mod_assets/bg/club_room_glitch.png"
+image club_gl2 = "mod_assets/bg/club_room_glitch.png"
 image mod_one_eye = "mod_assets/cg/one_eye_gl.png"
+image m_smile = "mod_assets/cg/m_smile.png"
 ######################################################################
 
 ################ Custom Transformations and Styles ###################
@@ -119,6 +122,10 @@ transform mod_pos_gl(x=540, alt_x=640, z=0.80):
 
 transform mod_finstant(x=400, z=0.80): # special finstant for yuri; refer to day2b.rpy
         xcenter x yoffset 0 zoom z*1.05 alpha 1.00 yanchor 1.0 ypos 1.03
+
+transform mod_malpha(a=1.00):
+    i33
+    alpha a
 ######################################################################
 
 ####################### Custom audio #################################
@@ -144,6 +151,11 @@ define audio.tgl3 = "<loop 4.444>mod_assets/sfx/glitch3.ogg"
 define audio.tpj = "<loop 0>mod_assets/sfx/pj.ogg"
 define audio.t7fast = "<loop 31.880>bgm/7g.ogg"
 define audio.start_gl = "<loop 0>mod_assets/sfx/start_gl.ogg"
+define audio.t8g = "<loop 9.938>mod_assets/sfx/8g.ogg"
+define audio.t8g2 = "mod_assets/sfx/8g2.ogg"
+define audio.dhglitch = "mod_assets/sfx/dhg.ogg"
+define audio.dhglitch2 = "mod_assets/sfx/dhg2.ogg"
+define audio.t99 = "<loop 3.172>mod_assets/sfx/monika_r_u_ok.ogg"
 ######################################################################
 
 ###################### Custom Functions ############################
@@ -184,4 +196,3 @@ init python:
             sword = "hit"
 
     renpy.music.register_channel("trans", mixer="music", tight=True)
-    

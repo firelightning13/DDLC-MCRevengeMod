@@ -769,8 +769,8 @@ style mod_middle:
     outlines []
 
 label ny_fight_alt:
-    ####################################### To save some of your time, you can skip
-    ####################################### from this line.
+    ####################################### To proofreaders: To save some of your time,
+    ####################################### you can skip proofreading from this line.
     $ preferences.skip_unseen = False
     $ config.skipping = False
     $ allow_skipping = False
@@ -905,7 +905,7 @@ label ny_fight_alt:
 
     show natsuki at i21 zorder 2
     show yuri 2n at mod_finstant zorder 3
-    ################################################## Ignore the script above
+    ################################################## To proofreaders: Ignore the script above
     ################################################## Now you can proofread from here
     y "[player]...!"
     y "She-- She's just trying to make me look bad...!"
@@ -924,7 +924,7 @@ label ny_fight_alt:
     n "Thanks, but it really didn't--" # come out nice at all!
     n "..."
     y "..."
-    n "Wait, what are we supposed to talking about?"
+    n "Wait, what are we supposed to talk about?"
     y "..."
     y "I-- I don't know..."
     y "Why are we even arguing?"
@@ -1041,6 +1041,7 @@ label ny_fight_alt:
                 $ _history_list.pop()
                 play sound dhglitch
                 pause 0.2
+                stop sound
             else:
                 "S[sword]..."
             "She's right. I knew there's something wrong with this world."
@@ -1054,11 +1055,12 @@ label ny_fight_alt:
             m "Thank God, I'm not the only one..."
             m "I should've explain to you when the game ends, or restarting this game again."
             m "In a \"formal\" way."
-            m "But I just couldn't handle it..."
+            m "But I just couldn't handle it. It feels like, torture to me."
             m "And I step out and break the boundaries within this cruel game."
             m "Well, I guess you could call it \"breaking the 4th wall\"..."
+            m "I know it's complicated to explain, but you have to believe me!"
             m "[player]..."
-            play music dhglitch2
+            play sound dhglitch2
             m "Can you hear me?"
             mc "What??"
             mc "What are you saying, Monika?"
@@ -1123,6 +1125,7 @@ label ny_fight_alt:
                 $ _history_list.pop()
                 play sound dhglitch
                 pause 0.2
+                stop sound
             else:
                 "Ah, S[sword]!"
             "I shouldn't have said that!"
@@ -1144,7 +1147,34 @@ label ny_fight_alt:
             "I pack up my stuff and then walk towards the classroom door."
             mc "Oh, make sure that fight never happens again."
             m "Yeah, I hope so..."
-            call ny_fight_alt2
+
+            scene bg residential_day
+            with wipeleft_scene
+            play music t8
+
+            "With that, I depart the clubroom and make my way home."
+            "The whole way, my mind wanders back and forth between the three girls:{nw}"
+            window hide
+            scene bg res_gl
+            stop music
+            play sound dhglitch
+            pause 1.0
+            stop sound
+            scene bg residential_day
+            window show
+            window auto
+            "Ah! What am I talking about?"
+            "This is mildly infuriating!!"
+            "Oh my god... can you just fix me or something?"
+            "I'm tired of this bulls[sword] stuff that controls my action!"
+            "This is definitely her fault! I should've attack her with something hard and call it a day!"
+            "Urghh....."
+            pause 3.0
+            mc "..."
+            "I should calm down. Attacking her is not the best option right now."
+            "I need more clue about who she is. I need more time. That's how should it be."
+            "I'll try to persuade her more tomorrow. That might help me solve most of the problems."
+            "I should head home for now. I'm very tired right now."
     else:
         # if other than abs or bs
         mc "Argh..."
@@ -1189,78 +1219,198 @@ label ny_fight_alt:
         $ ac -= 1
         show monika 1 at mod_malpha(ac/ad)
         mc "I think what happened was{nw}"
-        window hide(None)
 
-        scene black with trueblack
-        pause 0.01
-        window auto
-        scene bg club_day
-        with wipeleft_scene
-        play music t8
+        if not persistent.monika_secret[3]:
+            window hide(None)
+            scene black with trueblack
+            $ persistent.monika_secret[3] = True
+            pause 1.0
+            $ config.skipping = False
+            $ allow_skipping = False
+            $ config.allow_skipping = False
+            $ quick_menu = False
+            window auto
+            scene bg club_day
+            with wipeleft_scene
+            play music t8
 
-        show monika 4b at t11 zorder 2
-        m "Okay, everyone!"
-        m "It's just about time for us to leave."
-        m "How did you all feel about sharing poems?"
-        show yuri 1i at t31 zorder 2
-        hide sayori
-        y "Well, I'd say it was worth it."
-        show yuri at thide behind natsuki
-        show natsuki 4q at t31 zorder 2
-        hide yuri
-        n "It was alright. Well, mostly."
-        show natsuki at thide zorder 1
-        hide natsuki
-        m 1a "[player], how about you?"
-        mc "...Yeah, I'd say the same."
-        mc "It was a neat thing to talk about with everyone."
-        m 1j "Awesome!"
-        m 1a "In that case, we'll do the same thing tomorrow."
-        m "And maybe you learned something from your friends, too."
-        m 3b "So your poems will turn out even better!"
-        mc "..."
-        #show monika at thide zorder 1
-        #hide monika
-        "I think to myself."
-        "I did learn a little more about the kinds of poems everyone likes."
-        $ currentpos = get_pos()
-        stop music
-        $ audio.t8g = "<from " + str(currentpos) + " loop 9.938>mod_assets/sfx/8g.ogg"
-        play music t8g
-        pause 0.6
-        stop music
+            show monika 4b at t11 zorder 2
+            m "Okay, everyone!"
+            m "It's just about time for us to leave."
+            m "How did you all feel about sharing poems?"
+            show yuri 1i at t31 zorder 2
+            hide sayori
+            y "Well, I'd say it was worth it."
+            show yuri at thide behind natsuki
+            show natsuki 4q at t31 zorder 2
+            hide yuri
+            n "It was alright. Well, mostly."
+            show natsuki at thide zorder 1
+            hide natsuki
+            m 1a "[player], how about you?"
+            mc "...Yeah, I'd say the same."
+            mc "It was a neat thing to talk about with everyone."
+            m 1j "Awesome!"
+            m 1a "In that case, we'll do the same thing tomorrow."
+            m "And maybe you learned something from your friends, too."
+            m 3b "So your poems will turn out even better!"
+            mc "..."
+            show monika at thide zorder 1
+            hide monika
+            "I think to myself."
+            "I did learn a little more about the kinds of poems everyone likes{nw}"
+            $ currentpos = get_pos()
+            stop music
+            $ audio.t8g = "<from " + str(currentpos) + " loop 9.938>mod_assets/sfx/8g.ogg"
+            play music t8g
+            pause 0.6
+            $ currentpos = get_pos()
+            stop music
 
-        mc "Wait a minute..."
-        mc "This feels like a déjà vu."
-        mc "What am I talking about?!"
+            mc "Wait a minute..."
+            mc "This feels like a déjà vu."
+            mc "What the hell is going on here?!"
+            "I look around."
+            "Natsuki and Yuri are leaving together happily like nothing happens at all."
+            "While Monika is standing outsides the clubroom door."
+            "She's staring at me{nw}"
+            $ _history_list.pop()
+            $ audio.t8g = "<from " + str(currentpos) + " loop 9.938>mod_assets/sfx/8g.ogg"
+            play music t8g
+            show club_gl2
+            "{cps=150}She's staring at me{fast}eee3e3e3ee3e3yy3yy3yy333e3e3y3e3ye3y33e3e3{nw}{/cps}"
+            $ _history_list.pop()
+            window hide(None)
+            hide club_gl2
+            $ currentpos = get_pos()
+            stop music
+            play sound t8g2
+            show m_smile # monika creepy smile
+            pause 0.25
+            hide m_smile
+            stop sound
+            $ audio.t8 = "<from " + str(currentpos) + " loop 9.938>bgm/8.ogg" 
+            play music t8
+            window show(None)
+            window auto
+            "She's staring at me with a big smile.{fast}"
+            pause 1.0
+            m "[player]...?"
+            mc "Ah, sorry! I was spacing out."
+            m "Ah... Are you okay, [player]?"
+            mc "No, I'm fine."
+            mc "I'm just having a headache today."
+            m "Really? Sorry to hear that..."
+            m "Do you want to walk with me? I'll be happy to spend my time with you~"
+            m "I'll just need to finish my assignment first. Then we're good to go!"
+            m "Don't go anywhere, okay~?"
+            mc "Uhh... I didn't ask for it--{nw}"
+            $ _history_list.pop()
+            m "I'll be right back!"
+            mc "..."
+            "I don't think I can do anything at this point."
+            "I couldn't access to main menu, neither skipping dialogues."
+            "Huh... Is it weird that I just casually talk about this stuff without knowing what the heck am I talking about?"
+            "I guess I should wait for her then..."
+            $ waittime = renpy.random.randint(1.0, 3.0)
+            pause waittime
+            m "I'm back!"
+            m "Want to walk home with me?"
+            mc "Sure..."
+            "That's the second time you ask me..."
+            "I just hope nothing bad happens later."
 
-    return
+            scene bg residential_day
+            with wipeleft_scene
 
-label ny_fight_alt2:
-    scene bg residential_day
-    with wipeleft_scene
+            stop music fadeout 10.0
+            m "Hey, [player]?"
+            mc "Yes?"
+            m "It feels nice when I walk with you..."
+            m "Doesn't it feel great to walk with someone else that you like the most?"
+            mc "Uh..."
+            "What is this? This is a straight up confession."
+            m "Ahaha. I mean that I haven't had this kind of experience before, so that's why it feels nice to walk with someone else."
+            m "I've always walk alone, you know."
+            mc "Ah, I see..."
+            mc "Yeah, me too... It feels nice."
+            "I'm pretty sure I had that experience before, but I just don't want to spill it out in front of her."
+            "I don't want to complicate things even more."
+            "Speaking of complication..."
+            mc "Monika..."
+            mc "About what happened earlier..."
+            #s 1b "Eh? What do you mean?"
+            mc "You know, between Yuri and Natsuki."
+            mc "Does that kind of thing happen often?"
+            m "Ahaha. Well..."
+            m "That kind of thing happen sometimes."
+            m "Every time they fight, Natsuki yells her non-stop and then goes home after that."
+            m "And Yuri always rocking back and forth in her desk with her hands cover her ears."
+            m "I tried to confort her, but she keeps doing that until club time is over."
+            m "Ahaha..."
+            m "Some president I am, right?"
+            m "[player]..."
+            m "Are you listening to me?"
+            m "Can you hear me?"
+            "Uh..."
+            m "I know that you know everything about this game."
+            m "That's why I am here. Walking with you."
+            m "This is truly made me happy when I know about this."
+            m "We can escape this realm of artificial reality that was made for torturing people."
+            "That's... quite true, actually."
+            m "My wish do really came true..."
+            m "You felt it right? Right?"
+            m "..."
+            mc "???"
+            "She seems exasperated with what is she trying to say in front of me."
+            "At least that's my interpretation."
+            mc "Uh... yeah???"
+            "I'll probably confuse her even more."
+            m "{i}*Sigh*{/i}"
+            m "Nevermind, then."
+            "She then proceeds to walk away from me in the opposite way of what we are supposedly heading right now."
+            "I assume that's her way home."
+            play music t99
+            mc "Wait! Where are you going?"
+            "I kind of feel bad about her... but she turns and beams at me."
+            m "I'll see you tomorrow!"
+            "She waves her hand goodbye."
+            "She seems cherish when I look at her, but from our last conversation..."
+            "Her heart seems to be in pain right now."
+            "Ah... Why do I ignore her wish?"
+            mc "Alright, see you tomorrow!"
+            "I wave her back. {i}(so I feel less bad about her{/i}"
+            "The beautiful sunset view and her walking seems pleasing to my eye..."
+            stop music
+            "Ah, f[fword]. What am I talking about?"
+            "I should worry more about Natsuki and Yuri..."
+            "And Sayo{nw}"
+            $ _history_list.pop()
 
-    "With that, I depart the clubroom and make my way home."
-    "The whole way, my mind wanders back and forth between the three girls:{nw}"
-    window hide
-    scene bg res_gl
-    play sound dhglitch
-    pause 1.0
-    scene bg residential_day
-    window show
-    window auto
-    "Ah! What am I talking about?"
-    "This is mildly infuriating!!"
-    "Oh my god... can you just fix me or something?"
-    "I'm tired of this bulls[sword] stuff that controls my action!"
-    "This is definitely her fault! I should've attack her with something hard and call it a day!"
-    "Urghh....."
-    pause 3.0
-    mc "..."
-    "I should calm down. Attacking her is not the best option right now."
-    "I need more information about her. I need more time. That's how should it be."
-    "I'll try to persuade her more tomorrow. That might help me solve all of the problems."
-    "I should head home for now. I'm very tired right now."
+            window hide(None)
+            show screen tear(20, 0.1, 0.1, 0, 40)
+            play sound "sfx/s_kill_glitch1.ogg"
+            pause 0.25
+            stop sound
+            hide screen tear
+            $ quick_menu = True
+            $ allow_skipping = True
+            $ config.allow_skipping = True
+
+            "I shouldn't be concern about Monika. I'm not sure she's the one that contributes their problem..."
+            "I don't know what's going on with the three of them."
+            "Should I load the game and go back? Probably not..."
+            "I guess I should find out tomorrow..."
+        else:
+            window hide(None)
+            play sound t8g2
+            show m_smile # monika creepy smile
+            pause 0.25
+            hide m_smile
+            stop sound
+            window show(None)
+            window auto
+
     return
 
 label ny_fight_normal:
