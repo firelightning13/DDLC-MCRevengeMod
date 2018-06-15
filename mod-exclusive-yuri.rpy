@@ -651,7 +651,7 @@ label mod_exclusive_abs_1:
     mc "How did you know her na{nw}"
     play music gl
     show yuri glitch at t11 zorder 2
-    mc "How did you know her na{fast} [gtext] [gtext] [gtext]{nw}"
+    mc "{cps=100}How did you know her na{fast} [gtext] [gtext] [gtext]{nw}{/cps}"
     window hide(None)
     window auto
     hide yuri

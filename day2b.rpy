@@ -630,9 +630,13 @@ label ch_mod_2_end:
             $ quick_menu = False
             window hide(None)
             $ renpy.display_menu(items=[('Yes', True), ('No', True)], interact=False, screen='choice')
+            show screen tear(20, 0.1, 0.1, 0, 40)
             play sound sgl
             pause 0.25
             stop sound
+            hide screen tear
+            window show(None)
+            window auto
     if poetappeal != "mp" and poetappeal != "cute":
         show yuri at mod_finstant zorder 3 # instant appear just like i21, but still in "focus" mode
     else:
@@ -645,8 +649,8 @@ label ch_mod_2_end:
     n 1e "Huh! And how do you know he didn't appreciate {i}my{/i} advice more?"
     n "Are you that full of yourself?"
     show natsuki at t22 zorder 2
-    "Oh no."
-    "This is getting worser and worser..."
+    "Uh-oh."
+    "Looks like this situation got even worse."
     show yuri at f21 zorder 3
     y 3h "I...!"
     y "No..."
@@ -786,6 +790,7 @@ label ny_fight_alt:
     show noise at noise_alpha zorder 100
     show vignette at vignetteflicker(-2.030) zorder 100
     show layer master at rewind
+
     y "{cps=200}You think you can counterbalance your toxic personality just by dressing and acting cute?{/cps}{nw}"
     y 1k "{cps=200}The only cute thing about you is how hard you try.{/cps}{nw}"
     show yuri at i21 zorder 2
@@ -837,6 +842,7 @@ label ny_fight_alt:
     y 1t "{cps=200}Yoasadu!!/! undd.,asdwrs\%tanda tqwa?t, ?ยก?r?ig?hawwat?,ยก [player]?{/cps}{nw}"
     # garbage text, theres no internal meaning of it
     y "{cps=200}[gtext]{/cps}{space=5000}{w=2.0}{nw}"
+
     python:
         currentpos = get_pos()
         startpos = currentpos - 0.3
@@ -859,6 +865,7 @@ label ny_fight_alt:
     y "{cps=200}[gtext]{/cps}{space=5000}{fast}{w=2.0}{nw}"
     hide white onlayer front
     window hide(None)
+    stop music
     scene white
     play music start_gl
     show intro with Dissolve(0.5, alpha=True)
@@ -869,10 +876,10 @@ label ny_fight_alt:
         alpha 0.5
     pause 0.5
     hide intro
-    show intro_pj:
-        alpha 0.5
-    pause 0.1
-    hide intro_pj
+    #show intro_pj:
+    #    alpha 0.5
+    #pause 0.1
+    #hide intro_pj
     show intro:
         alpha 0.5
     pause 0.5
@@ -888,69 +895,130 @@ label ny_fight_alt:
     scene black
     pause 1.0
     show reloading "Reloading script... Please wait."
-    pause 1.0
-    show reloading "Reloading script... Please wait.."
-    pause 1.0
-    show reloading "Reloading script... Please wait..."
-    pause 1.0
-    show reloading "Reloading script... Please wait."
     pause 0.5
+    show reloading "Reloading script... Please wait.."
+    pause 0.5
+    show reloading "Reloading script... Please wait..."
+    pause 0.5
+    show reloading "Reloading script... Please wait."
+    pause 0.25
     hide reloading
+    pause 0.25
     #$ allow_skipping = True
     #$ config.allow_skipping = True
-    scene bg club_day
-    with wipeleft_scene
-    $ quick_menu = True
-    $ del _history_list[0:]
+    #$ quick_menu = True
 
-    show natsuki at i21 zorder 2
-    show yuri 2n at mod_finstant zorder 3
     ################################################## To proofreaders: Ignore the script above
     ################################################## Now you can proofread from here
-    y "[player]...!"
-    y "She-- She's just trying to make me look bad...!"
-    n 4w "That's not true!"
-    n "She started it!"
-    n "If she get over--" # herself and learn to appreciate that {i}simple{/i} writing is more effective...
-    n "...over..."
-    n "..."
-    y "Natsuki..."
-    y "You really trying that hard to to make me look bad?"
-    y "Please."
-    y "If you think that my--" # writing style is that bad?
-    y "...my..."
-    y "..."
-    n "Oh, now you are trying to make me look bad?"
-    n "Thanks, but it really didn't--" # come out nice at all!
-    n "..."
-    y "..."
-    n "Wait, what are we supposed to talk about?"
-    y "..."
-    y "I-- I don't know..."
-    y "Why are we even arguing?"
-    n "What? Are you even paying attention to what happened around you?"
-    y "Well. Sorry..."
-    y "It seems that you didn't paying attention either."
-    n "--!"
-    n "Well..."
-    n "{i}(This is a very awkward situation...){/i}"
-    n "Monika!"
-    y "...?"
-    m "Ah..."
-    m "What is it, Natsuki?"
-    y "Do you know anything about what happened just now?"
-    n "I was about to ask that..."
-    m "Uh..."
-    m "What are you talking about?"
-    m "There's nothing happening weird around here."
-    m "Except that you guys are fighting for no reason..."
-    m "And..."
-    m "..."
-    y "Are we? I don't think so..."
-    n "Jeez. What's going on right now?"
-    n "[player], do you know-"
-    n "Wait. Where's [player]?"
-    y "Where did he go?{nw}"
+
+    #python:
+    #    player_string = len(player)
+    #    player_cps = (player_string/50) # character limit is 12 characters, impossible for it
+                                        # to be negative value (after calculation in pause)
+
+    ### This conversation will be played without player's interaction(forced)
+    ## each sentence with numbers shown at the side (including +0.04), which is times to finish a sentence (calculates with characters per second)
+    ## is subject to change within intonation and the speed of speaking from each individual speakers
+    ## note that some sentences will be changed by proofreaders, and then reviewed and recalculate by me
+    # default cps = 50s (equivalent of 0.02s per word)(including spaces and punctuation marks)
+    # +0.04 for quotation marks surrounding the sentence
+
+    if preferences.text_cps != 50:
+        $ persistent.mod_cps = preferences.text_cps
+        $ preferences.text_cps = 50
+    $ config.keymap['dismiss'] = []
+    $ renpy.display.behavior.clear_keymap_cache()
+
+    ### wait {w} time = How long you speak that sentence - how long the sentence shows up in the game + 0.04s
+
+    scene bg club_day
+    with wipeleft_scene
+    $ del _history_list[0:]
+
+    show natsuki 1f at i22 zorder 2
+    show yuri 2n at mod_finstant zorder 3
+    y "[player]...!\"{space=5000}{w=0.91}{nw}" #0.12 w/o player's name
+    y "She-- She's just trying to make me look bad...!\"{space=5000}{w=0.78}{nw}" #0.98
+    show yuri at t21 zorder 2
+    show natsuki at f22 zorder 3
+    n 4w "That's not true!\"{space=5000}{w=0.78}{nw}" #0.36
+    n "She started it!\"{space=5000}{w=0.67}{nw}" #0.34
+    n 4e "If she get over--\"{space=5000}{w=1.1}{nw}" # herself and learn to appreciate that {i}simple{/i} writing is more effective... #0.38
+    n 4q "...over...\"{space=5000}{w=0.24}{nw}" #0.24
+    n 4s "...\"{space=5000}{w=0.88}{nw}" #0.1
+    show natsuki at t22 zorder 2
+    show yuri at f21 zorder 3
+    y 1k "Natsuki...\"{space=5000}{w=0.51}{nw}" #0.6
+    y 2h "You really trying that hard to make me look bad?\"{space=5000}{w=1.36}{nw}" #1.0
+    y 2i "Please.\"{space=5000}{w=0.95}{nw}" #0.18
+    y 2j "If you think that my--\"{space=5000}{w=0.91}{nw}" # writing style is that bad? #0.48
+    y 2h "...my...\"{space=5000}{w=0.84}{nw}" #0.2
+    y 1o "...\"{space=5000}{w=1.03}{nw}" #0.1
+    show yuri at t21 zorder 2
+    show natsuki at f22 zorder 3
+    n 4e "Oh, now you are trying to make me look bad?\"{space=5000}{w=1.8}{nw}" #0.9
+    n 4w "Thanks, but it really didn't--\"{space=5000}{w=1.75}{nw}" # come out nice at all! #0.64
+    n 1n "...\"{space=5000}{w=1.14}{nw}" #0.1
+    show natsuki at t22 zorder 2    
+    show yuri at f21 zorder 3
+    y 1v "...\"{space=5000}{w=1.14}{nw}" #0.1
+    show yuri at t21 zorder 2
+    show natsuki at f22 zorder 3
+    n 3c  "Wait, what are we supposed to talk about?\"{space=5000}{w=1.65}{nw}" #0.86
+    show natsuki at t22 zorder 2
+    show yuri at f21 zorder 3
+    y 1w "...\"{space=5000}{w=1.14}{nw}" #0.1
+    y 1v "I-- I don't know...\"{space=5000}{w=1.67}{nw}" #0.42
+    y 3h "What are we arguing about?\"{space=5000}{w=1.27}{nw}" #0.56
+    show yuri at t21 zorder 2
+    show natsuki at f22 zorder 3
+    n 4w "What? Are you even paying attention to what happened around you?\"\n{space=5000}{w=2.51}{nw}" #1.32
+    show natsuki at t22 zorder 2
+    show yuri at f21 zorder 3
+    y 1g "Well. Sorry...\"{space=5000}{w=1.23}{nw}" #0.32
+    y 2j "It seems that you didn't paying attention either.\"{space=5000}{w=1.99}{nw}" #0.52
+    show yuri at t21 zorder 2
+    show natsuki at f22 zorder 3
+    n 1r "--!\"{space=5000}{w=1.44}{nw}" #0.1
+    n 1q "Well...\"{space=5000}{w=0.76}{nw}" #0.18
+    n 3u "{i}(This is kinda awkward situation I'm in right now...){/i}\"{space=5000}{w=1.6}{nw}" #1.08
+    play sound ngl
+    n gl "Monika!\"{space=5000}{w=0.67}{nw}" #0.18
+    y 3n "...!\"{space=5000}{w=0.4}{nw}" #0.12
+    show natsuki 1w at t33 zorder 2
+    show yuri at t32 zorder 2
+    show monika at l31 zorder 3
+    m 1g "Ah...\"{space=5000}{w=0.61}{nw}" #0.14
+    show yuri 3o at t32 zorder 2
+    show monika at f31 zorder 3
+    m 2n "What is it, Natsuki?\"{space=5000}{w=1.04}{nw}" #0.44
+    show monika at t31 zorder 2
+    show yuri at f32 zorder 3
+    y 3n "U-- Uhm...\"{space=5000}{w=1.84}{nw}" #0.24
+    y 3t "Do you know anything about what happened just now?\"{space=5000}{w=2.0}{nw}" #1.04
+    show yuri at t32 zorder 2
+    show natsuki at f33 zorder 3
+    n 4g "I was about to ask that...\"{space=5000}{w=1.53}{nw}" #0.56
+    show natsuki at t33 zorder 2
+    show monika at f31 zorder 3
+    m 2h "Uh...\"{space=5000}{w=0.66}{nw}" #0.14
+    m "What are you talking about?\"{space=5000}{w=1.12}{nw}" #0.58
+    m 2i "There's nothing happening weird around here.\"{space=5000}{w=1.58}{nw}" #0.92
+    m 2q "Except that you guys are fighting for no reason...\"{space=5000}{w=1.86}{nw}" #1.04
+    m "And...\"{space=5000}{w=1.14}{nw}" #0.14
+    m 2o "...\"{space=5000}{w=1.13}{nw}" #0.1
+    show monika at t31 zorder 2
+    show yuri at f32 zorder 3
+    y 3l "Are we? I don't think so...\"{space=5000}{w=0.77}{nw}" #0.58
+    show yuri at t32 zorder 2
+    show natsuki at f33 zorder 3
+    n 4e "Jeez. What's going on right now?\"{space=5000}{w=1.6}{nw}" #0.68
+    n 3w "[player], do you know-\"{space=5000}{w=0.89}{nw}" #0.32 w/o player's name
+    n 1c "Wait. Where's [player]?\"{space=5000}{w=1.18}{nw}" #0.34
+    show natsuki at t33 zorder 2
+    show yuri at f32 zorder 3
+    y 3f "Where did he go?{nw}"
+
     window hide(None)
     show screen tear(20, 0.1, 0.1, 0, 40)
     play sound "sfx/s_kill_glitch1.ogg"
@@ -958,71 +1026,92 @@ label ny_fight_alt:
     stop sound
     hide screen tear
     window show(None)
+    $ config.keymap['dismiss'] = dismiss_keys
+    $ renpy.display.behavior.clear_keymap_cache()
+    $ quick_menu = True
+    $ preferences.text_cps = persistent.mod_cps
+    show natsuki at t33 zorder 2
+    show yuri at t32 zorder 2
+    show monika at t31 zorder 2
+
     if poetappeal == "abs" or poetappeal == "bs":
         mc "I'm right here..."
         mc "Sorry about that."
-        n "About what?"
+        show natsuki at f33 zorder 3
+        n 2c "About what?"
         mc "Anyway..."
         mc "You're all done sharing poems right?"
-        y "..."
-        n "..."
-        m "Yeah. We're pretty much done here..."
+        show natsuki at t33 zorder 2
+        y 3g "..."
+        n 2s "..."
+        show monika at f31 zorder 3
+        m 2h "Yeah. We're pretty much done here..."
         m "It's already late. You guys can go home now."
+        show monika at t31 zorder 2
         if poetappeal == "abs":
             mc "Yeah. You're right."
-        else poetappeal == "bs":
+        elif poetappeal == "bs":
             mc "Erm... That's a little{nw}"
             $ _history_list.pop()
-        n "Yeah. I'm outta here..."
+        show natsuki at f33 zorder 3
+        n 2w "Yeah. I'm outta here..."
+        show natsuki at thide zorder 1
+        hide natsuki
         "Natsuki starts packing up her things and then walks right out of the classroom."
         y "..."
-        y "Oh! Uh..."
-        y "I think I should get going then..."
+        show yuri at hf33 zorder 3
+        y 3n "Oh! Uh..."
+        y 3p "I think I should get going then..."
+        show yuri at thide zorder 1
+        hide yuri
         "Yuri follows the same path as Natsuki."
         "She packs up her things and then timidly walks out of the classroom."
+        show monika at 1h t11 zorder 2
         if poetappeal == "abs":
             mc "..."
-            m "..."
+            m 1q "..."
             mc "Well, uh..."
             mc "About what happened..."
             mc "I--"
-            m "[player]..."
-            m "What are you trying to do?"
+            m 1h "[player]..."
+            m 2i "What are you trying to do?"
             m "You almost killed us back there..."
             mc "Killed you? What are you talking about?"
             "\"Killed\"? That's a strong word to describe. Pretty sure that's not the right word."
             mc "I didn't do anything..."
-            m "Well, who did it then?"
+            m 2h "Well, who did it then?"
             mc "I wish I knew who did it."
-            m "..."
-            m "[player]..."
+            m 1f "..."
+            play sound dhglitch2
+            m 1p "[player]..."
             mc "Huh?"
-            "As I hear her frustated sigh, she finally wants to say something."
+            "As I hear her frustated sighs, she finally wants to say something."
             if persistent.monika_secret[1]: #if she failed to explain when they shared their poems.
-                m "Please, hear me out."
-                m "Just don't leave me hanging again--" #oof
+                m 1g "Please, hear me out."
+                m "Just don't leave me hanging again--{nw}" #oof
                 $ _history_list.pop()
-                m "I-I mean--"
+                m 1n "I-I mean--"
+                show monika 1o at t11 zorder 2
                 mc "???"
                 "I think she was trying to say something at me when I share my poem with her..."
                 "I don't know what happened back then. But that word seems...{nw}"
                 $ _history_list.pop()
                 mc "Alright. What are you trying to say?"
             else:
-                m "Do you remember when we shared out poem to each other moment ago?"
+                m 1f "Do you remember when we shared out poem to each other moment ago?"
                 mc "Yeah... Why?"
-                m "Where I said that I need to talk to you about something..."
+                m 1g "Where I said that I need to talk to you about something..."
                 mc "Ah, yeah. That..."
-                "She seems pressured and hurried. What's \"something\" that she wanted to talk about?"
-            m "The thing is..."
-            m "{/i}(I guess I should spill the beans...){i}"
+                "She seems pressured and hurried. What was she wanted to talk about?"
+            m 1g "The thing is..."
+            m 1o "{/i}(I guess I should spill the beans...){i}"
             $ _history_list.pop()
             "Did I just hear her thoughts inside her head?"
             $ _history_list.pop()
-            m "Everything is not real around here..."
-            m "This world, it's just something made up by someone else."
-            m "Who developed this world."
-            m "This... game..."
+            m 1f "Everything is not real around here..."
+            m 2g "This world, it's just something made up by someone else."
+            m 2c "Who developed this world."
+            m 2h "This... game..."
             if persistent.protecc:
                 "Shi{nw}"
                 window hide(None)
@@ -1048,65 +1137,78 @@ label ny_fight_alt:
             "But... why do I feel like I shouldn't trust her?"
             "My mind is always makes me confused."
             # background starts to get darker, forcing you to go to the next chapter
+            show darkred:
+                additive 0.2
+                alpha 0
+                linear 20 alpha 1.0
+            show noise:
+                alpha 0
+                linear 20 alpha 0.1
             mc "I guess..."
-            m "???"
+            m 1f "???"
             mc "Well, I think I {i}roughly{/i} knew about it."
-            m "Really?"
-            m "Thank God, I'm not the only one..."
-            m "I should've explain to you when the game ends, or restarting this game again."
-            m "In a \"formal\" way."
-            m "But I just couldn't handle it. It feels like, torture to me."
-            m "And I step out and break the boundaries within this cruel game."
-            m "Well, I guess you could call it \"breaking the 4th wall\"..."
-            m "I know it's complicated to explain, but you have to believe me!"
-            m "[player]..."
-            play sound dhglitch2
-            m "Can you hear me?"
+            m 1e "Really?"
+            m 1n "Thank God, I'm not the only one..."
+            m 1g "I should've explain to you when the game ends, or restarting this game again."
+            m 2o "In a \"formal\" way."
+            m 2g "But I just couldn't do it. This game is continuously torturing me, and I wanted to be free."
+            m 1r "That's why I step out and break the boundaries within this cruel game."
+            m 2p "Well, I guess you could call it \"breaking the 4th wall\"..."
+            m 1g "I know it's complicated to explain, but you have to believe me!"
+            m 1c "[player]..."
+            m 1d "Can you hear me?"
             mc "What??"
             mc "What are you saying, Monika?"
-            m "I'm really admire you as a person."
+            m 2e "I'm really admire you as a person."
             mc "What??"
-            m "I just want to say that{nw}"
+            show black onlayer front:
+                alpha 0.0
+                0.25
+                linear 1.0 alpha 1.00
+            m 1b "{cps=30}I just want to say that{/cps}{nw}" #0.767
             $ _history_list.pop()
+            hide black onlayer front
+            hide darkred
+            hide noise
+            stop music
             window hide(None)
             window auto
         else:
             mc "Well..."
             m "..."
-            m "[player]..."
+            m 1i "[player]..."
             $ quick_menu = False
             $ config.keymap['dismiss'] = []
             $ renpy.display.behavior.clear_keymap_cache()
-            # realistic delay, based on text_cps and people irl
-            # since Monika wants to be real person
-            m "You did this, didn't you?{w=1.4}{nw}"
-            m "How could you?{w=1.4}{nw}"
-            m "How could you do this to us!?{w=1.3}{nw}"
-            m "I shouldn't have trusted you!{w=1.5}{nw}"
-            m "I think I should just--{nw}"
+            m 2i "You did this, didn't you?\"{space=5000}{w=1.06}{nw}"
+            m "How could you?\"{space=5000}{w=0.68}{nw}"
+            m "How could you do this to us!?\"{space=5000}{w=1.06}{nw}" # possibly refer to player, not mc
+            m 2q "I shouldn't have trusted you!\"{space=5000}{w=1.09}{nw}"
+            m 2r "I think I should just--{nw}"
             play sound dhglitch
             pause 0.2
             $ config.keymap['dismiss'] = dismiss_keys
             $ renpy.display.behavior.clear_keymap_cache()
+            $ quick_menu = True
             stop sound
             mc "Hey! I didn't do anything..."
             mc "What are you talking about?!"
-            m "Don't be silly. I know what you did."
+            m 2i "Don't be silly. I know what you did."
             mc "I did what?"
-            m "Well..."
-            m "..."
+            m 2h "Well..."
+            m 1o "..."
             "She seems in the bad mood now. So am I."
             mc "Now, should {i}you{/i} explain about what's going on?"
             mc "I have zero clue about this."
             "That's a lie though. But for reasons..."
             $ _history_list.pop()
-            m "{i}*Sigh*{/i}"
-            m "Sorry, [player]. I have no idea what's going on."
+            m 1q "{i}*Sigh*{/i}"
+            m 1h "Sorry, [player]. I have no idea what's going on."
             mc "What?"
             mc "You can't just ignore the fact that you are trying to dele--{nw}"
             $ _history_list.pop()
             mc "Er..."
-            m "???"
+            m 1f "???"
             if persistent.protecc:
                 "Ah, shi{nw}"
                 window hide(None)
@@ -1127,26 +1229,26 @@ label ny_fight_alt:
                 pause 0.2
                 stop sound
             else:
-                "Ah, S[sword]!"
+                "Ah, s[sword]!"
             "I shouldn't have said that!"
             mc "I'm sorry."
             mc "I guess I'm too overreacting..."
-            m "..."
-            m "Well..."
-            m "It seems that you don't know anything, huh?"
-            m "I guess I was wrong about you..."
+            m 1q "..."
+            m 1o "Well..."
+            m 1p "It seems that you don't know anything, huh?"
+            m 1f "I guess I was wrong about you..."
             "She seems did not admit it to me, but I'll make sure that she will."
             $ _history_list.pop()
             "As of right now, I'm going to act as natural as possible."
             $ _history_list.pop()
             mc "Sorry, I didn't know."
             mc "I'm sure there will be nothing happened in the future."
-            m "[player], about your poem-"
-            m "Actually, never mind. You can go home now."
+            m 1g "[player], about your poem-"
+            m 2q "Actually, never mind. You can go home now."
             mc "Alright, then."
             "I pack up my stuff and then walk towards the classroom door."
             mc "Oh, make sure that fight never happens again."
-            m "Yeah, I hope so..."
+            m 1o "Yeah, I hope so..."
 
             scene bg residential_day
             with wipeleft_scene
@@ -1184,40 +1286,45 @@ label ny_fight_alt:
         "[gtext]" # Argh... I couldn't read my mind like this...
         $ ad = 12
         $ ac = 12
-        show monika 1 at mod_malpha(ac/ad)
-        y "[player]... Are you okay?"
+        show monika at mod_malpha(ac/ad)
+        show yuri at f32 zorder 3
+        y 3n "[player]... Are you okay?"
         $ ac -= 1
-        show monika 1 at mod_malpha(ac/ad)
-        y "Did- Did I hurt you in some way...?"
+        show monika at mod_malpha(ac/ad)
+        y 3t "Did- Did I hurt you in some way...?"
         $ ac -= 1
-        show monika 1 at mod_malpha(ac/ad)
+        show monika at mod_malpha(ac/ad)
+        show yuri at t32 zorder 2
         mc "Uh- no... I--"
         $ ac -= 1
-        show monika 1 at mod_malpha(ac/ad)
-        n "Oh come on, Yuri. It's not your fault for doing that."
+        show monika at mod_malpha(ac/ad)
+        show natsuki at f33 zorder 3
+        n 5c "Oh come on, Yuri. It's not your fault for doing that."
         $ ac -= 1
-        show monika 1 at mod_malpha(ac/ad)
-        y "Uuuu."
+        show monika at mod_malpha(ac/ad)
+        y 4a "Uuuu."
         $ ac -= 1
-        show monika 1 at mod_malpha(ac/ad)
-        n "What we did was--"
+        show monika at mod_malpha(ac/ad)
+        n 5w "What we did was--"
         $ ac -= 1
-        show monika 1 at mod_malpha(ac/ad)
-        n "-was..."
+        show monika at mod_malpha(ac/ad)
+        n 5q "-was..."
         $ ac -= 1
-        show monika 1 at mod_malpha(ac/ad)
+        show monika at mod_malpha(ac/ad)
         mc "???"
         $ ac -= 1
-        show monika 1 at mod_malpha(ac/ad)
-        n "Ah, I don't f[fgword] know! Don't just stare at me!"
+        show monika at mod_malpha(ac/ad)
+        n 1x "Ah, I don't f[fgword] know! Don't just stare at me!"
         $ ac -= 1
-        show monika 1 at mod_malpha(ac/ad)
+        show monika at mod_malpha(ac/ad)
         mc "Language, Natsuki..."
+        if persistent.protecc:
+            "Wait, what did she says?"
         $ ac -= 1
-        show monika 1 at mod_malpha(ac/ad)
-        n "Hmph."
+        show monika at mod_malpha(ac/ad)
+        n 5g "Hmph."
         $ ac -= 1
-        show monika 1 at mod_malpha(ac/ad)
+        show monika at mod_malpha(ac/ad)
         mc "I think what happened was{nw}"
 
         if not persistent.monika_secret[3]:
@@ -1295,17 +1402,20 @@ label ny_fight_alt:
             window auto
             "She's staring at me with a big smile.{fast}"
             pause 1.0
-            m "[player]...?"
+            show monika at t11 zorder 2
+            m 1d "[player]...?"
             mc "Ah, sorry! I was spacing out."
-            m "Ah... Are you okay, [player]?"
+            m 1f "Ah... Are you okay, [player]?"
             mc "No, I'm fine."
             mc "I'm just having a headache today."
             m "Really? Sorry to hear that..."
-            m "Do you want to walk with me? I'll be happy to spend my time with you~"
-            m "I'll just need to finish my assignment first. Then we're good to go!"
-            m "Don't go anywhere, okay~?"
+            m 1j "Do you want to walk with me? I'll be happy to spend my time with you~"
+            m 1a "I'll just need to finish my assignment first. Then we're good to go!"
+            m 1k "Don't go anywhere, okay~?"
             mc "Uhh... I didn't ask for it--{nw}"
             $ _history_list.pop()
+            show monika at thide zorder 1
+            hide monika
             m "I'll be right back!"
             mc "..."
             "I don't think I can do anything at this point."
@@ -1314,9 +1424,12 @@ label ny_fight_alt:
             "I guess I should wait for her then..."
             $ waittime = renpy.random.randint(1.0, 3.0)
             pause waittime
-            m "I'm back!"
+            show monika at t11 zorder 2
+            m 5a "I'm back!"
             m "Want to walk home with me?"
             mc "Sure..."
+            show monika at thide zorder 1
+            hide monika
             "That's the second time you ask me..."
             "I just hope nothing bad happens later."
 
@@ -1324,14 +1437,15 @@ label ny_fight_alt:
             with wipeleft_scene
 
             stop music fadeout 10.0
-            m "Hey, [player]?"
+            show monika at t11 zorder 2
+            m 5a "Hey, [player]?"
             mc "Yes?"
-            m "It feels nice when I walk with you..."
+            m 1j "It feels nice when I walk with you..."
             m "Doesn't it feel great to walk with someone else that you like the most?"
             mc "Uh..."
             "What is this? This is a straight up confession."
-            m "Ahaha. I mean that I haven't had this kind of experience before, so that's why it feels nice to walk with someone else."
-            m "I've always walk alone, you know."
+            m 1l "Ahaha. I mean that I haven't had this kind of experience before, so that's why it feels nice to walk with someone else."
+            m 3b "I've always walk alone, you know."
             mc "Ah, I see..."
             mc "Yeah, me too... It feels nice."
             "I'm pretty sure I had that experience before, but I just don't want to spill it out in front of her."
@@ -1342,38 +1456,58 @@ label ny_fight_alt:
             #s 1b "Eh? What do you mean?"
             mc "You know, between Yuri and Natsuki."
             mc "Does that kind of thing happen often?"
-            m "Ahaha. Well..."
-            m "That kind of thing happen sometimes."
-            m "Every time they fight, Natsuki yells her non-stop and then goes home after that."
+            m 1n "Ahaha. Well..."
+            m 2a "That kind of thing happen sometimes."
+            m 2b "Every time they fight, Natsuki yells her non-stop and then goes home after that."
             m "And Yuri always rocking back and forth in her desk with her hands cover her ears."
-            m "I tried to confort her, but she keeps doing that until club time is over."
-            m "Ahaha..."
-            m "Some president I am, right?"
-            m "[player]..."
-            m "Are you listening to me?"
+            m 2m "I tried to confort her, but she keeps doing that until club time is over."
+            m 2l "Ahaha..."
+            m 2a "Some president I am, right?"
+            window hide(None)
+            show screen tear(20, 0.1, 0.1, 0, 40)
+            play sound "sfx/s_kill_glitch1.ogg"
+            pause 0.25
+            stop sound
+            hide screen tear
+            window show(None)
+            window auto
+            m 1f "[player]..."
+            m 1g "Are you listening to me?"
             m "Can you hear me?"
             "Uh..."
-            m "I know that you know everything about this game."
+            $ _history_list.pop()
+            m 1c "I know that you know everything about this game."
             m "That's why I am here. Walking with you."
-            m "This is truly made me happy when I know about this."
+            "What? How did you know that?"
+            $ _history_list.pop()
+            m 1e "This is truly made me happy when I know about this."
             m "We can escape this realm of artificial reality that was made for torturing people."
-            "That's... quite true, actually."
-            m "My wish do really came true..."
-            m "You felt it right? Right?"
-            m "..."
+            #"That's... quite true, actually."
+            "Wait, who's real villain here?"
+            $ _history_list.pop()
+            m 1g "My wish do really came true..."
+            m 1f "You felt it right? Right?"
+            m 1o "..."
+            pause 1.5
             mc "???"
             "She seems exasperated with what is she trying to say in front of me."
             "At least that's my interpretation."
             mc "Uh... yeah???"
             "I'll probably confuse her even more."
-            m "{i}*Sigh*{/i}"
+            "I try not to reveal who I really am in front of her. I think this is not the right to do that yet."
+            m 1q "{i}*Sigh*{/i}"
             m "Nevermind, then."
+            show monika at thide zorder 2
+            hide monika
             "She then proceeds to walk away from me in the opposite way of what we are supposedly heading right now."
             "I assume that's her way home."
             play music t99
             mc "Wait! Where are you going?"
             "I kind of feel bad about her... but she turns and beams at me."
-            m "I'll see you tomorrow!"
+            show monika at t11 zorder 2
+            m 5a "I'll see you tomorrow!"
+            show monika at thide zorder 2
+            hide monika
             "She waves her hand goodbye."
             "She seems cherish when I look at her, but from our last conversation..."
             "Her heart seems to be in pain right now."
@@ -1397,9 +1531,12 @@ label ny_fight_alt:
             $ allow_skipping = True
             $ config.allow_skipping = True
 
-            "I shouldn't be concern about Monika. I'm not sure she's the one that contributes their problem..."
+            "I shouldn't be concern about Monika. I'm not sure she's the one causing their problems to be prominent..."
+            "Or someone else..."
             "I don't know what's going on with the three of them."
-            "Should I load the game and go back? Probably not..."
+            "Should I load the game and go back?{nw}"
+            $ quick_menu = False
+            "Should I load the game and go back?{fast} Probably not..."
             "I guess I should find out tomorrow..."
         else:
             window hide(None)
@@ -1451,6 +1588,21 @@ label ny_fight_normal:
     show natsuki 1g at t22 zorder 2
     $ style.say_dialogue = style.normal
     mc "..."
+    $ mc_blocked = True
+    show club_gl2 zorder 1
+    pause 0.01
+    window hide(None)
+    show screen tear(20, 0.1, 0.1, 0, 40)
+    stop music
+    play sound "sfx/s_kill_glitch1.ogg"
+    pause 0.25
+    stop sound
+    hide club_gl2
+    hide screen tear
+    scene black
+    window auto
+    play sound 7end
+    pause 6.0
     #$ style.say_dialogue = style.edited
     #"{cps=*2}How did I get dragged into this in the first place?!{/cps}{nw}"
     #"{cps=*2}It's not like I know anything about writing...{/cps}{nw}"

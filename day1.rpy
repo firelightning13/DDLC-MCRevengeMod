@@ -782,7 +782,7 @@ label ch_mod_1:
         play music t3
         $ persistent.day1_gl = 11
     else:
-        "The whole way, my mind wanders{fast} back and forth between the three girls:"
+        "The whole way, my mind wanders back and forth between the three girls:"
         show natsuki 4a at t31 zorder 2
         "Natsuki,"
         show yuri 1a at t32 zorder 2

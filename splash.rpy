@@ -323,16 +323,14 @@ label splashscreen:
 
     # Splash screen
     show white
-    $ persistent.ghost_menu = False #Handling for easter egg from DDLC
+    #$ persistent.ghost_menu = False #Handling for easter egg from DDLC
     $ splash_message = splash_message_default #Default splash message
     $ renpy.music.play(config.main_menu_music)
     show intro with Dissolve(0.5, alpha=True)
     pause 2.5
     hide intro with Dissolve(0.5, alpha=True)
     #You can use random splash messages, as well. By default, they are only shown during certain acts.
-    if persistent.demu_demu:
-        $ splash_message = "Just Monika."
-    elif persistent.playthrough == 2 and renpy.random.randint(0, 3) == 0:
+    if persistent.playthrough == 2 and renpy.random.randint(0, 3) == 0: ### 25% chance
         $ splash_message = renpy.random.choice(splash_messages)
     show splash_warning "[splash_message]" with Dissolve(0.5, alpha=True)
     pause 2.0
@@ -348,8 +346,11 @@ label warningscreen:
 label after_load:
     $ config.allow_skipping = allow_skipping
     $ _dismiss_pause = config.developer
-    $ persistent.ghost_menu = False #Handling for easter egg from DDLC
+    #$ persistent.ghost_menu = False #Handling for easter egg from DDLC
     $ style.say_dialogue = style.normal
+    $ preferences.skip_unseen = False
+    $ config.keymap['dismiss'] = dismiss_keys
+    $ renpy.display.behavior.clear_keymap_cache()
     #Check if the save has been tampered with
     if anticheat != persistent.anticheat:
         stop music
@@ -357,7 +358,21 @@ label after_load:
         "The save file could not be loaded."
         "Are you trying to cheat?"
         #Handle however you want, default is to force reset all save data
-        $ delete_all_saves()
+        $ m_name = "Monika"
+        $ fl = FL13
+        show monika 1 at t11
+        if persistent.playername == "":
+            m "You're so funny."
+            fl "You don't know what I'm capable of. And [player] is going to play my mod."
+        else:
+            m "You're so funny, [persistent.playername]."
+            fl "You don't know what I'm capable of. And [persistent.playername] is going to play my mod."
+        m 1i "Huh? Excuse me?"
+        m 5b "Who are you?"
+        fl "Good luck modifying this game, because now you're not the only one who's in control here!{nw}"
+        window hide(None)
+        show screen tear(8, offtimeMult=1, ontimeMult=10)
+        pause 1.5
         $ renpy.utter_restart()
     return
 

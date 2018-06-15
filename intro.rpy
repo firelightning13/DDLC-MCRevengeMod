@@ -28,7 +28,7 @@ label ch_mod_intro:
     show splash_n
     pause 0.25
     hide splash_n with Dissolve(0.5, alpha=True)
-    show splash_warning "WARNING: Flashing colours in 3 seconds ahead!\n-firelightning13" with Dissolve(0.5, alpha=True)
+    show splash_warning "WARNING: Flashing colours after you dismiss the error dialog!\n-firelightning13" with Dissolve(0.5, alpha=True)
     pause 1.0
     hide splash_warning
     show screen tear(20, 0.1, 0.1, 0, 40)

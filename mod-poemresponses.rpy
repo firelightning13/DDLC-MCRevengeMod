@@ -76,11 +76,11 @@ label mod_poemresponse:
                         scene black
                         pause 0.1
                     elif persistent.ggwp_monika == 4 and poetappeal == "mp": # from yuri exclusive scene (oof Natsuki)
-                        "dskfgsfjgsdkfjsg{nw}"
+                        "{cps=50}dskfgsfjgsdkfjsg{nw}{/cps}"
                         $ _history_list[-1].what = "I told Natsuki I was interested in her poems yesterday."
-                        "oiasdhosdiasdisadaodk{nw}"
+                        "{cps=50}oiasdhosdiasdisadaodk{nw}{/cps}"
                         $ _history_list[-1].what = "It's probably only fair if I shared mine with her first."
-                        "{cps=*2}mosadiondeyyeyeeyeyeeyeyeeyeyeyeyyeyeyey{/cps}{nw}"
+                        "{cps=100}mosadiondeyyeyeeyeyeeyeyeeyeyeyeyyeyeyey{/cps}{nw}"
                         $ _history_list[-1].what = "eye  can   c    u   .. / .-.. --- ...- . / -.-- --- ..-" # it's a morse code, feel free to translate it
                     elif persistent.ggwp_monika > 0: # if none of the above happened
                         "I'm not sure what is happening in this world..."
@@ -95,7 +95,7 @@ label mod_poemresponse:
                     if poetappeal == "mp" or poetappeal == "abs": # from yuri exclusive scene
                         "Not sure why my mind is racing when I decided to share my poems with her..."
                         "Is it because that I'm afraid that something terrible will happened to her?"
-                    elif persistent.ggwp_monika == 3 and poetappeal == "bs": # from "before" natsuki exclusive scene triggers
+                    elif persistent.ggwp_monika == 3 and poetappeal == "bs": # from "before" natsuki exclusive scene shows up
                         "I still don't know what's up between me and Yuri recently..."
                         "I think I should ask her about it-{nw}"
                         $ _history_list.pop()
@@ -197,12 +197,7 @@ label mod_poemresponse_monika:
     call expression nextscene
     return
 
-#### NOTE:
-# Most of the script were taken from Act 1 of the original game and I don't have much time to edit those to fit into my story.
-# My creative wallet have been hit quite a lot, thus I lost most of my motivation for this mod. I'm really not a writer myself.
-# I am a pretty bad writer.
-
-## temporary code, will not use it atm
+## temporary code, will not use it forever
 #label natsuki_special_1: # special case for natsuki
     #return
 
@@ -395,20 +390,33 @@ label m_cute_1:
         label natsuki_come_back: # this could be improved a little bit, not sure how
             pause 1.0
             "Suddenly, the door opens."
+            m 2b "Natsuki!"
+            show monika 2a
+            show natsuki 5a at f31 zorder 3
             n "I'm back!"
-            n "Wait, what are you two doing right now?"
+            n 4e "Wait, what are you two doing right now?"
+            show monika at f32 zorder 3
+            show natsuki at t31 zorder 2
             m "Well, we all started sharing our poems with each other."
+            show natsuki 5g at f31 zorder 3
+            show monika at t32 zorder 2
             n "Already?"
-            n "Can't you just wait for me? I told you it's only for a while."
-            m 2a "We still have plenty of time, so I'm more glad that you took all the time you needed."
+            n 5w "Can't you just wait for me? I told you it's only for a while."
+            show monika 2a at f32 zorder 3
+            show natsuki at t31 zorder 2
+            m "We still have plenty of time, so I'm more glad that you took all the time you needed."
+            show natsuki 5c at f31 zorder 3
+            show monika at t32 zorder 2
             n "Yeah, whatever."
-            n "I guess I should go get my poem now."
+            n 5s "I guess I should go get my poem now."
+            show natsuki at thide zorder 1
+            hide natsuki
             $ natsuki_out = False
             return
     else:
         "That... doesn't help anything with this current situation that I'm in-{nw}"
         $ _history_list.pop()
-        return
+    return
 
 label m_mp_1:
     m 1a "Great job, [player]!"
@@ -468,16 +476,19 @@ label m_mp_1:
             return
     else:
         mc "What will she do then?"
-        m "Hmm...?"
+        m 1a "Hmm...?"
         m "What do you mean, [player]?"
         mc "What happens next?"
-        m "What are you talking about?"
+        m 2f "What are you talking about?"
         mc "What...?"
         "I'm pretty sure she's crazy right now."
         "Or not."
         mc "You know that I've literally heard everything what you said."
         mc "Who are you talking to anyway?"
+        $ currentpos = get_pos()
+        stop music
         pause 0.5
+        play music "<from " + str(currentpos) + " loop 4.444>bgm/5.ogg"
     return
 
 label m_abs_1:
@@ -504,24 +515,32 @@ label m_abs_1:
     m 3j "Ahaha- I'm just teasing you..."
     mc "Jeez, I don't really know much about your taste in the first place..."
     mc "I wrote it by my own volition."
-    m "I see..."
-    m "It has a bit of abstract elements, kind of what I usually writes."
+    m 2a "I see..."
+    m 4b "It has a bit of abstract elements, kind of what I usually writes."
     m "I expect you to write something like what Yuri or Natsuki usually writes..."
     mc "Again... I don't know much about their taste. So I just write what I want to write anyway."
-    m "But still, you impressed me a lot~"
+    m 5a "But still, you impressed me a lot~"
     mc "Uh... Thanks, I guess..."
     mc "At least I know your taste a little bit."
-    m "Aww... did you really want to impress me that much?~"
-    mc "I-Uh..."
-    jump yuri_come_back
+    m 1j "Aww... did you really want to impress me that much?~"
+    if y_ranaway:
+        mc "I-Uh..."
+        jump yuri_come_back
+    else:
+        mc "Uh, no...?"
+        "F[fword]. I'm being my old-self again."
+        m "Ahaha."
+    return
 
 label m_bs_1:
-    m "...."
-    m "[player]?"
+    m 1a "Great job, [player]!"
+    m "I was going to-"
+    m 1c "...."
+    m 1d "[player]?"
     mc "...?"
-    m "Are you sure this is your first time writing your poem?"
+    m 2d "Are you sure this is your first time writing your poem?"
     mc "Ah, so it's that bad."
-    m "I didn't say it's bad though. It just that it's different from what Yuri or Natsuki usually writes..."
+    m 2m "I didn't say it's bad though. It just that it's different from what Yuri or Natsuki usually writes..."
     if n_readpoem:
         # if mc did read natsuki's poem
         mc "Huh? That's weird."
@@ -529,18 +548,22 @@ label m_bs_1:
         "Or not."
         "I still couldn't figure her out if she really liked my poem."
         mc "Wait, didn't she prefer \"cute\" stuff other than anything else?"
-        m "Ahaha. I guess it's just a bug then." # unless the script placeholder isnt actually a placeholder to begin with
+        m 1n "Ahaha. I guess it's just a bug then." # unless the script placeholder isnt actually a placeholder to begin with
         mc "A bug?"
     else:
         # if mc didn't read natsuki's poem yet
         mc "Did you expect my writing to be just like them?"
-    m "Ah-No! What I mean is..."
-    m "Whenever I read your poem, there's a bit of happiness, and also sadness feel to it."
-    m "You could say it's... {i}bittersweet{/i}."
+    m 1l "Ah-No! What I mean is..."
+    m 3e "Whenever I read your poem, there's a bit of happiness, and also sadness feel to it."
+    show monika 2e at t11 zorder 2
+    $ m_temp = "Monika"
+    m_temp "\"You could say it's... {nw}"
+    m 2m "You could say it's... {fast}{i}bittersweet{/i}."
+    show monika 2e at t11 zorder 2
     "That word seems familiar to me..."
     mc "So... is it good or bad?"
-    m "It's very good."
-    m "Kind of what Sayo-{nw}"
+    m 1k "It's very good."
+    m 3b "Kind of what Sayo-{nw}"
     $ del _history_list[-2:]
     window hide(None)
     show screen tear(20, 0.1, 0.1, 0, 40)
@@ -549,13 +572,13 @@ label m_bs_1:
     stop sound
     hide screen tear
     window show(None)
-    m "It's very good.{fast}"
+    m 1k "It's very good.{fast}"
     window auto
     mc "What did you say just now?"
-    m "What do you mean?"
+    m 1a "What do you mean?"
     mc "Umm..."
     mc "I thought I heard that name-{nw}"
-    m "It's nothing but a compliment. Ahaha..."
+    m 2l "It's nothing but a compliment. Ahaha..."
     mc "A compliment...?"
     "Is that even a compliment?"
     "I don't even know what's going on with her..."
@@ -565,18 +588,19 @@ label m_bs_1:
     return
 
 label monika_special_1_end:
-    "I don't know why I keep worrying about Yuri..."
-    "I feel like something's wrong with her."
+    if y_ranaway:
+        "I don't know why I keep worrying about Yuri..."
+        "I feel like something's wrong with her."
     m 1a "Anyway, do you want to read my poem now?"
     mc "Ah, definitely."
     m 1e "Don't worry, I'm not very good..."
     mc "Really? You sound pretty confident for someone who claims to not be very good."
     m 1j "Well...that's 'cause I have to sound confident."
-    m "Especially since that I read your poem just now... Ehehe~"
+    m 1e "Especially since that I read your poem just now... Ehehe~"
     mc "That's--"
     mc "I didn't know about that..."
     m 1b "Ahaha. That doesn't mean I always feel that way, you know?"
-    mc "eyeee ccccccccccc uuu{nw}"
+    mc "{cps=100}eyeee ccccccccccc uuu{nw}{/cps}"
     $ _history_list.pop()
     window hide(None)
     show screen tear(20, 0.1, 0.1, 0, 40)
@@ -598,35 +622,35 @@ label monika_special_1_end:
     mc "It's kind of abstract. Just like my poem..."
     mc "I mean, it's {i}very{/i} abstract."
     mc "There are some parts that I don't understand that much."
-    m "Well, you don't have to worry about the meaning of it and everything."
+    m 2e "Well, you don't have to worry about the meaning of it and everything."
     mc "How so?"
-    m "Hmm..."
-    m "It's kind of complicated to answer, but I'll try my best to answer it for you anyway..."
+    m 2q "Hmm..."
+    m 2g "It's kind of complicated to answer, but I'll try my best to answer it for you anyway..."
     mc "Okay. I'm all ears."
-    m 3d "I'm not sure if I know how to put it..."
-    m 3a "I guess you could say that I had some kind of epiphany recently."
+    m 2d "I'm not sure if I know how to put it..."
+    m 2a "I guess you could say that I had some kind of epiphany recently."
     m "It's been influencing my poems a bit."
     mc "An epiphany?"
     "I think I do have that same feeling before."
     m 1a "Yeah...something like that."
     m "I'm kind of nervous to talk about deep stuff like that, because it's kind of coming on strongly..."
-    m "Anyway, do you have that kind of experience before?"
-    m "That's okay if you don't know anything about it..."
+    m 1d "Anyway, do you have that kind of experience before?"
+    m 1q "That's okay if you don't know anything about it..."
     mc "Maybe..."
-    m "Maybe?"
+    m 2h "Maybe?"
     mc "I mean I already know where you coming from."
     mc "It's hard to explain something that is out of ordinary."
     mc "It's even weird if you don't know much about yourself or what you are capable of."
     mc "No matter how hard you try to understand what is going on, sometimes you just don't get it."
     mc "Then, you realized that there's no point to understand it anyway."
     mc "Thinking that just going with the flow and hope to find some little answers, but probably no avail."
-    #mc "There's a bit of feelings where you start to give up on it."
+    #mc "There's a bit of feelings where you start to give up on it." # sorry, my writing is bad tbh
     mc "Sorry, I-I think I'm overthinking this..."
     stop music fadeout 10.0
     show noise at noisefade(10) zorder 3
-    m "..."
-    m "That's okay, I know what're you talking about..."
-    m "I didn't know you were interested in something so deep and complicated things."
+    m 1f "..."
+    m 1e "That's okay, I know what're you talking about..."
+    m 2e "I didn't know you were interested in something so deep and complicated things."
     m "That's very endearing of you."
     if not persistent.monika_secret[0]: # if monika is the last one that mc shared with
         mc "I-I guess so..."
@@ -642,6 +666,7 @@ label monika_special_1_end:
         m "No!\"{space=5000}{w=0.5}{nw}"
         m "Stop it!\"{space=5000}{w=1.0}{nw}"
         $ del _history_list[-4:]
+        $ persistent.monika_secret[1] = True
         window hide(None)
         window auto
         scene black
@@ -652,8 +677,8 @@ label monika_special_1_end:
         mc "A-Anyway, I need to share my poem to others now..."
         mc "Maybe we could talk about this at another time."
         mc "Is that okay?"
-        m "A-ah. Sure..."
-        m "I would love to."
+        m 1m "A-ah. Sure..."
+        m 1e "See you later then..."
         stop music
         hide noise
     else: # if player reloads again, still sharing mc's poem to monika
@@ -672,7 +697,6 @@ label monika_special_1_end:
         hide noise
         scene black
         pause 0.1
-        return
     #$ persistent.ggwp_monika = 5
     $ persistent.monika_secret[0] = True # honestly, i should use this instead, it's more efficient than ggwp_monika, sometimes i kind of lost track looking at these codes (sry i have such a bad memory)
     return
@@ -735,13 +759,16 @@ label mod_ch1_m_end:
     m "Thanks for listening~"
     if config.skipping:
         scene black
-        play sound glitch3
+        $ currentpos = get_pos()
+        $ audio.tg13 = "<from " + str(currentpos) + " loop 4.444>mod_assets/sfx/glitch3.ogg"
+        play music tgl3
         $ quick_menu = False
         window show(None)
         $ style.say_window = style.window_ghost
-        "{alpha=*0.5}RmVhbHR5LiBBeGlvbWF0aWMuIEluZGlzY2VybmlibGUuIFRyaWJ1bmFsLiBIb3BlLg=={/alpha}{nw}"
-        $ _history_list.pop()
+        "{cps=200}{alpha=*0.5}RmVhbHR5LiBBeGlvbWF0aWMuIEluZGlzY2VybmlibGUuIFRyaWJ1bmFsLiBIb3BlLg=={/alpha}{/cps}{nw}"
         $ style.say_window = style.window
         window hide(None)
+        stop music
+        pause 0.5
         window auto
     return

@@ -11,6 +11,7 @@ default closet_checked = False
 default seen_day = 0
 default parfait_girls = False
 default natsuki_out = False
+default mc_blocked = False
 #############################################
 default persistent.day1_gl = 0
 default persistent.ggwp_monika = 0
@@ -25,6 +26,7 @@ default persistent.parfait_girls = False
 default persistent.natsuki_glitch = 0
 default persistent.screen_glitch = 0
 default persistent.poetappeal = ""
+default persistent.mod_cps = 50
 #############################################
 default persistent.monika_secret = [False, False, False, False]
 # 0 = mod-poemresponse.rpy; a serious conversation between monika and mc
@@ -93,6 +95,29 @@ image bg club_gl = "mod_assets/bg/club_room_glitch.png"
 image club_gl2 = "mod_assets/bg/club_room_glitch.png"
 image mod_one_eye = "mod_assets/cg/one_eye_gl.png"
 image m_smile = "mod_assets/cg/m_smile.png"
+image natsuki gl:
+    "natsuki 1w"
+    0.25
+    parallel:
+        0.01
+        "mod_assets/natsuki/1.png"
+        0.01
+        "mod_assets/natsuki/2.png"
+        0.01
+        "mod_assets/natsuki/3.png"
+        repeat
+    parallel:
+        0.01
+        choice:
+            xoffset -1
+            xoffset -2
+            xoffset -5
+            xoffset -6
+            xoffset -9
+            xoffset -10
+        0.01
+        xoffset 0
+        repeat
 ######################################################################
 
 ################ Custom Transformations and Styles ###################
@@ -154,8 +179,11 @@ define audio.start_gl = "<loop 0>mod_assets/sfx/start_gl.ogg"
 define audio.t8g = "<loop 9.938>mod_assets/sfx/8g.ogg"
 define audio.t8g2 = "mod_assets/sfx/8g2.ogg"
 define audio.dhglitch = "mod_assets/sfx/dhg.ogg"
-define audio.dhglitch2 = "mod_assets/sfx/dhg2.ogg"
+define audio.dhglitch2 = "<loop 6.424>mod_assets/sfx/dhg2.ogg"
 define audio.t99 = "<loop 3.172>mod_assets/sfx/monika_r_u_ok.ogg"
+define audio.tendc = "<loop 3.172>mod_assets/sfx/end_credit.ogg"
+define audio.ngl = "mod_assets/sfx/ngl.ogg"
+define audio.7end = "mod_assets/sfx/7end.ogg"
 ######################################################################
 
 ###################### Custom Functions ############################

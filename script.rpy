@@ -1,4 +1,4 @@
-# This is used for top-level game strucutre.
+﻿# This is used for top-level game strucutre.
 # Should not include any actual events or scripting; only logic and calling other labels.
 # define config.developer = True
 
@@ -50,6 +50,10 @@ label start:
             call ch_mod_2
             call mod_poemresponse
             call ch_mod_2_end
+
+            # Partly Day 3
+            if not mc_blocked:
+                call ch_mod_p2
 
             # End of demo
             call mod_end_demo

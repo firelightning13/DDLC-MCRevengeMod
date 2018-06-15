@@ -136,7 +136,7 @@ label mod_exclusive_cute_1:
         "Wait, I think I've read it before, or haven't I...?"
     n 5g "If you're gonna judge, you can go do it through the glass on that door."
     "She points to the classroom door."
-    if parfait_girls or persistent.ggwp_monika == 2:
+    if persistent.parfait_girls or persistent.ggwp_monika == 2:
         mc "Ah-No!"
         mc "I didn't judge anything!"
         mc "What's wrong with you?"
@@ -226,7 +226,7 @@ label mod_exclusive_cute_1:
             "I don't even know why I'm feeling this way."
             # a fake story by mc, nice one eh
             mc "I just{fast} bought a stack of it a few months ago for my older sister's birthday present."
-            mc "But she forgot this volume when she moved out for college.
+            mc "But she forgot this volume when she moved out for college."
             mc "I didn't want to read it though, since I'm not into it, so I thought I just wanted to share it with you."
             mc "I don't want this book going to be wasted and left alone in my house."
             "Wow, this is one hell of a story."
