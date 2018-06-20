@@ -60,6 +60,14 @@ label ch_mod_2a:
     call dftsy_game2
     "Even though I'm a little bit late. I hope they don't mind..."
     "I timidly open the front door."
+    $ currentpos = get_pos()
+    stop music
+    play sound ggg
+    "{cps=200}SAve tsis gAmE noW! sAve his gAme noW?\nsEv This Gam NOsW! save tHiS gam3 now!\nSave thiss gam owww Save this game noWW\n Saeve this game nw! !save game not now this!{/cps}{nw}"
+    $ _history_list[-1].what = "{color=000}Save this game now!{/color}"
+    stop sound
+    $ audio.t2o = "<from " + str(currentpos) + " loop 4.492>mod_assets/sfx/2o.ogg"
+    play music t2o
 
     if renpy.random.randint(0, 5) == 0:
         scene bg spoopy
@@ -378,7 +386,7 @@ label ch_mod_2a:
             "She's trying to help me, right?"
             "After all, I don't have other things to read, so..."
             if not ihorror: ### choose manga over horror from day one
-                "{i}Even though I had stacks of books in my room...{/i}"
+                "{i}Even though I have stacks of books in my room...{/i}"
                 "I'm not trying to be an a[aword] here..."
                 if persistent.protecc:
                     $ _history_list.pop()
@@ -440,7 +448,11 @@ label ch_mod_2_end:
     "I let myself a long sigh."
     "I'm not even sure what's going on..."
     "Sometimes, I just feel like I'm being controlled by someone else."
-    "I feel like I'm not being myself when I share my poem to other girls."
+    "I feel like I'm being scripted when I discuss my poems to other girls."
+    if mc_boring:
+        "That's why I'm skipping the dialogues, I got too bored so quickly."
+        "Wait, how did I do that?"
+        $ del _history_list[-2:]
     if poetappeal == "abs" or poetappeal == "bs":
         "Except Monika..."
         if persistent.monika_secret[1]:
@@ -593,13 +605,15 @@ label ch_mod_2_end:
     show yuri at f21 zorder 3
     y 1k "And [player] liked my poem too, you know."
     y "He even told me he was impressed by it."
-    if poetappeal == "cute" or poetappeal == "bs":
+    if poetappeal == "cute" or poetappeal == "bs" or poetappeal == "mp":
         show yuri at t21 zorder 2
         if poetappeal == "cute":
             "Well, that doesn't mean-{nw}"
         elif poetappeal == "bs":
             "I think both of their style are great to be honest."
             "I don't think-{nw}"
+        else:
+            "Thanks, Yuri, for that complime-{nw}"
         stop music
         show natsuki at f22 zorder 3
         n 4y "Oh?"
@@ -637,6 +651,7 @@ label ch_mod_2_end:
             hide screen tear
             window show(None)
             window auto
+            $ quick_menu = True
     if poetappeal != "mp" and poetappeal != "cute":
         show yuri at mod_finstant zorder 3 # instant appear just like i21, but still in "focus" mode
     else:
@@ -668,10 +683,11 @@ label ch_mod_2_end:
     show yuri 3p at h21
     show natsuki at t22 zorder 2
     y "N-Natsuki!!"
-    show yuri at t32 zorder 2
+    show yuri at t21 zorder 2
     "Ah! Why do I need to hear this!?"
+    show yuri at t32 zorder 2
     show natsuki at t33 zorder 2
-    show monika 3l at l41 behind yuri,natsuki
+    show monika 3l at l31 behind yuri,natsuki
     m "Um, Natsuki, that's a little--"
     show monika at h41
     show yuri 3p at f32 zorder 3
@@ -681,7 +697,7 @@ label ch_mod_2_end:
     hide monika
     if not persistent.monika_secret[2] and not config.skipping:
         python:
-            if renpy.music.get_playing() == audio.tg3:
+            if renpy.music.get_playing() == audio.t3g:
                 currentmusic = ">bgm/3g.ogg"
             else:
                 currentmusic = ">bgm/3.ogg"
@@ -784,64 +800,64 @@ label ny_fight_alt:
         $ currentpos = 31.880 + (get_pos() * 0.25)
     else:
         $ currentpos = get_pos()
-    $ audio.t7fast = "<from " + str(currentpos) + "loop 31.880>bgm/7g.ogg"
+    $ audio.t7fast = "<from " + str(currentpos) + " loop 31.880>bgm/7g.ogg"
     play music t7fast
     hide flicker
     show noise at noise_alpha zorder 100
     show vignette at vignetteflicker(-2.030) zorder 100
     show layer master at rewind
 
-    y "{cps=200}You think you can counterbalance your toxic personality just by dressing and acting cute?{/cps}{nw}"
-    y 1k "{cps=200}The only cute thing about you is how hard you try.{/cps}{nw}"
+    y "{cps=400}You think you can counterbalance your toxic personality just by dressing and acting cute?{/cps}{nw}"
+    y 1k "{cps=400}The only cute thing about you is how hard you try.{/cps}{nw}"
     show yuri at i21 zorder 2
     show natsuki at f22 zorder 3
-    n 2y "{cps=200}Whoa, be careful or you might cut yourself on that edge, Yuri.{/cps}{nw}"
-    n "{cps=200}Oh, my bad... You already do, don't you?{/cps}{nw}"
+    n 2y "{cps=400}Whoa, be careful or you might cut yourself on that edge, Yuri.{/cps}{nw}"
+    n "{cps=400}Oh, my bad... You already do, don't you?{/cps}{nw}"
     show natsuki at i22 zorder 2
     show yuri at f21 zorder 3
-    y 3n "{cps=200}D-Did you just accuse me of cutting myself??{/cps}{nw}"
-    y 3r "{cps=200}What the f[fword] is wrong with your head?!{/cps}{nw}"
+    y 3n "{cps=400}D-Did you just accuse me of cutting myself??{/cps}{nw}"
+    y 3r "{cps=400}What the f[fword] is wrong with your head?!{/cps}{nw}"
     show yuri at i21 zorder 2
     show natsuki at f22 zorder 3
-    n 1e "{cps=200}Yeah, go on!"
-    n "{cps=200}Let [player] hear everything you really think!{/cps}{nw}"
-    n "{cps=200}I'm sure he'll be head over heels for you after this!{/cps}{nw}"
+    n 1e "{cps=400}Yeah, go on!{/cps}{nw}"
+    n "{cps=400}Let [player] hear everything you really think!{/cps}{nw}"
+    n "{cps=400}I'm sure he'll be head over heels for you after this!{/cps}{nw}"
     show natsuki at i22 zorder 2
     show yuri at f21 zorder 3
-    y 3n "{cps=200}A-Ah--!"
+    y 3n "{cps=400}A-Ah--!{/cps}{nw}"
     show yuri at i21 zorder 2
-    "{cps=200}Suddenly, Yuri turns toward me, as if she just noticed I was standing here.{/cps}{nw}"
+    "{cps=400}Suddenly, Yuri turns toward me, as if she just noticed I was standing here.{/cps}{nw}"
     show yuri at f21 zorder 3
-    y 2n "{cps=200}[player]...!"
-    y "{cps=200}She-- She's just trying to make me look bad...!{/cps}{nw}"
+    y 2n "{cps=400}[player]...!{/cps}{nw}"
+    y "{cps=400}She-- She's just trying to make me look bad...!{/cps}{nw}"
     show yuri at i21 zorder 2
     show natsuki at f22 zorder 3
-    n 4w "{cps=200}That's not true!{/cps}{nw}"
-    n "{cps=200}She started it!{/cps}{nw}"
+    n 4w "{cps=400}That's not true!{/cps}{nw}"
+    n "{cps=400}She started it!{/cps}{nw}"
     #n 4e "If she could get over herself and learn to appreciate that {i}simple{/i} writing is more effective..."
-    n 4e "{cps=200}If shee culd geet overr herself anand learnttt to appraseciate thaet {i}simple{/i} writinsg is moore effectivwe...{/cps}{nw}"
+    n 4e "{cps=400}If shee culd geet overr herself anand learnttt to appraseciate thaet {i}simple{/i} writinsg is moore effectivwe...{/cps}{nw}"
     #n "Then this wouldn't have happened in the first place!"
-    n "{cps=200}then this wouldasdn't have happeneddd in thae fiwst plwacee!{/cps}{nw}"
+    n "{cps=400}then this wouldasdn't have happeneddd in thae fiwst plwacee!{/cps}{nw}"
     #n "What's the point in making your poems all convoluted for no reason?"
-    n "{cps=200}Whaqt's the ppoint in makinbg yours poememses alaslall convopoluted fosr noe reassson?{/cps}{nw}"
+    n "{cps=400}Whaqt's the ppoint in makinbg yours poememses alaslall convopoluted fosr noe reassson?{/cps}{nw}"
     #n "The meaning should jump out at the reader, not force them to have to figure it out."
-    n "{cps=200}The meaningshould jumpjmpu ouet at th readr, nononnt forcethem o hvve to fggre itt ouet.{/cps}{nw}"
+    n "{cps=400}The meaningshould jumpjmpu ouet at th readr, nononnt forcethem o hvve to fggre itt ouet.{/cps}{nw}"
     #n 1f "Help me explain that to her, [player]!"
-    n 1f "{cps=200}hell meee expaalain aathat to her, [player]ยก?!{/cps}{nw}"
+    n 1f "{cps=400}hell meee expaalain aathat to her, [player]ยก?!{/cps}{nw}"
     show natsuki at i22 zorder 2
     show yuri at mod_finstant zorder 3
     #y 3o "W-Wait!"
-    y 3o "{cps=200}W-Wwwwt!{/cps}{nw}"
+    y 3o "{cps=400}W-Wwwwt!{/cps}{nw}"
     #y "There's a reason we have so many deep and expressive words in our language!"
-    y "{cps=200}There's a reason we have so many deep and expressive words in wour laanguage!{/cps}{nw}"
+    y "{cps=400}There's a reason we have so many deep and expressive words in wour laanguage!{/cps}{nw}"
     #y 3w "It's the only way to convey complex feelings and meaning the most effectively."
-    y 3w "{cps=200}It's the only way to convey complex feelinaags! and meaning the mostt effectiveely.{/cps}{nw}"
+    y 3w "{cps=400}It's the only way to convey complex feelinaags! and meaning the mostt effectiveely.{/cps}{nw}"
     #y "Avoiding them is not only unnecessarily limiting yourself...it's also a waste!"
-    y "{cps=200}Avaocidding thqem isw not only unnenecessessarilyyy limi/d/atiegng youlf.-!?.it's ayolk avb wawet3e!{/cps}{nw}"
+    y "{cps=400}Avaocidding thqem isw not only unnenecessessarilyyy limi/d/atiegng youlf.-!?.it's ayolk avb wawet3e!{/cps}{nw}"
     #y 1t "You understand that, right, [player]?"
-    y 1t "{cps=200}Yoasadu!!/! undd.,asdwrs\%tanda tqwa?t, ?ยก?r?ig?hawwat?,ยก [player]?{/cps}{nw}"
+    y 1t "{cps=400}Yoasadu!!/! undd.,asdwrs\%tanda tqwa?t, ?ยก?r?ig?hawwat?,ยก [player]?{/cps}{nw}"
     # garbage text, theres no internal meaning of it
-    y "{cps=200}[gtext]{/cps}{space=5000}{w=2.0}{nw}"
+    y "{cps=400}[gtext]{/cps}{space=5000}{w=2.0}{nw}"
 
     python:
         currentpos = get_pos()
@@ -849,20 +865,21 @@ label ny_fight_alt:
         if startpos < 0: startpos = 0
         track = "<from " + str(startpos) + " to " + str(currentpos) + ">bgm/7g.ogg"
         renpy.music.play(track, loop=True)
+    show layer master
     show white onlayer front:
         alpha 0.0
         linear 0.25 alpha 0.5
-    y "{cps=200}[gtext]{/cps}{space=5000}{fast}{w=0.1}{nw}"
+    y "{cps=400}[gtext]{/cps}{space=5000}{fast}{w=0.1}{nw}"
     $ quick_menu = False
-    y "{cps=200}[gtext]{/cps}{space=5000}{fast}{w=0.2}{nw}"
+    y "{cps=400}[gtext]{/cps}{space=5000}{fast}{w=0.2}{nw}"
     $ quick_menu = True
-    y "{cps=200}[gtext]{/cps}{space=5000}{fast}{w=0.3}{nw}"
+    y "{cps=400}[gtext]{/cps}{space=5000}{fast}{w=0.3}{nw}"
     $ quick_menu = False
-    y "{cps=200}[gtext]{/cps}{space=5000}{fast}{w=0.2}{nw}"
+    y "{cps=400}[gtext]{/cps}{space=5000}{fast}{w=0.2}{nw}"
     $ quick_menu = True
-    y "{cps=200}[gtext]{/cps}{space=5000}{fast}{w=0.2}{nw}"
+    y "{cps=400}[gtext]{/cps}{space=5000}{fast}{w=0.2}{nw}"
     $ quick_menu = False
-    y "{cps=200}[gtext]{/cps}{space=5000}{fast}{w=2.0}{nw}"
+    y "{cps=400}[gtext]{/cps}{space=5000}{fast}{w=2.0}{nw}"
     hide white onlayer front
     window hide(None)
     stop music
@@ -926,8 +943,11 @@ label ny_fight_alt:
     if preferences.text_cps != 50:
         $ persistent.mod_cps = preferences.text_cps
         $ preferences.text_cps = 50
-    $ config.keymap['dismiss'] = []
-    $ renpy.display.behavior.clear_keymap_cache()
+    if config.developer or persistent.played_once:
+        pass
+    else:
+        $ config.keymap['dismiss'] = []
+        $ renpy.display.behavior.clear_keymap_cache()
 
     ### wait {w} time = How long you speak that sentence - how long the sentence shows up in the game + 0.04s
 
@@ -985,6 +1005,7 @@ label ny_fight_alt:
     play sound ngl
     n gl "Monika!\"{space=5000}{w=0.67}{nw}" #0.18
     y 3n "...!\"{space=5000}{w=0.4}{nw}" #0.12
+    stop sound
     show natsuki 1w at t33 zorder 2
     show yuri at t32 zorder 2
     show monika at l31 zorder 3
@@ -1026,8 +1047,11 @@ label ny_fight_alt:
     stop sound
     hide screen tear
     window show(None)
-    $ config.keymap['dismiss'] = dismiss_keys
-    $ renpy.display.behavior.clear_keymap_cache()
+    if config.developer or persistent.played_once:
+        pass
+    else:
+        $ config.keymap['dismiss'] = dismiss_keys
+        $ renpy.display.behavior.clear_keymap_cache()
     $ quick_menu = True
     $ preferences.text_cps = persistent.mod_cps
     show natsuki at t33 zorder 2
@@ -1059,14 +1083,14 @@ label ny_fight_alt:
         hide natsuki
         "Natsuki starts packing up her things and then walks right out of the classroom."
         y "..."
-        show yuri at hf33 zorder 3
+        show yuri at hf32 zorder 3
         y 3n "Oh! Uh..."
         y 3p "I think I should get going then..."
         show yuri at thide zorder 1
         hide yuri
         "Yuri follows the same path as Natsuki."
         "She packs up her things and then timidly walks out of the classroom."
-        show monika at 1h t11 zorder 2
+        show monika 1h at t11 zorder 2
         if poetappeal == "abs":
             mc "..."
             m 1q "..."
@@ -1284,47 +1308,47 @@ label ny_fight_alt:
         "[gtext]" # What the heck just happened? My mind is glitching out for some reason.
         $ gtext = glitchtext(80)
         "[gtext]" # Argh... I couldn't read my mind like this...
-        $ ad = 12
-        $ ac = 12
-        show monika at mod_malpha(ac/ad)
+        $ ad = 11.0
+        $ ac = 11.0
+        show monika 2o at mod_malpha(ac/ad) zorder 2
         show yuri at f32 zorder 3
         y 3n "[player]... Are you okay?"
-        $ ac -= 1
-        show monika at mod_malpha(ac/ad)
+        $ ac -= 1.0
+        show monika 2o at mod_malpha(ac/ad) zorder 2
         y 3t "Did- Did I hurt you in some way...?"
-        $ ac -= 1
-        show monika at mod_malpha(ac/ad)
+        $ ac -= 1.0
+        show monika 2o at mod_malpha(ac/ad) zorder 2
         show yuri at t32 zorder 2
         mc "Uh- no... I--"
-        $ ac -= 1
-        show monika at mod_malpha(ac/ad)
+        $ ac -= 1.0
+        show monika 2o at mod_malpha(ac/ad) zorder 2
         show natsuki at f33 zorder 3
         n 5c "Oh come on, Yuri. It's not your fault for doing that."
-        $ ac -= 1
-        show monika at mod_malpha(ac/ad)
+        $ ac -= 1.0
+        show monika 2o at mod_malpha(ac/ad) zorder 2
         y 4a "Uuuu."
-        $ ac -= 1
-        show monika at mod_malpha(ac/ad)
+        $ ac -= 1.0
+        show monika 2o at mod_malpha(ac/ad) zorder 2
         n 5w "What we did was--"
-        $ ac -= 1
-        show monika at mod_malpha(ac/ad)
+        $ ac -= 1.0
+        show monika 2o at mod_malpha(ac/ad) zorder 2
         n 5q "-was..."
-        $ ac -= 1
-        show monika at mod_malpha(ac/ad)
+        $ ac -= 1.0
+        show monika 2o at mod_malpha(ac/ad) zorder 2
         mc "???"
-        $ ac -= 1
-        show monika at mod_malpha(ac/ad)
+        $ ac -= 1.0
+        show monika 2o at mod_malpha(ac/ad) zorder 2
         n 1x "Ah, I don't f[fgword] know! Don't just stare at me!"
-        $ ac -= 1
-        show monika at mod_malpha(ac/ad)
+        $ ac -= 1.0
+        show monika 2o at mod_malpha(ac/ad) zorder 2
         mc "Language, Natsuki..."
         if persistent.protecc:
             "Wait, what did she says?"
-        $ ac -= 1
-        show monika at mod_malpha(ac/ad)
+        $ ac -= 1.0
+        show monika 2o at mod_malpha(ac/ad) zorder 2
         n 5g "Hmph."
-        $ ac -= 1
-        show monika at mod_malpha(ac/ad)
+        $ ac -= 1.0
+        show monika 2o at mod_malpha(ac/ad) zorder 2
         mc "I think what happened was{nw}"
 
         if not persistent.monika_secret[3]:
@@ -1436,7 +1460,7 @@ label ny_fight_alt:
             scene bg residential_day
             with wipeleft_scene
 
-            stop music fadeout 10.0
+            stop music fadeout 20.0
             show monika at t11 zorder 2
             m 5a "Hey, [player]?"
             mc "Yes?"
@@ -1601,8 +1625,9 @@ label ny_fight_normal:
     hide screen tear
     scene black
     window auto
-    play sound 7end
+    play sound end7
     pause 6.0
+    return
     #$ style.say_dialogue = style.edited
     #"{cps=*2}How did I get dragged into this in the first place?!{/cps}{nw}"
     #"{cps=*2}It's not like I know anything about writing...{/cps}{nw}"

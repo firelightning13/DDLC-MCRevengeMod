@@ -673,7 +673,7 @@ label ch_mod_1:
     show yuri at t32 zorder 2
     if monika_glitch or renpy.showing("bg spoopy", layer='master'):
         "What the heck is going on!? My head is getting crazy!"
-        "Things are getting weirder and weirder."
+        #"Things are getting weirder and weirder."
     $ mcrp = player # temp fix
     mc "Well, uh...?"
     if persistent.day1_gl < 10:
@@ -817,6 +817,12 @@ label ch_mod_1:
     else:
         $ persistent.protecc = False
         $ renpy.call_screen("dialog", "[gtext]", ok_action=Return())
+    if persistent.protecc:
+        $ fword = "***"
+        $ fgword = "******"
+        $ bword = "****"
+        $ aword = "******"
+        $ sword = "***"
     return
 
 label mod_ch1_accepts:
@@ -824,7 +830,7 @@ label mod_ch1_accepts:
     mc "I mean it could be fun, right?"
     mc "Sharing our poems with each other..."
     show monika 1d at f33 zorder 3
-    "Monika looks at me quizzically"
+    "Monika looks at me quizzically."
     m "Wait, [player]?"
     mc "Yes?"
     $ quick_menu = False

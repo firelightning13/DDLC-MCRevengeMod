@@ -30,7 +30,11 @@ label mod_exclusive_mp_1:
         "...as I watch her intense reading expression..."
         "..."
         $ del _history_list[-6:]
-    play music t6 fadeout 1.0
+    if renpy.music.get_playing() == audio.t2gl: # stops the music abruptly
+        stop music
+        play music t6
+    else:
+        play music t6 fadeout 1.0
     show yuri 4a at t11 zorder 2
     y "Ah..."
     if persistent.mc_violent:
@@ -597,7 +601,7 @@ label mod_exclusive_abs_1:
     y "W-What is happening right now?"
     mc "Don't worry, we're safe here"
     y 3o "Uuu..." # what?
-    play music t9gl
+    play music t9gl fadein 1.0
     mc "Yuri..."
     "I honestly don't want to talk about this... but she leaves me no choice."
     mc "What is going on around here?"
@@ -628,10 +632,12 @@ label mod_exclusive_abs_1:
     "She didn't look like she was lying..."
     "Maybe I underestimate her..."
     mc "Alright... don't push yourself, okay?"
-    "I say that as I hold her right hand with my left hand, trying to make her comfortable."
+    #"I say that as I hold her right hand with my left hand, trying to make her comfortable."
+    "I say that as I'm trying to make her comfortable."
     y 2s "[player]..."
     mc "What is it, Yuri?"
-    "She holds my other hand with her right hand."
+    #"She holds my other hand with her right hand."
+    "Suddenly, she hold my hands."
     show yuri 2s at face(y=600) with dissolve
     y "I kind of like that about you..."
     "Didn't I hear this phrase before?"

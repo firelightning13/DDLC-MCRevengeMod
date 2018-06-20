@@ -10,6 +10,11 @@ label ch_mod_intro:
     pause 3.0
     hide screen tear
     stop music
+    if persistent.played_once:
+        if renpy.loadable("inject.rpyc"):
+            $ renpy.utter_restart()
+        else:
+            jump mod_intro_reject
     scene white
 
     play music t1g

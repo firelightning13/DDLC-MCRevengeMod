@@ -37,7 +37,11 @@ label mod_exclusive_cute_1:
     "I hear Natsuki utter an exasperated sigh from within the closet."
     "She seems to be annoyed by something."
     "I approach her, in case she needs a hand."
-    play music t6 fadeout 1
+    if renpy.music.get_playing() == audio.t2gl: # stops the music abruptly
+        stop music
+        play music t6
+    else:
+        play music t6 fadeout 1.0
     scene bg closet
     show natsuki 4r at t11 zorder 2
     with wipeleft_scene
@@ -376,6 +380,7 @@ label mod_exclusive_cute_1:
         play music t666
         show n_cg1b
         hide n_cg1_base
+        $ quick_menu = False
         n "{color=#000}My dad would beat the s[sword] out of me if he found this.{/color}"
         n "{color=#000}Then, my dad will not give me lunch money because of it...{/color}"
         n "{color=#000}I don't have lunch money.{/color}"
@@ -395,12 +400,10 @@ label mod_exclusive_cute_1:
         python: ### same text as "CAN YOU HEAR ME?.txt" but different name file
             try: renpy.file(config.basedir + "/Loathing-Judgement-Elitism-Self-doubt.txt")
             except: open(config.basedir + "/Loathing-Judgement-Elitism-Self-doubt.txt", "wb").write(renpy.file("CAN YOU HEAR ME.txt").read())
-        $ style.say_dialogue = style.normal
-        mc "Nani?" # what?
-        $ _history_list[-1].what = "What?"
-        mc "Nani ga okotte iru?" # what is going on?
-        $ _history_list[-1].what = "What's going on?"
-        mc "Natsuki, daijōbudesuka?" # natsuki, are you okay?
+        $ style.say_dialogue = style.jp
+        mc "何？" # what?
+        mc "何が起こっている？" # what is going on?
+        mc "ナツキ、大丈夫ですか？" # natsuki, are you okay? #natsuki in kana, thanks PikaFem from ddmc discord server
         $ currentpos = get_pos()
         stop music
         window hide(None)
@@ -416,7 +419,9 @@ label mod_exclusive_cute_1:
         $ persistent.natsuki_glitch = 4
         $ audio.t6 = "<from " + str(currentpos) + " loop 10.893>bgm/6.ogg"
         play music t6
-    elif persistent.natsuki_glitch >= 4 or config.skipping: # post-glitch natsuki after load previous save/start a new game/skipping dialogues
+        $ quick_menu = True
+        $ style.say_dialogue = style.normal
+    elif persistent.natsuki_glitch >= 4 or (config.skipping and preferences.skip_unseen == True): # post-glitch natsuki after load previous save/start a new game/skipping dialogues
         n "I don't even know what my dad would do if he found this."
     else: # if players choose "bs" poem, minor glitch happens (only seen once)
         n "My dad would beat the s[sword] out of me if he found this."
@@ -466,12 +471,22 @@ label mod_exclusive_cute_1:
     return
 
 label special_cute_1:
-    "Suddenly, Natsuki starts laughing."
     if persistent.natsuki_glitch < 6:
         $ preferences.skip_unseen = False
         $ config.skipping = False
         $ config.allow_skipping = False
         $ allow_skipping = False
+    "{cps=400}Suddenly, Natsuki starts laughing.{/cps}{nw}"
+    hide n_cg1_exp3
+    show n_cg1_exp1 at cgfade
+    n "{cps=400}Ahahaha!{/cps}{nw}"
+    n "{cps=400}I totally forgot that happens!{/cps}{nw}"
+    "{cps=400}Natsuki puts her finger on one of the panels.{/cps}{nw}"
+    n "{cps=400}Minori is my favorite character.{/cps}{nw}"
+    n "{cps=400}You always feel a little bad for her, since she's so unlucky.{/cps}{nw}"
+    n "{cps=400}But it gets especially bad when--{/cps}{nw}"
+    hide n_cg1_exp1
+    if persistent.natsuki_glitch < 6:
         pause 1.0
         window hide(None)
         show screen tear(20, 0.1, 0.1, 0, 40)
@@ -482,15 +497,6 @@ label special_cute_1:
         window show(None)
         "Argh. What the-{nw}"
         $ _history_list.pop()
-    hide n_cg1_exp3
-    show n_cg1_exp1 at cgfade
-    n "Ahahaha!"
-    n "I totally forgot that happens!"
-    "Natsuki puts her finger on one of the panels."
-    n "Minori is my favorite character."
-    n "You always feel a little bad for her, since she's so unlucky."
-    n "But it gets especially bad when--"
-    hide n_cg1_exp1
     n "Uu..."
     n "I shouldn't be talking about that yet!"
     n "Just finish this chapter!"
@@ -528,9 +534,9 @@ label special_cute_1:
     play sound fall
     mc "Woah--Hey--"
     "I catch her right before she falls onto the ground."
-    "I grab her shoulders with both of my hands."
-    "For some reason, we're like hugging together, in a weird way..." # sounds weird but I have no idea how to fix.
-    "My heart starts to go crazy. I don't know I'll be able to keep it up!"
+    #"I grab her shoulders with both of my hands."
+    #"For some reason, we're like hugging together, in a weird way..." # sounds weird but I have no idea how to fix.
+    #"My heart starts to go crazy. I don't know I'll be able to keep it up!"
     mc "Natsuki, are you okay?!"
     queue music t9
     n "..."
@@ -718,6 +724,8 @@ label normal_cute_1:
     hide black with dissolve_cg
     "It looks like she started to fall asleep."
     mc "Hey, Natsuki..."
+    hide n_cg1_exp4
+    show n_cg1_exp5 at cgfade
     n "Y-Yeah...?"
     "Suddenly, Natsuki collapses straight into me."
     play sound fall

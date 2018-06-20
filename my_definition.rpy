@@ -12,6 +12,7 @@ default seen_day = 0
 default parfait_girls = False
 default natsuki_out = False
 default mc_blocked = False
+default mc_boring = False # he's literally bored with his life
 #############################################
 default persistent.day1_gl = 0
 default persistent.ggwp_monika = 0
@@ -27,6 +28,7 @@ default persistent.natsuki_glitch = 0
 default persistent.screen_glitch = 0
 default persistent.poetappeal = ""
 default persistent.mod_cps = 50
+default persistent.played_once = False
 #############################################
 default persistent.monika_secret = [False, False, False, False]
 # 0 = mod-poemresponse.rpy; a serious conversation between monika and mc
@@ -95,6 +97,7 @@ image bg club_gl = "mod_assets/bg/club_room_glitch.png"
 image club_gl2 = "mod_assets/bg/club_room_glitch.png"
 image mod_one_eye = "mod_assets/cg/one_eye_gl.png"
 image m_smile = "mod_assets/cg/m_smile.png"
+image end_credit1 = "mod_assets/cg/end_credit1.png"
 image natsuki gl:
     "natsuki 1w"
     0.25
@@ -127,6 +130,17 @@ style window_lq is window:
 style window_ghost is window:
     background Image("gui/textbox.png", xalign=0.5, yalign=1.0, alpha=0.5)
 
+style jp is default:
+    font "mod_assets/gui/MSGOTHIC.ttf"
+    #kerning 8
+    outlines [(10, "#000", 0, 0)]
+    xpos gui.text_xpos
+    xanchor gui.text_xalign
+    xsize gui.text_width
+    ypos gui.text_ypos
+    text_align gui.text_xalign
+    layout ("subtitle" if gui.text_xalign else "tex")
+
 transform m_pos:
     xpos 320
     ypos 500
@@ -149,7 +163,7 @@ transform mod_finstant(x=400, z=0.80): # special finstant for yuri; refer to day
         xcenter x yoffset 0 zoom z*1.05 alpha 1.00 yanchor 1.0 ypos 1.03
 
 transform mod_malpha(a=1.00):
-    i33
+    i31
     alpha a
 ######################################################################
 
@@ -181,9 +195,9 @@ define audio.t8g2 = "mod_assets/sfx/8g2.ogg"
 define audio.dhglitch = "mod_assets/sfx/dhg.ogg"
 define audio.dhglitch2 = "<loop 6.424>mod_assets/sfx/dhg2.ogg"
 define audio.t99 = "<loop 3.172>mod_assets/sfx/monika_r_u_ok.ogg"
-define audio.tendc = "<loop 3.172>mod_assets/sfx/end_credit.ogg"
+define audio.endc = "<loop 3.172>mod_assets/sfx/end_credit.ogg"
 define audio.ngl = "mod_assets/sfx/ngl.ogg"
-define audio.7end = "mod_assets/sfx/7end.ogg"
+define audio.end7 = "mod_assets/sfx/7end.ogg"
 ######################################################################
 
 ###################### Custom Functions ############################
@@ -208,19 +222,5 @@ init python:
         elif event == "slow_done":
             config.keymap['dismiss'] = dismiss_keys
             renpy.display.behavior.clear_keymap_cache()
-
-    def mod_censorship():
-        if persistent.protecc:
-            fword = "***"
-            fgword = "******"
-            bword = "****"
-            aword = "******"
-            sword = "***"
-        else:
-            fword = "uck"
-            fgword = "ucking"
-            bword = "itch"
-            aword = "sshole"
-            sword = "hit"
 
     renpy.music.register_channel("trans", mixer="music", tight=True)

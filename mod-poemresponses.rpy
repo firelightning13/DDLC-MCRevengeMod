@@ -13,41 +13,47 @@
 # natsuki_out, if natsuki went to infirmary with monika, depends on persistent.natsuki_glitch
 # persistent.screen_glitch = 1, if player load again from day one, either normal poem game if "cute"/"mp", or glitched out if "abs"/"bs"
 
-#################################################### RESPONSE LOGIC/CALCULATION #########################################################
-### basically how to calculate "like" points threshold for poem responses in lazy and dirty way (completely different from original game)
-### this "like" points calculated based on choice that you make in day one and day two
-### parfait_girls and persistent.tea_set doesn't affect any points by the way... (or else it would unfair for players)
-### normal poem game doesn't have much of an affect on any points though... (if player tends to play "poem game" again on day one)
-### will probably change when im working on day three/four scene in the next full/beta/demo/experimental release (which i havnt plan yet)
-
-init python:
-    def mod_calculate_points():
-        # initialize point system
-        # 0 = bad; 1 = med ; 2 or 3 = good
-        # right now, mod_mpoints is unusable atm
-        mod_ypoints = 0
-        mod_npoints = 0
-        mod_mpoints = 0
-
-        if ihorror: mod_ypoints = 1
-        else: mod_npoints = 1
-        if isit: mod_npoints = 1
-        else: mod_mpoints = 1
-        if accepts_invite: mod_mpoints = 1
-
-        if poetappeal == "cute": mod_npoints += 2
-        elif poetappeal == "mp": mod_ypoints += 2
-        elif poetappeal == "abs":
-            mod_mpoints += 2
-            mod_ypoints = 2
-        elif poetappeal == "bs":
-            mod_npoints = 2
-            mod_mpoints = 2
-            mod_ypoints = 1
-
-#########################################################################################################################################
 label mod_poemresponse:
-    $ mod_calculate_points()
+    #################################################### RESPONSE LOGIC/CALCULATION #########################################################
+    ### basically how to calculate "like" points threshold for poem responses in lazy and dirty way (completely different from original game)
+    ### this "like" points calculated based on choice that you make in day one and day two
+    ### parfait_girls and persistent.tea_set doesn't affect any points by the way... (or else it would unfair for players)
+    ### normal poem game doesn't have much of an affect on any points though... (if player tends to play "poem game" again on day one)
+    ### will probably change when im working on day three/four scene in the next full/beta/demo/experimental release (which i havnt plan yet)
+
+    # initialize point system
+    # 0 = bad; 1 = med ; 2 or 3 = good
+    # right now, mod_mpoints is unusable atm
+
+    $ mod_ypoints = 0
+    $ mod_npoints = 0
+    $ mod_mpoints = 0
+
+    if ihorror:
+        $ mod_ypoints = 1
+    else:
+        $ mod_npoints = 1
+    if isit:
+        $ mod_npoints = 1
+    else:
+        $ mod_mpoints = 1
+    if accepts_invite:
+        $ mod_mpoints = 1
+
+    if poetappeal == "cute":
+        $ mod_npoints += 2
+    elif poetappeal == "mp":
+        $ mod_ypoints += 2
+    elif poetappeal == "abs":
+        $ mod_mpoints += 2
+        $ mod_ypoints = 2
+    elif poetappeal == "bs":
+        $ mod_npoints = 2
+        $ mod_mpoints = 2
+        $ mod_ypoints = 1
+
+    #########################################################################################################################################
+
     ### most codes here are from original scripts from DDLC, except a few tweaks for my mod to work
     $ poemsread = 0
     label mod_poemresponse_loop:
@@ -140,6 +146,7 @@ label mod_poemresponse_natsuki:
     scene bg club_day
     show natsuki 1c at t11 zorder 2
     with wipeleft_scene
+    $ preferences.skip_unseen = True
     if mod_npoints >= 2:
         $ poetopinion = "good"
     elif mod_npoints == 1:
@@ -149,14 +156,18 @@ label mod_poemresponse_natsuki:
     $ nextscene = "mod_ch" + str(mod_chapter) + "_n_" + poetopinion
     # $ nextscene = "natsuki_special_" + str(mod_chapter) # temporary
     call expression nextscene
-    $ nextscene = "mod_ch" + str(chapter) + "_n_end"
+    $ nextscene = "mod_ch" + str(mod_chapter) + "_n_end"
     call expression nextscene
+    if config.skipping:
+        $ mc_boring = True
+    $ preferences.skip_unseen = False
     return
 
 label mod_poemresponse_yuri:
     scene bg club_day
     show yuri 1a at t11 zorder 2
     with wipeleft_scene
+    $ preferences.skip_unseen = True
     if mod_ypoints >= 2:
         $ poetopinion = "good"
     elif mod_ypoints == 1:
@@ -165,8 +176,11 @@ label mod_poemresponse_yuri:
         $ poetopinion = "bad"
     $ nextscene = "mod_ch" + str(mod_chapter) + "_y_" + poetopinion
     call expression nextscene
-    $ nextscene = "mod_ch" + str(chapter) + "_y_end"
+    $ nextscene = "mod_ch" + str(mod_chapter) + "_y_end"
     call expression nextscene
+    if config.skipping:
+        $ mc_boring = True
+    $ preferences.skip_unseen = False
     return
 
 label mod_poemresponse_monika:
@@ -191,9 +205,9 @@ label mod_poemresponse_monika:
     $ nextscene = "mod_ch" + str(mod_chapter) + "_m_start"
     call expression nextscene
     if poetappeal == "abs":
-        $ nextscene = "monika_special_" + str(chapter) + "_end"
+        $ nextscene = "monika_special_" + str(mod_chapter) + "_end"
     else:
-        $ nextscene = "mod_ch" + str(chapter) + "_m_end"
+        $ nextscene = "mod_ch" + str(mod_chapter) + "_m_end"
     call expression nextscene
     return
 
@@ -288,12 +302,15 @@ label mod_ch1_n_bad: # taken from original script, probably a placeholder, excep
     return
 
 label mod_ch1_y_good:
+    $ poemopinion = "good"
     jump ch1_y_good # uses original script, as a placeholder
 
 label mod_ch1_y_med:
+    $ poemopinion = "med"
     jump ch1_y_med # uses original script, as a placeholder
 
 label mod_ch1_y_bad:
+    $ poemopinion = "bad"
     jump ch1_y_bad # uses original script, as a placeholder
 
 label mod_ch1_n_end:
@@ -305,14 +322,13 @@ label mod_ch1_y_end:
 label mod_ch1_m_start:
     m 1b "Hi, [player]!"
     m "Having a good time so far?"
-    if poemsread < 2:
-        "Why everything was normal when I shared my poem to Natsuki and Yuri?"
-        "I never seen anything weird happening so far."
-    elif poemsread < 1:
-        if y_readpoem:
-            "Why everything was normal when I shared my poem to Yuri?"
-        elif n_readpoem:
+    if poemsread > 0:
+        if y_ranaway:
             "Why everything was normal when I shared my poem to Natsuki?"
+        elif natsuki_out:
+            "Why everything was normal when I shared my poem to Yuri?"
+        else:
+            "Why everything was normal when I shared my poem to Natsuki and Yuri?"
         "I never seen anything weird happening so far."
     elif persistent.natsuki_glitch == 6:
         "I don't think so, after what I had witnessed something unexpected recently..."
@@ -334,7 +350,7 @@ label mod_ch1_m_start:
     if persistent.ggwp_monika == 2 or persistent.natsuki_glitch == 6:
         "I am so tired from all of this bulls[sword]..."
     elif persistent.ggwp_monika == 4 or persistent.natsuki_glitch == 5:
-        "I'll probably going to break things up again..."
+        "I'll probably going to break things again..."
     m 1a "Anyway..."
     m "Want to share your poem with me?"
     mc "Eh, I guess I have to..."
@@ -344,7 +360,7 @@ label mod_ch1_m_start:
     m "But it's that sort of barrier that we'll all learn to get past soon."
     mc "Yeah, I guess that's true."
     "Anyway, I hand Monika my poem."
-    if poetappeal == "bs" or poetappeal "abs":
+    if poetappeal == "bs" or poetappeal == "abs":
         window show(None)
         pause 2.0
         window show(None)
@@ -489,6 +505,7 @@ label m_mp_1:
         stop music
         pause 0.5
         play music "<from " + str(currentpos) + " loop 4.444>bgm/5.ogg"
+        $ del _history_list[-10:]
     return
 
 label m_abs_1:

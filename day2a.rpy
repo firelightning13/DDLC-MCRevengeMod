@@ -126,7 +126,7 @@ label dftsy_game2:
     return
 
 label ch_mod_2:
-    $ mod_censorship()
+    #$ mod_censorship()
     if persistent.screen_glitch > 1:
         jump skip_2_2a
     else:
@@ -137,15 +137,15 @@ label ch_mod_2:
     scene bg bedroom
     with wipeleft_scene
 
-    if config.developer: # for testing purposes
-        $ persistent.ggwp_monika = 0
-        $ parfait_girls = False
-        $ persistent.tea_set = False
-        $ persistent.mc_violent = False
-        $ persistent.poster_seen = False
-        $ persistent.cheat_mod = 0
-        $ poster_checked = False
-        $ closet_checked = False
+    #if config.developer: # for testing purposes
+    #    $ persistent.ggwp_monika = 0
+    #    $ parfait_girls = False
+    #    $ persistent.tea_set = False
+    #    $ persistent.mc_violent = False
+    #    $ persistent.poster_seen = False
+    #    $ persistent.cheat_mod = 0
+    #    $ poster_checked = False
+    #    $ closet_checked = False
     "Argh.."
     "I had a bad dream..."
     "...Someone screaming my name."
@@ -164,6 +164,8 @@ label ch_mod_2:
         # if player chooses abstract poem
         "Anyway, I still have time to go to school."
         "I need to get ready!"
+    "{cps=200}Save This gAme noW! sAve his gAme noW!\nsv This Game NOWW! save tHiS gam3 now!\nSave thiss gam owww Save this game noWW\n Saeve this game nw! !save game not now this!{/cps}{nw}"
+    $ _history_list[-1].what = "{color=000}Save this game now!{/color}"
 
     scene bg residential_day
     with wipeleft_scene

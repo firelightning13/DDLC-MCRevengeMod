@@ -214,6 +214,15 @@ image intro:
     "white" with Dissolve(0.5, alpha=True)
     0.5
 
+image intro_pj: # fywdiab_nerbh
+    truecenter
+    "white"
+    0.5
+    "mod_assets/bg/fywdiab_nerbh.png" with Dissolve(0.5, alpha=True)
+    2.5
+    "white" with Dissolve(0.5, alpha=True)
+    0.5
+
 image warning:
     truecenter
     "white"
@@ -255,7 +264,7 @@ label splashscreen:
             $ quick_menu = False
             scene black
             menu:
-                "A previous save file/updates for this mod has been found. Would you like to delete your save data and start over? If you have previous update from this mod, you should do so, or else it will break my mod!"
+                "{cps=400}A previous save file/updates for this mod has been found. Would you like to delete your save data and start over? {i}If you have previous update from this mod, you should do so, or else it will break my mod!{/i}{/cps}"
                 "Yes, delete my existing data.":
                     "Deleting save data...{nw}"
                     python:
@@ -278,7 +287,7 @@ label splashscreen:
     if not persistent.first_run:
         default persistent.finished_ddlc = None
         #Optional, load a copy of DDLC save data
-        call import_ddlc_persistent
+        #call import_ddlc_persistent
 
         $ quick_menu = False
         scene white
@@ -286,18 +295,18 @@ label splashscreen:
         scene tos
         with Dissolve(1.0)
         pause 1.0
-        "[config.name] is a Doki Doki Literature Club fan mod that is not affiliated with Team Salvato."
-        "It is designed to be played only after the official game has been completed, and contains spoilers for the official game."
-        "This story is mostly based on theories that were made by fans of DDLC, and in no way canon to the original story of DDLC or any other future games by Team Salvato."
-        "Game files for Doki Doki Literature Club are required to play this mod and can be downloaded for free at: http://ddlc.moe"
+        "{cps=400}[config.name] is a Doki Doki Literature Club fan mod that is not affiliated with Team Salvato.{/cps}"
+        "{cps=400}It is designed to be played only after the official game has been completed, and contains spoilers for the official game.{/cps}"
+        "{cps=400}This story is mostly based on theories that were made by fans of DDLC, and in no way canon to the original story of DDLC or any other future games by Team Salvato.{/cps}"
+        "{cps=400}Game files for Doki Doki Literature Club are required to play this mod and can be downloaded for free at: http://ddlc.moe{/cps}"
         if persistent.finished_ddlc == "postcredits_loop":
             menu:
-                "This mod detects that you already have completed the game. By playing [config.name], you consent to your exposure of highly disturbing content."
+                "{cps=400}This mod detects that you already have completed the game. By playing [config.name], you consent to your exposure of usual highly disturbing content, within additional content such as {i}glitchy, flashy images and disturbing,distorting soundtracks.{/i}{/cps}"
                 "I agree.":
                     pass
         else:
             menu:
-                "By playing [config.name] you agree that you have completed DDLC and accept any spoilers contained within, and you consent to your exposure of highly disturbing content."
+                "{cps=400}By playing [config.name] you agree that you have completed DDLC and accept any spoilers contained within, and you consent to your exposure of highly disturbing content, such as {i}glitchy, flashy images and disturbing, distorting soundtracks.{/i}{/cps}"
                 "I agree.":
                     pass
         scene tos2
@@ -309,6 +318,8 @@ label splashscreen:
 
         $ persistent.first_run = True
 
+        if renpy.loadable("../mod1"):
+            $ persistent.played_once = True
 
 
     $ basedir = config.basedir.replace('\\', '/')
@@ -325,6 +336,16 @@ label splashscreen:
     show white
     #$ persistent.ghost_menu = False #Handling for easter egg from DDLC
     $ splash_message = splash_message_default #Default splash message
+    #if renpy.random.randint(0, 99) == 0 or config.developer: ### 1% chance
+    #    $ renpy.music.play(audio.tpj)
+    #    show intro_pj with Dissolve(0.5, alpha=True)
+    #    pause 2.5
+    #    hide intro_pj with Dissolve(0.5, alpha=True)
+    #    $ currentpos = get_pos()
+    #    $ audio.t1f = "<from " + str(currentpos) + " loop 22.073>bgm/1.ogg"
+    #    $ config.main_menu_music = audio.t1f
+    #    $ renpy.music.play(config.main_menu_music)
+    #else:
     $ renpy.music.play(config.main_menu_music)
     show intro with Dissolve(0.5, alpha=True)
     pause 2.5
@@ -344,6 +365,7 @@ label warningscreen:
     pause 3.0
 
 label after_load:
+    $ config.main_menu_music = audio.t1
     $ config.allow_skipping = allow_skipping
     $ _dismiss_pause = config.developer
     #$ persistent.ghost_menu = False #Handling for easter egg from DDLC
@@ -358,21 +380,22 @@ label after_load:
         "The save file could not be loaded."
         "Are you trying to cheat?"
         #Handle however you want, default is to force reset all save data
-        $ m_name = "Monika"
-        $ fl = FL13
-        show monika 1 at t11
-        if persistent.playername == "":
-            m "You're so funny."
-            fl "You don't know what I'm capable of. And [player] is going to play my mod."
-        else:
-            m "You're so funny, [persistent.playername]."
-            fl "You don't know what I'm capable of. And [persistent.playername] is going to play my mod."
-        m 1i "Huh? Excuse me?"
-        m 5b "Who are you?"
-        fl "Good luck modifying this game, because now you're not the only one who's in control here!{nw}"
-        window hide(None)
-        show screen tear(8, offtimeMult=1, ontimeMult=10)
-        pause 1.5
+        #$ m_name = "Monika"
+        #$ fl = FL13
+        #show monika 1 at t11
+        #if persistent.playername == "":
+        #    m "You're so funny."
+        #    fl "You don't know what I'm capable of. And [player] is going to play my mod."
+        #else:
+        #    m "You're so funny, [persistent.playername]."
+        #    fl "You don't know what I'm capable of. And [persistent.playername] is going to play my mod."
+        #m 1i "Huh? Excuse me?"
+        #m 5b "Who are you?"
+        #fl "Good luck modifying this game, because now you're not the only one who's in control here!{nw}"
+        #window hide(None)
+        #show screen tear(8, offtimeMult=1, ontimeMult=10)
+        #pause 1.5
+        $ delete_all_saves()
         $ renpy.utter_restart()
     return
 

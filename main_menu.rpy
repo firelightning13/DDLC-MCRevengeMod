@@ -19,7 +19,7 @@ screen navigation():
             elif persistent.ggwp_monika > 0:
                 textbutton _("New Game") action Show(screen="confirm", message="You can load your previous saved game instead of starting over.\nAre you sure you want to start a new game?", yes_action=Function(ModWarningSave), no_action=Hide("confirm"))
             else:
-                textbutton _("New Game") action If(persistent.playername, true=Show(screen="confirm", message="Your old name is [player].\nDo you want to change your name?", yes_action=Show(screen="name_input", message="Please enter your name", ok_action=Function(FinishEnterName)), no_action=Start()), false=Show(screen="name_input", message="Please enter your name", ok_action=Function(FinishEnterName)))
+                textbutton _("New Game") action If(persistent.playername, true=Start(), false=Show(screen="name_input", message="Please enter your name", ok_action=Function(FinishEnterName)))
 
         else:
 
@@ -120,7 +120,7 @@ screen main_menu():
                 text "[config.name!t]":
                     style "main_menu_title"
 
-                text "v. [config.version] demo-experimental, by firelightning13":
+                text "v. [config.version]-experimental, by firelightning13":
                     style "main_menu_version"
             else:
                 pass
