@@ -365,7 +365,8 @@ label warningscreen:
     pause 3.0
 
 label after_load:
-    $ config.main_menu_music = audio.t1
+    $ config.keymap['dismiss'] = dismiss_keys
+    $ renpy.display.behavior.clear_keymap_cache()
     $ config.allow_skipping = allow_skipping
     $ _dismiss_pause = config.developer
     #$ persistent.ghost_menu = False #Handling for easter egg from DDLC
