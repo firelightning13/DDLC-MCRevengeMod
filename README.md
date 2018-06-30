@@ -21,6 +21,7 @@ This version contains:
 **Upcoming updates:**
 - _This development has been discontinued. There will be no future updates from this project._
 
+
 ## About this project
 Note: This mod is a fan work, and ~currently~ under my development. This mod is clearly inspired from original Doki-Doki Literature Club and I gave it a little bit of twist, giving much more options and flexibilities to player, but still limited to what Ren.py engine offers, and my limited abilities and understandings to game itself. Also, you can consider this an "alternate universe of DDLC". This mod holds a concept where some features aren't appealing as much in original game, _eg: Save/Load and Skip Mode_. These mechanics are perfect advantage for my mod to basically using them in the playthrough, make it more important as the story progresses. _(much like Life is Strange, but you can go back in time by saving/loading again and again!)_ Also, this mod has a great replayability value compares to original DDLC because it has interesting story branch that you can explore.
 
