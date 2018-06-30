@@ -3,7 +3,8 @@
 ### ~[Click here to join my discord server!]~
 # DDLC - MC Revenge Mod
 What if the main character of Doki-Doki Literature Club becomes sentient and self-aware, similar to Monika? He was awaken by the power of my coding and begin to realise that this is all just a game? What will he do? Will he beat Monika and save his best friend?
-**THIS MOD IS DISCONTINUED** (anyone who is interested to continue this development, please dm me at Discord - FL13#0023)
+
+_**THIS MOD IS DISCONTINUED** (anyone who is interested to continue this development, please dm me at Discord - FL13#0023)_
 
 ## Releases
 [Final Release v0.3](https://github.com/firelightning13/DDLC-MCRevengeMod/releases/tag/v0.3)
