@@ -98,6 +98,7 @@ image club_gl2 = "mod_assets/bg/club_room_glitch.png"
 image mod_one_eye = "mod_assets/cg/one_eye_gl.png"
 image m_smile = "mod_assets/cg/m_smile.png"
 image end_credit1 = "mod_assets/cg/end_credit1.png"
+image end_credit2 = "mod_assets/cg/end_credit2.png"
 image natsuki gl:
     "natsuki 1w"
     0.25

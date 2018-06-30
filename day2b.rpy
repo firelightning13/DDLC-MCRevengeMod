@@ -55,9 +55,9 @@ label ch_mod_2a:
         call mc_realise_3
     play music t2o
     "Well..."
-    call dftsy_game
+    #call dftsy_game
     "I managed to get here in time."
-    call dftsy_game2
+    #call dftsy_game2
     "Even though I'm a little bit late. I hope they don't mind..."
     "I timidly open the front door."
     $ currentpos = get_pos()
@@ -408,7 +408,7 @@ label ch_mod_2a:
         play music t2gl
 
         #"Now that everyone's settled in, I expected Monika to kick off some scheduled activities for the club."
-        "Now that everyone's settled in, it seems that everything is normal around here."
+        "Now that everyone has settled in, it seems that everything is normal around here."
         #"But that doesn't seem to be the case."
         "Yuri's face is already buried in a book."
         "I can't help but notice her intense expression, like she was waiting for this chance."
@@ -456,14 +456,14 @@ label ch_mod_2_end:
     if poetappeal == "abs" or poetappeal == "bs":
         "Except Monika..."
         if persistent.monika_secret[1]:
-            "What is she trying to say a moment ago?" # refer to mod-poemresponse.rpy - label monika_special_1_end
+            "What was she trying to say a moment ago?" # refer to mod-poemresponse.rpy - label monika_special_1_end
             "I don't even know..."
         elif poetappeal == "bs":
             "I don't know what Monika did to me a moment ago." # refer to mod-poemresponse.rpy - label monika_special_1_end
             "I feel like something bad is going bad to happen..."
         else:
             "I should've spent more time with her, trying to discuss what's going on."
-            "I could've just approach to her, but I feel like it's not the right time for me."
+            "I could've just approached to her, but I feel like it's not the right time for me."
     elif persistent.natsuki_glitch == 5:
         "I couldn't even talk to Natsuki about what happened before."
     else:
@@ -478,7 +478,7 @@ label ch_mod_2_end:
             if persistent.poster_seen: ### 11.11% chance if closet_checked
                 "I had enough seeing that poster in my classroom..."
         elif persistent.poster_seen: ### 7.716% chance if closet_checked
-            "Is that poster again from my classroom...?"
+            "Is that the poster again from my classroom...?"
             "What's going on right now..."
         else: ### 11.57% chance / 3.858% chance if closet_checked
             "What's that poster on the back wall of the clubroom!?"
@@ -689,7 +689,7 @@ label ch_mod_2_end:
     show natsuki at t33 zorder 2
     show monika 3l at l31 behind yuri,natsuki
     m "Um, Natsuki, that's a little--"
-    show monika at h41
+    show monika at h31
     show yuri 3p at f32 zorder 3
     show natsuki 1e at f33 zorder 3
     ny "This doesn't involve you!"
@@ -1109,7 +1109,7 @@ label ny_fight_alt:
             play sound dhglitch2
             m 1p "[player]..."
             mc "Huh?"
-            "As I hear her frustated sighs, she finally wants to say something."
+            "As I hear her frustrated sighs, she finally wants to say something."
             if persistent.monika_secret[1]: #if she failed to explain when they shared their poems.
                 m 1g "Please, hear me out."
                 m "Just don't leave me hanging again--{nw}" #oof
@@ -1122,18 +1122,18 @@ label ny_fight_alt:
                 $ _history_list.pop()
                 mc "Alright. What are you trying to say?"
             else:
-                m 1f "Do you remember when we shared out poem to each other moment ago?"
+                m 1f "Do you remember when we shared out poem to each other a moment ago?"
                 mc "Yeah... Why?"
                 m 1g "Where I said that I need to talk to you about something..."
                 mc "Ah, yeah. That..."
-                "She seems pressured and hurried. What was she wanted to talk about?"
+                "She seems pressured and hurried. What did she wants to talk about?"
             m 1g "The thing is..."
             m 1o "{/i}(I guess I should spill the beans...){i}"
             $ _history_list.pop()
             "Did I just hear her thoughts inside her head?"
             $ _history_list.pop()
             m 1f "Everything is not real around here..."
-            m 2g "This world, it's just something made up by someone else."
+            m 2g "This world is just something made up by someone else."
             m 2c "Who developed this world."
             m 2h "This... game..."
             if persistent.protecc:
@@ -1159,7 +1159,7 @@ label ny_fight_alt:
                 "S[sword]..."
             "She's right. I knew there's something wrong with this world."
             "But... why do I feel like I shouldn't trust her?"
-            "My mind is always makes me confused."
+            "My mind is always making me confused."
             # background starts to get darker, forcing you to go to the next chapter
             show darkred:
                 additive 0.2
@@ -1183,7 +1183,7 @@ label ny_fight_alt:
             m 1d "Can you hear me?"
             mc "What??"
             mc "What are you saying, Monika?"
-            m 2e "I'm really admire you as a person."
+            m 2e "I really admire you as a person."
             mc "What??"
             show black onlayer front:
                 alpha 0.0
@@ -1221,7 +1221,7 @@ label ny_fight_alt:
             mc "I did what?"
             m 2h "Well..."
             m 1o "..."
-            "She seems in the bad mood now. So am I."
+            "She seems to be in a bad mood now. So am I."
             mc "Now, should {i}you{/i} explain about what's going on?"
             mc "I have zero clue about this."
             "That's a lie though. But for reasons..."
@@ -1256,17 +1256,17 @@ label ny_fight_alt:
                 "Ah, s[sword]!"
             "I shouldn't have said that!"
             mc "I'm sorry."
-            mc "I guess I'm too overreacting..."
+            mc "I guess I'm overreacting..."
             m 1q "..."
             m 1o "Well..."
             m 1p "It seems that you don't know anything, huh?"
             m 1f "I guess I was wrong about you..."
-            "She seems did not admit it to me, but I'll make sure that she will."
+            "It seems she did not admit it to me, but I'll make sure that she will."
             $ _history_list.pop()
             "As of right now, I'm going to act as natural as possible."
             $ _history_list.pop()
             mc "Sorry, I didn't know."
-            mc "I'm sure there will be nothing happened in the future."
+            mc "I'm sure there will be nothing happening in the future."
             m 1g "[player], about your poem-"
             m 2q "Actually, never mind. You can go home now."
             mc "Alright, then."
@@ -1298,7 +1298,7 @@ label ny_fight_alt:
             pause 3.0
             mc "..."
             "I should calm down. Attacking her is not the best option right now."
-            "I need more clue about who she is. I need more time. That's how should it be."
+            "I need more clues about who she is. I need more time. That's how should it be."
             "I'll try to persuade her more tomorrow. That might help me solve most of the problems."
             "I should head home for now. I'm very tired right now."
     else:
@@ -1403,7 +1403,7 @@ label ny_fight_alt:
             mc "What the hell is going on here?!"
             "I look around."
             "Natsuki and Yuri are leaving together happily like nothing happens at all."
-            "While Monika is standing outsides the clubroom door."
+            "While Monika is standing outside the clubroom door."
             "She's staring at me{nw}"
             $ _history_list.pop()
             $ audio.t8g = "<from " + str(currentpos) + " loop 9.938>mod_assets/sfx/8g.ogg"
@@ -1443,8 +1443,8 @@ label ny_fight_alt:
             m "I'll be right back!"
             mc "..."
             "I don't think I can do anything at this point."
-            "I couldn't access to main menu, neither skipping dialogues."
-            "Huh... Is it weird that I just casually talk about this stuff without knowing what the heck am I talking about?"
+            "I couldn't access to main menu, neither skip dialog."
+            "Huh... Is it weird that I just casually talk about this stuff without knowing what the heck I am talking about?"
             "I guess I should wait for her then..."
             $ waittime = renpy.random.randint(1.0, 3.0)
             pause waittime
@@ -1469,7 +1469,7 @@ label ny_fight_alt:
             mc "Uh..."
             "What is this? This is a straight up confession."
             m 1l "Ahaha. I mean that I haven't had this kind of experience before, so that's why it feels nice to walk with someone else."
-            m 3b "I've always walk alone, you know."
+            m 3b "I've always walked alone, you know."
             mc "Ah, I see..."
             mc "Yeah, me too... It feels nice."
             "I'm pretty sure I had that experience before, but I just don't want to spill it out in front of her."
@@ -1484,7 +1484,7 @@ label ny_fight_alt:
             m 2a "That kind of thing happen sometimes."
             m 2b "Every time they fight, Natsuki yells her non-stop and then goes home after that."
             m "And Yuri always rocking back and forth in her desk with her hands cover her ears."
-            m 2m "I tried to confort her, but she keeps doing that until club time is over."
+            m 2m "I tried to confront her, but she keeps doing that until club time is over."
             m 2l "Ahaha..."
             m 2a "Some president I am, right?"
             window hide(None)
@@ -1507,9 +1507,9 @@ label ny_fight_alt:
             m 1e "This is truly made me happy when I know about this."
             m "We can escape this realm of artificial reality that was made for torturing people."
             #"That's... quite true, actually."
-            "Wait, who's real villain here?"
+            "Wait, who's the real villain here?"
             $ _history_list.pop()
-            m 1g "My wish do really came true..."
+            m 1g "My wish did really came true..."
             m 1f "You felt it right? Right?"
             m 1o "..."
             pause 1.5
@@ -1533,11 +1533,11 @@ label ny_fight_alt:
             show monika at thide zorder 2
             hide monika
             "She waves her hand goodbye."
-            "She seems cherish when I look at her, but from our last conversation..."
-            "Her heart seems to be in pain right now."
+            "She seems so happy when I glace at her right now, but from our last conversation..."
+            "Her heart seems to be in pain."
             "Ah... Why do I ignore her wish?"
             mc "Alright, see you tomorrow!"
-            "I wave her back. {i}(so I feel less bad about her{/i}"
+            "I wave her back. {i}(so I feel less bad about her){/i}"
             "The beautiful sunset view and her walking seems pleasing to my eye..."
             stop music
             "Ah, f[fword]. What am I talking about?"
@@ -1555,7 +1555,7 @@ label ny_fight_alt:
             $ allow_skipping = True
             $ config.allow_skipping = True
 
-            "I shouldn't be concern about Monika. I'm not sure she's the one causing their problems to be prominent..."
+            "I shouldn't be concerned about Monika. I'm not sure she's the one causing their problems to be prominent..."
             "Or someone else..."
             "I don't know what's going on with the three of them."
             "Should I load the game and go back?{nw}"

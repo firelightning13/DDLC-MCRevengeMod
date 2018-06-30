@@ -83,6 +83,7 @@ label ch_mod_p1b: ### will only see once
     pause 2.0
     stop music
     hide screen tear
+    $ quick_menu = False
     scene white
     pause 2.0
     show noise:
@@ -106,6 +107,7 @@ label ch_mod_p1b: ### will only see once
             $ persistent.poetappeal = "abs"
     hide noise
     scene black
+    $ quick_menu = True
     $ config.allow_skipping = True
     $ allow_skipping = True
     return
@@ -113,21 +115,21 @@ label ch_mod_p1b: ### will only see once
 ###### There's a lot of anti-cheat system that i implemented, trying to prevent abusive save/load mechanics by players
 ###### (you are probably confused if you see some weird things below, sry you had to see my horrendous codes)
 
-label dftsy_game:
-    if not renpy.can_load("1-6", test=False)and not persistent.warning_seen and not (persistent.ggwp_monika > 0):
-        $ renpy.save("1-6", extra_info='') # incase if player forgot to save
-    return
+#label dftsy_game:
+#    if not renpy.can_load("1-6", test=False)and not persistent.warning_seen and not (persistent.ggwp_monika > 0):
+#        $ renpy.save("1-6", extra_info='') # incase if player forgot to save
+#    return
 
-label dftsy_game2:
-    if not renpy.can_load("1-1", test=False) and not persistent.warning_seen and persistent.ggwp_monika > 0:
-        $ renpy.call_screen("dialog", "I just saved your life.", ok_action=Return())
-        $ renpy.call_screen("dialog", "If you want to be safe, please always save your game.\n-firelightning13", ok_action=Return())
-        $ persistent.warning_seen = True
-    return
+#label dftsy_game2:
+#   if not renpy.can_load("1-1", test=False) and not persistent.warning_seen and persistent.ggwp_monika > 0:
+#       $ renpy.call_screen("dialog", "I just saved your life.", ok_action=Return())
+#       $ renpy.call_screen("dialog", "If you want to be safe, please always save your game.\n-firelightning13", ok_action=Return())
+#       $ persistent.warning_seen = True
+#   return
 
 label ch_mod_2:
     #$ mod_censorship()
-    if persistent.screen_glitch > 1:
+    if persistent.screen_glitch > 0:
         jump skip_2_2a
     else:
         $ persistent.screen_glitch = 1
@@ -151,10 +153,10 @@ label ch_mod_2:
     "...Someone screaming my name."
     "I wonder who {i}she{/i} was?"
     "She said something like \"save me\"..."
-    default persistent.warning_seen = False
-    call dftsy_game
+    #default persistent.warning_seen = False
+    #call dftsy_game
     "Or something like \"Don't forget to save your game\"...?"
-    call dftsy_game2
+    #call dftsy_game2
     "That was weird..."
     if poetappeal != "abs" or persistent.ggwp_monika == 1:
         # if player chooses other than abstract
