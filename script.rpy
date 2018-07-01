@@ -1,6 +1,6 @@
-# This is used for top-level game strucutre.
+﻿# This is used for top-level game strucutre.
 # Should not include any actual events or scripting; only logic and calling other labels.
-#define config.developer = True
+# define config.developer = True
 
 label start:
 
@@ -21,17 +21,42 @@ label start:
 
     $ quick_menu = True
     $ style.say_dialogue = style.normal
+    $ config.main_menu_music = audio.t1
     $ allow_skipping = True
     $ config.allow_skipping = True
 
-    if persistent.playthrough == 0:
-        call intro_mod from _call_intro_mod
+    if persistent.ggwp_monika == -1:
+        # if inject.rpyc is not found inside the "/game" folder. (unless you put them back)
+        jump mod_crash
 
-    if persistent.playthrough == 1:
-        call intro_mod_2 from _call_intro_mod_2
+    elif persistent.playthrough == 0:
+        #Intro
+        call ch_mod_intro
+    
+    elif persistent.playthrough == 1:
+        # Normal day 1
+        call ch_mod_1a
+        jump mod_continue
 
-    if persistent.playthrough == 2:
-        jump intro_mod_2_1
+    elif persistent.playthrough == 2:
+        # Alternative day 1
+        call ch_mod_1b
+        label mod_continue:
+            # Poem game
+            call ch_mod_p1
+
+            # Day 2
+            $ mod_chapter = 1
+            call ch_mod_2
+            call mod_poemresponse
+            call ch_mod_2_end
+
+            # Partly Day 3
+            if not mc_blocked:
+                call ch_mod_p2
+
+            # End of demo
+            call mod_end_demo
 
 label endgame(pause_length=4.0):
     $ quick_menu = False

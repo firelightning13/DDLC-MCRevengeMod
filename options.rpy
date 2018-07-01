@@ -23,7 +23,7 @@ define gui.show_name = True
 
 ## The version of the game.
 
-define config.version = "0.1.2"
+define config.version = "0.3"
 
 
 ## Text that is placed on the game's about screen. To insert a blank line
@@ -217,30 +217,28 @@ init python:
 
     ## This is the archive of data for your mod
     #build.archive(build.name, "all")
+
+    ## These files get put into your data file
     build.package(build.directory_name + "source",'zip','source',description='Source Code Archive')
     build.package(build.directory_name + "Mod",'zip',build.name,description='DDLC Compatible Mod')
 
     # Declare archives
+    #build.archive("scripts",build.name)
     build.archive("mod_assets",build.name)
-
-
-    ## These files get put into your data file
-    build.classify("game/mod_assets/**","mod_assets")
-    #build.classify("game/**.rpy",build.name) #Optional line to include plaintext scripts
-    build.classify("game/options.rpyc",build.name)
-    build.classify("game/definitions.rpyc",build.name)
-    build.classify("game/main_menu.rpyc",build.name)
-    build.classify("game/script.rpyc",build.name)
-    build.classify("game/splash.rpyc",build.name)
-    build.classify("game/**.rpyc","mod_assets") #Serialized scripts must be included
-    build.classify("README.html",build.name) #Included help file for mod installation
-
-    #Add the pictures necessary for the tutorial selection menu
-    build.classify("game/gui/button/tutorial_hover_background.png",build.name)
-    build.classify("game/gui/button/tutorial_idle_background.png",build.name)
+    #build.archive("submods",build.name)
 
     ##Optionally include a zip file with all source code
     build.classify('**.rpy','source')
+
+    ## These files get put into your data file
+    build.classify("game/mod_assets/**","mod_assets")
+    #build.classify("game/**.rpy",build.name)
+    build.classify("game/core.rpyc",build.name)
+    build.classify("game/options.rpyc",build.name)
+    build.classify("game/script.rpyc",build.name)
+    build.classify("game/splash.rpyc",build.name)
+    build.classify("game/**.rpyc","mod_assets")
+    build.classify("README.html",build.name)
 
     build.classify('**~', None)
     build.classify('**.bak', None)

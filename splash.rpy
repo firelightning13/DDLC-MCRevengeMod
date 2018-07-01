@@ -21,7 +21,7 @@ init python:
     splash_messages = [
     "Please support Doki Doki Literature Club.",
     "Monika is watching you code.",
-    "Please support fireligtning13.\nHe's a great guy.",
+    "Please support firelightning13.\nHe's a great guy.",
     "I spend everyday working with my mod.",
     "Monika is the best girl",
     "Sayori is the best girl",
@@ -35,8 +35,16 @@ init python:
 image splash_warning = ParameterizedText(style="splash_text", xalign=0.5, yalign=0.5)
 
 ##Here's where you can change the logo file to whatever you want
-image menu_logo:
+image menu_logo_mod:
     "/mod_assets/DDLCMCR.png"
+    subpixel True
+    xcenter 240
+    ycenter 120
+    zoom 0.60
+    menu_logo_move
+
+image menu_logo:
+    "gui/logo.png"
     subpixel True
     xcenter 240
     ycenter 120
@@ -206,6 +214,15 @@ image intro:
     "white" with Dissolve(0.5, alpha=True)
     0.5
 
+image intro_pj: # fywdiab_nerbh
+    truecenter
+    "white"
+    0.5
+    "mod_assets/bg/fywdiab_nerbh.png" with Dissolve(0.5, alpha=True)
+    2.5
+    "white" with Dissolve(0.5, alpha=True)
+    0.5
+
 image warning:
     truecenter
     "white"
@@ -214,8 +231,9 @@ image warning:
     "white" with Dissolve(0.5, alpha=True)
     0.5
 
-image tos = "bg/warning.png"
-image tos2 = "bg/warning2.png"
+#image tos = "bg/warning.png"
+image tos = "mod_assets/bg/warning.png"
+image tos2 = "mod_assets/bg/warning2.png"
 
 # Make sure character files are in place
 init python:
@@ -232,35 +250,76 @@ init python:
         except: open(config.basedir + "/characters/sayori.chr", "wb").write(renpy.file("sayori.chr").read())
 
 label splashscreen:
+    default persistent.first_run = False
+    # Logic for detecting if the game has been reinstalled
+    python:
+        mod_firstrun = ""
+        try:
+            mod_firstrun = renpy.file("mod_firstrun").read(1)
+        except:
+            with open(config.basedir + "/game/mod_firstrun", "wb") as f:
+                pass
+    if not mod_firstrun: #renpy.loadable("10"):
+        if persistent.first_run: #and not persistent.do_not_delete:
+            $ quick_menu = False
+            scene black
+            menu:
+                "{cps=400}A previous save file/updates for this mod has been found. Would you like to delete your save data and start over? {i}If you have previous update from this mod, you should do so, or else it will break my mod!{/i}{/cps}"
+                "Yes, delete my existing data.":
+                    "Deleting save data...{nw}"
+                    python:
+                        delete_all_saves()
+                        renpy.loadsave.location.unlink_persistent()
+                        renpy.persistent.should_save_persistent = False
+                        renpy.utter_restart()
+                "No, continue where I left off.":
+                    pass
+
+        python:
+            if not mod_firstrun:
+                with open(config.basedir + "/game/mod_firstrun", "w") as f:
+                    f.write("1")
+            #filepath = renpy.file("firstrun").name
+            #open(filepath, "a").close()
 
     #If this is the first time the game has been run, show a disclaimer
-    default persistent.first_run = False
+    #if not persistent.first_run:
     if not persistent.first_run:
+        default persistent.finished_ddlc = None
+        #Optional, load a copy of DDLC save data
+        #call import_ddlc_persistent
+
         $ quick_menu = False
         scene white
         pause 0.5
         scene tos
         with Dissolve(1.0)
         pause 1.0
-        "[config.name] is a Doki Doki Literature Club fan mod that is not affiliated with Team Salvato."
-        "It is designed to be played only after the official game has been completed, and contains spoilers for the official game."
-        "Game files for Doki Doki Literature Club are required to play this mod and can be downloaded for free at: http://ddlc.moe"
-        menu:
-            "By playing [config.name] you agree that you have completed Doki Doki Literature Club and accept any spoilers contained within."
-            "I agree.":
-                pass
+        "{cps=400}[config.name] is a Doki Doki Literature Club fan mod that is not affiliated with Team Salvato.{/cps}"
+        "{cps=400}It is designed to be played only after the official game has been completed, and contains spoilers for the official game.{/cps}"
+        "{cps=400}This story is mostly based on theories that were made by fans of DDLC, and in no way canon to the original story of DDLC or any other future games by Team Salvato.{/cps}"
+        "{cps=400}Game files for Doki Doki Literature Club are required to play this mod and can be downloaded for free at: http://ddlc.moe{/cps}"
+        if persistent.finished_ddlc == "postcredits_loop":
+            menu:
+                "{cps=400}This mod detects that you already have completed the game. By playing [config.name], you consent to your exposure of usual highly disturbing content, within additional content such as {i}glitchy, flashy images and disturbing,distorting soundtracks.{/i}{/cps}"
+                "I agree.":
+                    pass
+        else:
+            menu:
+                "{cps=400}By playing [config.name] you agree that you have completed DDLC and accept any spoilers contained within, and you consent to your exposure of highly disturbing content, such as {i}glitchy, flashy images and disturbing, distorting soundtracks.{/i}{/cps}"
+                "I agree.":
+                    pass
         scene tos2
         with Dissolve(1.5)
         pause 1.0
-
-        #Optional, load a copy of DDLC save data
-        #call import_ddlc_persistent
 
         scene white
         with Dissolve(1.5)
 
         $ persistent.first_run = True
 
+        if renpy.loadable("../mod1"):
+            $ persistent.played_once = True
 
 
     $ basedir = config.basedir.replace('\\', '/')
@@ -275,19 +334,24 @@ label splashscreen:
 
     # Splash screen
     show white
-    $ persistent.ghost_menu = False #Handling for easter egg from DDLC
+    #$ persistent.ghost_menu = False #Handling for easter egg from DDLC
     $ splash_message = splash_message_default #Default splash message
+    #if renpy.random.randint(0, 99) == 0 or config.developer: ### 1% chance
+    #    $ renpy.music.play(audio.tpj)
+    #    show intro_pj with Dissolve(0.5, alpha=True)
+    #    pause 2.5
+    #    hide intro_pj with Dissolve(0.5, alpha=True)
+    #    $ currentpos = get_pos()
+    #    $ audio.t1f = "<from " + str(currentpos) + " loop 22.073>bgm/1.ogg"
+    #    $ config.main_menu_music = audio.t1f
+    #    $ renpy.music.play(config.main_menu_music)
+    #else:
     $ renpy.music.play(config.main_menu_music)
     show intro with Dissolve(0.5, alpha=True)
     pause 2.5
     hide intro with Dissolve(0.5, alpha=True)
     #You can use random splash messages, as well. By default, they are only shown during certain acts.
-    if persistent.warning_seen:
-        $ splash_message = "Please choose the right path, ok thanks.\n-firelightning13"
-        $ persistent.warning_seen = False
-    elif persistent.demu_demu:
-        $ splash_message = "Just Monika."
-    elif persistent.playthrough == 2 and renpy.random.randint(0, 3) == 0:
+    if persistent.playthrough == 2 and renpy.random.randint(0, 3) == 0: ### 25% chance
         $ splash_message = renpy.random.choice(splash_messages)
     show splash_warning "[splash_message]" with Dissolve(0.5, alpha=True)
     pause 2.0
@@ -301,12 +365,14 @@ label warningscreen:
     pause 3.0
 
 label after_load:
-    $ config.keymap['dismiss'] = dismiss_keys
-    $ renpy.display.behavior.clear_keymap_cache()
+    $ config.main_menu_music = audio.t1
     $ config.allow_skipping = allow_skipping
     $ _dismiss_pause = config.developer
-    $ persistent.ghost_menu = False #Handling for easter egg from DDLC
+    #$ persistent.ghost_menu = False #Handling for easter egg from DDLC
     $ style.say_dialogue = style.normal
+    $ preferences.skip_unseen = False
+    $ config.keymap['dismiss'] = dismiss_keys
+    $ renpy.display.behavior.clear_keymap_cache()
     #Check if the save has been tampered with
     if anticheat != persistent.anticheat:
         stop music
@@ -314,6 +380,22 @@ label after_load:
         "The save file could not be loaded."
         "Are you trying to cheat?"
         #Handle however you want, default is to force reset all save data
+        #$ m_name = "Monika"
+        #$ fl = FL13
+        #show monika 1 at t11
+        #if persistent.playername == "":
+        #    m "You're so funny."
+        #    fl "You don't know what I'm capable of. And [player] is going to play my mod."
+        #else:
+        #    m "You're so funny, [persistent.playername]."
+        #    fl "You don't know what I'm capable of. And [persistent.playername] is going to play my mod."
+        #m 1i "Huh? Excuse me?"
+        #m 5b "Who are you?"
+        #fl "Good luck modifying this game, because now you're not the only one who's in control here!{nw}"
+        #window hide(None)
+        #show screen tear(8, offtimeMult=1, ontimeMult=10)
+        #pause 1.5
+        $ delete_all_saves()
         $ renpy.utter_restart()
     return
 
