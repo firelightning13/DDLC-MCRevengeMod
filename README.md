@@ -47,3 +47,8 @@ Playtesters:
 
 ## Want to take over this mod?
 You can ask me for permission to take over this mod. Contact me via Discord.
+
+## License, fair use and such
+All of the original images and sound effects from the game is not available in github, however all of the images and sounds modified by me (in `mod_assets` folder) are still owned by Team Salvato and all of the credits are only for them. No custom sprites, cg images or soundtracks in this mod. (except Time to Time by khai dreams - which is already permitted by the author)
+
+This project is also licensed for "fair use" only. [Read here for more info](https://github.com/firelightning13/DDLC-MCRevengeMod/blob/master/LICENSE.md)
